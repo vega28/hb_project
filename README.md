@@ -2,30 +2,35 @@
 
 ### Overview
 
-Replace this with a 1–2 sentence summary of your project idea
+This personal library app allows users to log and organize their media into collections. Users can set and track progress to goals, share ratings and reviews, and visualize their media consumption in various ways.
 
 ### Technologies required (besides typical Hackbright tech stack)
 
-- List any APIs or data sources you're planning on using here
+- APIs and data sources coming soon...
 
 ### Data
 
-- List data you'll want to store in your database
+- There will be data for user profiles as well as general media data. Each media item will have various properties depending on the type of media. All media will be categorized by genre. See full data model here: https://dbdiagram.io/d/605cf99cecb54e10c33d4cbe
 
 ### Roadmap
 
 #### MVP
 
-- List 1–3 MVP features
+- Add media item
+- Search database for media
+- Organize media into personal collections
 
 #### 2.0
 
-- List 1–3 2.0 features
+- Set goals and track progress
+- Visualize data
 
 #### 3.0
 
-- List as many nice-to-have features as you'd like
+- New media recommendations by genre
+- More visualization of data
+- Share progress/goals/recommendations with friends
 
 ### Notes
 
-Replace this with anything else about the project
+TBD
