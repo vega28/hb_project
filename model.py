@@ -28,16 +28,16 @@ class Item(db.Model):
     __tablename__ = 'media'
 
     item_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    title = db.Column(db.String(100))
-    type_id = db.Column(db.Integer, db.ForeignKey('media_types.type_id')) # foreign key to media_types table
+    title = db.Column(db.String(100), nullable=False)
+    type_id = db.Column(db.Integer, db.ForeignKey('media_types.type_id'), nullable=False) # foreign key to media_types table
     cover = db.Column(db.String(100)) # link to image
     description = db.Column(db.Text)
 
     media_type = db.relationship('Type', backref='items') # FIXME: technically want this to refer to Type.media_type... otherwise is it necessary since it's indistinct from type_id above?
-    # TODO: describe relationships here
+    genres = db.relationship('Genre', secondary='media_genres', backref='items')
 
     def __repr__(self):
-        return f'<Media Item title={self.title} type_id={self.type_id}>'
+        return f'<Media Item title={self.title} media_type={self.media_type}>'
 
 
 class Type(db.Model):
@@ -46,7 +46,7 @@ class Type(db.Model):
     __tablename__ = 'media_types'
 
     type_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    media_type = db.Column(db.String(20))
+    media_type = db.Column(db.String(20), nullable=False)
 
     # items = a list of media items of the specified media_type
 
@@ -55,28 +55,32 @@ class Type(db.Model):
 
 
 
-# class Genre(db.Model):
-#     """ A specific genre of media. """
-#     __tablename__ = 'genres'
-#     # add attributes here
-      # genre_id 
-      # genre_name 
-#     # describe relationships here
-#     def __repr__(self):
-#         return f'<Genre attribute={self.attribute}>'
+class Genre(db.Model):
+    """ A specific genre of media. """
+
+    __tablename__ = 'genres'
+
+    genre_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    genre_name = db.Column(db.String(30), unique=True, nullable=False)
+
+    items = db.relationship('Item', secondary='media_genres', backref='genres') 
+
+    def __repr__(self):
+        return f'<Genre genre_name={self.genre_name}>'
 
 
 
-# class MediaGenre(db.Model):
-#     """ Association table between media and genres. """
-#     __tablename__ = 'media_genres'
-#     # add attributes here
-      # media_genre_id
-      # item_id # foreign key linking to media
-      # genre_id # foreign key linking to genres
-#     # describe relationships here
-#     def __repr__(self):
-#         return f'<ClassName attribute={self.attribute}>'
+class MediaGenre(db.Model):
+    """ Association table between media and genres. """
+
+    __tablename__ = 'media_genres'
+
+    media_genre_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    item_id = db.Column(db.Integer, db.ForeignKey('media.item_id'), nullable=False) # foreign key linking to media
+    genre_id = db.Column(db.Integer, db.ForeignKey('genres.genre_id'), nullable=False) # foreign key linking to genres
+
+    def __repr__(self):
+        return f'<ClassName attribute={self.attribute}>'
 
 
 
