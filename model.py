@@ -16,7 +16,7 @@ class User(db.Model):
     pwd = db.Column(db.String(25), nullable=False) # keep it secret, keep it safe!
     profile_pic = db.Column(db.String(100)) # link to image
 
-    # TODO: describe relationships here
+    # media = a list of media Item objects specific to this user's library 
 
     def __repr__(self):
         return f'<User fname={self.fname} lname={self.lname}>'
@@ -29,15 +29,18 @@ class Item(db.Model):
 
     item_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
-    type_id = db.Column(db.Integer, db.ForeignKey('media_types.type_id'), nullable=False) # foreign key to media_types table
+    type_id = db.Column(db.Integer, 
+                        db.ForeignKey('media_types.type_id'), 
+                        nullable=False) # foreign key to media_types table
     cover = db.Column(db.String(100)) # link to image
     description = db.Column(db.Text)
 
-    media_type = db.relationship('Type', backref='items') # FIXME: technically want this to refer to Type.media_type... otherwise is it necessary since it's indistinct from type_id above?
+    media_type = db.relationship('Type', backref='items') # returns media_type object
     genres = db.relationship('Genre', secondary='media_genres', backref='items')
+    # users = db.relationship('User', secondary='user_media', backref='items') # TODO: check these relationships...
 
     def __repr__(self):
-        return f'<Media Item title={self.title} media_type={self.media_type}>'
+        return f'<Media Item title={self.title}>'
 
 
 class Type(db.Model):
@@ -47,8 +50,9 @@ class Type(db.Model):
 
     type_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     media_type = db.Column(db.String(20), nullable=False)
+    # TODO: make name of media_type the primary key, change foreign key in Item class
 
-    # items = a list of media items of the specified media_type
+    # items = a list of media Item objects of the specified media_type 
 
     def __repr__(self):
         return f'<Type media_type={self.media_type} type_id={self.type_id}>'
@@ -63,7 +67,7 @@ class Genre(db.Model):
     genre_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     genre_name = db.Column(db.String(30), unique=True, nullable=False)
 
-    items = db.relationship('Item', secondary='media_genres', backref='genres') 
+    # items = a list of media items of the specified genre 
 
     def __repr__(self):
         return f'<Genre genre_name={self.genre_name}>'
@@ -76,21 +80,36 @@ class MediaGenre(db.Model):
     __tablename__ = 'media_genres'
 
     media_genre_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    item_id = db.Column(db.Integer, db.ForeignKey('media.item_id'), nullable=False) # foreign key linking to media
-    genre_id = db.Column(db.Integer, db.ForeignKey('genres.genre_id'), nullable=False) # foreign key linking to genres
+    item_id = db.Column(db.Integer, 
+                        db.ForeignKey('media.item_id'), 
+                        nullable=False) # foreign key linking to media
+    genre_id = db.Column(db.Integer, 
+                        db.ForeignKey('genres.genre_id'), 
+                        nullable=False) # foreign key linking to genres
 
     def __repr__(self):
-        return f'<ClassName attribute={self.attribute}>'
+        return f'<MediaGenre media_genre_id={self.media_genre_id}>'
 
 
 
-# class Book(db.Model):
-#     """ A book. """
-#     __tablename__ = 'books'
-#     # add attributes here
-#     # describe relationships here
-#     def __repr__(self):
-#         return f'<ClassName attribute={self.attribute}>'
+class Book(Item): 
+    """ A book. """
+
+    __tablename__ = 'books'
+
+    # add attributes here
+    book_id = db.Column(db.Integer, 
+                        db.ForeignKey('media.item_id'), 
+                        primary_key=True)
+    author = db.Column(db.String, nullable=False)
+    edition = db.Column(db.String)
+    length = db.Column(db.Integer) # length in pages
+    # TODO: ISBN! 
+
+    # describe relationships here # TODO: do these inherit from the parent class as well?
+
+    def __repr__(self):
+        return f'<Book book_id={self.book_id} title={self.title}>' # TODO: check that this works as you think it does... title comes from parent class.
 
 
 
@@ -154,35 +173,53 @@ class MediaGenre(db.Model):
 
 
 
-# class CollectionMedia(db.Model):
+# class CollectionUserMedia(db.Model):
 #     """ Association table between Collections and UserMedia """
-#     __tablename__ = 'collections_media'
+#     __tablename__ = 'collections_user_media'
+
+    # collections_user_media_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    # collection_id = db.Column(db.Integer, db.ForeignKey('collections.collection_id'), nullable=False) # foreign key linking to collections
+    # user_media_id = db.Column(db.Integer, db.ForeignKey('user_media.user_media_id'), nullable=False) # foreign key linking to user_media
+
+#     def __repr__(self):
+#         return f'<CollectionUserMedia collections_user_media_id={self.collections_user_media_id}>'
+
+
+
+class UserMedia(db.Model):
+    """ Middle table: media items specific to a user. """
+
+    __tablename__ = 'user_media'
+
+    user_media_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    user_id = db.Column(db.Integer, 
+                        db.ForeignKey('users.user_id'), 
+                        nullable=False) # foreign key linking to users
+    item_id = db.Column(db.Integer, 
+                        db.ForeignKey('media.item_id'), 
+                        nullable=False) # foreign key linking to media
+    rating = db.Column(db.Integer)
+    review = db.Column(db.Text)
+    created_at = db.Column(db.DateTime) # check this - how to make it NOW?
+    source = db.Column(db.String(30))
+
+    user = db.relationship('User', backref='media')
+    item = db.relationship('Item', backref='user_media')
+
+    def __repr__(self):
+        return f'<UserMedia user_media_id={self.user_media_id}>'
+
+
+
+# class Update(db.Model):
+#     """ Middle table: an update logged by a user. """
+#     __tablename__ = 'user_updates'
 #     # add attributes here
 #     # describe relationships here
 #     def __repr__(self):
 #         return f'<ClassName attribute={self.attribute}>'
 
 
-
-# class UserMedia(db.Model):
-#     """ Media items specific to a user. """
-#     __tablename__ = 'user_media'
-#     # add attributes here
-#     # describe relationships here
-#     def __repr__(self):
-#         return f'<ClassName attribute={self.attribute}>'
-
-
-
-# class UserLog(db.Model):
-#     """ A log entry update by a user. """
-#     __tablename__ = 'user_log'
-#     # add attributes here
-#     # describe relationships here
-#     def __repr__(self):
-#         return f'<ClassName attribute={self.attribute}>'
-
-# TODO: Times consumed as its own table or part of the above?!
 
 
 
@@ -197,3 +234,22 @@ class MediaGenre(db.Model):
 #     def __repr__(self):
 #         return f'<ClassName attribute={self.attribute}>'
 
+
+
+
+
+
+def connect_to_db(flask_app, db_uri='postgresql:///library', echo=True):
+    flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
+    flask_app.config['SQLALCHEMY_ECHO'] = echo
+    flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    db.app = flask_app
+    db.init_app(flask_app)
+
+    print('Connected to the db!')
+
+if __name__ == '__main__':
+    from server import app
+
+    connect_to_db(app)
