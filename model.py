@@ -93,7 +93,7 @@ class MediaGenre(db.Model):
 
 
 class Book(Item): 
-    """ A book. """
+    """ A book - subclassed from media Item. """
 
     __tablename__ = 'books'
 
@@ -104,17 +104,17 @@ class Book(Item):
     author = db.Column(db.String, nullable=False)
     edition = db.Column(db.String)
     length = db.Column(db.Integer) # length in pages
-    # TODO: ISBN! 
+    isbn = db.Column(db.Integer, unique=True) # check if there exists a specific format for ISBN in python?
 
-    # describe relationships here # TODO: do these inherit from the parent class as well?
+    # describe relationships here # TODONE: do these inherit from the parent class as well? YES.
 
     def __repr__(self):
-        return f'<Book book_id={self.book_id} title={self.title}>' # TODO: check that this works as you think it does... title comes from parent class.
+        return f'<Book title={self.title} author={self.author}>' 
 
 
 
-# class TVShow(db.Model):
-#     """ A TV show. """
+# class TVShow(Item):
+#     """ A TV show - subclassed from media Item. """
 #     __tablename__ = 'tv_shows'
 #     # add attributes here
 #     # describe relationships here
@@ -123,13 +123,18 @@ class Book(Item):
 
 
 
-# class Movie(db.Model):
-#     """ A movie. """
-#     __tablename__ = 'movies'
-#     # add attributes here
-#     # describe relationships here
-#     def __repr__(self):
-#         return f'<ClassName attribute={self.attribute}>'
+class Movie(Item):
+    """ A movie - subclassed from media Item. """
+
+    __tablename__ = 'movies'
+
+    length = db.Column(db.Integer) # length of movie in minutes
+    year = db.Column(db.Integer) # release year
+
+    # describe relationships here
+
+    def __repr__(self):
+        return f'<Movie title={self.title}>'
 
 
 
@@ -163,26 +168,39 @@ class Book(Item):
 
 
 
-# class Collection(db.Model):
-#     """ A user-defined collection of media. """
-#     __tablename__ = 'collections'
-#     # add attributes here
-#     # describe relationships here
-#     def __repr__(self):
-#         return f'<ClassName attribute={self.attribute}>'
+class Collection(db.Model):
+    """ A user-defined collection of media. """
+
+    __tablename__ = 'collections'
+
+    collection_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    user_id = db.Column(db.Integer, 
+                        db.ForeignKey('users.user_id'), 
+                        nullable=False) # foreign key linking to users
+    name = db.Column(db.String(30), nullable=False)
+
+    # user_media = a list of UserMedia objects that are in this collection
+
+    def __repr__(self):
+        return f'<Collection name={self.name} user_id={self.user_id}>'
 
 
 
-# class CollectionUserMedia(db.Model):
-#     """ Association table between Collections and UserMedia """
-#     __tablename__ = 'collections_user_media'
+class CollectionUserMedia(db.Model):
+    """ Association table between Collections and UserMedia """
 
-    # collections_user_media_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    # collection_id = db.Column(db.Integer, db.ForeignKey('collections.collection_id'), nullable=False) # foreign key linking to collections
-    # user_media_id = db.Column(db.Integer, db.ForeignKey('user_media.user_media_id'), nullable=False) # foreign key linking to user_media
+    __tablename__ = 'collections_user_media'
 
-#     def __repr__(self):
-#         return f'<CollectionUserMedia collections_user_media_id={self.collections_user_media_id}>'
+    collections_user_media_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    collection_id = db.Column(db.Integer, 
+                              db.ForeignKey('collections.collection_id'), 
+                              nullable=False) # foreign key linking to collections
+    user_media_id = db.Column(db.Integer, 
+                              db.ForeignKey('user_media.user_media_id'), 
+                              nullable=False) # foreign key linking to user_media
+
+    def __repr__(self):
+        return f'<CollectionUserMedia collections_user_media_id={self.collections_user_media_id}>'
 
 
 
@@ -205,6 +223,7 @@ class UserMedia(db.Model):
 
     user = db.relationship('User', backref='media')
     item = db.relationship('Item', backref='user_media')
+    collections = db.relationship('Collection', secondary='collections_user_media', backref='user_media')
 
     def __repr__(self):
         return f'<UserMedia user_media_id={self.user_media_id}>'
