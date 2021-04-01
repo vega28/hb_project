@@ -1,0 +1,3 @@
+test_books.json came from list at: 
+    https://openlibrary.org/people/vega287354/lists/OL195389L/seeds.json
+
