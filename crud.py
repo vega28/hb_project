@@ -211,3 +211,24 @@ def assign_collection(user, media_item, collection):
     return association
 
 
+def create_user_update(user, media_item, date=None, start_bool=False, end_bool=False, update_value=None, num_times_through=None, dnf=None):
+    """ Allow user to create an update on a specific media item.
+        e.g. started / finished / completed 50 pages / etc... 
+        Return UserUpdate object. """
+
+    user_update = UserUpdate(user_id=user.user_id, 
+                            item_id=media_item.item_id, 
+                            update_entered_at = datetime.now(), 
+                            date=date, 
+                            start_bool=start_bool, 
+                            end_bool=end_bool, 
+                            update_value=update_value,
+                            num_times_through=num_times_through, 
+                            dnf=dnf) 
+
+    db.session.add(user_update)
+    db.session.commit()   
+
+    return user_update
+
+

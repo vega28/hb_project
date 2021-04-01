@@ -17,6 +17,7 @@ class User(db.Model):
     profile_pic = db.Column(db.String(100)) # link to image
 
     # media = a list of media Item objects specific to this user's library 
+    # updates = a list of this user's updates
 
     def __repr__(self):
         return f'<User fname={self.fname} lname={self.lname}>'
@@ -35,6 +36,7 @@ class Item(db.Model):
     cover = db.Column(db.String(100)) # link to image
     description = db.Column(db.Text)
 
+    # updates = a list of UserUpdates about this media item
     media_type = db.relationship('Type', backref='items') # returns media_type object
     genres = db.relationship('Genre', secondary='media_genres', backref='items')
     # users = db.relationship('User', secondary='user_media', backref='items') # TODO: check these relationships...
@@ -230,7 +232,7 @@ class UserMedia(db.Model):
                         nullable=False) # foreign key linking to media
     rating = db.Column(db.Integer)
     review = db.Column(db.Text)
-    created_at = db.Column(db.DateTime) # check this - how to make it NOW?
+    created_at = db.Column(db.DateTime, nullable=False) # check this - how to make it NOW?
     source = db.Column(db.String(30))
 
     user = db.relationship('User', backref='media')
@@ -242,28 +244,35 @@ class UserMedia(db.Model):
 
 
 
-# class Update(db.Model):
-#     """ Middle table: an update logged by a user. """
-#     __tablename__ = 'user_updates'
-#     # add attributes here
-#     # describe relationships here
-#     def __repr__(self):
-#         return f'<ClassName attribute={self.attribute}>'
+class UserUpdate(db.Model):
+    """ Middle table: an update logged by a user. """
+
+    __tablename__ = 'user_updates'
+
+    update_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    user_id = db.Column(db.Integer, 
+                        db.ForeignKey('users.user_id'), 
+                        nullable=False) # foreign key linking to users
+    item_id = db.Column(db.Integer, 
+                        db.ForeignKey('media.item_id'), 
+                        nullable=False) # foreign key linking to media
+    update_entered_at = db.Column(db.DateTime, nullable=False) # check this - how to make it NOW?
+    date = db.Column(db.DateTime) # consider format - day/mo/yr needed?
+    start_bool = db.Column(db.Boolean, nullable=False)
+    end_bool = db.Column(db.Boolean, nullable=False)
+    dnf = db.Column(db.Boolean)
+    num_times_through = db.Column(db.Integer) # have this calculated based on previous records
+    update_value = db.Column(db.Integer) # number of pages read or episode watched, etc.
+
+    user = db.relationship('User', backref='updates')
+    item = db.relationship('Item', backref='updates')
+
+    def __repr__(self):
+        return f'<UserUpdate update_id={self.update_id}>'
 
 
 
 
-
-
-# --- class definition structure --- # 
-
-# class ClassName(db.Model):
-#     """ <class description> """
-#     __tablename__ = '<tablename>'
-#     # add attributes here
-#     # describe relationships here
-#     def __repr__(self):
-#         return f'<ClassName attribute={self.attribute}>'
 
 
 

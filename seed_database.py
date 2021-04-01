@@ -52,3 +52,5 @@ crud.assign_collection(bob, contact, favorites)
 crud.assign_collection(bob, sunshine, favorites)
 crud.assign_collection(bob, sg1_ep1, favorites)
 
+# user update:
+bob_cosmos_update = crud.create_user_update(bob, cosmos, update_value=50)
