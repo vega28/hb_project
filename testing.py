@@ -19,17 +19,25 @@ movietype = Type(media_type='movie')
 db.session.add(movietype)
 db.session.commit()
 
+tvtype = Type(media_type='tv')
+db.session.add(tvtype)
+db.session.commit()
+
 # CHECK ITEMS
 cosmos = Item(title='Cosmos', type_id = 1)
 db.session.add(cosmos)
 db.session.commit()
 
-contact = Book(title='Contact',type_id=1,author='Carl Sagan')
+contact = Book(title='Contact',type_id=booktype.type_id,author='Carl Sagan')
 db.session.add(contact)
 db.session.commit()
 
-sunshine = Movie(title='Sunshine',type_id=2,length=107,year=2007)
+sunshine = Movie(title='Sunshine',type_id=movietype.type_id,length=107,year=2007)
 db.session.add(sunshine)
+db.session.commit()
+
+sg1_ep1 = TVEpisode(title='Children of the Gods', type_id=tvtype.type_id, show_title='Stargate SG-1', length=92, season=1)
+db.session.add(sg1_ep1)
 db.session.commit()
 
 # CHECK GENRES
@@ -53,6 +61,10 @@ sunshine_genre = MediaGenre(item_id=sunshine.item_id, genre_id=genre2.genre_id)
 db.session.add(sunshine_genre)
 db.session.commit()
 
+sg1_genre = MediaGenre(item_id=sg1_ep1.item_id, genre_id=genre2.genre_id)
+db.session.add(sg1_genre)
+db.session.commit()
+
 # ADD USER-SPECIFIC MEDIA
 bob_cosmos = UserMedia(user_id=bob.user_id, item_id=cosmos.item_id, rating=5)
 db.session.add(bob_cosmos)
@@ -60,6 +72,10 @@ db.session.commit()
 
 bob_sunshine = UserMedia(user_id=bob.user_id, item_id=sunshine.item_id, rating=5)
 db.session.add(bob_sunshine)
+db.session.commit()
+
+bob_sg1 = UserMedia(user_id=bob.user_id, item_id=sg1_ep1.item_id, rating=4)
+db.session.add(bob_sg1)
 db.session.commit()
 
 # CHECK COLLECTIONS
@@ -73,4 +89,8 @@ db.session.commit()
 
 fave_movie = CollectionUserMedia(collection_id=favorites.collection_id, user_media_id=bob_sunshine.user_media_id)
 db.session.add(fave_movie)
+db.session.commit()
+
+fave_tv = CollectionUserMedia(collection_id=favorites.collection_id, user_media_id=bob_sg1.user_media_id)
+db.session.add(fave_tv)
 db.session.commit()

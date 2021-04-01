@@ -103,7 +103,7 @@ class Book(Item):
                         primary_key=True)
     author = db.Column(db.String, nullable=False)
     edition = db.Column(db.String)
-    length = db.Column(db.Integer) # length in pages
+    pages = db.Column(db.Integer) # length in pages
     isbn = db.Column(db.Integer, unique=True) # check if there exists a specific format for ISBN in python?
 
     # describe relationships here # TODONE: do these inherit from the parent class as well? YES.
@@ -113,28 +113,40 @@ class Book(Item):
 
 
 
-# class TVShow(Item):
-#     """ A TV show - subclassed from media Item. """
-#     __tablename__ = 'tv_shows'
-#     # add attributes here
-#     # describe relationships here
-#     def __repr__(self):
-#         return f'<ClassName attribute={self.attribute}>'
-
-
-
 class Movie(Item):
     """ A movie - subclassed from media Item. """
 
     __tablename__ = 'movies'
 
+    movie_id = db.Column(db.Integer,
+                        db.ForeignKey('media.item_id'),
+                        primary_key=True)
     length = db.Column(db.Integer) # length of movie in minutes
     year = db.Column(db.Integer) # release year
 
     # describe relationships here
 
     def __repr__(self):
-        return f'<Movie title={self.title}>'
+        return f'<Movie title={self.title} year={self.year}>'
+
+
+
+class TVEpisode(Item):
+    """ An episode of a TV show - subclassed from media Item. """
+
+    __tablename__ = 'tv'
+
+    ep_id = db.Column(db.Integer,
+                      db.ForeignKey('media.item_id'),
+                      primary_key=True)
+    show_title = db.Column(db.String, nullable=False)
+    ep_length = db.Column(db.Integer) # length of episode in minutes
+    season = db.Column(db.Integer) # which season is the episode in?
+
+    # describe relationships here
+
+    def __repr__(self):
+        return f'<TVEpisode show_title={self.show_title} title={self.title}>'
 
 
 
