@@ -24,6 +24,7 @@ fake = Faker()
 for new_type in ['book', 'movie', 'tv']:
     crud.create_media_type(new_type)
 
+## Open Library API version:
 # with open('data/test_books.json') as f:
 #     book_data = json.loads(f.read())
 # books_in_db = []
@@ -32,6 +33,7 @@ for new_type in ['book', 'movie', 'tv']:
 #     new_book = crud.create_book(title=title, type_id=1, author='somebody', cover=cover_image)
 #     books_in_db.append(new_book)
 
+## Google Books API version:
 with open('data/books.json') as f:
     book_data = json.loads(f.read())
 books_in_db = []
@@ -41,8 +43,8 @@ for book in book_data['items']:
                                 type_id=1, 
                                 author=book['volumeInfo']['authors'][0], 
                                 description=book['volumeInfo'].get('description'), # NOTE: The Hobbit has no description...
-                                cover=book['volumeInfo']['imageLinks']['thumbnail'],
-                                pages=book['volumeInfo']['pageCount'])
+                                cover=book['volumeInfo']['imageLinks'].get('thumbnail'),
+                                pages=book['volumeInfo'].get('pageCount'))
                                 # year=book['volumeInfo']['publishedDate'], # TODO: add this to model
                                 # isbn=book['volumeInfo']['industryIdentifiers']['ISBN_13']) # TODO: figure out how to unpack this.
     books_in_db.append(new_book)
