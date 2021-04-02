@@ -3,6 +3,11 @@
 {% block title %}Media{% endblock %}
 
 {% block body %}
-  <h1>View All Media 📚🎬📺 </h1>
-  <p>content will go here...</p>
+  <h1>All Media 📚🎬📺 </h1>
+  <ul>
+    {% for item in all_media %} 
+      <li><a href="/media/{{ item.item_id }}">{{ item.title }}</a></li>
+    {% endfor %}
+  </ul>
+  <p><a href="/">Return to homepage.</a></p>
 {% endblock %}

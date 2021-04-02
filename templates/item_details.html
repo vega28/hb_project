@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ item.title }} | Details{% endblock %}
+
+{% block body %}
+  <h1>{{ item.title }}</h1>
+  <p>{{ item.description }}</p>
+  <img src="{{ item.cover }}">
+  <p><a href="/media">Return to list of media.</a></p>
+{% endblock %}

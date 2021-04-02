@@ -21,6 +21,12 @@ def get_all_users():
     return User.query.all()
 
 
+def get_user_by_id(user_id):
+    """ Query database and return a user by their id. """
+
+    return db.session.query(User).filter(User.user_id==user_id).first()
+
+
 def create_media_type(type_name):
     """ Create and return a new media type. """
 
@@ -99,7 +105,6 @@ def create_item(title, type_id, cover=None, description=None):
 def get_all_media():
     """ Query database and return a list of all media items. """
 
-    # return db.session.query(Item).all()
     return Item.query.all() 
 
 
@@ -107,6 +112,12 @@ def get_all_books():
     """ Query database and return a list of all books. """
 
     return Book.query.all() 
+
+
+def get_item_by_id(item_id):
+    """ Query database and return an item by its id. """
+
+    return db.session.query(Item).filter(Item.item_id==item_id).first()
 
 
 def get_all_movies():

@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ user.fname }} {{ user.lname }} | Details{% endblock %}
+
+{% block body %}
+  <h1>{{ user.fname }} {{ user.lname }}</h1>
+  <p>{{ user.email }}</p>
+  <img src="{{ user.profile_pic }}">
+  <p><a href="/users">Return to list of users.</a></p>
+{% endblock %}
