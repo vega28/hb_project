@@ -20,5 +20,23 @@ def show_homepage():
     return render_template('homepage.html')
 
 
+@app.route('/media')
+def list_media():
+    """ View list of all media. """
+
+    # all_media = crud.get_all_media() # FIXME KeyError: 'SQLALCHEMY_TRACK_MODIFICATIONS'
+
+    return render_template('media.html') # , all_media=all_media)
+
+
+@app.route('/users')
+def list_users():
+    """ View list of all users. """
+
+    all_users = crud.get_all_users() # FIXME: KeyError: 'SQLALCHEMY_TRACK_MODIFICATIONS'
+
+    return render_template('users.html', all_users=all_users)
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

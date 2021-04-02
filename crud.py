@@ -17,7 +17,7 @@ def create_user(fname, lname, email, pwd, profile_pic=None):
 
 def get_all_users():
     """ Query database and return a list of all users. """
-
+    
     return User.query.all()
 
 
@@ -99,6 +99,7 @@ def create_item(title, type_id, cover=None, description=None):
 def get_all_media():
     """ Query database and return a list of all media items. """
 
+    # return db.session.query(Item).all()
     return Item.query.all() 
 
 
