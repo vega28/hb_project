@@ -1,0 +1,1282 @@
+{
+    "kind": "books#volumes",
+    "totalItems": 5,
+    "items": [
+        {
+            "kind": "books#volume",
+            "id": "cDKODQAAQBAJ",
+            "etag": "/6RfcYwf2y0",
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/cDKODQAAQBAJ",
+            "volumeInfo": {
+            "title": "Cosmos",
+            "authors": [
+                "Carl Sagan"
+            ],
+            "publisher": "Ballantine Books",
+            "publishedDate": "2013",
+            "description": "Presents an illustrated guide to the universe and to Earth's relationship to it, moving from theories of creation to humankind's discovery of the cosmos, to general relativity, to space missions, and beyond.",
+            "industryIdentifiers": [
+                {
+                "type": "ISBN_13",
+                "identifier": "9780345539434"
+                },
+                {
+                "type": "ISBN_10",
+                "identifier": "0345539435"
+                }
+            ],
+            "readingModes": {
+                "text": false,
+                "image": false
+            },
+            "pageCount": 396,
+            "printType": "BOOK",
+            "categories": [
+                "Science"
+            ],
+            "averageRating": 4.5,
+            "ratingsCount": 1665,
+            "maturityRating": "NOT_MATURE",
+            "allowAnonLogging": false,
+            "contentVersion": "0.1.0.0.preview.0",
+            "panelizationSummary": {
+                "containsEpubBubbles": false,
+                "containsImageBubbles": false
+            },
+            "imageLinks": {
+                "smallThumbnail": "http://books.google.com/books/content?id=cDKODQAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+                "thumbnail": "http://books.google.com/books/content?id=cDKODQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+            },
+            "language": "en",
+            "previewLink": "http://books.google.com/books?id=cDKODQAAQBAJ&printsec=frontcover&dq=cDKODQAAQBAJ&hl=&cd=1&source=gbs_api",
+            "infoLink": "http://books.google.com/books?id=cDKODQAAQBAJ&dq=cDKODQAAQBAJ&hl=&source=gbs_api",
+            "canonicalVolumeLink": "https://books.google.com/books/about/Cosmos.html?hl=&id=cDKODQAAQBAJ"
+            },
+            "saleInfo": {
+            "country": "US",
+            "saleability": "NOT_FOR_SALE",
+            "isEbook": false
+            },
+            "accessInfo": {
+            "country": "US",
+            "viewability": "PARTIAL",
+            "embeddable": true,
+            "publicDomain": false,
+            "textToSpeechPermission": "ALLOWED_FOR_ACCESSIBILITY",
+            "epub": {
+                "isAvailable": false
+            },
+            "pdf": {
+                "isAvailable": false
+            },
+            "webReaderLink": "http://play.google.com/books/reader?id=cDKODQAAQBAJ&hl=&printsec=frontcover&source=gbs_api",
+            "accessViewStatus": "SAMPLE",
+            "quoteSharingAllowed": false
+            },
+            "searchInfo": {
+            "textSnippet": "Presents an illustrated guide to the universe and to Earth&#39;s relationship to it, moving from theories of creation to humankind&#39;s discovery of the cosmos, to general relativity, to space missions, and beyond."
+            }
+        },
+        {
+            "kind": "books#volume",
+            "id": "hFfhrCWiLSMC",
+            "etag": "0YSxcfPDHNI",
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/hFfhrCWiLSMC",
+            "volumeInfo": {
+              "title": "The Hobbit, Or There and Back Again",
+              "authors": [
+                "John Ronald Reuel Tolkien"
+              ],
+              "publishedDate": "1982",
+              "industryIdentifiers": [
+                {
+                  "type": "ISBN_13",
+                  "identifier": "9780345339683"
+                },
+                {
+                  "type": "ISBN_10",
+                  "identifier": "0345339681"
+                }
+              ],
+              "readingModes": {
+                "text": false,
+                "image": false
+              },
+              "pageCount": 306,
+              "printType": "BOOK",
+              "categories": [
+                "Fantasy fiction"
+              ],
+              "averageRating": 4.5,
+              "ratingsCount": 88,
+              "maturityRating": "NOT_MATURE",
+              "allowAnonLogging": false,
+              "contentVersion": "0.2.1.0.preview.0",
+              "panelizationSummary": {
+                "containsEpubBubbles": false,
+                "containsImageBubbles": false
+              },
+              "imageLinks": {
+                "smallThumbnail": "http://books.google.com/books/content?id=hFfhrCWiLSMC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+                "thumbnail": "http://books.google.com/books/content?id=hFfhrCWiLSMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+              },
+              "language": "en",
+              "previewLink": "http://books.google.com/books?id=hFfhrCWiLSMC&printsec=frontcover&dq=hFfhrCWiLSMC&hl=&cd=1&source=gbs_api",
+              "infoLink": "http://books.google.com/books?id=hFfhrCWiLSMC&dq=hFfhrCWiLSMC&hl=&source=gbs_api",
+              "canonicalVolumeLink": "https://books.google.com/books/about/The_Hobbit_Or_There_and_Back_Again.html?hl=&id=hFfhrCWiLSMC"
+            },
+            "saleInfo": {
+              "country": "US",
+              "saleability": "NOT_FOR_SALE",
+              "isEbook": false
+            },
+            "accessInfo": {
+              "country": "US",
+              "viewability": "PARTIAL",
+              "embeddable": true,
+              "publicDomain": false,
+              "textToSpeechPermission": "ALLOWED_FOR_ACCESSIBILITY",
+              "epub": {
+                "isAvailable": false
+              },
+              "pdf": {
+                "isAvailable": false
+              },
+              "webReaderLink": "http://play.google.com/books/reader?id=hFfhrCWiLSMC&hl=&printsec=frontcover&source=gbs_api",
+              "accessViewStatus": "SAMPLE",
+              "quoteSharingAllowed": false
+            }
+        }, 
+        {
+            "kind": "books#volume",
+            "id": "iUt8DAAAQBAJ",
+            "etag": "DHCg+f0NN8Q",
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/iUt8DAAAQBAJ",
+            "volumeInfo": {
+              "title": "Storm in a Teacup: The Physics of Everyday Life",
+              "authors": [
+                "Helen Czerski"
+              ],
+              "publisher": "W. W. Norton & Company",
+              "publishedDate": "2017-01-10",
+              "description": "“[Czerski’s] quest to enhance humanity’s everyday scientific literacy is timely and imperative.”—Science Storm in a Teacup is Helen Czerski’s lively, entertaining, and richly informed introduction to the world of physics. Czerski provides the tools to alter the way we see everything around us by linking ordinary objects and occurrences, like popcorn popping, coffee stains, and fridge magnets, to big ideas like climate change, the energy crisis, or innovative medical testing. She provides answers to vexing questions: How do ducks keep their feet warm when walking on ice? Why does it take so long for ketchup to come out of a bottle? Why does milk, when added to tea, look like billowing storm clouds? In an engaging voice at once warm and witty, Czerski shares her stunning breadth of knowledge to lift the veil of familiarity from the ordinary.",
+              "industryIdentifiers": [
+                {
+                  "type": "ISBN_13",
+                  "identifier": "9780393248975"
+                },
+                {
+                  "type": "ISBN_10",
+                  "identifier": "0393248976"
+                }
+              ],
+              "readingModes": {
+                "text": true,
+                "image": false
+              },
+              "pageCount": 336,
+              "printType": "BOOK",
+              "categories": [
+                "Science"
+              ],
+              "averageRating": 3.5,
+              "ratingsCount": 4,
+              "maturityRating": "NOT_MATURE",
+              "allowAnonLogging": true,
+              "contentVersion": "1.9.8.0.preview.2",
+              "panelizationSummary": {
+                "containsEpubBubbles": false,
+                "containsImageBubbles": false
+              },
+              "imageLinks": {
+                "smallThumbnail": "http://books.google.com/books/content?id=iUt8DAAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+                "thumbnail": "http://books.google.com/books/content?id=iUt8DAAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+              },
+              "language": "en",
+              "previewLink": "http://books.google.com/books?id=iUt8DAAAQBAJ&printsec=frontcover&dq=iUt8DAAAQBAJ&hl=&cd=1&source=gbs_api",
+              "infoLink": "https://play.google.com/store/books/details?id=iUt8DAAAQBAJ&source=gbs_api",
+              "canonicalVolumeLink": "https://play.google.com/store/books/details?id=iUt8DAAAQBAJ"
+            },
+            "saleInfo": {
+              "country": "US",
+              "saleability": "FOR_SALE",
+              "isEbook": true,
+              "listPrice": {
+                "amount": 15.95,
+                "currencyCode": "USD"
+              },
+              "retailPrice": {
+                "amount": 9.99,
+                "currencyCode": "USD"
+              },
+              "buyLink": "https://play.google.com/store/books/details?id=iUt8DAAAQBAJ&rdid=book-iUt8DAAAQBAJ&rdot=1&source=gbs_api",
+              "offers": [
+                {
+                  "finskyOfferType": 1,
+                  "listPrice": {
+                    "amountInMicros": 15950000,
+                    "currencyCode": "USD"
+                  },
+                  "retailPrice": {
+                    "amountInMicros": 9990000,
+                    "currencyCode": "USD"
+                  },
+                  "giftable": true
+                }
+              ]
+            },
+            "accessInfo": {
+              "country": "US",
+              "viewability": "PARTIAL",
+              "embeddable": true,
+              "publicDomain": false,
+              "textToSpeechPermission": "ALLOWED",
+              "epub": {
+                "isAvailable": true,
+                "acsTokenLink": "http://books.google.com/books/download/Storm_in_a_Teacup_The_Physics_of_Everyda-sample-epub.acsm?id=iUt8DAAAQBAJ&format=epub&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+              },
+              "pdf": {
+                "isAvailable": false
+              },
+              "webReaderLink": "http://play.google.com/books/reader?id=iUt8DAAAQBAJ&hl=&printsec=frontcover&source=gbs_api",
+              "accessViewStatus": "SAMPLE",
+              "quoteSharingAllowed": false
+            },
+            "searchInfo": {
+              "textSnippet": "“[Czerski’s] quest to enhance humanity’s everyday scientific literacy is timely and imperative.”—Science Storm in a Teacup is Helen Czerski’s lively, entertaining, and richly informed introduction to the world of physics."
+            }
+        },
+        {
+            "kind": "books#volume",
+            "id": "GRSkDwAAQBAJ",
+            "etag": "z6Q6uPE50XM",
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/GRSkDwAAQBAJ",
+            "volumeInfo": {
+              "title": "The Empress of Salt and Fortune",
+              "authors": [
+                "Nghi Vo"
+              ],
+              "publisher": "Tordotcom",
+              "publishedDate": "2020-03-24",
+              "description": "\"Dangerous, subtle, unexpected and familiar, angry and ferocious and hopeful... The Empress of Salt and Fortune is a remarkable accomplishment of storytelling.\"—NPR A 2020 ALA Booklist Top Ten SF/F Debut A Book Riot Must-Read Fantasy of 2020 A Paste Most Anticipated Novel of 2020 A Library Journal Debut of the Month A Buzzfeed Must-Read Fantasy Novel of Spring 2020 With the heart of an Atwood tale and the visuals of a classic Asian period drama, Nghi Vo's The Empress of Salt and Fortune is a tightly and lushly written narrative about empire, storytelling, and the anger of women. A young royal from the far north, is sent south for a political marriage in an empire reminiscent of imperial China. Her brothers are dead, her armies and their war mammoths long defeated and caged behind their borders. Alone and sometimes reviled, she must choose her allies carefully. Rabbit, a handmaiden, sold by her parents to the palace for the lack of five baskets of dye, befriends the emperor's lonely new wife and gets more than she bargained for. At once feminist high fantasy and an indictment of monarchy, this evocative debut follows the rise of the empress In-yo, who has few resources and fewer friends. She's a northern daughter in a mage-made summer exile, but she will bend history to her will and bring down her enemies, piece by piece. Praise for The Empress of Salt and Fortune “An elegant gut-punch, a puzzle box that unwinds itself in its own way and in its own time. I cannot recommend it highly enough. Gorgeous. Cruel. Perfect. I didn't know I needed to read this until I did.”—Seanan McGuire \"A tale of rebellion and fealty that feels both classic and fresh, The Empress of Salt and Fortune is elegantly told, strongly felt, and brimming with rich detail. An epic in miniature, beautifully realised.\"—Zen Cho At the Publisher's request, this title is being sold without Digital Rights Management Software (DRM) applied.",
+              "industryIdentifiers": [
+                {
+                  "type": "ISBN_13",
+                  "identifier": "9781250750297"
+                },
+                {
+                  "type": "ISBN_10",
+                  "identifier": "1250750296"
+                }
+              ],
+              "readingModes": {
+                "text": true,
+                "image": false
+              },
+              "pageCount": 112,
+              "printType": "BOOK",
+              "categories": [
+                "Fiction"
+              ],
+              "averageRating": 4.5,
+              "ratingsCount": 7,
+              "maturityRating": "MATURE",
+              "allowAnonLogging": true,
+              "contentVersion": "1.4.4.0.preview.2",
+              "panelizationSummary": {
+                "containsEpubBubbles": false,
+                "containsImageBubbles": false
+              },
+              "imageLinks": {
+                "smallThumbnail": "http://books.google.com/books/content?id=GRSkDwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+                "thumbnail": "http://books.google.com/books/content?id=GRSkDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+              },
+              "language": "en",
+              "previewLink": "http://books.google.com/books?id=GRSkDwAAQBAJ&printsec=frontcover&dq=GRSkDwAAQBAJ&hl=&cd=1&source=gbs_api",
+              "infoLink": "https://play.google.com/store/books/details?id=GRSkDwAAQBAJ&source=gbs_api",
+              "canonicalVolumeLink": "https://play.google.com/store/books/details?id=GRSkDwAAQBAJ"
+            },
+            "saleInfo": {
+              "country": "US",
+              "saleability": "FOR_SALE",
+              "isEbook": true,
+              "listPrice": {
+                "amount": 3.99,
+                "currencyCode": "USD"
+              },
+              "retailPrice": {
+                "amount": 3.99,
+                "currencyCode": "USD"
+              },
+              "buyLink": "https://play.google.com/store/books/details?id=GRSkDwAAQBAJ&rdid=book-GRSkDwAAQBAJ&rdot=1&source=gbs_api",
+              "offers": [
+                {
+                  "finskyOfferType": 1,
+                  "listPrice": {
+                    "amountInMicros": 3990000,
+                    "currencyCode": "USD"
+                  },
+                  "retailPrice": {
+                    "amountInMicros": 3990000,
+                    "currencyCode": "USD"
+                  },
+                  "giftable": true
+                }
+              ]
+            },
+            "accessInfo": {
+              "country": "US",
+              "viewability": "PARTIAL",
+              "embeddable": true,
+              "publicDomain": false,
+              "textToSpeechPermission": "ALLOWED",
+              "epub": {
+                "isAvailable": true
+              },
+              "pdf": {
+                "isAvailable": false
+              },
+              "webReaderLink": "http://play.google.com/books/reader?id=GRSkDwAAQBAJ&hl=&printsec=frontcover&source=gbs_api",
+              "accessViewStatus": "SAMPLE",
+              "quoteSharingAllowed": false
+            },
+            "searchInfo": {
+              "textSnippet": "An epic in miniature, beautifully realised.&quot;—Zen Cho &quot;Nghi Vo&#39;s gracefully told debut . . . resides in the intimate margins of its (beautifully imagined) world&#39;s history, portraying how the marginalized may yet shape those narratives and ..."
+            }
+        },
+        {
+            "kind": "books#volume",
+            "id": "8e1WDwAAQBAJ",
+            "etag": "nIre/b1vjvM",
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/8e1WDwAAQBAJ",
+            "volumeInfo": {
+              "title": "The Ruin of Kings",
+              "authors": [
+                "Jenn Lyons"
+              ],
+              "publisher": "Tor Books",
+              "publishedDate": "2019-02-05",
+              "description": "A Kirkus Best of Science Fiction and Fantasy pick for 2019! A Library Journal Best Book of 2019! An NPR Favorite Book of 2019! \"Everything epic fantasy should be: rich, cruel, gorgeous, brilliant, enthralling and deeply, deeply satisfying. I loved it.\"—Lev Grossman, author of The Magicians When destiny calls, there's no fighting back. Kihrin grew up in the slums of Quur, a thief and a minstrel's son raised on tales of long-lost princes and magnificent quests. When he is claimed against his will as the missing son of a treasonous prince, Kihrin finds himself at the mercy of his new family's ruthless power plays and political ambitions. Practically a prisoner, Kihrin discovers that being a long-lost prince is nothing like what the storybooks promised. The storybooks have lied about a lot of other things, too: dragons, demons, gods, prophecies, and how the hero always wins. Then again, maybe he isn't the hero after all. For Kihrin is not destined to save the world. He's destined to destroy it. Jenn Lyons begins the Chorus of Dragons series with The Ruin of Kings, an epic fantasy novel about a man who discovers his fate is tied to the future of an empire. \"It's impossible not to be impressed with the ambition of it all . . . a larger-than-life adventure story about thieves, wizards, assassins and kings to dwell in for a good long while.\"—The New York Times A Chorus of Dragons 1: The Ruin of Kings 2: The Name of All Things 3: The Memory of Souls At the Publisher's request, this title is being sold without Digital Rights Management Software (DRM) applied.",
+              "industryIdentifiers": [
+                {
+                  "type": "ISBN_13",
+                  "identifier": "9781250175496"
+                },
+                {
+                  "type": "ISBN_10",
+                  "identifier": "1250175496"
+                }
+              ],
+              "readingModes": {
+                "text": true,
+                "image": false
+              },
+              "pageCount": 512,
+              "printType": "BOOK",
+              "categories": [
+                "Fiction"
+              ],
+              "averageRating": 3.5,
+              "ratingsCount": 6,
+              "maturityRating": "NOT_MATURE",
+              "allowAnonLogging": true,
+              "contentVersion": "1.8.7.0.preview.2",
+              "panelizationSummary": {
+                "containsEpubBubbles": false,
+                "containsImageBubbles": false
+              },
+              "imageLinks": {
+                "smallThumbnail": "http://books.google.com/books/content?id=8e1WDwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+                "thumbnail": "http://books.google.com/books/content?id=8e1WDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+              },
+              "language": "en",
+              "previewLink": "http://books.google.com/books?id=8e1WDwAAQBAJ&printsec=frontcover&dq=8e1WDwAAQBAJ&hl=&cd=1&source=gbs_api",
+              "infoLink": "https://play.google.com/store/books/details?id=8e1WDwAAQBAJ&source=gbs_api",
+              "canonicalVolumeLink": "https://play.google.com/store/books/details?id=8e1WDwAAQBAJ"
+            },
+            "saleInfo": {
+              "country": "US",
+              "saleability": "FOR_SALE",
+              "isEbook": true,
+              "listPrice": {
+                "amount": 8.99,
+                "currencyCode": "USD"
+              },
+              "retailPrice": {
+                "amount": 8.99,
+                "currencyCode": "USD"
+              },
+              "buyLink": "https://play.google.com/store/books/details?id=8e1WDwAAQBAJ&rdid=book-8e1WDwAAQBAJ&rdot=1&source=gbs_api",
+              "offers": [
+                {
+                  "finskyOfferType": 1,
+                  "listPrice": {
+                    "amountInMicros": 8990000,
+                    "currencyCode": "USD"
+                  },
+                  "retailPrice": {
+                    "amountInMicros": 8990000,
+                    "currencyCode": "USD"
+                  },
+                  "giftable": true
+                }
+              ]
+            },
+            "accessInfo": {
+              "country": "US",
+              "viewability": "PARTIAL",
+              "embeddable": true,
+              "publicDomain": false,
+              "textToSpeechPermission": "ALLOWED",
+              "epub": {
+                "isAvailable": true
+              },
+              "pdf": {
+                "isAvailable": false
+              },
+              "webReaderLink": "http://play.google.com/books/reader?id=8e1WDwAAQBAJ&hl=&printsec=frontcover&source=gbs_api",
+              "accessViewStatus": "SAMPLE",
+              "quoteSharingAllowed": false
+            },
+            "searchInfo": {
+              "textSnippet": "For Kihrin is not destined to save the world. He&#39;s destined to destroy it. Jenn Lyons begins the Chorus of Dragons series with The Ruin of Kings, an epic fantasy novel about a man who discovers his fate is tied to the future of an empire."
+            }
+        },
+        {
+            "kind": "books#volume",
+            "id": "NQ6xDwAAQBAJ",
+            "etag": "0YAlbaL0ts0",
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/NQ6xDwAAQBAJ",
+            "volumeInfo": {
+              "title": "The Future We Choose",
+              "subtitle": "Surviving the Climate Crisis",
+              "authors": [
+                "Christiana Figueres",
+                "Tom Rivett-Carnac"
+              ],
+              "publisher": "Vintage",
+              "publishedDate": "2020-02-25",
+              "description": "Climate change: it is arguably the most urgent and consequential issue humankind has ever faced. How we address it in the next thirty years will determine the kind of world we will live in and will bequeath to our children and to theirs. In The Future We Choose, Christiana Figueres and Tom Rivett-Carnac--who led negotiations for the United Nations during the historic Paris Agreement of 2015--have written a cautionary but optimistic book about the world's changing climate and the fate of humanity. The authors outline two possible scenarios for our planet. In one, they describe what life on Earth will be like by 2050 if we fail to meet the Paris climate targets. In the other, they lay out what it will be like to live in a carbon neutral, regenerative world. They argue for confronting the climate crisis head-on, with determination and optimism. The Future We Choose presents our options and tells us what governments, corporations, and each of us can and must do to fend off disaster.",
+              "industryIdentifiers": [
+                {
+                  "type": "ISBN_13",
+                  "identifier": "9780525658368"
+                },
+                {
+                  "type": "ISBN_10",
+                  "identifier": "052565836X"
+                }
+              ],
+              "readingModes": {
+                "text": true,
+                "image": false
+              },
+              "pageCount": 240,
+              "printType": "BOOK",
+              "categories": [
+                "Science"
+              ],
+              "maturityRating": "NOT_MATURE",
+              "allowAnonLogging": true,
+              "contentVersion": "1.2.2.0.preview.2",
+              "panelizationSummary": {
+                "containsEpubBubbles": false,
+                "containsImageBubbles": false
+              },
+              "imageLinks": {
+                "smallThumbnail": "http://books.google.com/books/content?id=NQ6xDwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+                "thumbnail": "http://books.google.com/books/content?id=NQ6xDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+              },
+              "language": "en",
+              "previewLink": "http://books.google.com/books?id=NQ6xDwAAQBAJ&printsec=frontcover&dq=NQ6xDwAAQBAJ&hl=&cd=1&source=gbs_api",
+              "infoLink": "https://play.google.com/store/books/details?id=NQ6xDwAAQBAJ&source=gbs_api",
+              "canonicalVolumeLink": "https://play.google.com/store/books/details?id=NQ6xDwAAQBAJ"
+            },
+            "saleInfo": {
+              "country": "US",
+              "saleability": "FOR_SALE",
+              "isEbook": true,
+              "listPrice": {
+                "amount": 12.99,
+                "currencyCode": "USD"
+              },
+              "retailPrice": {
+                "amount": 12.99,
+                "currencyCode": "USD"
+              },
+              "buyLink": "https://play.google.com/store/books/details?id=NQ6xDwAAQBAJ&rdid=book-NQ6xDwAAQBAJ&rdot=1&source=gbs_api",
+              "offers": [
+                {
+                  "finskyOfferType": 1,
+                  "listPrice": {
+                    "amountInMicros": 12990000,
+                    "currencyCode": "USD"
+                  },
+                  "retailPrice": {
+                    "amountInMicros": 12990000,
+                    "currencyCode": "USD"
+                  },
+                  "giftable": true
+                }
+              ]
+            },
+            "accessInfo": {
+              "country": "US",
+              "viewability": "PARTIAL",
+              "embeddable": true,
+              "publicDomain": false,
+              "textToSpeechPermission": "ALLOWED_FOR_ACCESSIBILITY",
+              "epub": {
+                "isAvailable": true,
+                "acsTokenLink": "http://books.google.com/books/download/The_Future_We_Choose-sample-epub.acsm?id=NQ6xDwAAQBAJ&format=epub&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+              },
+              "pdf": {
+                "isAvailable": false
+              },
+              "webReaderLink": "http://play.google.com/books/reader?id=NQ6xDwAAQBAJ&hl=&printsec=frontcover&source=gbs_api",
+              "accessViewStatus": "SAMPLE",
+              "quoteSharingAllowed": false
+            },
+            "searchInfo": {
+              "textSnippet": "In The Future We Choose, Christiana Figueres and Tom Rivett-Carnac--who led negotiations for the United Nations during the historic Paris Agreement of 2015--have written a cautionary but optimistic book about the world&#39;s changing climate ..."
+            }
+        },
+        {
+            "kind": "books#volume",
+            "id": "J0tIAgAAQBAJ",
+            "etag": "S/8iDQA0seE",
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/J0tIAgAAQBAJ",
+            "volumeInfo": {
+              "title": "The Fifth Season",
+              "authors": [
+                "N. K. Jemisin"
+              ],
+              "publisher": "Orbit",
+              "publishedDate": "2015-08-04",
+              "description": "At the end of the world, a woman must hide her secret power and find her kidnapped daughter in this \"intricate and extraordinary\" Hugo Award winning novel of power, oppression, and revolution. (The New York Times) This is the way the world ends. . .for the last time. It starts with the great red rift across the heart of the world's sole continent, spewing ash that blots out the sun. It starts with death, with a murdered son and a missing daughter. It starts with betrayal, and long dormant wounds rising up to fester. This is the Stillness, a land long familiar with catastrophe, where the power of the earth is wielded as a weapon. And where there is no mercy. Read the first book in the critically acclaimed, three-time Hugo award-winning trilogy by NYT bestselling author N. K. Jemisin.",
+              "industryIdentifiers": [
+                {
+                  "type": "ISBN_13",
+                  "identifier": "9780316229302"
+                },
+                {
+                  "type": "ISBN_10",
+                  "identifier": "031622930X"
+                }
+              ],
+              "readingModes": {
+                "text": true,
+                "image": false
+              },
+              "pageCount": 512,
+              "printType": "BOOK",
+              "categories": [
+                "Fiction"
+              ],
+              "averageRating": 4,
+              "ratingsCount": 102,
+              "maturityRating": "NOT_MATURE",
+              "allowAnonLogging": true,
+              "contentVersion": "1.17.17.0.preview.2",
+              "panelizationSummary": {
+                "containsEpubBubbles": false,
+                "containsImageBubbles": false
+              },
+              "imageLinks": {
+                "smallThumbnail": "http://books.google.com/books/content?id=J0tIAgAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+                "thumbnail": "http://books.google.com/books/content?id=J0tIAgAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+              },
+              "language": "en",
+              "previewLink": "http://books.google.com/books?id=J0tIAgAAQBAJ&printsec=frontcover&dq=J0tIAgAAQBAJ&hl=&cd=1&source=gbs_api",
+              "infoLink": "https://play.google.com/store/books/details?id=J0tIAgAAQBAJ&source=gbs_api",
+              "canonicalVolumeLink": "https://play.google.com/store/books/details?id=J0tIAgAAQBAJ"
+            },
+            "saleInfo": {
+              "country": "US",
+              "saleability": "FOR_SALE",
+              "isEbook": true,
+              "listPrice": {
+                "amount": 9.99,
+                "currencyCode": "USD"
+              },
+              "retailPrice": {
+                "amount": 9.99,
+                "currencyCode": "USD"
+              },
+              "buyLink": "https://play.google.com/store/books/details?id=J0tIAgAAQBAJ&rdid=book-J0tIAgAAQBAJ&rdot=1&source=gbs_api",
+              "offers": [
+                {
+                  "finskyOfferType": 1,
+                  "listPrice": {
+                    "amountInMicros": 9990000,
+                    "currencyCode": "USD"
+                  },
+                  "retailPrice": {
+                    "amountInMicros": 9990000,
+                    "currencyCode": "USD"
+                  },
+                  "giftable": true
+                }
+              ]
+            },
+            "accessInfo": {
+              "country": "US",
+              "viewability": "PARTIAL",
+              "embeddable": true,
+              "publicDomain": false,
+              "textToSpeechPermission": "ALLOWED",
+              "epub": {
+                "isAvailable": true,
+                "acsTokenLink": "http://books.google.com/books/download/The_Fifth_Season-sample-epub.acsm?id=J0tIAgAAQBAJ&format=epub&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+              },
+              "pdf": {
+                "isAvailable": false
+              },
+              "webReaderLink": "http://play.google.com/books/reader?id=J0tIAgAAQBAJ&hl=&printsec=frontcover&source=gbs_api",
+              "accessViewStatus": "SAMPLE",
+              "quoteSharingAllowed": false
+            },
+            "searchInfo": {
+              "textSnippet": "At the end of the world, a woman must hide her secret power and find her kidnapped daughter in this &quot;intricate and extraordinary&quot; Hugo Award winning novel of power, oppression, and revolution. (The New York Times) This is the way the world ..."
+            }
+        },
+        {
+          "kind": "books#volume",
+          "id": "JuDInK3YtyMC",
+          "etag": "yv4wDz1H7EM",
+          "selfLink": "https://www.googleapis.com/books/v1/volumes/JuDInK3YtyMC",
+          "volumeInfo": {
+            "title": "The Essential Calvin And Hobbes",
+            "authors": [
+              "Bill Watterson"
+            ],
+            "publisher": "Andrews McMeel Publishing",
+            "publishedDate": "1988-01-01",
+            "description": "The Essential Calvin and Hobbes is an over-size anthology-type book including an original 16-page story and color Sunday cartoons.",
+            "industryIdentifiers": [
+              {
+                "type": "ISBN_10",
+                "identifier": "0836218051"
+              },
+              {
+                "type": "ISBN_13",
+                "identifier": "9780836218053"
+              }
+              ],
+              "readingModes": {
+                "text": false,
+                "image": true
+              },
+              "pageCount": 254,
+              "printType": "BOOK",
+              "categories": [
+                "Comics & Graphic Novels"
+              ],
+              "averageRating": 4.5,
+              "ratingsCount": 54,
+              "maturityRating": "NOT_MATURE",
+              "allowAnonLogging": false,
+              "contentVersion": "0.0.1.0.preview.1",
+              "comicsContent": true,
+              "imageLinks": {
+                "smallThumbnail": "http://books.google.com/books/content?id=JuDInK3YtyMC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+                "thumbnail": "http://books.google.com/books/content?id=JuDInK3YtyMC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+              },
+              "language": "en",
+              "previewLink": "http://books.google.com/books?id=JuDInK3YtyMC&printsec=frontcover&dq=JuDInK3YtyMC&hl=&cd=1&source=gbs_api",
+              "infoLink": "http://books.google.com/books?id=JuDInK3YtyMC&dq=JuDInK3YtyMC&hl=&source=gbs_api",
+              "canonicalVolumeLink": "https://books.google.com/books/about/The_Essential_Calvin_And_Hobbes.html?hl=&id=JuDInK3YtyMC"
+            },
+            "saleInfo": {
+              "country": "US",
+              "saleability": "NOT_FOR_SALE",
+              "isEbook": false
+            },
+            "accessInfo": {
+              "country": "US",
+              "viewability": "PARTIAL",
+              "embeddable": true,
+              "publicDomain": false,
+              "textToSpeechPermission": "ALLOWED",
+              "epub": {
+                "isAvailable": false
+              },
+              "pdf": {
+                "isAvailable": false
+              },
+              "webReaderLink": "http://play.google.com/books/reader?id=JuDInK3YtyMC&hl=&printsec=frontcover&source=gbs_api",
+              "accessViewStatus": "SAMPLE",
+              "quoteSharingAllowed": false
+            },
+            "searchInfo": {
+              "textSnippet": "The Essential Calvin and Hobbes is an over-size anthology-type book including an original 16-page story and color Sunday cartoons."
+            }
+          },
+          {
+            "kind": "books#volume",
+            "id": "yNxhLML79XwC",
+            "etag": "6APTlnkzmN4",
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/yNxhLML79XwC",
+            "volumeInfo": {
+              "title": "Howl's Moving Castle",
+              "authors": [
+                "Diana Wynne Jones"
+              ],
+              "publisher": "Harper Collins",
+              "publishedDate": "2012-09-25",
+              "description": "Sophie has the great misfortune of being the eldest of three daughters, destined to fail miserably should she ever leave home to seek her fate. But when she unwittingly attracts the ire of the Witch of the Waste, Sophie finds herself under a horrid spell that transforms her into an old lady. Her only chance at breaking it lies in the ever-moving castle in the hills: the Wizard Howl's castle. To untangle the enchantment, Sophie must handle the heartless Howl, strike a bargain with a fire demon, and meet the Witch of the Waste head-on. Along the way, she discovers that there's far more to Howl—and herself—than first meets the eye.",
+              "industryIdentifiers": [
+                {
+                  "type": "ISBN_13",
+                  "identifier": "9780062244512"
+                },
+                {
+                  "type": "ISBN_10",
+                  "identifier": "0062244515"
+                }
+              ],
+              "readingModes": {
+                "text": true,
+                "image": false
+              },
+              "pageCount": 448,
+              "printType": "BOOK",
+              "categories": [
+                "Juvenile Fiction"
+              ],
+              "averageRating": 4,
+              "ratingsCount": 215,
+              "maturityRating": "NOT_MATURE",
+              "allowAnonLogging": true,
+              "contentVersion": "1.6.5.0.preview.2",
+              "panelizationSummary": {
+                "containsEpubBubbles": false,
+                "containsImageBubbles": false
+              },
+              "imageLinks": {
+                "smallThumbnail": "http://books.google.com/books/content?id=yNxhLML79XwC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+                "thumbnail": "http://books.google.com/books/content?id=yNxhLML79XwC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+              },
+              "language": "en",
+              "previewLink": "http://books.google.com/books?id=yNxhLML79XwC&printsec=frontcover&dq=yNxhLML79XwC&hl=&cd=1&source=gbs_api",
+              "infoLink": "https://play.google.com/store/books/details?id=yNxhLML79XwC&source=gbs_api",
+              "canonicalVolumeLink": "https://play.google.com/store/books/details?id=yNxhLML79XwC"
+            },
+            "saleInfo": {
+              "country": "US",
+              "saleability": "FOR_SALE",
+              "isEbook": true,
+              "listPrice": {
+                "amount": 6.99,
+                "currencyCode": "USD"
+              },
+              "retailPrice": {
+                "amount": 6.99,
+                "currencyCode": "USD"
+              },
+              "buyLink": "https://play.google.com/store/books/details?id=yNxhLML79XwC&rdid=book-yNxhLML79XwC&rdot=1&source=gbs_api",
+              "offers": [
+                {
+                  "finskyOfferType": 1,
+                  "listPrice": {
+                    "amountInMicros": 6990000,
+                    "currencyCode": "USD"
+                  },
+                  "retailPrice": {
+                    "amountInMicros": 6990000,
+                    "currencyCode": "USD"
+                  },
+                  "giftable": true
+                }
+              ]
+            },
+            "accessInfo": {
+              "country": "US",
+              "viewability": "PARTIAL",
+              "embeddable": true,
+              "publicDomain": false,
+              "textToSpeechPermission": "ALLOWED_FOR_ACCESSIBILITY",
+              "epub": {
+                "isAvailable": true,
+                "acsTokenLink": "http://books.google.com/books/download/Howl_s_Moving_Castle-sample-epub.acsm?id=yNxhLML79XwC&format=epub&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+              },
+              "pdf": {
+                "isAvailable": false
+              },
+              "webReaderLink": "http://play.google.com/books/reader?id=yNxhLML79XwC&hl=&printsec=frontcover&source=gbs_api",
+              "accessViewStatus": "SAMPLE",
+              "quoteSharingAllowed": false
+            },
+            "searchInfo": {
+              "textSnippet": "Diana Wynne Jones&#39;s entrancing, classic fantasy novel is filled with surprises at every turn."
+            }
+        },
+        {
+            "kind": "books#volume",
+            "id": "31rCgtgEU7AC",
+            "etag": "8QabrdHJY8o",
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/31rCgtgEU7AC",
+            "volumeInfo": {
+              "title": "The Other End of the Leash",
+              "subtitle": "Why We Do What We Do Around Dogs",
+              "authors": [
+                "Patricia McConnell, Ph.D."
+              ],
+              "publisher": "Ballantine Books",
+              "publishedDate": "2009-02-19",
+              "description": "Learn to communicate with your dog—using their language “Good reading for dog lovers and an immensely useful manual for dog owners.”—The Washington Post An Applied Animal Behaviorist and dog trainer with more than twenty years’ experience, Dr. Patricia McConnell reveals a revolutionary new perspective on our relationship with dogs—sharing insights on how “man’s best friend” might interpret our behavior, as well as essential advice on how to interact with our four-legged friends in ways that bring out the best in them. After all, humans and dogs are two entirely different species, each shaped by its individual evolutionary heritage. Quite simply, humans are primates and dogs are canids (as are wolves, coyotes, and foxes). Since we each speak a different native tongue, a lot gets lost in the translation. This marvelous guide demonstrates how even the slightest changes in our voices and in the ways we stand can help dogs understand what we want. Inside you will discover: • How you can get your dog to come when called by acting less like a primate and more like a dog • Why the advice to “get dominance” over your dog can cause problems • Why “rough and tumble primate play” can lead to trouble—and how to play with your dog in ways that are fun and keep him out of mischief • How dogs and humans share personality types—and why most dogs want to live with benevolent leaders rather than “alpha wanna-bes!” Fascinating, insightful, and compelling, The Other End of the Leash is a book that strives to help you connect with your dog in a completely new way—so as to enrich that most rewarding of relationships.",
+              "industryIdentifiers": [
+                {
+                  "type": "ISBN_13",
+                  "identifier": "9780307489180"
+                },
+                {
+                  "type": "ISBN_10",
+                  "identifier": "0307489183"
+                }
+              ],
+              "readingModes": {
+                "text": true,
+                "image": true
+              },
+              "pageCount": 272,
+              "printType": "BOOK",
+              "categories": [
+                "Pets"
+              ],
+              "averageRating": 4.5,
+              "ratingsCount": 14,
+              "maturityRating": "NOT_MATURE",
+              "allowAnonLogging": true,
+              "contentVersion": "1.8.7.0.preview.3",
+              "panelizationSummary": {
+                "containsEpubBubbles": false,
+                "containsImageBubbles": false
+              },
+              "imageLinks": {
+                "smallThumbnail": "http://books.google.com/books/content?id=31rCgtgEU7AC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+                "thumbnail": "http://books.google.com/books/content?id=31rCgtgEU7AC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+              },
+              "language": "en",
+              "previewLink": "http://books.google.com/books?id=31rCgtgEU7AC&printsec=frontcover&dq=31rCgtgEU7AC&hl=&cd=1&source=gbs_api",
+              "infoLink": "https://play.google.com/store/books/details?id=31rCgtgEU7AC&source=gbs_api",
+              "canonicalVolumeLink": "https://play.google.com/store/books/details?id=31rCgtgEU7AC"
+            },
+            "saleInfo": {
+              "country": "US",
+              "saleability": "FOR_SALE",
+              "isEbook": true,
+              "listPrice": {
+                "amount": 14.99,
+                "currencyCode": "USD"
+              },
+              "retailPrice": {
+                "amount": 14.99,
+                "currencyCode": "USD"
+              },
+              "buyLink": "https://play.google.com/store/books/details?id=31rCgtgEU7AC&rdid=book-31rCgtgEU7AC&rdot=1&source=gbs_api",
+              "offers": [
+                {
+                  "finskyOfferType": 1,
+                  "listPrice": {
+                    "amountInMicros": 14990000,
+                    "currencyCode": "USD"
+                  },
+                  "retailPrice": {
+                    "amountInMicros": 14990000,
+                    "currencyCode": "USD"
+                  },
+                  "giftable": true
+                }
+              ]
+            },
+            "accessInfo": {
+              "country": "US",
+              "viewability": "PARTIAL",
+              "embeddable": true,
+              "publicDomain": false,
+              "textToSpeechPermission": "ALLOWED_FOR_ACCESSIBILITY",
+              "epub": {
+                "isAvailable": true,
+                "acsTokenLink": "http://books.google.com/books/download/The_Other_End_of_the_Leash-sample-epub.acsm?id=31rCgtgEU7AC&format=epub&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+              },
+              "pdf": {
+                "isAvailable": true,
+                "acsTokenLink": "http://books.google.com/books/download/The_Other_End_of_the_Leash-sample-pdf.acsm?id=31rCgtgEU7AC&format=pdf&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+              },
+              "webReaderLink": "http://play.google.com/books/reader?id=31rCgtgEU7AC&hl=&printsec=frontcover&source=gbs_api",
+              "accessViewStatus": "SAMPLE",
+              "quoteSharingAllowed": false
+            },
+            "searchInfo": {
+              "textSnippet": "Since we each speak a different native tongue, a lot gets lost in the translation. This marvelous guide demonstrates how even the slightest changes in our voices and in the ways we stand can help dogs understand what we want."
+            }
+        },
+        {
+            "kind": "books#volume",
+            "id": "dgFxCQAAQBAJ",
+            "etag": "w/zPpI/zwz4",
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/dgFxCQAAQBAJ",
+            "volumeInfo": {
+              "title": "The Long Way to a Small, Angry Planet",
+              "subtitle": "Wayfarers 1",
+              "authors": [
+                "Becky Chambers"
+              ],
+              "publisher": "Hodder & Stoughton",
+              "publishedDate": "2015-03-16",
+              "description": "LONGLISTED FOR THE BAILEY'S WOMEN'S PRIZE FOR FICTION 'A quietly profound, humane tour de force' Guardian The beloved debut novel that will restore your faith in humanity #SmallAngryPlanet When Rosemary Harper joins the crew of the Wayfarer, she isn't expecting much. The ship, which has seen better days, offers her everything she could possibly want: a small, quiet spot to call home for a while, adventure in far-off corners of the galaxy, and distance from her troubled past. But Rosemary gets more than she bargained for with the Wayfarer. The crew is a mishmash of species and personalities, from Sissix, the friendly reptillian pilot, to Kizzy and Jenks, the constantly sparring engineers who keep the ship running. Life on board is chaotic, but more or less peaceful - exactly what Rosemary wants. Until the crew are offered the job of a lifetime: the chance to build a hyperspace tunnel to a distant planet. They'll earn enough money to live comfortably for years... if they survive the long trip through war-torn interstellar space without endangering any of the fragile alliances that keep the galaxy peaceful. But Rosemary isn't the only person on board with secrets to hide, and the crew will soon discover that space may be vast, but spaceships are very small indeed. PRAISE FOR THE WAYFARERS 'Never less than deeply involving' DAILY MAIL 'Explores the quieter side of sci-fi while still wowing us with daring leaps of imagination' iBOOKS 'So much fun to read' HEAT 'Chambers is simply an exceptional talent, quietly and beautifully redefining the space opera' TOR.COM 'The most fun that I've had with a novel in a long, long time' iO9",
+              "industryIdentifiers": [
+                {
+                  "type": "ISBN_13",
+                  "identifier": "9781473619777"
+                },
+                {
+                  "type": "ISBN_10",
+                  "identifier": "1473619777"
+                }
+              ],
+              "readingModes": {
+                "text": true,
+                "image": false
+              },
+              "pageCount": 608,
+              "printType": "BOOK",
+              "categories": [
+                "Fiction"
+              ],
+              "averageRating": 4,
+              "ratingsCount": 97,
+              "maturityRating": "NOT_MATURE",
+              "allowAnonLogging": true,
+              "contentVersion": "1.16.15.0.preview.2",
+              "panelizationSummary": {
+                "containsEpubBubbles": false,
+                "containsImageBubbles": false
+              },
+              "imageLinks": {
+                "smallThumbnail": "http://books.google.com/books/content?id=dgFxCQAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+                "thumbnail": "http://books.google.com/books/content?id=dgFxCQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+              },
+              "language": "en",
+              "previewLink": "http://books.google.com/books?id=dgFxCQAAQBAJ&printsec=frontcover&dq=dgFxCQAAQBAJ&hl=&cd=1&source=gbs_api",
+              "infoLink": "http://books.google.com/books?id=dgFxCQAAQBAJ&dq=dgFxCQAAQBAJ&hl=&source=gbs_api",
+              "canonicalVolumeLink": "https://books.google.com/books/about/The_Long_Way_to_a_Small_Angry_Planet.html?hl=&id=dgFxCQAAQBAJ"
+            },
+            "saleInfo": {
+              "country": "US",
+              "saleability": "NOT_FOR_SALE",
+              "isEbook": false
+            },
+            "accessInfo": {
+              "country": "US",
+              "viewability": "PARTIAL",
+              "embeddable": true,
+              "publicDomain": false,
+              "textToSpeechPermission": "ALLOWED",
+              "epub": {
+                "isAvailable": true,
+                "acsTokenLink": "http://books.google.com/books/download/The_Long_Way_to_a_Small_Angry_Planet-sample-epub.acsm?id=dgFxCQAAQBAJ&format=epub&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+              },
+              "pdf": {
+                "isAvailable": false
+              },
+              "webReaderLink": "http://play.google.com/books/reader?id=dgFxCQAAQBAJ&hl=&printsec=frontcover&source=gbs_api",
+              "accessViewStatus": "SAMPLE",
+              "quoteSharingAllowed": false
+            },
+            "searchInfo": {
+              "textSnippet": "LONGLISTED FOR THE BAILEY&#39;S WOMEN&#39;S PRIZE FOR FICTION &#39;A quietly profound, humane tour de force&#39; Guardian The beloved debut novel that will restore your faith in humanity #SmallAngryPlanet When Rosemary Harper joins the crew of the Wayfarer ..."
+            }
+        },
+        {
+            "kind": "books#volume",
+            "id": "8thMLkahggcC",
+            "etag": "0mZ8GKJipHE",
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/8thMLkahggcC",
+            "volumeInfo": {
+              "title": "Parable of the Sower",
+              "authors": [
+                "Octavia E. Butler"
+              ],
+              "publisher": "Open Road Media",
+              "publishedDate": "2012-07-24",
+              "description": "A New York Times Notable Book: In 2025, with the world descending into madness and anarchy, one woman begins a fateful journey toward a better future. “A stunner.” —Flea, musician and actor, TheWall Street Journal Lauren Olamina and her family live in one of the only safe neighborhoods remaining on the outskirts of Los Angeles. Behind the walls of their defended enclave, Lauren’s father, a preacher, and a handful of other citizens try to salvage what remains of a culture that has been destroyed by drugs, disease, war, and chronic water shortages. While her father tries to lead people on the righteous path, Lauren struggles with hyperempathy, a condition that makes her extraordinarily sensitive to the pain of others. When fire destroys their compound, Lauren’s family is killed and she is forced out into a world that is fraught with danger. With a handful of other refugees, Lauren must make her way north to safety, along the way conceiving a revolutionary idea that may mean salvation for all mankind. This ebook features an illustrated biography of Octavia E. Butler including rare images from the author’s estate.",
+              "industryIdentifiers": [
+                {
+                  "type": "ISBN_13",
+                  "identifier": "9781453263617"
+                },
+                {
+                  "type": "ISBN_10",
+                  "identifier": "1453263616"
+                }
+              ],
+              "readingModes": {
+                "text": true,
+                "image": true
+              },
+              "pageCount": 299,
+              "printType": "BOOK",
+              "categories": [
+                "Fiction"
+              ],
+              "averageRating": 4,
+              "ratingsCount": 82,
+              "maturityRating": "NOT_MATURE",
+              "allowAnonLogging": true,
+              "contentVersion": "1.42.39.0.preview.3",
+              "panelizationSummary": {
+                "containsEpubBubbles": false,
+                "containsImageBubbles": false
+              },
+              "imageLinks": {
+                "smallThumbnail": "http://books.google.com/books/content?id=8thMLkahggcC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+                "thumbnail": "http://books.google.com/books/content?id=8thMLkahggcC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+              },
+              "language": "en",
+              "previewLink": "http://books.google.com/books?id=8thMLkahggcC&printsec=frontcover&dq=8thMLkahggcC&hl=&cd=1&source=gbs_api",
+              "infoLink": "https://play.google.com/store/books/details?id=8thMLkahggcC&source=gbs_api",
+              "canonicalVolumeLink": "https://play.google.com/store/books/details?id=8thMLkahggcC"
+            },
+            "saleInfo": {
+              "country": "US",
+              "saleability": "FOR_SALE_AND_RENTAL",
+              "isEbook": true,
+              "listPrice": {
+                "amount": 10.99,
+                "currencyCode": "USD"
+              },
+              "retailPrice": {
+                "amount": 10.99,
+                "currencyCode": "USD"
+              },
+              "buyLink": "https://play.google.com/store/books/details?id=8thMLkahggcC&rdid=book-8thMLkahggcC&rdot=1&source=gbs_api",
+              "offers": [
+                {
+                  "finskyOfferType": 1,
+                  "listPrice": {
+                    "amountInMicros": 10990000,
+                    "currencyCode": "USD"
+                  },
+                  "retailPrice": {
+                    "amountInMicros": 10990000,
+                    "currencyCode": "USD"
+                  },
+                  "giftable": true
+                },
+                {
+                  "finskyOfferType": 3,
+                  "listPrice": {
+                    "amountInMicros": 2990000,
+                    "currencyCode": "USD"
+                  },
+                  "retailPrice": {
+                    "amountInMicros": 2690000,
+                    "currencyCode": "USD"
+                  },
+                  "rentalDuration": {
+                    "unit": "DAY",
+                    "count": 3
+                  }
+                }
+              ]
+            },
+            "accessInfo": {
+              "country": "US",
+              "viewability": "PARTIAL",
+              "embeddable": true,
+              "publicDomain": false,
+              "textToSpeechPermission": "ALLOWED",
+              "epub": {
+                "isAvailable": true,
+                "acsTokenLink": "http://books.google.com/books/download/Parable_of_the_Sower-sample-epub.acsm?id=8thMLkahggcC&format=epub&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+              },
+              "pdf": {
+                "isAvailable": true,
+                "acsTokenLink": "http://books.google.com/books/download/Parable_of_the_Sower-sample-pdf.acsm?id=8thMLkahggcC&format=pdf&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+              },
+              "webReaderLink": "http://play.google.com/books/reader?id=8thMLkahggcC&hl=&printsec=frontcover&source=gbs_api",
+              "accessViewStatus": "SAMPLE",
+              "quoteSharingAllowed": false
+            },
+            "searchInfo": {
+              "textSnippet": "This ebook features an illustrated biography of Octavia E. Butler including rare images from the author’s estate."
+            }
+        },
+        {
+            "kind": "books#volume",
+            "id": "ZSu2DQAAQBAJ",
+            "etag": "YHaJpruNv78",
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/ZSu2DQAAQBAJ",
+            "volumeInfo": {
+              "title": "All Systems Red",
+              "subtitle": "The Murderbot Diaries",
+              "authors": [
+                "Martha Wells"
+              ],
+              "publisher": "Tor.com",
+              "publishedDate": "2017-05-02",
+              "description": "Winner: 2018 Hugo Award for Best Novella Winner: 2018 Nebula Award for Best Novella Winner: 2018 Alex Award Winner: 2018 Locus Award One of the Verge's Best Books of 2017 A New York Times and USA Today Bestseller A murderous android discovers itself in All Systems Red, a tense science fiction adventure by Martha Wells that interrogates the roots of consciousness through Artificial Intelligence. \"As a heartless killing machine, I was a complete failure.\" In a corporate-dominated spacefaring future, planetary missions must be approved and supplied by the Company. Exploratory teams are accompanied by Company-supplied security androids, for their own safety. But in a society where contracts are awarded to the lowest bidder, safety isn’t a primary concern. On a distant planet, a team of scientists are conducting surface tests, shadowed by their Company-supplied ‘droid — a self-aware SecUnit that has hacked its own governor module, and refers to itself (though never out loud) as “Murderbot.” Scornful of humans, all it really wants is to be left alone long enough to figure out who it is. But when a neighboring mission goes dark, it's up to the scientists and their Murderbot to get to the truth. At the Publisher's request, this title is being sold without Digital Rights Management Software (DRM) applied.",
+              "industryIdentifiers": [
+                {
+                  "type": "ISBN_13",
+                  "identifier": "9780765397522"
+                },
+                {
+                  "type": "ISBN_10",
+                  "identifier": "0765397528"
+                }
+              ],
+              "readingModes": {
+                "text": true,
+                "image": false
+              },
+              "pageCount": 144,
+              "printType": "BOOK",
+              "categories": [
+                "Fiction"
+              ],
+              "averageRating": 4,
+              "ratingsCount": 73,
+              "maturityRating": "NOT_MATURE",
+              "allowAnonLogging": true,
+              "contentVersion": "1.12.14.0.preview.2",
+              "panelizationSummary": {
+                "containsEpubBubbles": false,
+                "containsImageBubbles": false
+              },
+              "imageLinks": {
+                "smallThumbnail": "http://books.google.com/books/content?id=ZSu2DQAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+                "thumbnail": "http://books.google.com/books/content?id=ZSu2DQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+              },
+              "language": "en",
+              "previewLink": "http://books.google.com/books?id=ZSu2DQAAQBAJ&printsec=frontcover&dq=ZSu2DQAAQBAJ&hl=&cd=1&source=gbs_api",
+              "infoLink": "https://play.google.com/store/books/details?id=ZSu2DQAAQBAJ&source=gbs_api",
+              "canonicalVolumeLink": "https://play.google.com/store/books/details?id=ZSu2DQAAQBAJ"
+            },
+            "saleInfo": {
+              "country": "US",
+              "saleability": "FOR_SALE",
+              "isEbook": true,
+              "listPrice": {
+                "amount": 3.99,
+                "currencyCode": "USD"
+              },
+              "retailPrice": {
+                "amount": 3.99,
+                "currencyCode": "USD"
+              },
+              "buyLink": "https://play.google.com/store/books/details?id=ZSu2DQAAQBAJ&rdid=book-ZSu2DQAAQBAJ&rdot=1&source=gbs_api",
+              "offers": [
+                {
+                  "finskyOfferType": 1,
+                  "listPrice": {
+                    "amountInMicros": 3990000,
+                    "currencyCode": "USD"
+                  },
+                  "retailPrice": {
+                    "amountInMicros": 3990000,
+                    "currencyCode": "USD"
+                  },
+                  "giftable": true
+                }
+              ]
+            },
+            "accessInfo": {
+              "country": "US",
+              "viewability": "PARTIAL",
+              "embeddable": true,
+              "publicDomain": false,
+              "textToSpeechPermission": "ALLOWED",
+              "epub": {
+                "isAvailable": true
+              },
+              "pdf": {
+                "isAvailable": false
+              },
+              "webReaderLink": "http://play.google.com/books/reader?id=ZSu2DQAAQBAJ&hl=&printsec=frontcover&source=gbs_api",
+              "accessViewStatus": "SAMPLE",
+              "quoteSharingAllowed": false
+            },
+            "searchInfo": {
+              "textSnippet": "Winner: 2018 Hugo Award for Best Novella Winner: 2018 Nebula Award for Best Novella Winner: 2018 Alex Award Winner: 2018 Locus Award One of the Verge&#39;s Best Books of 2017 A New York Times and USA Today Bestseller A murderous android ..."
+            }
+        },
+        {
+            "kind": "books#volume",
+            "id": "hTy7QzxZSEUC",
+            "etag": "b02zGVo6KvU",
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/hTy7QzxZSEUC",
+            "volumeInfo": {
+              "title": "The Color Purple",
+              "authors": [
+                "Alice Walker"
+              ],
+              "publisher": "Houghton Mifflin Harcourt",
+              "publishedDate": "1992",
+              "description": "The lives of two sisters--Nettie, a missionary in Africa, and Celie, a southern woman married to a man she hates--are revealed in a series of letters exchanged over thirty years",
+              "industryIdentifiers": [
+                {
+                  "type": "ISBN_10",
+                  "identifier": "0151191549"
+                },
+                {
+                  "type": "ISBN_13",
+                  "identifier": "9780151191543"
+                }
+              ],
+              "readingModes": {
+                "text": false,
+                "image": true
+              },
+              "pageCount": 290,
+              "printType": "BOOK",
+              "categories": [
+                "Fiction"
+              ],
+              "averageRating": 4,
+              "ratingsCount": 160,
+              "maturityRating": "NOT_MATURE",
+              "allowAnonLogging": false,
+              "contentVersion": "0.1.2.0.preview.1",
+              "panelizationSummary": {
+                "containsEpubBubbles": false,
+                "containsImageBubbles": false
+              },
+              "imageLinks": {
+                "smallThumbnail": "http://books.google.com/books/content?id=hTy7QzxZSEUC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+                "thumbnail": "http://books.google.com/books/content?id=hTy7QzxZSEUC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+              },
+              "language": "en",
+              "previewLink": "http://books.google.com/books?id=hTy7QzxZSEUC&printsec=frontcover&dq=hTy7QzxZSEUC&hl=&cd=1&source=gbs_api",
+              "infoLink": "http://books.google.com/books?id=hTy7QzxZSEUC&dq=hTy7QzxZSEUC&hl=&source=gbs_api",
+              "canonicalVolumeLink": "https://books.google.com/books/about/The_Color_Purple.html?hl=&id=hTy7QzxZSEUC"
+            },
+            "saleInfo": {
+              "country": "US",
+              "saleability": "NOT_FOR_SALE",
+              "isEbook": false
+            },
+            "accessInfo": {
+              "country": "US",
+              "viewability": "PARTIAL",
+              "embeddable": true,
+              "publicDomain": false,
+              "textToSpeechPermission": "ALLOWED",
+              "epub": {
+                "isAvailable": false
+              },
+              "pdf": {
+                "isAvailable": false
+              },
+              "webReaderLink": "http://play.google.com/books/reader?id=hTy7QzxZSEUC&hl=&printsec=frontcover&source=gbs_api",
+              "accessViewStatus": "SAMPLE",
+              "quoteSharingAllowed": false
+            },
+            "searchInfo": {
+              "textSnippet": "The lives of two sisters--Nettie, a missionary in Africa, and Celie, a southern woman married to a man she hates--are revealed in a series of letters exchanged over thirty years"
+            }
+          }
+        ]
+    }

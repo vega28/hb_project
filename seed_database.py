@@ -24,15 +24,30 @@ fake = Faker()
 for new_type in ['book', 'movie', 'tv']:
     crud.create_media_type(new_type)
 
-with open('data/test_books.json') as f:
+# with open('data/test_books.json') as f:
+#     book_data = json.loads(f.read())
+# books_in_db = []
+# for book in book_data['entries']:
+#     title, cover_image = (book['title'], book['picture']['url'])
+#     new_book = crud.create_book(title=title, type_id=1, author='somebody', cover=cover_image)
+#     books_in_db.append(new_book)
+
+with open('data/books.json') as f:
     book_data = json.loads(f.read())
 books_in_db = []
-for book in book_data['entries']:
-    title, cover_image = (book['title'], book['picture']['url'])
-    new_book = crud.create_book(title=title, type_id=1, author='somebody', cover=cover_image)
+for book in book_data['items']:
+    # genres = book['categories'] # TODO: assign these now!
+    new_book = crud.create_book(title=book['volumeInfo']['title'], 
+                                type_id=1, 
+                                author=book['volumeInfo']['authors'][0], 
+                                description=book['volumeInfo'].get('description'), # NOTE: The Hobbit has no description...
+                                cover=book['volumeInfo']['imageLinks']['thumbnail'],
+                                pages=book['volumeInfo']['pageCount'])
+                                # year=book['volumeInfo']['publishedDate'], # TODO: add this to model
+                                # isbn=book['volumeInfo']['industryIdentifiers']['ISBN_13']) # TODO: figure out how to unpack this.
     books_in_db.append(new_book)
 
-cosmos = crud.create_item(title='Cosmos', type_id=1)
+# cosmos = crud.create_item(title='Cosmos', type_id=1)
 contact = crud.create_book(title='Contact', type_id=1, author='Carl Sagan', pages=434)
 sunshine = crud.create_movie(title='Sunshine', type_id=2, length=107, year=2007)
 sg1_ep1 = crud.create_tv_ep(title='Children of the Gods', type_id=3, 
@@ -58,14 +73,14 @@ for i in range(10):
 sci = crud.create_genre(genre_name = 'Science')
 scifi = crud.create_genre(genre_name = 'Science Fiction')
 
-crud.assign_genre(cosmos, sci)
+# crud.assign_genre(cosmos, sci)
 crud.assign_genre(contact, scifi)
 crud.assign_genre(sunshine, scifi)
 crud.assign_genre(sg1_ep1, scifi)
 
 # assign user-specific media:
-crud.store_media_in_user_library(user=bob, media_item=cosmos, rating=5, 
-                        review='We are all starstuff.', source='owned')
+# crud.store_media_in_user_library(user=bob, media_item=cosmos, rating=5, 
+                        # review='We are all starstuff.', source='owned')
 crud.store_media_in_user_library(user=bob, media_item=contact, rating=5, 
                         review='woot', source='owned')
 crud.store_media_in_user_library(user=bob, media_item=sunshine, rating=5, 
@@ -81,4 +96,4 @@ crud.assign_collection(bob, sunshine, favorites)
 crud.assign_collection(bob, sg1_ep1, favorites)
 
 # user update:
-bob_cosmos_update = crud.create_user_update(bob, cosmos, update_value=50)
+bob_cosmos_update = crud.create_user_update(bob, contact, update_value=50)

@@ -33,7 +33,7 @@ class Item(db.Model):
     type_id = db.Column(db.Integer, 
                         db.ForeignKey('media_types.type_id'), 
                         nullable=False) # foreign key to media_types table
-    cover = db.Column(db.String(100)) # link to image
+    cover = db.Column(db.Text) # link to image
     description = db.Column(db.Text)
 
     # updates = a list of UserUpdates about this media item
