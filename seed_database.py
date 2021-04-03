@@ -49,6 +49,13 @@ for book in book_data['items']:
                                 # isbn=book['volumeInfo']['industryIdentifiers']['ISBN_13']) # TODO: figure out how to unpack this.
     books_in_db.append(new_book)
 
+## IMDB API for movies:
+# with open('data/movies.json') as f2:
+#     movie_data = json.loads(f2.read())
+# movies_in_db = []
+# for movie in movie_data:
+#     new_movie = crud.create_movie(title=movie['title'], type_id=2)
+
 # cosmos = crud.create_item(title='Cosmos', type_id=1)
 contact = crud.create_book(title='Contact', type_id=1, author='Carl Sagan', pages=434)
 sunshine = crud.create_movie(title='Sunshine', type_id=2, length=107, year=2007)
