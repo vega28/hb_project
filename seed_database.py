@@ -50,11 +50,17 @@ for book in book_data['items']:
     books_in_db.append(new_book)
 
 ## IMDB API for movies:
-# with open('data/movies.json') as f2:
-#     movie_data = json.loads(f2.read())
-# movies_in_db = []
-# for movie in movie_data:
-#     new_movie = crud.create_movie(title=movie['title'], type_id=2)
+with open('data/movies.json') as f2:
+    movie_data = json.loads(f2.read())
+movies_in_db = []
+for movie in movie_data['items']:
+    new_movie = crud.create_movie(title=movie['title'], 
+                                type_id=2,
+                                cover=movie['image'],
+                                description=movie['plot'],
+                                length=movie['runtimeMins'],
+                                year=movie['year'])
+    movies_in_db.append(new_movie)
 
 # cosmos = crud.create_item(title='Cosmos', type_id=1)
 contact = crud.create_book(title='Contact', type_id=1, author='Carl Sagan', pages=434)
@@ -77,6 +83,13 @@ for i in range(10):
                                         rating=randint(1,5), 
                                         review=fake.text(), 
                                         source=choice(sources))
+    for n in range(2):
+        crud.store_media_in_user_library(user=new_user, 
+                                        media_item=choice(movies_in_db), 
+                                        rating=randint(1,5), 
+                                        review=fake.text(), 
+                                        source=choice(sources))
+
 
 # create & assign genres:
 sci = crud.create_genre(genre_name = 'Science')
