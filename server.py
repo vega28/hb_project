@@ -92,14 +92,15 @@ def show_sign_up_page():
 
 @app.route('/new_user', methods=['POST'])
 def register_user():
-    """ Create a new user. Verify that the email is unique and the passwords match. """
+    """ Create a new user. 
+        Verify that the email is unique and the passwords match. """
 
     fname = request.form.get('fname')    
     lname = request.form.get('lname')
-    email = request.form.get('email')
+    email = request.form.get('email') # TODO: verify that this is an email format
     pwd = request.form.get('pwd')
     pwd2 = request.form.get('pwd_confirm')
-    profile_pic = request.form.get('email')
+    profile_pic = request.form.get('profile_pic')
 
     if crud.get_user_by_email(email):
         flash('That email is taken. Please try a different email.')
@@ -140,11 +141,12 @@ def process_search():
 
 @app.route('/add_media')
 def add_media_item():
-    """ Make GET request to the appropriate API and add item to the database. """
+    """ Make GET request to the appropriate API.
+        Add item to the database. """
 
 
 
-
+#-----------------------------------------------------------------------------#
 if __name__ == '__main__':
     connect_to_db(app)
     app.run(debug=True, host='0.0.0.0')

@@ -38,7 +38,9 @@ class Item(db.Model):
 
     # updates = a list of UserUpdates about this media item
     media_type = db.relationship('Type', backref='items') # returns media_type object
-    genres = db.relationship('Genre', secondary='media_genres', backref='items')
+    genres = db.relationship('Genre', 
+                            secondary='media_genres', 
+                            backref='items')
     # users = db.relationship('User', secondary='user_media', backref='items') # TODO: check these relationships...
 
     def __repr__(self):
@@ -81,7 +83,9 @@ class MediaGenre(db.Model):
 
     __tablename__ = 'media_genres'
 
-    media_genre_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    media_genre_id = db.Column(db.Integer, 
+                        autoincrement=True, 
+                        primary_key=True)
     item_id = db.Column(db.Integer, 
                         db.ForeignKey('media.item_id'), 
                         nullable=False) # foreign key linking to media
@@ -187,7 +191,9 @@ class Collection(db.Model):
 
     __tablename__ = 'collections'
 
-    collection_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    collection_id = db.Column(db.Integer, 
+                            autoincrement=True, 
+                            primary_key=True)
     user_id = db.Column(db.Integer, 
                         db.ForeignKey('users.user_id'), 
                         nullable=False) # foreign key linking to users
@@ -205,7 +211,9 @@ class CollectionUserMedia(db.Model):
 
     __tablename__ = 'collections_user_media'
 
-    collections_user_media_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    collections_user_media_id = db.Column(db.Integer, 
+                                        autoincrement=True, 
+                                        primary_key=True)
     collection_id = db.Column(db.Integer, 
                               db.ForeignKey('collections.collection_id'), 
                               nullable=False) # foreign key linking to collections
@@ -237,7 +245,9 @@ class UserMedia(db.Model):
 
     user = db.relationship('User', backref='media')
     item = db.relationship('Item', backref='user_media')
-    collections = db.relationship('Collection', secondary='collections_user_media', backref='user_media')
+    collections = db.relationship('Collection', 
+                                secondary='collections_user_media', 
+                                backref='user_media')
 
     def __repr__(self):
         return f'<UserMedia user_media_id={self.user_media_id}>'
@@ -289,6 +299,8 @@ def connect_to_db(flask_app, db_uri='postgresql:///library', echo=True):
 
     print('Connected to the db!')
 
+
+#-----------------------------------------------------------------------------#
 if __name__ == '__main__':
     from server import app
 

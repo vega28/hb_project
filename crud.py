@@ -5,9 +5,13 @@ from datetime import datetime
 
 
 def create_user(fname, lname, email, pwd, profile_pic=None):
-    """ Create and return a new user. """
+    """ Create and return a new user. 
+    e.g.
+        >>> create_user(fname='rose', lname='tyler', email='rose@tardis.com', pwd='doctorwho', profile_pic='https://bit.ly/3fPVcfn')
+        <User fname=Rose lname=Tyler>
+    """
 
-    user = User(fname=fname, lname=lname, email=email, pwd=pwd, profile_pic=profile_pic)
+    user = User(fname=fname.title(), lname=lname.title(), email=email, pwd=pwd, profile_pic=profile_pic)
 
     db.session.add(user)
     db.session.commit()
@@ -22,7 +26,11 @@ def get_all_users():
 
 
 def get_user_by_id(user_id):
-    """ Query database and return a user by their id. """
+    """ Query database and return a user by their id. 
+    e.g.
+        >>> crud.get_user_by_id(1)
+        <User fname=Bob lname=Bobson>
+    """
 
     return db.session.query(User).filter(User.user_id==user_id).first()
 
@@ -250,3 +258,7 @@ def create_user_update(user, media_item, date=None, start_bool=False, end_bool=F
     return user_update
 
 
+#-----------------------------------------------------------------------------#
+if __name__ == '__main__':
+    import unittest
+    unittest.main()

@@ -62,16 +62,30 @@ for movie in movie_data['items']:
                                 year=movie['year'])
     movies_in_db.append(new_movie)
 
-# cosmos = crud.create_item(title='Cosmos', type_id=1)
-contact = crud.create_book(title='Contact', type_id=1, author='Carl Sagan', pages=434)
-sunshine = crud.create_movie(title='Sunshine', type_id=2, length=107, year=2007)
+# cosmos = crud.create_item(title='Cosmos', type_id=1,
+#                             cover='http://books.google.com/books/content?id=cDKODQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
+#                             description="Presents an illustrated guide to the universe and to Earth's relationship to it, moving from theories of creation to humankind's discovery of the cosmos, to general relativity, to space missions, and beyond.")
+contact = crud.create_book(title='Contact', type_id=1, 
+                            cover='https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1567132653l/94786._SY475_.jpg',
+                            description="In December, 1999, a multinational team journeys out to the stars, to the most awesome encounter in human history. Who -- or what -- is out there? \nIn Cosmos, Carl Sagan explained the universe. In Contact, he predicts its future -- and our own.",
+                            author='Carl Sagan', 
+                            pages=434)
+mononoke = crud.create_movie(title='Princess Mononoke', type_id=2, 
+                            cover='https://m.media-amazon.com/images/M/MV5BNGIzY2IzODQtNThmMi00ZDE4LWI5YzAtNzNlZTM1ZjYyYjUyXkEyXkFqcGdeQXVyODEzNjM5OTQ@._V1_UX182_CR0,0,182,268_AL_.jpg', 
+                            description="On a journey to find the cure for a Tatarigami's curse, Ashitaka finds himself in the middle of a war between the forest gods and Tatara, a mining colony. In this quest he also meets San, the Mononoke Hime.", 
+                            length=134, 
+                            year=1997)
 sg1_ep1 = crud.create_tv_ep(title='Children of the Gods', type_id=3, 
-                        show_title='Stargate SG-1', ep_length=92, season=1)
+                            cover='https://m.media-amazon.com/images/M/MV5BMTc3MjEwMTc5N15BMl5BanBnXkFtZTcwNzQ2NjQ4NA@@._V1_UX182_CR0,0,182,268_AL_.jpg',
+                            description="Colonel Jack O'Neill is brought out of retirement to lead a new expedition back to Abydos, only to find an old friend, a new enemy and a far wider use of the Stargate.",
+                            show_title='Stargate SG-1', 
+                            ep_length=92, 
+                            season=1)
 
 sources = ['owned', 'library', 'amazon']
 
 # create test users:
-bob = crud.create_user(fname='bob', lname='bobson', email='bob@bob.com', pwd='bob')
+bob = crud.create_user(fname='bob', lname='bobson', email='bob@bob.com', pwd='bob', profile_pic='https://images.gr-assets.com/authors/1406058780p8/3089156.jpg')
 for i in range(10):
     new_user = crud.create_user(fname=fake.first_name(), 
                                 lname=fake.last_name(), 
