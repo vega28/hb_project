@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Search{% endblock %}
+
+{% block body %}
+  <h1>Search by Item Type:</h1>
+  <form action="/process_search" method="GET">
+    <!-- dropdown menu of types ... NTH other option where user enters info -->
+    <p>Title <input type="text" name="title"></p>
+    <p>Genre <input type="text" name="genre"></p>
+    <p><input type="submit"></p>
+  </form>
+  <p><a href="/user_homepage">Nevermind, return to my homepage.</a></p>
+{% endblock %}

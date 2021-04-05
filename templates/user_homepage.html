@@ -1,14 +1,18 @@
 {% extends 'base.html' %}
 
-{% block title %}🌈Homepage!{% endblock %}
+{% block title %}🌈{{ user.fname }}'s Homepage!{% endblock %}
 
 {% block body %}
-  <h1>📚 Welcome, {{ user.name }}! 📚 </h1>
+  <h1>📚 Welcome, {{ user.fname }}! 📚 </h1>
+  <img src="{{ user.profile_pic }}">
   <ul>
-    <li>View my media</li>
     <li>View my collections</li>
-    <li>Add a media item</li>
-    <li>Browse media</li>
+    <li><a href="/search">Add a media item</a></li>
+    <li><a href="/media">Browse media</a></li>
+    <li>View my media:</li>
   </ul>
+  {% for item in user.media %} 
+    <img src="{{ item.item.cover }}">
+  {% endfor %}
 
 {% endblock %}

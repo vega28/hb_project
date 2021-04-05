@@ -27,6 +27,12 @@ def get_user_by_id(user_id):
     return db.session.query(User).filter(User.user_id==user_id).first()
 
 
+def get_user_by_email(email):
+    """ Query database and return a user by their email. """
+
+    return db.session.query(User).filter(User.email==email).first()
+
+
 def create_media_type(type_name):
     """ Create and return a new media type. """
 
