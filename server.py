@@ -65,8 +65,11 @@ def user_details(user_id):
 @app.route('/log_in')
 def show_login_page():
     """ Show the log-in page for an existing user. """
-
-    return render_template('log_in.html')
+    if session.get('user_id',None):
+        flash(f'You are already logged in!')
+        return redirect('/')
+    else:
+        return render_template('log_in.html')
 
 
 @app.route('/verify_login', methods=['POST'])
@@ -78,7 +81,6 @@ def verify_login():
 
     user = crud.get_user_by_email(email)
 
-    # TODO: currently if someone is logged in already, this allows someone else to log in and overwrite the session. fix that!
     if user and user.pwd == pwd:
         flash(f'Welcome back, {user.fname}! You are now logged in.')
         session['user_id'] = user.user_id
