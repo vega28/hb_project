@@ -53,13 +53,14 @@ def create_media_type(type_name):
 
 
 def create_book(title, type_id, author, cover=None, description=None, 
-                edition=None, pages=None, isbn=None):
+                year=None, edition=None, pages=None, isbn=None):
     """ Create and return a new book. """
 
     new_item = Book(title=title, 
                     type_id=type_id,  # TODO: specify this automatically!
                     cover=cover, 
-                    description=description, 
+                    description=description,
+                    # year=year, # TODO: parse year from publishedDate (which has a flexible format...)
                     author=author, 
                     edition=edition, 
                     pages=pages, 
@@ -71,7 +72,8 @@ def create_book(title, type_id, author, cover=None, description=None,
     return new_item
 
 
-def create_movie(title, type_id, cover=None, description=None, length=None, year=None):
+def create_movie(title, type_id, cover=None, description=None, length=None, 
+                year=None):
     """ Create and return a new movie. """
 
     new_item = Movie(title=title, 
@@ -88,15 +90,17 @@ def create_movie(title, type_id, cover=None, description=None, length=None, year
 
 
 def create_tv_ep(title, type_id, show_title, cover=None, description=None, 
-                ep_length=None, season=None):
+                year=None, ep_length=None, season=None, ep_of_season=None):
     """ Create and return a new tv episode. """
 
     new_item = TVEpisode(title=title, 
                         type_id=type_id,  # TODO: specify this automatically!
                         cover=cover, 
                         description=description, 
+                        year=year,
                         show_title=show_title, 
                         ep_length=ep_length, 
+                        ep_of_season=ep_of_season,
                         season=season)
 
     db.session.add(new_item)
@@ -108,7 +112,11 @@ def create_tv_ep(title, type_id, show_title, cover=None, description=None,
 def create_item(title, type_id, cover=None, description=None):
     """ Create and return a new generic media item. """
 
-    new_item = Item(title=title, type_id=type_id, cover=cover, description=description)
+    new_item = Item(title=title, 
+                    type_id=type_id, 
+                    cover=cover, 
+                    description=description,
+                    year=year)
 
     db.session.add(new_item)
     db.session.commit()   
@@ -223,7 +231,7 @@ def get_user_media_id(user, media_item):
                     UserMedia.item_id==media_item.item_id).first().user_media_id
 
 
-def assign_collection(user, media_item, collection):
+def assign_to_collection(user, media_item, collection):
     """ Associate the specified media item with the specified collection. 
         Return CollectionUserMedia association object. """
 

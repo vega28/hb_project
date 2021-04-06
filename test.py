@@ -24,8 +24,8 @@ def example_data():
     model.db.session.commit()
 
     # Add sample users and media
-    rose = model.User(fname='rose', lname='tyler', email='rose@tardis.com', pwd='doctorwho', profile_pic='https://bit.ly/3fPVcfn')
-    bob = model.User(fname='bob', lname='bobson', email='bob@bob.com', pwd='bob', profile_pic='https://images.gr-assets.com/authors/1406058780p8/3089156.jpg')
+    rose = model.User(fname='Rose', lname='Tyler', email='rose@tardis.com', pwd='doctorwho', profile_pic='https://bit.ly/3fPVcfn')
+    bob = model.User(fname='Bob', lname='Bobson', email='bob@bob.com', pwd='bob', profile_pic='https://images.gr-assets.com/authors/1406058780p8/3089156.jpg')
 
     cosmos = model.Item(title='Cosmos', type_id=1,
                             cover='http://books.google.com/books/content?id=cDKODQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
@@ -47,7 +47,7 @@ def example_data():
                             ep_length=92, 
                             season=1)
 
-    model.db.session.add_all([rose, bob, cosmos, contact, mononoke, sg1_ep1])
+    model.db.session.add_all([bob, rose, cosmos, contact, mononoke, sg1_ep1])
     model.db.session.commit()
 
 
@@ -79,11 +79,24 @@ class FlaskTestsDatabase(TestCase):
         result = self.client.get('/users')
         self.assertIn(b'rose@tardis.com', result.data)
 
+    def test_user_details(self):
+        """ Test user details page. """
+
+        result = self.client.get('/users/2')
+        self.assertIn(b'Tyler', result.data)
+
     def test_media_list(self):
         """ Test media list page. """
 
         result = self.client.get('/media')
         self.assertIn(b'Princess Mononoke', result.data)
+
+    def test_media_details(self):
+        """ Test media details page. """
+
+        result = self.client.get('/media/1')
+        self.assertIn(b'Cosmos', result.data)
+
 
 
 

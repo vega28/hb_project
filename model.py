@@ -14,7 +14,7 @@ class User(db.Model):
     lname = db.Column(db.String(25), nullable=False)
     email = db.Column(db.String(40), nullable=False, unique=True) 
     pwd = db.Column(db.String(25), nullable=False) # keep it secret, keep it safe!
-    profile_pic = db.Column(db.String(100)) # link to image
+    profile_pic = db.Column(db.Text) # link to image
 
     # media = a list of media Item objects specific to this user's library 
     # updates = a list of this user's updates
@@ -35,6 +35,7 @@ class Item(db.Model):
                         nullable=False) # foreign key to media_types table
     cover = db.Column(db.Text) # link to image
     description = db.Column(db.Text)
+    year = db.Column(db.Integer) # release year
 
     # updates = a list of UserUpdates about this media item
     media_type = db.relationship('Type', backref='items') # returns media_type object
@@ -128,7 +129,6 @@ class Movie(Item):
                         db.ForeignKey('media.item_id'),
                         primary_key=True)
     length = db.Column(db.Integer) # length of movie in minutes
-    year = db.Column(db.Integer) # release year
 
     # describe relationships here
 
@@ -148,6 +148,7 @@ class TVEpisode(Item):
     show_title = db.Column(db.String, nullable=False)
     ep_length = db.Column(db.Integer) # length of episode in minutes
     season = db.Column(db.Integer) # which season is the episode in?
+    ep_of_season = db.Column(db.Integer) # which episode of that season?
 
     # describe relationships here
 

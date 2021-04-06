@@ -44,8 +44,8 @@ for book in book_data['items']:
                                 author=book['volumeInfo']['authors'][0], 
                                 description=book['volumeInfo'].get('description'), # NOTE: The Hobbit has no description...
                                 cover=book['volumeInfo']['imageLinks'].get('thumbnail'),
-                                pages=book['volumeInfo'].get('pageCount'))
-                                # year=book['volumeInfo']['publishedDate'], # TODO: add this to model
+                                pages=book['volumeInfo'].get('pageCount'),
+                                year=book['volumeInfo'].get('publishedDate')) 
                                 # isbn=book['volumeInfo']['industryIdentifiers']['ISBN_13']) # TODO: figure out how to unpack this.
     books_in_db.append(new_book)
 
@@ -61,6 +61,23 @@ for movie in movie_data['items']:
                                 length=movie['runtimeMins'],
                                 year=movie['year'])
     movies_in_db.append(new_movie)
+
+## IMDB API for TV:
+with open('data/tv.json') as f3:
+    tv_data = json.loads(f3.read())
+tv_in_db = []
+for ep in tv_data['items']:
+    new_ep = crud.create_tv_ep(title=ep['title'], 
+                                type_id=3,
+                                cover=ep['image'],
+                                description=ep['plot'],
+                                show_title=ep['tvEpisodeInfo']['seriesTitle'],
+                                season=ep['tvEpisodeInfo']['seasonNumber'],
+                                ep_of_season=ep['tvEpisodeInfo']['episodeNumber'],
+                                ep_length=ep['runtimeMins'],
+                                year=ep['year'])
+    tv_in_db.append(new_ep)
+
 
 # cosmos = crud.create_item(title='Cosmos', type_id=1,
 #                             cover='http://books.google.com/books/content?id=cDKODQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
@@ -86,7 +103,9 @@ sources = ['owned', 'library', 'amazon']
 
 # create test users:
 bob = crud.create_user(fname='bob', lname='bobson', email='bob@bob.com', pwd='bob', profile_pic='https://images.gr-assets.com/authors/1406058780p8/3089156.jpg')
-for i in range(10):
+rose = crud.create_user(fname='rose', lname='tyler', email='rose@tardis.com', pwd='doctorwho', profile_pic='https://bit.ly/3fPVcfn')
+wendy = crud.create_user(fname='Wendy', lname='Carter', email='wcarter@dontstarve.com', pwd='Abigail', profile_pic='/static/images/wendy_pf.png')
+for i in range(10): # FIXME: currently user can have duplicate media items.
     new_user = crud.create_user(fname=fake.first_name(), 
                                 lname=fake.last_name(), 
                                 email=fake.email(), 
@@ -103,33 +122,40 @@ for i in range(10):
                                         rating=randint(1,5), 
                                         review=fake.text(), 
                                         source=choice(sources))
+    for m in range(1):
+        crud.store_media_in_user_library(user=new_user,
+                                        media_item=choice(tv_in_db),
+                                        rating=randint(1,5),
+                                        review=fake.text(),
+                                        source=choice(sources))
 
 
 # create & assign genres:
 sci = crud.create_genre(genre_name = 'Science')
 scifi = crud.create_genre(genre_name = 'Science Fiction')
+clifi = crud.create_genre(genre_name = 'Climate Fiction')
 
 # crud.assign_genre(cosmos, sci)
 crud.assign_genre(contact, scifi)
-crud.assign_genre(sunshine, scifi)
+crud.assign_genre(mononoke, clifi)
 crud.assign_genre(sg1_ep1, scifi)
 
 # assign user-specific media:
 # crud.store_media_in_user_library(user=bob, media_item=cosmos, rating=5, 
                         # review='We are all starstuff.', source='owned')
-crud.store_media_in_user_library(user=bob, media_item=contact, rating=5, 
+crud.store_media_in_user_library(user=rose, media_item=contact, rating=5, 
                         review='woot', source='owned')
-crud.store_media_in_user_library(user=bob, media_item=sunshine, rating=5, 
-                        review='SpooOOOoooky', source='library')
-crud.store_media_in_user_library(user=bob, media_item=sg1_ep1, rating=4, 
+crud.store_media_in_user_library(user=rose, media_item=mononoke, rating=5, 
+                        review='beautiful soundtrack and movie', source='library')
+crud.store_media_in_user_library(user=rose, media_item=sg1_ep1, rating=4, 
                         review='That was a long pilot.', source='prime video')
 
 # organize collections:
-favorites = crud.create_collection(user=bob, collection_name='Favorites')
+favorites = crud.create_collection(user=rose, collection_name='Favorites')
 
-crud.assign_collection(bob, contact, favorites)
-crud.assign_collection(bob, sunshine, favorites)
-crud.assign_collection(bob, sg1_ep1, favorites)
+crud.assign_to_collection(rose, contact, favorites)
+crud.assign_to_collection(rose, mononoke, favorites)
+crud.assign_to_collection(rose, sg1_ep1, favorites)
 
 # user update:
-bob_cosmos_update = crud.create_user_update(bob, contact, update_value=50)
+rose_contact_update = crud.create_user_update(rose, contact, update_value=50)

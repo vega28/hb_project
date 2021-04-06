@@ -5,9 +5,13 @@
 {% block body %}
   <h1>{{ user.fname }} {{ user.lname }}</h1>
   <p>{{ user.email }}</p>
-  <img src="{{ user.profile_pic }}">
-  {% for item in user.media %} 
-    <img src="{{ item.item.cover }}">
-  {% endfor %}
+  <div>
+    <img src="{{ user.profile_pic }}">
+  </div>
+  <div>
+    {% for item in user.media %} 
+      <img src="{{ item.item.cover }}">
+    {% endfor %}
+  </div>
   <p><a href="/users">Return to list of users.</a></p>
 {% endblock %}
