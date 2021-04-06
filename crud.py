@@ -11,7 +11,11 @@ def create_user(fname, lname, email, pwd, profile_pic=None):
         <User fname=Rose lname=Tyler>
     """
 
-    user = User(fname=fname.title(), lname=lname.title(), email=email, pwd=pwd, profile_pic=profile_pic)
+    user = User(fname=fname.title(), 
+                lname=lname.title(), 
+                email=email.lower(), 
+                pwd=pwd, 
+                profile_pic=profile_pic)
 
     db.session.add(user)
     db.session.commit()
@@ -28,7 +32,7 @@ def get_all_users():
 def get_user_by_id(user_id):
     """ Query database and return a user by their id. 
     e.g.
-        >>> crud.get_user_by_id(1)
+        >>> get_user_by_id(1)
         <User fname=Bob lname=Bobson>
     """
 
@@ -36,25 +40,47 @@ def get_user_by_id(user_id):
 
 
 def get_user_by_email(email):
-    """ Query database and return a user by their email. """
+    """ Query database and return a user by their email. 
+    e.g.
+        >>> get_user_by_email('rose@tardis.com')
+        <User fname=Rose lname=Tyler>
+    """
 
     return db.session.query(User).filter(User.email==email).first()
 
 
 def create_media_type(type_name):
-    """ Create and return a new media type. """
+    """ Create and return a new media type. 
+    e.g.
+        >>> create_media_type('book')
+        <Type media_type=book type_id=1>
+    """
 
-    new_type = Type(media_type=type_name)
+    check_type = Type.query.filter(Type.media_type==type_name).first()
 
-    db.session.add(new_type)
-    db.session.commit()   
+    if check_type: # media type already exists!
+        return check_type
 
-    return new_type
+    else:
+        new_type = Type(media_type=type_name)
+
+        db.session.add(new_type)
+        db.session.commit()   
+
+        return new_type
 
 
 def create_book(title, type_id, author, cover=None, description=None, 
                 year=None, edition=None, pages=None, isbn=None):
-    """ Create and return a new book. """
+    """ Create and return a new book. 
+    e.g.
+        >>> create_book(title='Contact', type_id=1,
+        ... cover='https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1567132653l/94786._SY475_.jpg',
+        ... description="In December, 1999, a multinational team journeys out to the stars, to the most awesome encounter in human history. Who -- or what -- is out there? In Cosmos, Carl Sagan explained the universe. In Contact, he predicts its future -- and our own.",
+        ... author='Carl Sagan', 
+        ... pages=434)
+        <Book title=Contact author=Carl Sagan>
+    """
 
     new_item = Book(title=title, 
                     type_id=type_id,  # TODO: specify this automatically!
@@ -74,7 +100,15 @@ def create_book(title, type_id, author, cover=None, description=None,
 
 def create_movie(title, type_id, cover=None, description=None, length=None, 
                 year=None):
-    """ Create and return a new movie. """
+    """ Create and return a new movie. 
+    e.g.
+        >>> create_movie(title='Princess Mononoke', type_id=2, 
+        ... cover='https://m.media-amazon.com/images/M/MV5BNGIzY2IzODQtNThmMi00ZDE4LWI5YzAtNzNlZTM1ZjYyYjUyXkEyXkFqcGdeQXVyODEzNjM5OTQ@._V1_UX182_CR0,0,182,268_AL_.jpg', 
+        ... description="On a journey to find the cure for a Tatarigami's curse, Ashitaka finds himself in the middle of a war between the forest gods and Tatara, a mining colony. In this quest he also meets San, the Mononoke Hime.", 
+        ... length=134, 
+        ... year=1997)
+        <Movie title=Princess Mononoke year=1997>
+    """
 
     new_item = Movie(title=title, 
                     type_id=type_id,  # TODO: specify this automatically!
@@ -91,7 +125,16 @@ def create_movie(title, type_id, cover=None, description=None, length=None,
 
 def create_tv_ep(title, type_id, show_title, cover=None, description=None, 
                 year=None, ep_length=None, season=None, ep_of_season=None):
-    """ Create and return a new tv episode. """
+    """ Create and return a new tv episode. 
+    e.g.
+        >>> create_tv_ep(title='Children of the Gods', type_id=3, 
+        ... cover='https://m.media-amazon.com/images/M/MV5BMTc3MjEwMTc5N15BMl5BanBnXkFtZTcwNzQ2NjQ4NA@@._V1_UX182_CR0,0,182,268_AL_.jpg',
+        ... description="Colonel Jack O'Neill is brought out of retirement to lead a new expedition back to Abydos, only to find an old friend, a new enemy and a far wider use of the Stargate.",
+        ... show_title='Stargate SG-1', 
+        ... ep_length=92, 
+        ... season=1)
+        <TVEpisode show_title=Stargate SG-1 title=Children of the Gods>
+    """
 
     new_item = TVEpisode(title=title, 
                         type_id=type_id,  # TODO: specify this automatically!
@@ -110,7 +153,13 @@ def create_tv_ep(title, type_id, show_title, cover=None, description=None,
 
 
 def create_item(title, type_id, cover=None, description=None, year=None):
-    """ Create and return a new generic media item. """
+    """ Create and return a new generic media item. 
+    e.g.
+        >>> create_item(title='Cosmos', type_id=1,
+        ... cover='http://books.google.com/books/content?id=cDKODQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
+        ... description="Presents an illustrated guide to the universe and to Earth's relationship to it, moving from theories of creation to humankind's discovery of the cosmos, to general relativity, to space missions, and beyond.")
+        <Media Item title=Cosmos>
+    """
 
     new_item = Item(title=title, 
                     type_id=type_id, 
@@ -136,12 +185,6 @@ def get_all_books():
     return Book.query.all() 
 
 
-def get_item_by_id(item_id):
-    """ Query database and return an item by its id. """
-
-    return db.session.query(Item).filter(Item.item_id==item_id).first()
-
-
 def get_all_movies():
     """ Query database and return a list of all movies. """
 
@@ -154,15 +197,30 @@ def get_all_tv():
     return TVEpisode.query.all() 
 
 
+def get_item_by_id(item_id):
+    """ Query database and return an item by its id. """
+
+    return db.session.query(Item).filter(Item.item_id==item_id).first()
+
+
 def create_genre(genre_name):
-    """ Create and return a new genre. """
+    """ Create and return a new genre. 
+    e.g.
+        >>> create_genre('Climate Fiction')
+        <Genre genre_name=Climate Fiction>
+    """
 
-    new_genre = Genre(genre_name=genre_name)
+    check_genre = Genre.query.filter(Genre.genre_name==genre_name).first()
 
-    db.session.add(new_genre)
-    db.session.commit()   
+    if check_genre: # genre already exists!
+        return check_genre
+    else:
+        new_genre = Genre(genre_name=genre_name)
 
-    return new_genre
+        db.session.add(new_genre)
+        db.session.commit()   
+
+        return new_genre
 
 
 def get_all_genres():
@@ -268,5 +326,11 @@ def create_user_update(user, media_item, date=None, start_bool=False, end_bool=F
 
 #-----------------------------------------------------------------------------#
 if __name__ == '__main__':
-    import unittest
-    unittest.main()
+    import doctest
+    # import unittest
+    from server import app
+    connect_to_db(app)
+    # unittest.main()
+    result = doctest.testmod(verbose=2)
+    if not result.failed:
+        print("ALL DOCTESTS PASSED. GOOD WORK!")

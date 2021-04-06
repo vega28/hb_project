@@ -69,6 +69,7 @@ class Genre(db.Model):
 
     __tablename__ = 'genres'
 
+    # TODO: make genre_id a string key (SCI, SCIFI, CLIFI, NF etc.)
     genre_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     genre_name = db.Column(db.String(30), unique=True, nullable=False)
 

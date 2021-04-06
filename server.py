@@ -12,11 +12,11 @@ app.jinja_env.undefined = StrictUndefined
 
 @app.route('/')
 def show_homepage():
-    """ Show the homepage. """
-
-    # print('\n\n DEBUGGING ... session:',session,'\n****\n') ###
+    """ Show the homepage. 
+        NOTE: If user is logged in, show the user-specific homepage. """
 
     logged_in = session.get('user_id',None)
+
     if logged_in:
         user = crud.get_user_by_id(session['user_id'])
         return render_template('user_homepage.html', user=user)
@@ -25,7 +25,7 @@ def show_homepage():
 
 
 
-# browse all media route (by genre, media type, etc.)
+# browse all media route (by genre, media type, etc.) TODO: organize by JS?
 @app.route('/media')
 def list_media():
     """ View list of all media. """
@@ -84,7 +84,6 @@ def verify_login():
     if user and user.pwd == pwd:
         flash(f'Welcome back, {user.fname}! You are now logged in.')
         session['user_id'] = user.user_id
-        # print(f"\n\n DEBUGGING ... YOU LOGGED IN WITH USER ID # {session['user_id']}") ###
     else:
         flash(f'User email and/or password is incorrect. Please try again.')
 
@@ -130,16 +129,6 @@ def register_user():
         flash('Your passwords do not match. Please try again.')
 
     return redirect('/')
-
-
-@app.route('/user_homepage') # make this user-specific...
-def show_user_homepage():
-    """ Show a logged-in user their personal homepage. """
-
-    # TODO: write me!
-    user = crud.get_user_by_id(session['user_id'])
-
-    return render_template('user_homepage.html', user=user)
 
 
 # add media item (check if in db first, then make get request to appropriate API)
