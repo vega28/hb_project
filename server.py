@@ -16,7 +16,13 @@ def show_homepage():
 
     # print('\n\n DEBUGGING ... session:',session,'\n****\n') ###
 
-    return render_template('homepage.html')
+    logged_in = session.get('user_id',None)
+    if logged_in:
+        user = crud.get_user_by_id(session['user_id'])
+        return render_template('user_homepage.html', user=user)
+    else:
+        return render_template('homepage.html')
+
 
 
 # browse all media route (by genre, media type, etc.)
@@ -57,7 +63,7 @@ def user_details(user_id):
 
 
 @app.route('/log_in')
-def show_log_in_page():
+def show_login_page():
     """ Show the log-in page for an existing user. """
 
     return render_template('log_in.html')
@@ -79,6 +85,16 @@ def verify_login():
         # print(f"\n\n DEBUGGING ... YOU LOGGED IN WITH USER ID # {session['user_id']}") ###
     else:
         flash(f'User email and/or password is incorrect. Please try again.')
+
+    return redirect('/')
+
+
+@app.route('/log_out')
+def log_out():
+    """ Log user out of session. """
+
+    del session['user_id']
+    flash('You have been logged out.')
 
     return redirect('/')
 
@@ -143,6 +159,8 @@ def process_search():
 def add_media_item():
     """ Make GET request to the appropriate API.
         Add item to the database. """
+
+
 
 
 

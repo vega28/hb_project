@@ -52,6 +52,30 @@ def example_data():
 
 
 
+class FlaskTestsBasic(TestCase):
+    """ Basic Flask tests. """
+
+    def setUp(self):
+        """ Stuff to do before EVERY test. """
+
+        self.client = app.test_client()
+        app.config['TESTING'] = True
+
+    def test_homepage(self):
+        """ Test the main homepage. """
+
+        result = self.client.get('/')
+        self.assertIn(b'Welcome', result.data)
+
+    def test_login(self):
+        """ Test login page. """
+        
+        result = self.client.post('/login',
+                                data={'user_id': '2', 'pwd': 'thedoctor'},
+                                follow_redirects=True)
+        self.assertIn(b'email', result.data) # FIXME: check which page this actually refers to?
+
+
 class FlaskTestsDatabase(TestCase):
     """ Flask tests that use the database. """
 

@@ -103,8 +103,8 @@ sources = ['owned', 'library', 'amazon']
 
 # create test users:
 bob = crud.create_user(fname='bob', lname='bobson', email='bob@bob.com', pwd='bob', profile_pic='https://images.gr-assets.com/authors/1406058780p8/3089156.jpg')
-rose = crud.create_user(fname='rose', lname='tyler', email='rose@tardis.com', pwd='doctorwho', profile_pic='https://bit.ly/3fPVcfn')
-wendy = crud.create_user(fname='Wendy', lname='Carter', email='wcarter@dontstarve.com', pwd='Abigail', profile_pic='/static/images/wendy_pf.png')
+rose = crud.create_user(fname='rose', lname='tyler', email='rose@tardis.com', pwd='badwolf', profile_pic='https://bit.ly/3fPVcfn')
+wendy = crud.create_user(fname='Wendy', lname='Carter', email='wcarter@dontstarve.com', pwd='abigail', profile_pic='/static/images/wendy_pf.png')
 for i in range(10): # FIXME: currently user can have duplicate media items.
     new_user = crud.create_user(fname=fake.first_name(), 
                                 lname=fake.last_name(), 
@@ -159,3 +159,4 @@ crud.assign_to_collection(rose, sg1_ep1, favorites)
 
 # user update:
 rose_contact_update = crud.create_user_update(rose, contact, update_value=50)
+

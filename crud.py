@@ -109,7 +109,7 @@ def create_tv_ep(title, type_id, show_title, cover=None, description=None,
     return new_item
 
 
-def create_item(title, type_id, cover=None, description=None):
+def create_item(title, type_id, cover=None, description=None, year=None):
     """ Create and return a new generic media item. """
 
     new_item = Item(title=title, 
