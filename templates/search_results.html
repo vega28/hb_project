@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Search Results 🔍{% endblock %}
+
+{% block body %}
+  <h1>Searching for... {{ session['search_query'].get('title') }}!</h1>
+  {% for key in session['search_query'] %} 
+    <p>{{ key }}: {{ session['search_query'][key] }}</p>
+  {% endfor %}
+  <p><a href="/search">Return to searchpage.</a></p>
+{% endblock %}

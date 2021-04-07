@@ -2,9 +2,12 @@
 
 from flask import (Flask, render_template, request, flash, session, redirect)
 import os
+from jinja2 import StrictUndefined
+from pprint import pformat
+import requests
+
 from model import connect_to_db
 import crud
-from jinja2 import StrictUndefined
 
 app = Flask(__name__)
 app.secret_key = "dev"
@@ -139,14 +142,35 @@ def register_user():
 def search_for_media_item():
     """ Show search page. """
 
+    # session['media_types'] = crud.get_all_types() # use this if you get the jinja template together for searchpage.html
+
     return render_template('searchpage.html')
 
 
 @app.route('/process_search')
 def process_search():
     """ Search database for the specified media item.
+        Show ALL results matching any ONE keyword. 
+        Let user select the correct item, if it exists.
         If not in the database, redirect to /add_media route. """
 
+    if session.get('search_query'):
+        del session['search_query']
+    media_type = request.args.get('media_type')
+    session['search_query'] = {'media_type': media_type,
+                                'title': request.args.get('title'),
+                                'year': request.args.get('year'),
+                                'main_genre': request.args.get('genre')}
+    if media_type == 'book':
+        session['search_query']['author'] = request.args.get('author')
+    elif media_type == 'movie':
+        session['search_query']['length'] = request.args.get('length')
+    elif media_type == 'tv_ep':
+        session['search_query']['season'] = request.args.get('season')
+
+    # TODO: CHECK IN DB!
+
+    return render_template('search_results.html')
 
 
 @app.route('/add_media')
@@ -154,6 +178,27 @@ def add_media_item():
     """ Make GET request to the appropriate API.
         Add item to the database. """
 
+    if session['search_query']['media_type'] == 'book':
+        # Google Books API
+        uri = 'https://www.googleapis.com/books/v1/volumes'
+        payload = {'access_token': GOOGLE_BOOKS_TOKEN,
+                    'maxResults': 20,
+                    'q': f"{session['search_query']['title']} {session['search_query']['author']}"}
+        res = requests.get(uri, params=payload)
+        data = res.json()
+        return render_template('api_search_results.html', pformat=pformat, data=data)
+        # TODO: allow user to select an option to add to db - get its tag, do another request to get that volume's info, and add to db
+
+    elif session['search_query']['media_type'] == 'movie':
+        pass # IMDB movie API
+        # TODO: allow user to select an option to add to db - get its tag, do another request to get that volume's info, and add to db
+
+    elif session['search_query']['media_type'] == 'tv_ep':
+        pass # IMDB TV API
+        # TODO: allow user to select an option to add to db - get its tag, do another request to get that volume's info, and add to db
+
+    else:
+        pass # user creates their own new type and item
 
 
 

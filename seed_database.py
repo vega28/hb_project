@@ -9,7 +9,6 @@ from random import choice, randint
 import crud
 import model
 import server
-import secrets
 
 os.system('dropdb library')
 os.system('createdb library')

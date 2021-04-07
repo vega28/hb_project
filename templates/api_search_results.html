@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Search Results 🔍{% endblock %}
+
+{% block body %}
+  <h1>Searching for... {{ session['search_query'].get('title') }}!</h1>
+  {% for key in session['search_query'] %} 
+    <p>{{ key }}: {{ session['search_query'][key] }}</p>
+  {% endfor %}
+
+  <img src="{{ data['items'][0]['volumeInfo']['imageLinks']['smallThumbnail'] }}">
+  <ul>
+    {% for volume in data['items'] %} 
+        <li><a href="{{ volume['volumeInfo']['canonicalVolumeLink'] }}">
+            {{ volume['volumeInfo']['title'] }} by {{ volume['volumeInfo']['authors'][0] }}
+        </a></li>
+    {% endfor %}
+  </ul> 
+
+  <p><pre>{{ pformat(data) }}</pre></p>
+  <p><a href="/search">Return to searchpage.</a></p>
+{% endblock %}

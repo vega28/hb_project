@@ -6,7 +6,8 @@ This personal library app allows users to log and organize their media into coll
 
 ### Technologies required (besides typical Hackbright tech stack)
 
-- APIs and data sources coming soon...
+- Google Books API
+- IMDB API
 
 ### Data
 
