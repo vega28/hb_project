@@ -7,5 +7,16 @@
   {% for key in session['search_query'] %} 
     <p>{{ key }}: {{ session['search_query'][key] }}</p>
   {% endfor %}
+
+  <ul>
+    {% for item in db_title_matches %} 
+        <li><a href="/media/{{ item.item_id }}">
+          {{ item.type_id }}: {{ item.title }}
+        </a></li>
+    {% endfor %}
+  </ul> 
+
+  <p>Not finding what you're looking for? <a href="/add_media">Search on the web instead!</a></p>
+
   <p><a href="/search">Return to searchpage.</a></p>
 {% endblock %}

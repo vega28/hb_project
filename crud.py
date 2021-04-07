@@ -208,8 +208,14 @@ def get_all_tv():
 def get_item_by_id(item_id):
     """ Query database and return an item by its id. """
 
-    return db.session.query(Item).filter(Item.item_id==item_id).first()
+    return Item.query.filter(Item.item_id==item_id).first()
 
+
+def get_items_by_title(title):
+    """ Query database and return a list of items with the given title. """
+
+    return Item.query.filter(Item.title==title).all()
+    
 
 def create_genre(genre_name):
     """ Create and return a new genre. 

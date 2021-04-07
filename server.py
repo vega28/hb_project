@@ -169,8 +169,9 @@ def process_search():
         session['search_query']['season'] = request.args.get('season')
 
     # TODO: CHECK IN DB!
+    db_title_matches = crud.get_items_by_title(session['search_query']['title'])
 
-    return render_template('search_results.html')
+    return render_template('search_results.html', db_title_matches=db_title_matches)
 
 
 @app.route('/add_media')
@@ -187,7 +188,10 @@ def add_media_item():
         res = requests.get(uri, params=payload)
         data = res.json()
         return render_template('api_search_results.html', pformat=pformat, data=data)
-        # TODO: allow user to select an option to add to db - get its tag, do another request to get that volume's info, and add to db
+        # TODO: allow user to select an option to add to db 
+        #       get tag for selected item
+        #       do another request to get that volume's info
+        #       add to db
 
     elif session['search_query']['media_type'] == 'movie':
         pass # IMDB movie API
