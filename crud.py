@@ -7,20 +7,28 @@ from datetime import datetime
 def create_user(fname, lname, email, pwd, profile_pic=None):
     """ Create and return a new user. 
     e.g.
+
         >>> create_user(fname='rose', lname='tyler', email='rose@tardis.com', pwd='doctorwho', profile_pic='https://bit.ly/3fPVcfn')
         <User fname=Rose lname=Tyler>
+
     """
 
-    user = User(fname=fname.title(), 
-                lname=lname.title(), 
-                email=email.lower(), 
-                pwd=pwd, 
-                profile_pic=profile_pic)
+    check_user = User.query.filter(User.email==email).first()
 
-    db.session.add(user)
-    db.session.commit()
+    if check_user: # user already exists!
+        return check_user
 
-    return user
+    else:
+        user = User(fname=fname.title(), 
+                    lname=lname.title(), 
+                    email=email.lower(), 
+                    pwd=pwd, 
+                    profile_pic=profile_pic)
+
+        db.session.add(user)
+        db.session.commit()
+
+        return user
 
 
 def get_all_users():
@@ -329,8 +337,8 @@ if __name__ == '__main__':
     import doctest
     # import unittest
     from server import app
-    connect_to_db(app)
+    connect_to_db(app, echo=False)
     # unittest.main()
-    result = doctest.testmod(verbose=2)
+    result = doctest.testmod() # (verbose=2)
     if not result.failed:
         print("ALL DOCTESTS PASSED. GOOD WORK!")

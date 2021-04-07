@@ -13,7 +13,6 @@ import secrets
 
 os.system('dropdb library')
 os.system('createdb library')
-os.system('source secrets.sh')
 
 model.connect_to_db(server.app, echo=False)
 model.db.create_all()
