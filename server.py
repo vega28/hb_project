@@ -139,7 +139,7 @@ def register_user():
 
 # add media item (check if in db first, then make get request to appropriate API)
 @app.route('/search')
-def search_for_media_item():
+def search_db_for_media_item():
     """ Show search page. """
 
     # session['media_types'] = crud.get_all_types() # use this if you get the jinja template together for searchpage.html
@@ -173,8 +173,8 @@ def process_search():
     for term in session['search_query']:
         if session['search_query'][term]:
             query_terms[term] = session['search_query'][term]
-    print('********************************************')
-    print(query_terms)
+    # print('********************************************') ###
+    # print(query_terms) ###
 
     db_matches = crud.search_db(query_terms=query_terms)
     db_matches_dict = {}
@@ -187,9 +187,75 @@ def process_search():
     # return render_template('search_results.html', db_title_matches=db_title_matches)
 
 
+@app.route('/review_media')
+def review_media_item():
+    """ Ask for user's review and rating of new media item. """
+
+    if session.get('item_to_add'):
+        del session['item_to_add']
+    item = crud.get_item_by_id(request.args.get('chosen-item'))
+
+    session['item_to_add'] = {'title': item.title, 'item_id': item.item_id, 'cover': item.cover}
+
+    return render_template('review_media.html')
+
+
+@app.route('/review_new_media')
+def review_new_media_item():
+    """ Ask for user's review and rating of new media item. 
+        Add new item to database. """
+
+    if session.get('item_to_add'):
+        del session['item_to_add']
+    
+    # create new item with the appropriate media_type. add to db.
+    if session['search_query']['media_type'] == 'book':
+        # TODO: API call with volume id to get this book's specific info.
+        # Google Books API
+        uri = f"https://www.googleapis.com/books/v1/volumes/{request.args.get('id')}"
+        payload = {'key': GOOGLE_BOOKS_TOKEN,
+                    'volumeId': request.args.get('id')}
+        # item = crud.create_book(title, type_id, author, cover=None, description=None, 
+        #         year=None, edition=None, pages=None, isbn=None)
+        res = requests.get(uri, params=payload) # FIXME: this is currently failing
+        data = res.json()
+        return render_template('search_results.html', pformat=pformat, data=data) # temp route - will go to review page when item is added to db correctly!
+
+
+    # elif session['search_query']['media_type'] == 'movie':
+    #     item = crud.create_movie(title, type_id, cover=None, description=None, length=None, 
+    #             year=None)# TODO
+    # elif session['search_query']['media_type'] == 'tv_ep':
+    #     item = crud.create_tv_ep(title, type_id, show_title, cover=None, description=None, 
+    #             year=None, ep_length=None, season=None, ep_of_season=None)# TODO
+    # else:
+    #     item = crud.create_item(title, type_id, cover=None, description=None, year=None) # TODO
+
+    # retrieve user's rating, review, and source. route to /add_media
+
+    session['item_to_add'] = {'title': item.title, 'item_id': item.item_id, 'cover': item.cover}
+
+    return render_template('review_media.html')
+
+
 @app.route('/add_media')
 def add_media_item():
-    """ Make GET request to the appropriate API.
+    """ Add item to user's media. """
+
+    crud.store_media_in_user_library(user=crud.get_user_by_id(session['user_id']), 
+            media_item=crud.get_item_by_id(session['item_to_add']['item_id']), 
+            rating=request.args.get('rating'), 
+            review=request.args.get('review'), 
+            source=request.args.get('source'))
+
+    flash(f"{session['item_to_add']['title']} has been added to your library.")
+
+    return redirect('/')
+
+
+@app.route('/api_search')
+def search_api_for_media_item():
+    """ Make GET request to the appropriate API. 
         Add item to the database. """
 
     if session['search_query']['media_type'] == 'book':

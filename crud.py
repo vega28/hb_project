@@ -227,7 +227,7 @@ def search_db(query_terms):
     if query_terms.get('year'):
         new_query = new_query.filter(Item.year == query_terms['year'])
     if query_terms.get('genre'):
-        pass # query by genre!! join with media_genre?
+        pass # TODO: query by genre!! join with media_genre?
 
     # for key in query_terms: # build query
     #     new_query = new_query.filter(Item.key == query_terms[key])

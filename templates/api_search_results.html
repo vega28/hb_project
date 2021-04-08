@@ -4,18 +4,23 @@
 
 {% block body %}
   <h1>Searching for... {{ session['search_query'].get('title') }}!</h1>
-  {% for key in session['search_query'] %} 
-    <p>{{ key }}: {{ session['search_query'][key] }}</p>
-  {% endfor %}
 
-  <img src="{{ data['items'][0]['volumeInfo']['imageLinks']['smallThumbnail'] }}">
-  <ul>
+  <form action="/review_new_media">
+    <p><input type="submit"></p>
+    Please select an item:  
     {% for volume in data['items'] %} 
-        <li><a href="{{ volume['volumeInfo']['canonicalVolumeLink'] }}">
-            {{ volume['volumeInfo']['title'] }} by {{ volume['volumeInfo']['authors'][0] }}
-        </a></li>
+    <div>
+      <input type="radio" name="item-choice" value="{{ volume['id'] }}" id="{{ volume['id'] }}">
+      <label for="{{ volume['id'] }}">
+        <a href="{{ volume['volumeInfo']['canonicalVolumeLink'] }}">
+              {{ volume['volumeInfo']['title'] }} 
+              by {{ volume['volumeInfo'].get('authors')[0] }} 
+              <img src="{{ volume['volumeInfo'].get('imageLinks')['smallThumbnail'] }}">
+        </a>
+      </label>
+    </div>
     {% endfor %}
-  </ul> 
+  </form>
 
   <p><pre>{{ pformat(data) }}</pre></p>
   <p><a href="/search">Return to searchpage.</a></p>

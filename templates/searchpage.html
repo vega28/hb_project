@@ -4,11 +4,11 @@
 
 {% block body %}
   <h1>Search by Item Type:</h1>
-  <form action="/process_search" method="GET">
+  <form action="/review_media" method="GET">
     
     <!-- dropdown menu of types ... NTH other option where user enters info -->
-    <p>Type of media <select id="media_type" name="media_type">
-      <option value="">-- please choose an option --</option><!-- TODO: make this unselectable -->
+    <p>Type of media <select id="media_type" name="media_type" required>
+      <option value="">-- please choose an option --</option>
       <option class="choice" value="book">book</option>
       <option class="choice" value="movie">movie</option>
       <option class="choice" value="tv_ep">tv episode</option>
@@ -50,6 +50,7 @@
 
   </form>
 
+  <p>Not finding what you're looking for? <a href="/api_search">Search the APIs instead!</a></p>
 
 
   <p><a href="/">Nevermind, return to my homepage.</a></p>
