@@ -217,6 +217,40 @@ def get_items_by_title(title):
     return Item.query.filter(Item.title==title).all()
     
 
+def search_db(query_terms):
+    """ Query database and return a list of items that match all the given 
+        search terms. Search terms should be given in dict format. """
+    
+    new_query = Item.query
+    if query_terms.get('title'):
+        new_query = new_query.filter(Item.title == query_terms['title'])
+    if query_terms.get('year'):
+        new_query = new_query.filter(Item.year == query_terms['year'])
+    if query_terms.get('genre'):
+        pass # query by genre!! join with media_genre?
+
+    # for key in query_terms: # build query
+    #     new_query = new_query.filter(Item.key == query_terms[key])
+
+        # FIXME: how do I use the keys to point at the attributes I care about? apparently putting a variable in there doesn't work.
+        # Also, note this does not add author or anything type-specific! need to join queries in that case.
+
+    if query_terms.get('media_type') == 'book':
+        new_query = new_query.join(Book)
+        if query_terms.get('author'):
+            new_query = new_query.filter(Book.author == query_terms['author'])
+    elif query_terms.get('media_type') == 'movie':
+        new_query = new_query.join(Movie)
+        if query_terms.get('length'):
+            new_query = new_query.filter(Movie.length == query_terms['length'])
+    elif query_terms.get('media_type') == 'tv_ep':
+        new_query = new_query.join(TVEpisode)
+        if query_terms.get('season'):
+            new_query = new_query.filter(TVEpisode.season == query_terms['season'])
+
+    return new_query.all()
+
+
 def create_genre(genre_name):
     """ Create and return a new genre. 
     e.g.

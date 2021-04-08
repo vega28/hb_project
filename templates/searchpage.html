@@ -8,7 +8,7 @@
     
     <!-- dropdown menu of types ... NTH other option where user enters info -->
     <p>Type of media <select id="media_type" name="media_type">
-      <option value="">-- Please choose an option --</option><!-- TODO: make this unselectable -->
+      <option value="">-- please choose an option --</option><!-- TODO: make this unselectable -->
       <option class="choice" value="book">book</option>
       <option class="choice" value="movie">movie</option>
       <option class="choice" value="tv_ep">tv episode</option>
@@ -17,32 +17,41 @@
     </select></p>
 
     <section id="level-2">
-      <p>Title <input type="text" name="title"></p>
-      <p>Year <input type="number" name="year"></p>
-      <p>Main genre <select name="genre">
-        <option class="choice" value="sci">Science</option>
-        <option class="choice" value="scifi">Science Fiction</option>
-        <option class="choice" value="clifi">Climate Fiction</option>
+      <p>Title <input class="choice" id="title" type="text" name="title"></p>
+      <p>Year <input class="choice" id="year" type="number" name="year"></p>
+      <p>Main genre <select id="genre" name="genre">
+        <option class="choice" value="">-- none of these --</option>
+        {% for genre in genres %} 
+          <option class="choice" value="{{ genre.genre_id }}">
+            {{ genre.genre_name }}
+          </option>
+        {% endfor %} 
       </select></p>
   
     </section>
 
-    <section class="type-of-media" id="its-a-book" style="display: none">
+    <section class="type-of-media choice" id="its-a-book" style="display: none">
       <p>Author <input type="text" name="author"></p>
     </section>
-    <section class="type-of-media" id="its-a-movie" style="display: none">
+    <section class="type-of-media choice" id="its-a-movie" style="display: none">
       <p>Runtime (minutes) <input type="number" name="length"></p>
     </section>
-    <section class="type-of-media" id="its-a-tv-ep" style="display: none">
+    <section class="type-of-media choice" id="its-a-tv-ep" style="display: none">
       <p>Season <input type="text" name="season"></p>
     </section>
-    <section class="type-of-media" id="its-an-item" style="display: none">
-      <p>Type of media <input type="text" name="media_type"></p>
+    <section class="type-of-media choice" id="its-an-item" style="display: none">
+      <!-- <p>Type of media <input type="text" name="media_type"></p> -->
     </section>
+
+    
+    <div id="db-search-results"></div>
 
     <p><input type="submit"></p>
 
   </form>
+
+
+
   <p><a href="/">Nevermind, return to my homepage.</a></p>
   <script src="/static/js/search.js"></script>
 {% endblock %}

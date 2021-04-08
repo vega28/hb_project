@@ -143,8 +143,9 @@ def search_for_media_item():
     """ Show search page. """
 
     # session['media_types'] = crud.get_all_types() # use this if you get the jinja template together for searchpage.html
+    genres = crud.get_all_genres()
 
-    return render_template('searchpage.html')
+    return render_template('searchpage.html', genres=genres)
 
 
 @app.route('/process_search')
@@ -168,10 +169,22 @@ def process_search():
     elif media_type == 'tv_ep':
         session['search_query']['season'] = request.args.get('season')
 
-    # TODO: CHECK IN DB!
-    db_title_matches = crud.get_items_by_title(session['search_query']['title'])
+    query_terms = {}
+    for term in session['search_query']:
+        if session['search_query'][term]:
+            query_terms[term] = session['search_query'][term]
+    print('********************************************')
+    print(query_terms)
 
-    return render_template('search_results.html', db_title_matches=db_title_matches)
+    db_matches = crud.search_db(query_terms=query_terms)
+    db_matches_dict = {}
+    for item in db_matches:
+        db_matches_dict[item.item_id] = {'title': item.title, 'cover': item.cover}
+
+    
+
+    return db_matches_dict
+    # return render_template('search_results.html', db_title_matches=db_title_matches)
 
 
 @app.route('/add_media')
