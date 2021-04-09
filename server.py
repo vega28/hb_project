@@ -173,18 +173,13 @@ def process_search():
     for term in session['search_query']:
         if session['search_query'][term]:
             query_terms[term] = session['search_query'][term]
-    # print('********************************************') ###
-    # print(query_terms) ###
 
     db_matches = crud.search_db(query_terms=query_terms)
     db_matches_dict = {}
     for item in db_matches:
         db_matches_dict[item.item_id] = {'title': item.title, 'cover': item.cover}
 
-    
-
     return db_matches_dict
-    # return render_template('search_results.html', db_title_matches=db_title_matches)
 
 
 @app.route('/review_media')
@@ -210,28 +205,29 @@ def review_new_media_item():
     
     # create new item with the appropriate media_type. add to db.
     if session['search_query']['media_type'] == 'book':
-        # TODO 
+
         list_num = request.args.get('list_num')
-        print('**************************DEBUG*****************',list_num)
+        author = request.args.get(list_num+'-authors')
+        if author:
+            author = author[0]
+        item_data = {'id': request.args.get(list_num+'-id'),
+                    'title': request.args.get(list_num+'-title'),
+                    'author': author,
+                    'cover': request.args.get(list_num+'-cover'),
+                    'description': request.args.get(list_num+'-description'),
+                    'pages': request.args.get(list_num+'-pageCount')}
 
-        item_data = {'id': request.args.get('id'),
-                    'title': request.args.get('title'),
-                    'author': request.args.get('author'),
-                    'cover': request.args.get('cover'),
-                    'description': request.args.get('description'),
-                    'pages': request.args.get('pageCount')}
-        # item_data = session['search_results']['items'][list_num]
-        # item = crud.create_book(title=item_data['volumeInfo']['title'], 
-        #                         type_id=1, # FIXME: currently hardcoded 
-        #                         author=item_data['volumeInfo'].get('authors')[0], 
-        #                         cover=item_data['volumeInfo'].get('imageLinks')['smallThumbnail'], 
-        #                         description=item_data['volumeInfo'].get('description'), 
-        #                         # year=item_data['volumeInfo'].get('publishedDate'), # TODO: fix format 
-        #                         # edition=None, 
-        #                         pages=item_data['volumeInfo'].get('pageCount')) 
-        #                         # isbn=None)
+        item = crud.create_book(title=item_data['title'], 
+                                type_id=1, # FIXME: currently hardcoded 
+                                author=item_data.get('author'), 
+                                cover=item_data.get('cover'), 
+                                description=item_data.get('description'), 
+                                # year=item_data.get('publishedDate'), # TODO: fix format 
+                                # edition=None, 
+                                pages=item_data.get('pages')) 
+                                # isbn=None)
 
-        return render_template('search_results.html', list_num=list_num, item_data=item_data) # temp route - will go to review page when item is added to db correctly!
+        # return render_template('search_results.html', list_num=list_num, item_data=item_data) ### temp debugging route - will go to review page when item is added to db correctly!
 
 
     # elif session['search_query']['media_type'] == 'movie':

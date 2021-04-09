@@ -14,18 +14,25 @@
       <label for="{{ loop.index }}">
         <a href="{{ volume['volumeInfo'].get('canonicalVolumeLink') }}">
               {{ volume['volumeInfo']['title'] }} 
-              by {{ volume['volumeInfo'].get('authors')[0] }} 
+              AUTHORED BY: {{ volume['volumeInfo'].get('authors') }}
               MY ID IS: {{ volume['id'] }}
               <img src="{{ volume['volumeInfo'].get('imageLinks')['smallThumbnail'] }}">
         </a>
       </label>
-      <input type="hidden" name="title" value="{{ volume['volumeInfo']['title'] }}">
-      <input type="hidden" name="author" value="{{ volume['volumeInfo'].get('authors')[0] }}">
-      <input type="hidden" name="id" value="{{ volume['id'] }}">
-      <input type="hidden" name="cover" value="{{ volume['volumeInfo'].get('imageLinks')['smallThumbnail'] }}">
-      <input type="hidden" name="pageCount" value="{{ volume['volumeInfo'].get('pageCount') }}">
-      <input type="hidden" name="description" value="{{ volume['volumeInfo'].get('description') }}">
-      <input type="hidden" name="publishedDate" value="{{ volume['volumeInfo'].get('publishedDate') }}">
+      <input type="hidden" name="{{ loop.index }}-title" 
+        value="{{ volume['volumeInfo']['title'] }}">
+      <input type="hidden" name="{{ loop.index }}-authors" 
+        value="{{ volume['volumeInfo'].get('authors') }}">
+      <input type="hidden" name="{{ loop.index }}-id" 
+        value="{{ volume['id'] }}">
+      <input type="hidden" name="{{ loop.index }}-cover" 
+        value="{{ volume['volumeInfo'].get('imageLinks')['smallThumbnail'] }}">
+      <input type="hidden" name="{{ loop.index }}-pageCount" 
+        value="{{ volume['volumeInfo'].get('pageCount') }}">
+      <input type="hidden" name="{{ loop.index }}-description" 
+        value="{{ volume['volumeInfo'].get('description') }}">
+      <input type="hidden" name="{{ loop.index }}-publishedDate" 
+        value="{{ volume['volumeInfo'].get('publishedDate') }}">
     </div>
     {% endfor %}
   </form>
