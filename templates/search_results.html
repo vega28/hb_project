@@ -4,6 +4,12 @@
 
 {% block body %}
   <h1>Searching for... {{ session['search_query'].get('title') }}!</h1>
- <p><pre>{{ pformat(data) }}</pre></p>
-  <p><a href="/search">Return to searchpage.</a></p>
+ 
+  <ul>
+    {% for key in item_data %} 
+      <li>{{ key }}: {{ item_data[key] }}</li>
+    {% endfor %} 
+  </ul>
+
+<p><a href="/search">Return to searchpage.</a></p>
 {% endblock %}

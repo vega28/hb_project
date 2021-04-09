@@ -210,16 +210,28 @@ def review_new_media_item():
     
     # create new item with the appropriate media_type. add to db.
     if session['search_query']['media_type'] == 'book':
-        # TODO: API call with volume id to get this book's specific info.
-        # Google Books API
-        uri = f"https://www.googleapis.com/books/v1/volumes/{request.args.get('id')}"
-        payload = {'key': GOOGLE_BOOKS_TOKEN,
-                    'volumeId': request.args.get('id')}
-        # item = crud.create_book(title, type_id, author, cover=None, description=None, 
-        #         year=None, edition=None, pages=None, isbn=None)
-        res = requests.get(uri, params=payload) # FIXME: this is currently failing
-        data = res.json()
-        return render_template('search_results.html', pformat=pformat, data=data) # temp route - will go to review page when item is added to db correctly!
+        # TODO 
+        list_num = request.args.get('list_num')
+        print('**************************DEBUG*****************',list_num)
+
+        item_data = {'id': request.args.get('id'),
+                    'title': request.args.get('title'),
+                    'author': request.args.get('author'),
+                    'cover': request.args.get('cover'),
+                    'description': request.args.get('description'),
+                    'pages': request.args.get('pageCount')}
+        # item_data = session['search_results']['items'][list_num]
+        # item = crud.create_book(title=item_data['volumeInfo']['title'], 
+        #                         type_id=1, # FIXME: currently hardcoded 
+        #                         author=item_data['volumeInfo'].get('authors')[0], 
+        #                         cover=item_data['volumeInfo'].get('imageLinks')['smallThumbnail'], 
+        #                         description=item_data['volumeInfo'].get('description'), 
+        #                         # year=item_data['volumeInfo'].get('publishedDate'), # TODO: fix format 
+        #                         # edition=None, 
+        #                         pages=item_data['volumeInfo'].get('pageCount')) 
+        #                         # isbn=None)
+
+        return render_template('search_results.html', list_num=list_num, item_data=item_data) # temp route - will go to review page when item is added to db correctly!
 
 
     # elif session['search_query']['media_type'] == 'movie':
@@ -265,7 +277,8 @@ def search_api_for_media_item():
                     'maxResults': 20,
                     'q': f"{session['search_query']['title']} {session['search_query']['author']}"}
         res = requests.get(uri, params=payload)
-        data = res.json()
+        data = res.json() # type dict
+
         return render_template('api_search_results.html', pformat=pformat, data=data)
         # TODO: allow user to select an option to add to db 
         #       get tag for selected item

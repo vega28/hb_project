@@ -10,14 +10,22 @@
     Please select an item:  
     {% for volume in data['items'] %} 
     <div>
-      <input type="radio" name="item-choice" value="{{ volume['id'] }}" id="{{ volume['id'] }}">
-      <label for="{{ volume['id'] }}">
-        <a href="{{ volume['volumeInfo']['canonicalVolumeLink'] }}">
+      <input type="radio" name="list_num" value="{{ loop.index }}" id="{{ loop.index }}">
+      <label for="{{ loop.index }}">
+        <a href="{{ volume['volumeInfo'].get('canonicalVolumeLink') }}">
               {{ volume['volumeInfo']['title'] }} 
               by {{ volume['volumeInfo'].get('authors')[0] }} 
+              MY ID IS: {{ volume['id'] }}
               <img src="{{ volume['volumeInfo'].get('imageLinks')['smallThumbnail'] }}">
         </a>
       </label>
+      <input type="hidden" name="title" value="{{ volume['volumeInfo']['title'] }}">
+      <input type="hidden" name="author" value="{{ volume['volumeInfo'].get('authors')[0] }}">
+      <input type="hidden" name="id" value="{{ volume['id'] }}">
+      <input type="hidden" name="cover" value="{{ volume['volumeInfo'].get('imageLinks')['smallThumbnail'] }}">
+      <input type="hidden" name="pageCount" value="{{ volume['volumeInfo'].get('pageCount') }}">
+      <input type="hidden" name="description" value="{{ volume['volumeInfo'].get('description') }}">
+      <input type="hidden" name="publishedDate" value="{{ volume['volumeInfo'].get('publishedDate') }}">
     </div>
     {% endfor %}
   </form>
