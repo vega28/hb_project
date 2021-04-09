@@ -192,6 +192,8 @@ def review_media_item():
 
     session['item_to_add'] = {'title': item.title, 'item_id': item.item_id, 'cover': item.cover}
 
+    # TODO: check if item already associated with user's media!
+
     return render_template('review_media.html')
 
 

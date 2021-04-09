@@ -4,14 +4,35 @@
 
 {% block body %}
   <h1>{{ user.fname }} {{ user.lname }}</h1>
+
   <p>{{ user.email }}</p>
+  
+  {% if session.get('user_id') == user.user_id %}
+    <h4>(this is you!)</h4> 
+  {% endif %}
+
   <div>
     <img src="{{ user.profile_pic }}">
   </div>
+  
   <div>
+    <h3>{{ user.fname }}'s collections:</h3>
+    {% for collection in user.collections %} 
+      <h5>{{ collection.name }}</h5>
+      {% for item in collection.user_media %}
+        <img src="{{ item.item.cover }}">
+      {% endfor %}
+    {% endfor %} 
+  <div>
+
+  </div>
+    <h3>{{ user.fname }}'s media:</h3>
+
     {% for item in user.media %} 
       <img src="{{ item.item.cover }}">
     {% endfor %}
   </div>
+
   <p><a href="/users">Return to list of users.</a></p>
+
 {% endblock %}

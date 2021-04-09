@@ -6,5 +6,12 @@
   <h1>{{ item.title }}</h1>
   <p>{{ item.description }}</p>
   <img src="{{ item.cover }}">
+
   <p><a href="/media">Return to list of media.</a></p>
+
+  {% if session.get('user_id') %} 
+    <form action="/review_media">
+      <button type="submit" name="chosen-item" value="{{ item.item_id }}">Add to my library!</button>
+    </form>
+  {% endif %}
 {% endblock %}

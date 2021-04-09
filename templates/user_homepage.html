@@ -6,15 +6,24 @@
   <h1>📚 Welcome, {{ user.fname }}! 📚 </h1>
   <img src="{{ user.profile_pic }}">
   <ul>
-    <li>View my collections</li>
     <li><a href="/log_out">Log Out</a></li>
-    <li><a href="/search">Add a media item</a></li>
-    <li><a href="/media">Browse media</a></li>
+    <li><a href="/search">Add a media item to your library</a></li>
+    <li><a href="/media">Browse all media</a></li>
     <li><a href="/users">View all users</a></li>
-    <li>View my media:</li>
   </ul>
-  {% for item in user.media %} 
-    <img src="{{ item.item.cover }}">
-  {% endfor %}
+
+  <h3>My collections:</h3>
+    {% for collection in user.collections %} 
+      <h5>{{ collection.name }}</h5>
+      {% for item in collection.user_media %}
+        <img src="{{ item.item.cover }}">
+      {% endfor %}
+    {% endfor %} 
+
+  <h3>My media:</h3>
+
+    {% for item in user.media %} 
+      <img src="{{ item.item.cover }}">
+    {% endfor %}
 
 {% endblock %}

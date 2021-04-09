@@ -16,6 +16,7 @@ class User(db.Model):
     pwd = db.Column(db.String(25), nullable=False) # keep it secret, keep it safe!
     profile_pic = db.Column(db.Text) # link to image
 
+    # collections = a list of Collection objects specific to this user
     # media = a list of media Item objects specific to this user's library 
     # updates = a list of this user's updates
 
@@ -201,6 +202,7 @@ class Collection(db.Model):
                         nullable=False) # foreign key linking to users
     name = db.Column(db.String(30), nullable=False)
 
+    user = db.relationship('User', backref='collections')
     # user_media = a list of UserMedia objects that are in this collection
 
     def __repr__(self):
