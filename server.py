@@ -16,6 +16,7 @@ app.jinja_env.undefined = StrictUndefined
 GOOGLE_BOOKS_TOKEN = os.environ['GOOGLE_BOOKS_TOKEN']
 IMDB_API_KEY = os.environ['IMDB_API_KEY']
 
+
 @app.route('/')
 def show_homepage():
     """ Show the homepage. 
@@ -278,10 +279,6 @@ def search_api_for_media_item():
         data = res.json() # type dict
 
         return render_template('api_search_results.html', pformat=pformat, data=data)
-        # TODO: allow user to select an option to add to db 
-        #       get tag for selected item
-        #       do another request to get that volume's info
-        #       add to db
 
     elif session['search_query']['media_type'] == 'movie':
         pass # IMDB movie API
@@ -294,6 +291,17 @@ def search_api_for_media_item():
     else:
         pass # user creates their own new type and item
 
+
+@app.route('/manage_media')
+def manage_media():
+    """ Allow user to manage their media. 
+        Collections functionality: 
+            create, delete, add items to, remove items from, rename
+        Media item functionality:
+            delete, add to collection, edit rating/review/source
+    """
+    user = crud.get_user_by_id(session['user_id'])
+    return render_template('manage_media.html', user=user)
 
 
 

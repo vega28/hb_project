@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Manage Media{% endblock %}
+
+{% block body %}
+  <h1>Manage Your Library</h1>
+  <ul>
+    <li><a href="/search">Search for an item to add</a></li>
+    <li><a href="/media">Browse all media</a></li>
+    <li><a href="/">Return to homepage</a></li>
+    </ul>
+
+  <div>
+    <h3>Your collections:</h3>
+    {% for collection in user.collections %} 
+      <div>
+        <h5>{{ collection.name }}</h5>
+        {% for item in collection.user_media %}
+          <img src="{{ item.item.cover }}">
+        {% endfor %}
+      </div>
+    {% endfor %} 
+  </div>
+
+  <div>
+    <h3>Your media:</h3>
+    {% for item in user.media %} 
+      <img src="{{ item.item.cover }}">
+    {% endfor %}
+  </div>
+
+{% endblock %}
