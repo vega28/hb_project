@@ -16,7 +16,7 @@
   </div>
   
   <div>
-    <h3>{{ user.fname }}'s collections:</h3>
+    <h3>{{ user.fname }}'s collections:</h3><!-- TODO: Maybe make a boolean in collections that says public or not! -->
     {% for collection in user.collections %} 
       <h5>{{ collection.name }}</h5>
       {% for item in collection.user_media %}
@@ -26,7 +26,7 @@
   <div>
 
   </div>
-    <h3>{{ user.fname }}'s media:</h3>
+    <h3>{{ user.fname }}'s media:</h3><!-- TODO: don't show this to other users after initial dev phase. -->
 
     {% for item in user.media %} 
       <img src="{{ item.item.cover }}">

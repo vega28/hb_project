@@ -3,7 +3,7 @@
 {% block title %}Search{% endblock %}
 
 {% block body %}
-  <h1>Search by Item Type:</h1>
+  <h1>Let's Check the Database First:</h1>
   <form action="/review_media" method="GET">
     
     <!-- dropdown menu of types ... NTH other option where user enters info -->
@@ -46,7 +46,7 @@
     
     <div id="db-search-results"></div>
 
-    <p><input type="submit"></p>
+    <p><input type="submit"></p><!-- TODO: make this only clickable if a radio button is selected from "db-search-results". -->
 
   </form>
 
