@@ -205,7 +205,7 @@ def review_new_media_item():
     """ Ask for user's review and rating of new media item. 
         Add new item to database. """
 
-    if session.get('item_to_add'):
+    if session.get('item_to_add'): # ? is this redundant?
         del session['item_to_add']
     
     # create new item with the appropriate media_type. add to db.
@@ -317,9 +317,24 @@ def manage_item():
     """
     user_media_id = request.form.get('user_media_id') 
     user = crud.get_user_by_id(session['user_id'])
-    item = crud.get_item_by_user_media_id(user.user_id, user_media_id) 
+    user_item = crud.get_user_item_by_user_media_id(user.user_id, user_media_id) 
 
-    return render_template('manage_item.html', user=user, item=item)
+    return render_template('manage_item.html', user=user, user_item=user_item)
+
+
+@app.route('/delete_item', methods=['POST'])
+def delete_item():
+    """ Remove the specified item from the user's library. """
+
+    user = crud.get_user_by_id(session['user_id'])
+    user_item = crud.get_user_item_by_user_media_id(user.user_id, request.form.get('user_media_id')) 
+    crud.remove_from_user_library(user, user_media_item=user_item)
+
+    print('**********HALLOOOOOOOOOO******************') ### this is appearing...
+
+    flash(f"This item has been removed from your library.")
+
+    return redirect('/manage_media') # FIXME ... but this part doesn't seem to be working...
 
 
 @app.route('/manage_collection')

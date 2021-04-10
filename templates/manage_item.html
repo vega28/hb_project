@@ -10,8 +10,20 @@
     </ul>
 
   <div>
-    <h3>Your media:</h3>
-      <img src="{{ item.cover }}" id="{{ item.item_id }}" value="{{ item.item_id }}">
+    <h3>{{ user_item.item.title }}</h3>
+    <img src="{{ user_item.item.cover }}" id="user-media-id" value="{{ user_item.user_media_id }}">
+    <h5>Your Rating: {{ user_item.rating }}</h5>
+    <h5>Your Review:</h5>
+    <p>{{ user_item.review }}</p>
+    <h5>Source:</h5>
+    <p>{{ user_item.source }}</p>
+    <h5>Description:</h5>
+    <p>{{ user_item.item.description }}</p>
+  </div>
+
+  <div>
+    <button id="edit-details">Edit Details</button>
+    <button id="delete-from-library">Delete From Your Library</button>
   </div>
 
   <script src="/static/js/manage.js"></script>
