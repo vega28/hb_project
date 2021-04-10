@@ -1,31 +1,25 @@
+<p>-----------------------------------------------------------</p>
 
-{% extends 'base.html' %}
+<h1 name="chosen-item" id="db-item-id" value="{{ db_item.item_id }}">Manage Your Item</h1>
 
-{% block title %}Manage Item{% endblock %}
+<div>
+  <button class="item-actions" id="edit-details" value="{{ user_item.user_media_id }}">Edit Details</button>
+  <button class="item-actions" id="delete-from-library" value="{{ user_item.user_media_id }}">Delete From Your Library</button>
+</div>
 
-{% block body %}
-  <h1>Manage Your Item</h1>
-  <ul>
-    <li><a href="/">Return to homepage</a></li>
-    </ul>
+<div>
+  <h3 id="chosen-user-item" value="{{ user_item.user_media_id }}">{{ user_item.item.title }}</h3>
+  <img src="{{ user_item.item.cover }}" id="item-cover">
+  <h5>Your Rating:</h5>
+  <p class="editable-detail" id="rating" value="{{ user_item.rating }}">{{ user_item.rating }}</p>
+  <h5>Your Review:</h5>
+  <p class="editable-detail" id="review" value="{{ user_item.review }}">{{ user_item.review }}</p>
+  <h5>Source:</h5>
+  <p class="editable-detail" id="source" value="{{ user_item.source }}">{{ user_item.source }}</p>
+  <h5>Description:</h5>
+  <p>{{ user_item.item.description }}</p>
+</div>
 
-  <div>
-    <h3>{{ user_item.item.title }}</h3>
-    <img src="{{ user_item.item.cover }}" id="user-media-id" value="{{ user_item.user_media_id }}">
-    <h5>Your Rating: {{ user_item.rating }}</h5>
-    <h5>Your Review:</h5>
-    <p>{{ user_item.review }}</p>
-    <h5>Source:</h5>
-    <p>{{ user_item.source }}</p>
-    <h5>Description:</h5>
-    <p>{{ user_item.item.description }}</p>
-  </div>
+<script src="/static/js/manage.js"></script>
 
-  <div>
-    <button id="edit-details">Edit Details</button>
-    <button id="delete-from-library">Delete From Your Library</button>
-  </div>
-
-  <script src="/static/js/manage.js"></script>
-  
-{% endblock %}
+<p>-----------------------------------------------------------</p>

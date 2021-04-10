@@ -15,18 +15,21 @@
     {% for collection in user.collections %} 
       <div>
         <h5>{{ collection.name }}</h5>
-        {% for item in collection.user_media %}
-          <img src="{{ item.item.cover }}" class="user-media-id" id="{{ item.user_media_id }}" value="{{ item.user_media_id }}">
+        {% for user_item in collection.user_media %}
+          <img src="{{ user_item.item.cover }}" class="collection-id" 
+          id="collection-{{ user_item.user_media_id }}" value="{{ user_item.user_media_id }}">
         {% endfor %}
       </div>
     {% endfor %} 
   </div>
 
+  <div id="item-details"></div>
+
   <div>
     <h3>Your media:</h3>
-    {% for item in user.media %} 
-      <img src="{{ item.item.cover }}" class="user-media-id" 
-      id="{{ item.user_media_id }}" value="{{ item.user_media_id }}">
+    {% for user_item in user.media %} 
+      <img src="{{ user_item.item.cover }}" class="user-media-id" 
+      id="{{ user_item.user_media_id }}" value="{{ user_item.user_media_id }}">
     {% endfor %}
   </div>
 

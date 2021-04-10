@@ -318,8 +318,9 @@ def manage_item():
     user_media_id = request.form.get('user_media_id') 
     user = crud.get_user_by_id(session['user_id'])
     user_item = crud.get_user_item_by_user_media_id(user.user_id, user_media_id) 
+    db_item = crud.get_item_by_user_media_id(user.user_id, user_media_id)
 
-    return render_template('manage_item.html', user=user, user_item=user_item)
+    return render_template('manage_item.html', user=user, user_item=user_item, db_item=db_item)
 
 
 @app.route('/delete_item', methods=['POST'])
@@ -330,11 +331,11 @@ def delete_item():
     user_item = crud.get_user_item_by_user_media_id(user.user_id, request.form.get('user_media_id')) 
     crud.remove_from_user_library(user, user_media_item=user_item)
 
-    print('**********HALLOOOOOOOOOO******************') ### this is appearing...
+    print('**********HALLOOOOOOOOOO4******************') ### this IS appearing...
 
-    flash(f"This item has been removed from your library.")
+    flash("This item has been removed from your library.") ### this is NOT appearing
 
-    return redirect('/manage_media') # FIXME ... but this part doesn't seem to be working...
+    return redirect('/manage_media') # FIXME ... this is NOT appearing
 
 
 @app.route('/manage_collection')
@@ -357,5 +358,5 @@ def manage_collection():
 
 #-----------------------------------------------------------------------------#
 if __name__ == '__main__':
-    connect_to_db(app)
+    connect_to_db(app, echo=False)
     app.run(debug=True, host='0.0.0.0')
