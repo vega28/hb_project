@@ -25,9 +25,11 @@
   <div>
     <h3>Your media:</h3>
     {% for item in user.media %} 
-      <img src="{{ item.item.cover }}" class="user-media-id" id="{{ item.user_media_id }}" value="{{ item.user_media_id }}">
+      <img src="{{ item.item.cover }}" class="user-media-id" 
+      id="{{ item.user_media_id }}" value="{{ item.user_media_id }}">
     {% endfor %}
   </div>
 
   <script src="/static/js/manage.js"></script>
+  
 {% endblock %}

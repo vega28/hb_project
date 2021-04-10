@@ -1,0 +1,19 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Manage Item{% endblock %}
+
+{% block body %}
+  <h1>Manage Your Item</h1>
+  <ul>
+    <li><a href="/">Return to homepage</a></li>
+    </ul>
+
+  <div>
+    <h3>Your media:</h3>
+      <img src="{{ item.cover }}" id="{{ item.item_id }}" value="{{ item.item_id }}">
+  </div>
+
+  <script src="/static/js/manage.js"></script>
+  
+{% endblock %}

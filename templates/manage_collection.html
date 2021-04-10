@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Manage Collection{% endblock %}
+
+{% block body %}
+  <h1>Manage Your Collection</h1>
+  <ul>
+    <li><a href="/">Return to homepage</a></li>
+    </ul>
+
+  <div>
+    <h3>{{ collection.name }}</h3>
+    {% for item in collection.user_media %}
+        <img src="{{ item.item.cover }}" class="user-media-id" id="{{ item.user_media_id }}" value="{{ item.user_media_id }}">
+    {% endfor %}
+  </div>
+
+
+  <script src="/static/js/manage.js"></script>
+  
+{% endblock %}

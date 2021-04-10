@@ -294,7 +294,7 @@ def search_api_for_media_item():
 
 @app.route('/manage_media')
 def manage_media():
-    """ Allow user to manage their media. 
+    """ Show media management page to user. 
         Collections functionality: 
             create, delete, add items to, remove items from, rename
         Media item functionality:
@@ -302,6 +302,39 @@ def manage_media():
     """
     user = crud.get_user_by_id(session['user_id'])
     return render_template('manage_media.html', user=user)
+
+
+@app.route('/manage_item', methods=['POST'])
+def manage_item():
+    """ Allow user to manage their media items. 
+        functionality:
+            delete item 
+            add item to collection - assign_to_collection(user, media_item, collection)
+            edit rating/review/source
+            NTH: see/edit updates associated with this item.
+    """
+    user_media_id = request.form.get('user_media_id') 
+    user = crud.get_user_by_id(session['user_id'])
+    item = crud.get_item_by_user_media_id(user.user_id, user_media_id) 
+
+    return render_template('manage_item.html', user=user, item=item)
+
+
+@app.route('/manage_collection')
+def manage_collection():
+    """ Allow user to manage their collections. 
+        Functionality: 
+            create collection - create_collection(user, collection_name)
+            delete collection - delete_collection(user, collection_name)
+            remove items from collection
+            rename collection
+            NTH: bulk add items to collection
+            NTH: arrange items in collection
+    """
+    # TODO: get collection_id back from manage.js and create management functions
+    user = crud.get_user_by_id(session['user_id'])
+    collection = crud.get_collection_by_id(collection_id)
+    return render_template('manage_collection.html', user=user, collection=collection)
 
 
 
