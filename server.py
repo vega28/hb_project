@@ -129,6 +129,8 @@ def register_user():
     if crud.get_user_by_email(email):
         flash('That email is taken. Please try a different email.')
     elif pwd == pwd2:
+        if profile_pic == '':
+            profile_pic = '/static/images/default_pf2.png'
         user = crud.create_user(fname, lname, email, pwd, profile_pic)
         session['user_id'] = user.user_id
         flash(f'Welcome, {fname}! Your account has been created. You are now logged in.')
