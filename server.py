@@ -365,14 +365,14 @@ def delete_collection():
 
 # TODO: create media management functions: 
 
-#       create collection - create_collection(user, collection_name)
-#       delete collection - delete_collection(user, collection_name)
-#       remove items from collection
 #       rename collection
 #       add item to collection - assign_to_collection(user, media_item, collection)
+#       remove items from collection
 #       edit rating/review/source
 
 #       DONE: delete item from user library 
+#       DONE: create collection 
+#       DONE: delete collection 
 
 #       NTH: see/edit updates associated with this item.
 #       NTH: bulk add items to collection

@@ -367,14 +367,6 @@ def get_collection_by_id(collection_id):
     return Collection.query.filter(Collection.collection_id==collection_id).first()
 
 
-def delete_collection(user, collection_name):
-    """ Delete the specified collection. """
-
-    # TODO: WRITE THIS
-
-    print(f'The collection was deleted. (except not actually yet... todo!)')
-
-
 def get_user_media_id(user, media_item):
     """ Query database and return the user_media_id association between 
         a user_id and a media_item. """
