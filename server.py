@@ -32,7 +32,7 @@ def show_homepage():
 
 
 
-# browse all media route (by genre, media type, etc.) TODO: organize by JS?
+# browse all media route (by genre, media type, etc.) TODO: filter with JS?
 @app.route('/media')
 def list_media():
     """ View list of all media. """
@@ -180,7 +180,8 @@ def process_search():
     db_matches = crud.search_db(query_terms=query_terms)
     db_matches_dict = {}
     for item in db_matches:
-        db_matches_dict[item.item_id] = {'title': item.title, 'cover': item.cover}
+        db_matches_dict[item.item_id] = {'title': item.title, 
+                                        'cover': item.cover}
 
     return db_matches_dict
 
@@ -193,7 +194,9 @@ def review_media_item():
         del session['item_to_add']
     item = crud.get_item_by_id(request.args.get('chosen-item'))
 
-    session['item_to_add'] = {'title': item.title, 'item_id': item.item_id, 'cover': item.cover}
+    session['item_to_add'] = {'title': item.title, 
+                            'item_id': item.item_id, 
+                            'cover': item.cover}
 
     # TODO: check if item already associated with user's media!
 
@@ -246,7 +249,9 @@ def review_new_media_item():
 
     # retrieve user's rating, review, and source. route to /add_media
 
-    session['item_to_add'] = {'title': item.title, 'item_id': item.item_id, 'cover': item.cover}
+    session['item_to_add'] = {'title': item.title, 
+                            'item_id': item.item_id, 
+                            'cover': item.cover}
 
     return render_template('review_media.html')
 
@@ -275,12 +280,13 @@ def search_api_for_media_item():
         # Google Books API
         uri = 'https://www.googleapis.com/books/v1/volumes'
         payload = {'access_token': GOOGLE_BOOKS_TOKEN,
-                    'maxResults': 20,
-                    'q': f"{session['search_query']['title']} {session['search_query']['author']}"}
+            'maxResults': 20,
+            'q': f"{session['search_query']['title']} {session['search_query']['author']}"}
         res = requests.get(uri, params=payload)
         data = res.json() # type dict
 
-        return render_template('api_search_results.html', pformat=pformat, data=data)
+        return render_template('api_search_results.html', 
+                                pformat=pformat, data=data)
 
     elif session['search_query']['media_type'] == 'movie':
         pass # IMDB movie API
@@ -294,64 +300,85 @@ def search_api_for_media_item():
         pass # user creates their own new type and item
 
 
-# @app.route('/manage_media')
-# def manage_media():
-    """ Show media management page to user. 
-        Collections functionality: 
-            create, delete, add items to, remove items from, rename
-        Media item functionality:
-            delete, add to collection, edit rating/review/source
-    """
-    # user = crud.get_user_by_id(session['user_id'])
-    # return render_template('manage_media.html', user=user)
+@app.route('/view_item', methods=['POST'])
+def view_item():
+    """ Allow user to view details for a specified item in their library. """
 
-
-@app.route('/manage_item', methods=['POST'])
-def manage_item():
-    """ Allow user to manage their media items. 
-        functionality:
-            delete item 
-            add item to collection - assign_to_collection(user, media_item, collection)
-            edit rating/review/source
-            NTH: see/edit updates associated with this item.
-    """
     user_media_id = request.form.get('user_media_id') 
     user = crud.get_user_by_id(session['user_id'])
     user_item = crud.get_user_item_by_user_media_id(user.user_id, user_media_id) 
     db_item = crud.get_item_by_user_media_id(user.user_id, user_media_id)
 
-    return render_template('manage_item.html', user=user, user_item=user_item, db_item=db_item)
+    return render_template('view_item.html', user=user, 
+                            user_item=user_item, db_item=db_item)
 
 
 @app.route('/delete_item', methods=['POST'])
 def delete_item():
-    """ Remove the specified item from the user's library. """
+    """ Remove the specified item from the user's library. 
+        NOTE this already removes it from the user's collections as well. """
 
     user = crud.get_user_by_id(session['user_id'])
-    user_item = crud.get_user_item_by_user_media_id(user.user_id, request.form.get('user_media_id')) 
+    user_item = crud.get_user_item_by_user_media_id(user.user_id, 
+                                        request.form.get('user_media_id')) 
     title = user_item.item.title
     crud.remove_from_user_library(user, user_media_item=user_item)
 
     return f'{title} has been removed from your library.'
 
 
-@app.route('/manage_collection', methods=['POST'])
-def manage_collection():
-    """ Allow user to manage their collections. 
-        Functionality: 
-            create collection - create_collection(user, collection_name)
-            delete collection - delete_collection(user, collection_name)
-            remove items from collection
-            rename collection
-            NTH: bulk add items to collection
-            NTH: arrange items in collection
-    """
-    # TODO: create management functions
+@app.route('/view_collection', methods=['POST'])
+def view_collection():
+    """ Allow user to view the specified collection. """
+
     collection_id = request.form.get('collection_id') 
     user = crud.get_user_by_id(session['user_id'])
     collection = crud.get_collection_by_id(collection_id)
 
-    return render_template('manage_collection.html', user=user, collection=collection)
+    return render_template('view_collection.html', 
+                            user=user, collection=collection)
+
+
+@app.route('/create_collection', methods=['POST'])
+def create_collection():
+    """ Allow user to define a new collection """
+
+    user = crud.get_user_by_id(session['user_id'])
+    collection = crud.create_collection(user, 
+                                    request.form.get('collection_name'))
+
+    return f'{collection.name} has been added to your library.'
+
+
+@app.route('/delete_collection', methods=['POST'])
+def delete_collection():
+    """ Remove the specified collection from the user's library. """
+
+    collection_id = request.form.get('collection_id') 
+    user = crud.get_user_by_id(session['user_id'])
+    collection = crud.get_collection_by_id(collection_id)
+    collection_name = collection.name
+    crud.remove_from_user_library(user, collection=collection)
+
+    return f'{collection_name} has been removed from your library.'
+
+
+# TODO: create media management functions: 
+
+#       create collection - create_collection(user, collection_name)
+#       delete collection - delete_collection(user, collection_name)
+#       remove items from collection
+#       rename collection
+#       add item to collection - assign_to_collection(user, media_item, collection)
+#       edit rating/review/source
+
+#       DONE: delete item from user library 
+
+#       NTH: see/edit updates associated with this item.
+#       NTH: bulk add items to collection
+#       NTH: arrange items in collection 
+
+
 
 
 

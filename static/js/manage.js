@@ -1,10 +1,10 @@
 "use strict";
 
-// When user clicks on a cover, open up the manage_item part of the page
+// When user clicks on a cover, open up the view_item part of the page
 $('.user-media-id').on('click', (evt) => {
     // alert(`WHY HELLO THERE... my id is ${evt.target.id}`);
     $('#collection-details').html('');
-    $.post('/manage_item', {'user_media_id': evt.target.id}, (res) => {
+    $.post('/view_item', {'user_media_id': evt.target.id}, (res) => {
         console.log('item details have successfully been inserted into the html of this page');
         $('#item-details').html(res);
     });
@@ -33,18 +33,17 @@ $('#edit-details').on('click', () => {
 
 
 // When user clicks close button, close the expanded details (both colleciton and item)
-$('.close-details').on('click', (evt) => {
-    // alert(`WHY HELLO THERE... my id is ${evt.target.id}`);
+$('.close-details').on('click', () => {
     $('#collection-details').html('');
     $('#item-details').html('');
 })
 
 
-// When user clicks on a collections div, open up the manage_collections part of the page
+// When user clicks on a collections div, open up the view_collection part of the page
 $('.collection').on('click', (evt) => {
     // alert(`WHY HELLO THERE... my id is ${evt.target.id}`);
     $('#item-details').html('');
-    $.post('/manage_collection', {'collection_id': evt.target.id}, (res) => {
+    $.post('/view_collection', {'collection_id': evt.target.id}, (res) => {
         console.log('collection details have successfully been inserted into the html of this page');
         $('#collection-details').html(res);
     });

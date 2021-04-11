@@ -318,21 +318,24 @@ def store_media_in_user_library(user, media_item, rating, review, source):
     return user_item
 
 
-def remove_from_user_library(user, user_media_item=None, user_media_id=None):
-    """ Remove the specified item from a user's library. """
+def remove_from_user_library(user, user_media_item=None, user_media_id=None, collection=None):
+    """ Remove the specified or collection from a user's library. """
 
     if user_media_item:
         user_media_id = user_media_item.user_media_id
     
-    user_item = get_user_item_by_user_media_id(user.user_id, user_media_id)
-    title = user_item.item.title
+        thing = get_user_item_by_user_media_id(user.user_id, user_media_id)
+        name_of_thing = thing.item.title
+    
+    elif collection:
+        thing = collection
+        name_of_thing = collection.name
 
-    db.session.delete(user_item) # delete the record in the user_media table with that user_media_id
+    db.session.delete(thing) # delete the record
     db.session.commit()
-    # delete any records in the collections_media table with that user_media_id
-    # later: delete any user_updates with that user_media_id
+    # later: verify whether any associated user_updates are removed too!
 
-    print(f'{title} was successfully removed from your library!')
+    print(f'{name_of_thing} was successfully removed from your library!')
 
 
 def get_user_item_by_user_media_id(user_id, user_media_id):
