@@ -2,7 +2,7 @@
 
 $('#media_type').on('change', (evt) => {
     evt.preventDefault();
-    const selectedOption = $(evt.target);
+    let selectedOption = $(evt.target);
     $('.type-of-media').hide();
     // TODO: empty the vals for any specific media type
     // $(`#its-a-${$('#media_type').val()}`).slideDown();

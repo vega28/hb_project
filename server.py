@@ -339,6 +339,18 @@ def view_collection():
                             user=user, collection=collection)
 
 
+@app.route('/list_collections')
+def list_collections():
+    """ Provide a list of a user's collections. """
+
+    user_collections = {}
+    user = crud.get_user_by_id(session['user_id'])
+    for collection in user.collections:
+        user_collections[collection.collection_id] = {'name': collection.name}
+
+    return user_collections
+
+
 @app.route('/create_collection', methods=['POST'])
 def create_collection():
     """ Allow user to define a new collection """
@@ -363,10 +375,33 @@ def delete_collection():
     return f'{collection_name} has been removed from your library.'
 
 
+@app.route('/add_item_to_collection', methods=['POST'])
+def add_item_to_collection():
+    """ Add the specified item to the user's specified collection. """
+
+    collection_id = request.form.get('collection_id') 
+    user_item_id = request.form.get('user_item_id')
+    user = crud.get_user_by_id(session['user_id'])
+    user_item = crud.get_user_item_by_user_media_id(user.user_id, user_item_id)
+    collection = crud.get_collection_by_id(collection_id)
+    crud.assign_to_collection(user, user_item, collection)
+
+    return f'{user_item.item.title} was successfully added to {collection.name}.'
+
+
+@app.route('/choose_collection', methods=['POST'])
+def choose_collection():
+    """ Allow user to choose which collection to add their item to. """
+
+    user = crud.get_user_by_id(session['user_id'])
+
+    return render_template('choose_collection.html', user=user)
+
+
 # TODO: create media management functions: 
 
 #       rename collection
-#       add item to collection - assign_to_collection(user, media_item, collection)
+#       add item to collection 
 #       remove items from collection
 #       edit rating/review/source
 

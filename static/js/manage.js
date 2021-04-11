@@ -1,14 +1,38 @@
 "use strict";
 
-// WORKING - When user clicks on a cover, open up the view_item part of the page
+// When user clicks on a cover, open up the view_item part of the page
+//      allow user to add item to a collection
+// TODO: when item is added to collection, it does not rerender template, so need to add manually!
 $('.user-media-id').on('click', (evt) => {
-    // alert(`WHY HELLO THERE... my id is ${evt.target.id}`);
     $('#collection-details').html('');
     $.post('/view_item', {'user_media_id': evt.target.id}, (res) => {
         $('#item-details').html(res);
-        console.log('item details have successfully been inserted into the html of this page');
+        console.log('item details have successfully been displayed on this page');
+ 
+        $('#add-to-collection').on('click', (evt) => {
+            evt.preventDefault();
+            $.get('/list_collections', (userCollections) => {
+            
+                $('#which-collection-to-add-to').append('<form id="add-to-collection-form">');
+                for (let i in userCollections) {
+                    $('#which-collection-to-add-to').append(`<p><input type="radio" name="which-collection" value="${i}">${userCollections[i]['name']}</p>`);
+                }
+                $('#which-collection-to-add-to').append('<input type="submit" id="coll-submit-button"></form>');
+                
+                // ? WHY didn't this next line work?!
+                // $('#add-to-collection-form').on('submit', (evt) => { 
+                $('#coll-submit-button').on('click', (evt) => {
+                    let postData = {'user_item_id': $('#add-to-collection').val(), 
+                                    'collection_id': $('input[type="radio"]:checked').val()}
+                    $.post('/add_item_to_collection', postData, (res2) => {
+                        alert(res2);
+                    })    
+                });
+            });
+    
+        });
     });
-})
+});
 
 
 
@@ -35,7 +59,7 @@ $('#edit-details').on('click', () => {
 })
 
 
-// WORKING - When user clicks close button, close the expanded details (both collection and item)
+// When user clicks close button, close the expanded details (both collection and item)
 $('.close-details').on('click', () => {
     $('#collection-details').html('');
     $('#item-details').html('');
@@ -55,9 +79,9 @@ $('.collection').on('click', (evt) => {
 })
 
 
-// WORKING - When user clicks on add collection button, ask for a new name and then make collection
+// When user clicks on add collection button, ask for a name and then make collection
 $('#create-collection').on('click', () => {
-    $('#new-collection').html('<form id="new-collection-form"><input type="text" id="new-collection-name"><input type="submit" id="submit-new-collection"></form>');
+    $('#new-collection').html('<form id="new-collection-form">New collection name: <input type="text" id="new-collection-name"><input type="submit" id="submit-new-collection"></form>');
 
     $('#new-collection-form').on('submit', (evt) => {
         evt.preventDefault();
@@ -83,3 +107,5 @@ $('#delete-collection').on('click', () => {
         alert(res);
     }); 
 })
+
+

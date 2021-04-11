@@ -1,0 +1,8 @@
+<form id="add-to-collection-form">
+    {% for collection in user.collections %} 
+        <input type="radio" class="which-collection" 
+        name="which-collection" id="{{ collection.collection_id }}" 
+        value="{{ collection.collection_id }}">{{ collection.name }}
+    {% endfor %} 
+    <input type="submit">
+</form>
