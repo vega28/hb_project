@@ -358,6 +358,12 @@ def create_collection(user, collection_name):
     return collection
 
 
+def get_collection_by_id(collection_id):
+    """ Given the collection_id, return the collection object. """
+
+    return Collection.query.filter(Collection.collection_id==collection_id).first()
+
+
 def delete_collection(user, collection_name):
     """ Delete the specified collection. """
 

@@ -294,16 +294,16 @@ def search_api_for_media_item():
         pass # user creates their own new type and item
 
 
-@app.route('/manage_media')
-def manage_media():
+# @app.route('/manage_media')
+# def manage_media():
     """ Show media management page to user. 
         Collections functionality: 
             create, delete, add items to, remove items from, rename
         Media item functionality:
             delete, add to collection, edit rating/review/source
     """
-    user = crud.get_user_by_id(session['user_id'])
-    return render_template('manage_media.html', user=user)
+    # user = crud.get_user_by_id(session['user_id'])
+    # return render_template('manage_media.html', user=user)
 
 
 @app.route('/manage_item', methods=['POST'])
@@ -329,16 +329,13 @@ def delete_item():
 
     user = crud.get_user_by_id(session['user_id'])
     user_item = crud.get_user_item_by_user_media_id(user.user_id, request.form.get('user_media_id')) 
+    title = user_item.item.title
     crud.remove_from_user_library(user, user_media_item=user_item)
 
-    print('**********HALLOOOOOOOOOO4******************') ### this IS appearing...
-
-    flash("This item has been removed from your library.") ### this is NOT appearing
-
-    return redirect('/manage_media') # FIXME ... this is NOT appearing
+    return f'{title} has been removed from your library.'
 
 
-@app.route('/manage_collection')
+@app.route('/manage_collection', methods=['POST'])
 def manage_collection():
     """ Allow user to manage their collections. 
         Functionality: 
@@ -349,9 +346,11 @@ def manage_collection():
             NTH: bulk add items to collection
             NTH: arrange items in collection
     """
-    # TODO: get collection_id back from manage.js and create management functions
+    # TODO: create management functions
+    collection_id = request.form.get('collection_id') 
     user = crud.get_user_by_id(session['user_id'])
     collection = crud.get_collection_by_id(collection_id)
+
     return render_template('manage_collection.html', user=user, collection=collection)
 
 

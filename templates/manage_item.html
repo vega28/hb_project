@@ -1,10 +1,12 @@
-<p>-----------------------------------------------------------</p>
+<h1>-----------------------------------------------------------</h1>
 
 <h1 name="chosen-item" id="db-item-id" value="{{ db_item.item_id }}">Manage Your Item</h1>
 
 <div>
   <button class="item-actions" id="edit-details" value="{{ user_item.user_media_id }}">Edit Details</button>
+  <button class="item-actions" id="add-to-collection" value="{{ user_item.user_media_id }}">Add to Collection</button>
   <button class="item-actions" id="delete-from-library" value="{{ user_item.user_media_id }}">Delete From Your Library</button>
+  <button class="close-details" id="close-item-actions" value="{{ user_item.user_media_id }}">Close Details</button>
 </div>
 
 <div>
@@ -22,4 +24,4 @@
 
 <script src="/static/js/manage.js"></script>
 
-<p>-----------------------------------------------------------</p>
+<h1>-----------------------------------------------------------</h1>

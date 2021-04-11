@@ -10,21 +10,33 @@
     <li><a href="/log_out">Log Out</a></li>
     <li><a href="/media">Browse all media</a></li>
     <li><a href="/users">View all users</a></li>
-    <li><a href="/manage_media">Manage your media</a></li>
+    <li><a href="/search">Search for new items</a></li>
   </ul>
 
-  <h3>My collections:</h3>
+  <div id="collection-details"></div>
+
+  <div>
+    <h3>Your collections:</h3>
     {% for collection in user.collections %} 
-      <h5>{{ collection.name }}</h5>
-      {% for item in collection.user_media %}
-        <img src="{{ item.item.cover }}">
-      {% endfor %}
+      <div>
+        <h5 class="collection" id="{{ collection.collection_id }}" value="{{ collection.collection_id }}">{{ collection.name }}</h5>
+        {% for user_item in collection.user_media %}
+          <img src="{{ user_item.item.cover }}">
+        {% endfor %}
+      </div>
     {% endfor %} 
+  </div>
 
-  <h3>My media:</h3>
+  <div id="item-details"></div>
 
-    {% for item in user.media %} 
-      <img src="{{ item.item.cover }}">
+  <div>
+    <h3>Your media:</h3>
+    {% for user_item in user.media %} 
+      <img src="{{ user_item.item.cover }}" class="user-media-id" 
+      id="{{ user_item.user_media_id }}" value="{{ user_item.user_media_id }}">
     {% endfor %}
+  </div>
 
+  <script src="/static/js/manage.js"></script>
+  
 {% endblock %}
