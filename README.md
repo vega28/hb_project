@@ -2,7 +2,7 @@
 
 ### Overview
 
-This personal library app allows users to log and organize their media into collections. Users can set and track progress to goals, share ratings and reviews, and visualize their media consumption in various ways.
+This personal library app allows users to log, review, and organize their media into collections. NTH features: users can share their media, visualize their media consumption in various ways, and set and track progress to goals.
 
 ### Technologies required (besides typical Hackbright tech stack)
 
@@ -20,16 +20,19 @@ This personal library app allows users to log and organize their media into coll
 - Add media item
 - Search database for media
 - Organize media into personal collections
+- Browse users and media
 
 #### 2.0
 
-- Set goals and track progress
+- User updates
+- Genres
 - Visualize data
 
 #### 3.0
 
 - New media recommendations by genre
 - More visualization of data
+- Set goals and track progress
 - Share progress/goals/recommendations with friends
 
 ### Notes
