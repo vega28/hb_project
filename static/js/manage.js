@@ -21,12 +21,16 @@ $('.user-media-id').on('click', (evt) => {
                 
                 // ? WHY didn't this next line work?!
                 // $('#add-to-collection-form').on('submit', (evt) => { 
-                $('#coll-submit-button').on('click', (evt) => {
-                    let postData = {'user_item_id': $('#add-to-collection').val(), 
-                                    'collection_id': $('input[type="radio"]:checked').val()}
+                $('#coll-submit-button').on('click', () => {
+                    let user_media_id = $('#add-to-collection').val();
+                    let collection_id = $('input[type="radio"]:checked').val();
+                    let postData = {'user_item_id': user_media_id, 
+                                    'collection_id': collection_id}
                     $.post('/add_item_to_collection', postData, (res2) => {
-                        alert(res2);
-                    })    
+                        alert(res2['alert']);
+                        $(`#collection-display-${collection_id}`).append(`<img src="${res2['cover']}" class="${user_media_id}">`);
+                    });
+                    $('#which-collection-to-add-to').html('');
                 });
             });
     

@@ -386,7 +386,10 @@ def add_item_to_collection():
     collection = crud.get_collection_by_id(collection_id)
     crud.assign_to_collection(user, user_item, collection)
 
-    return f'{user_item.item.title} was successfully added to {collection.name}.'
+    response = {'alert': f'{user_item.item.title} was successfully added to {collection.name}.',
+                'cover': user_item.item.cover}
+
+    return response
 
 
 @app.route('/choose_collection', methods=['POST'])
