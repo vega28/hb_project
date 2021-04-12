@@ -10,7 +10,7 @@
     <button class="close-details" id="close-collection-actions" value="{{ collection.collection_id }}">Close Details</button>
   </div>
   {% for item in collection.user_media %}
-      <img src="{{ item.item.cover }}">
+      <img src="{{ item.item.cover }}" class="{{ item.user_media_id }}">
   {% endfor %}
 </div>
 

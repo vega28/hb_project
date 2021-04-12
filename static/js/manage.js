@@ -37,16 +37,15 @@ $('.user-media-id').on('click', (evt) => {
 
 
 // When user clicks delete button, remove association between item and user (UserMedia object)
-// TODO: Delete is successful, but it doesn't rerender the template. remove that item cover from the page on the JS side!
 $('#delete-from-library').on('click', () => {
     let id_to_del = $('#delete-from-library').val();
     console.log(`here's your value: "${id_to_del}"`);
-    console.log($(`#${id_to_del}`).val()); // ! doesn't work in browser console either... even hardcoding in the id num!
+    console.log($(`.${id_to_del}`)[0].id); 
     // NTH: pop up confirmation before actually deleting
     $.post('/delete_item', {'user_media_id': id_to_del}, (res) => {
         $('#item-details').html('');
         alert(res);
-        console.log($(`#${id_to_del}`).val()); // ! currently undefined - Want to remove image associated with user_media_id for selected item... 
+        $(`.${id_to_del}`).remove(); 
     }); 
 })
 
@@ -97,13 +96,13 @@ $('#create-collection').on('click', () => {
 
 
 // When user clicks delete button, delete collection
-// TODO: Delete is successful, but it doesn't rerender the template. remove that collection from the page on the JS side!
 $('#delete-collection').on('click', () => {
     let id_to_del = $('#delete-collection').val();
     console.log(`here's your value: "${id_to_del}"`);
     // NTH: pop up confirmation before actually deleting
     $.post('/delete_collection', {'collection_id': id_to_del}, (res) => {
         $('#collection-details').html('');
+        $(`#collection-display-${id_to_del}`).remove();
         alert(res);
     }); 
 })

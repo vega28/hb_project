@@ -18,10 +18,10 @@
   <div>
     <h3>Your collections:</h3>
     {% for collection in user.collections %} 
-      <div>
+      <div id="collection-display-{{ collection.collection_id }}">
         <h5 class="collection" id="{{ collection.collection_id }}" value="{{ collection.collection_id }}">{{ collection.name }}</h5>
         {% for user_item in collection.user_media %}
-          <img src="{{ user_item.item.cover }}">
+          <img src="{{ user_item.item.cover }}" class="{{ user_item.user_media_id }}">
         {% endfor %}
       </div>
     {% endfor %} 
@@ -35,7 +35,7 @@
   <div>
     <h3>Your media:</h3>
     {% for user_item in user.media %} 
-      <img src="{{ user_item.item.cover }}" class="user-media-id" 
+      <img src="{{ user_item.item.cover }}" class="user-media-id {{ user_item.user_media_id }}" 
       id="{{ user_item.user_media_id }}" value="{{ user_item.user_media_id }}">
     {% endfor %}
   </div>
