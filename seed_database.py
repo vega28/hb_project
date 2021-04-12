@@ -97,39 +97,50 @@ sg1_ep1 = crud.create_tv_ep(title='Children of the Gods', type_id=3,
                             ep_length=92, 
                             season=1)
 
-sources = ['owned', 'library', 'amazon']
+sources = ['owned', 'library', 'amazon','other']
 
 # create test users:
 bob = crud.create_user(fname='bob', lname='bobson', email='bob@bob.com', pwd='bob', profile_pic='https://images.gr-assets.com/authors/1406058780p8/3089156.jpg')
 rose = crud.create_user(fname='rose', lname='tyler', email='rose@tardis.com', pwd='badwolf', profile_pic='https://bit.ly/3fPVcfn')
 wendy = crud.create_user(fname='Wendy', lname='Carter', email='wcarter@dontstarve.com', pwd='abigail', profile_pic='/static/images/wendy_pf.png')
-for i in range(10): # FIXME: currently user can have duplicate media items.
-    new_user = crud.create_user(fname=fake.first_name(), 
-                                lname=fake.last_name(), 
-                                email=fake.email(), 
-                                pwd=fake.password())
+leslie = crud.create_user(fname='Leslie', lname='Knope', email='lknope@pawnee.com', pwd='lilsebastian', profile_pic='https://media.glamour.com/photos/569580c38fa134644ec26260/master/pass/entertainment-2015-01-leslie-knope-final-season-main.jpg') 
+william = crud.create_user(fname='William', lname='Adama', email='adama@bsg.com', pwd='sosayweall', profile_pic='https://cdn.quotesgram.com/img/50/90/1225779377-admiral-adama-one_288x288.jpg')
+daniel = crud.create_user(fname='Daniel', lname='Jackson', email='djackson@sgc.com', pwd="share", profile_pic='https://tse2.mm.bing.net/th?id=OIP.W8baHOdXLIJsdi4V46xR-wHaLD&pid=Api')
+buffy = crud.create_user(fname='Buffy', lname='Summers', email='buffy@summers.com', pwd='mrpointy', profile_pic='https://tse1.mm.bing.net/th?id=OIP.b3ngjS5r4_W4nFmetfqDGQHaFf&pid=Api')
+test_users = [bob, rose, wendy, leslie, william, daniel, buffy]
+for user in test_users: # FIXME: currently user can have duplicate media items.
+    user_media = []
     for j in range(5):
-        crud.store_media_in_user_library(user=new_user, 
-                                        media_item=choice(books_in_db), 
-                                        rating=randint(1,5), 
-                                        review=fake.text(), 
-                                        source=choice(sources))
+        item_choice = choice(books_in_db)
+        if item_choice not in user_media:
+            user_media.append(item_choice)
+            crud.store_media_in_user_library(user=user, 
+                                            media_item=item_choice, 
+                                            rating=randint(1,5), 
+                                            review=fake.text(), 
+                                            source=choice(sources))
     for n in range(2):
-        crud.store_media_in_user_library(user=new_user, 
-                                        media_item=choice(movies_in_db), 
-                                        rating=randint(1,5), 
-                                        review=fake.text(), 
-                                        source=choice(sources))
+        item_choice = choice(movies_in_db)
+        if item_choice not in user_media:
+            user_media.append(item_choice)
+            crud.store_media_in_user_library(user=user, 
+                                            media_item=item_choice, 
+                                            rating=randint(1,5), 
+                                            review=fake.text(), 
+                                            source=choice(sources))
     for m in range(1):
-        crud.store_media_in_user_library(user=new_user,
-                                        media_item=choice(tv_in_db),
+        item_choice = choice(tv_in_db)
+        user_media.append(item_choice)
+        crud.store_media_in_user_library(user=user,
+                                        media_item=item_choice,
                                         rating=randint(1,5),
                                         review=fake.text(),
                                         source=choice(sources))
 
 
 # create & assign genres:
-sci = crud.create_genre(genre_name = 'Science')
+for new_genre in ['Science', 'Fiction', 'Nonfiction', 'Fantasy']:
+    crud.create_genre(new_genre)
 scifi = crud.create_genre(genre_name = 'Science Fiction')
 clifi = crud.create_genre(genre_name = 'Climate Fiction')
 

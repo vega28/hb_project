@@ -1276,6 +1276,452 @@
             "searchInfo": {
               "textSnippet": "The lives of two sisters--Nettie, a missionary in Africa, and Celie, a southern woman married to a man she hates--are revealed in a series of letters exchanged over thirty years"
             }
+          },
+          {
+            "kind": "books#volume",
+            "id": "X7J1FvRrpPoC",
+            "etag": "D+2iypBE8SI",
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/X7J1FvRrpPoC",
+            "volumeInfo": {
+              "title": "Thief of Time",
+              "subtitle": "A Novel of Discworld",
+              "authors": [
+                "Terry Pratchett"
+              ],
+              "publisher": "Harper Collins",
+              "publishedDate": "2009-10-13",
+              "description": "Everybody wants more time, which is why on Discworld only the experts can manage it -- the venerable Monks of History who store it and pump it from where it's wasted, like underwater (how much time does a codfish really need?), to places like cities, where busy denizens lament, \"Oh where does the time go?\" While everyone always talks about slowing down, one young horologist is about to do the unthinkable. He's going to stop. Well, stop time that is, by building the world's first truly accurate clock. Which means esteemed History Monk Lu-Tze and his apprentice Lobsang Ludd have to put on some speed to stop the timepiece before it starts. For if the Perfect Clock starts ticking, Time -- as we know it -- will end. And then the trouble will really begin...",
+              "industryIdentifiers": [
+                {
+                  "type": "ISBN_10",
+                  "identifier": "0061808598"
+                },
+                {
+                  "type": "ISBN_13",
+                  "identifier": "9780061808593"
+                }
+              ],
+              "readingModes": {
+                "text": true,
+                "image": false
+              },
+              "pageCount": 432,
+              "printType": "BOOK",
+              "categories": [
+                "Fiction"
+              ],
+              "averageRating": 4,
+              "ratingsCount": 75,
+              "maturityRating": "NOT_MATURE",
+              "allowAnonLogging": true,
+              "contentVersion": "0.8.5.0.preview.2",
+              "panelizationSummary": {
+                "containsEpubBubbles": false,
+                "containsImageBubbles": false
+              },
+              "imageLinks": {
+                "smallThumbnail": "http://books.google.com/books/content?id=X7J1FvRrpPoC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+                "thumbnail": "http://books.google.com/books/content?id=X7J1FvRrpPoC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+              },
+              "language": "en",
+              "previewLink": "http://books.google.com/books?id=X7J1FvRrpPoC&printsec=frontcover&dq=thief+of+time&hl=&cd=1&source=gbs_api",
+              "infoLink": "https://play.google.com/store/books/details?id=X7J1FvRrpPoC&source=gbs_api",
+              "canonicalVolumeLink": "https://play.google.com/store/books/details?id=X7J1FvRrpPoC"
+            },
+            "saleInfo": {
+              "country": "US",
+              "saleability": "FOR_SALE",
+              "isEbook": true,
+              "listPrice": {
+                "amount": 6.49,
+                "currencyCode": "USD"
+              },
+              "retailPrice": {
+                "amount": 6.49,
+                "currencyCode": "USD"
+              },
+              "buyLink": "https://play.google.com/store/books/details?id=X7J1FvRrpPoC&rdid=book-X7J1FvRrpPoC&rdot=1&source=gbs_api",
+              "offers": [
+                {
+                  "finskyOfferType": 1,
+                  "listPrice": {
+                    "amountInMicros": 6490000,
+                    "currencyCode": "USD"
+                  },
+                  "retailPrice": {
+                    "amountInMicros": 6490000,
+                    "currencyCode": "USD"
+                  },
+                  "giftable": true
+                }
+              ]
+            },
+            "accessInfo": {
+              "country": "US",
+              "viewability": "PARTIAL",
+              "embeddable": true,
+              "publicDomain": false,
+              "textToSpeechPermission": "ALLOWED_FOR_ACCESSIBILITY",
+              "epub": {
+                "isAvailable": true,
+                "acsTokenLink": "http://books.google.com/books/download/Thief_of_Time-sample-epub.acsm?id=X7J1FvRrpPoC&format=epub&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+              },
+              "pdf": {
+                "isAvailable": false
+              },
+              "webReaderLink": "http://play.google.com/books/reader?id=X7J1FvRrpPoC&hl=&printsec=frontcover&source=gbs_api",
+              "accessViewStatus": "SAMPLE",
+              "quoteSharingAllowed": false
+            },
+            "searchInfo": {
+              "textSnippet": "Everybody wants more time, which is why on Discworld only the experts can manage it -- the venerable Monks of History who store it and pump it from where it&#39;s wasted, like underwater (how much time does a codfish really need?), to places ..."
+            }
+          },
+          {
+            "kind": "books#volume",
+            "id": "lS7ipesDYFUC",
+            "etag": "JmkvWW/XAA8",
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/lS7ipesDYFUC",
+            "volumeInfo": {
+              "title": "Doomsday Book",
+              "subtitle": "A Novel",
+              "authors": [
+                "Connie Willis"
+              ],
+              "publisher": "Spectra",
+              "publishedDate": "2011-01-05",
+              "description": "Five years in the writing by one of science fiction's most honored authors, Doomsday Book is a storytelling triumph. Connie Willis draws upon her understanding of the universalities of human nature to explore the ageless issues of evil, suffering and the indomitable will of the human spirit. For Kivrin, preparing an on-site study of one of the deadliest eras in humanity's history was as simple as receiving inoculations against the diseases of the fourteenth century and inventing an alibi for a woman traveling alone. For her instructors in the twenty-first century, it meant painstaking calculations and careful monitoring of the rendezvous location where Kivrin would be received. But a crisis strangely linking past and future strands Kivrin in a bygone age as her fellows try desperately to rescue her. In a time of superstition and fear, Kivrin—barely of age herself—finds she has become an unlikely angel of hope during one of history's darkest hours. Praise for Doomsday Book “A stunning novel that encompasses both suffering and hope. . . . The best work yet from one of science fiction’s best writers.”—The Denver Post “Splendid work—brutal, gripping and genuinely harrowing, the product of diligent research, fine writing and well-honed instincts, that should appeal far beyond the normal science-fiction constituency.”—Kirkus Reviews (starred review) “The world of 1348 burns in the mind’s eye, and every character alive that year is a fully recognized being. . . . It becomes possible to feel . . . that Connie Willis did, in fact, over the five years Doomsday Book took her to write, open a window to another world, and that she saw something there.”—The Washington Post Book World",
+              "industryIdentifiers": [
+                {
+                  "type": "ISBN_13",
+                  "identifier": "9780307784445"
+                },
+                {
+                  "type": "ISBN_10",
+                  "identifier": "0307784444"
+                }
+              ],
+              "readingModes": {
+                "text": true,
+                "image": false
+              },
+              "pageCount": 592,
+              "printType": "BOOK",
+              "categories": [
+                "Fiction"
+              ],
+              "averageRating": 3.5,
+              "ratingsCount": 199,
+              "maturityRating": "NOT_MATURE",
+              "allowAnonLogging": true,
+              "contentVersion": "0.5.4.0.preview.2",
+              "panelizationSummary": {
+                "containsEpubBubbles": false,
+                "containsImageBubbles": false
+              },
+              "imageLinks": {
+                "smallThumbnail": "http://books.google.com/books/content?id=lS7ipesDYFUC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+                "thumbnail": "http://books.google.com/books/content?id=lS7ipesDYFUC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+              },
+              "language": "en",
+              "previewLink": "http://books.google.com/books?id=lS7ipesDYFUC&printsec=frontcover&dq=doomsday+book&hl=&cd=1&source=gbs_api",
+              "infoLink": "https://play.google.com/store/books/details?id=lS7ipesDYFUC&source=gbs_api",
+              "canonicalVolumeLink": "https://play.google.com/store/books/details?id=lS7ipesDYFUC"
+            },
+            "saleInfo": {
+              "country": "US",
+              "saleability": "FOR_SALE",
+              "isEbook": true,
+              "listPrice": {
+                "amount": 8.99,
+                "currencyCode": "USD"
+              },
+              "retailPrice": {
+                "amount": 8.99,
+                "currencyCode": "USD"
+              },
+              "buyLink": "https://play.google.com/store/books/details?id=lS7ipesDYFUC&rdid=book-lS7ipesDYFUC&rdot=1&source=gbs_api",
+              "offers": [
+                {
+                  "finskyOfferType": 1,
+                  "listPrice": {
+                    "amountInMicros": 8990000,
+                    "currencyCode": "USD"
+                  },
+                  "retailPrice": {
+                    "amountInMicros": 8990000,
+                    "currencyCode": "USD"
+                  },
+                  "giftable": true
+                }
+              ]
+            },
+            "accessInfo": {
+              "country": "US",
+              "viewability": "PARTIAL",
+              "embeddable": true,
+              "publicDomain": false,
+              "textToSpeechPermission": "ALLOWED_FOR_ACCESSIBILITY",
+              "epub": {
+                "isAvailable": true,
+                "acsTokenLink": "http://books.google.com/books/download/Doomsday_Book-sample-epub.acsm?id=lS7ipesDYFUC&format=epub&output=acs4_fulfillment_token&dl_type=sample&source=gbs_api"
+              },
+              "pdf": {
+                "isAvailable": false
+              },
+              "webReaderLink": "http://play.google.com/books/reader?id=lS7ipesDYFUC&hl=&printsec=frontcover&source=gbs_api",
+              "accessViewStatus": "SAMPLE",
+              "quoteSharingAllowed": false
+            },
+            "searchInfo": {
+              "textSnippet": ". The best work yet from one of science fiction’s best writers.”—The Denver Post “Splendid work—brutal, gripping and genuinely harrowing, the product of diligent research, fine writing and well-honed instincts, that should appeal ..."
+            }
+          },
+          {
+            "kind": "books#volume",
+            "id": "PKnI7BGANMIC",
+            "etag": "Hr2rTP8A1Xo",
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/PKnI7BGANMIC",
+            "volumeInfo": {
+              "title": "The Book of Three",
+              "authors": [
+                "Lloyd Alexander"
+              ],
+              "publisher": "Macmillan",
+              "publishedDate": "2006-05-16",
+              "description": "Taran, Assistant Pig-Keeper to a famous oracular sow, sets out on a hazardous mission to save Prydain from the forces of evil.",
+              "industryIdentifiers": [
+                {
+                  "type": "ISBN_10",
+                  "identifier": "0805080481"
+                },
+                {
+                  "type": "ISBN_13",
+                  "identifier": "9780805080483"
+                }
+              ],
+              "readingModes": {
+                "text": false,
+                "image": false
+              },
+              "pageCount": 190,
+              "printType": "BOOK",
+              "categories": [
+                "Juvenile Fiction"
+              ],
+              "averageRating": 4,
+              "ratingsCount": 10,
+              "maturityRating": "NOT_MATURE",
+              "allowAnonLogging": false,
+              "contentVersion": "2.2.1.0.preview.0",
+              "panelizationSummary": {
+                "containsEpubBubbles": false,
+                "containsImageBubbles": false
+              },
+              "imageLinks": {
+                "smallThumbnail": "http://books.google.com/books/content?id=PKnI7BGANMIC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+                "thumbnail": "http://books.google.com/books/content?id=PKnI7BGANMIC&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+              },
+              "language": "en",
+              "previewLink": "http://books.google.com/books?id=PKnI7BGANMIC&printsec=frontcover&dq=book+of+three&hl=&cd=1&source=gbs_api",
+              "infoLink": "http://books.google.com/books?id=PKnI7BGANMIC&dq=book+of+three&hl=&source=gbs_api",
+              "canonicalVolumeLink": "https://books.google.com/books/about/The_Book_of_Three.html?hl=&id=PKnI7BGANMIC"
+            },
+            "saleInfo": {
+              "country": "US",
+              "saleability": "NOT_FOR_SALE",
+              "isEbook": false
+            },
+            "accessInfo": {
+              "country": "US",
+              "viewability": "PARTIAL",
+              "embeddable": true,
+              "publicDomain": false,
+              "textToSpeechPermission": "ALLOWED",
+              "epub": {
+                "isAvailable": false
+              },
+              "pdf": {
+                "isAvailable": false
+              },
+              "webReaderLink": "http://play.google.com/books/reader?id=PKnI7BGANMIC&hl=&printsec=frontcover&source=gbs_api",
+              "accessViewStatus": "SAMPLE",
+              "quoteSharingAllowed": false
+            },
+            "searchInfo": {
+              "textSnippet": "Taran, Assistant Pig-Keeper to a famous oracular sow, sets out on a hazardous mission to save Prydain from the forces of evil."
+            }
+          },
+          {
+            "kind": "books#volume",
+            "id": "HpTuAAAAMAAJ",
+            "etag": "qD9VxXHwdWo",
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/HpTuAAAAMAAJ",
+            "volumeInfo": {
+              "title": "Teaching Introductory Physics",
+              "authors": [
+                "Arnold B. Arons",
+                "Arons Arnolds B",
+                "B. Arnold Arons"
+              ],
+              "publisher": "John Wiley & Sons Incorporated",
+              "publishedDate": "1997",
+              "description": "This book is an invaluable resource for physics teachers. It contains an updated version of the author's A Guide to Introductory Physics Teaching (1990), Homework and Test Questions (1994), and a previously unpublished monograph \"Introduction to Classical Conservation Laws\".",
+              "industryIdentifiers": [
+                {
+                  "type": "OTHER",
+                  "identifier": "UOM:39015061189463"
+                }
+              ],
+              "readingModes": {
+                "text": false,
+                "image": false
+              },
+              "pageCount": 816,
+              "printType": "BOOK",
+              "categories": [
+                "Science"
+              ],
+              "averageRating": 5,
+              "ratingsCount": 1,
+              "maturityRating": "NOT_MATURE",
+              "allowAnonLogging": false,
+              "contentVersion": "1.1.2.0.preview.0",
+              "panelizationSummary": {
+                "containsEpubBubbles": false,
+                "containsImageBubbles": false
+              },
+              "imageLinks": {
+                "smallThumbnail": "http://books.google.com/books/content?id=HpTuAAAAMAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+                "thumbnail": "http://books.google.com/books/content?id=HpTuAAAAMAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+              },
+              "language": "en",
+              "previewLink": "http://books.google.com/books?id=HpTuAAAAMAAJ&q=teaching+introductory+physics&dq=teaching+introductory+physics&hl=&cd=1&source=gbs_api",
+              "infoLink": "http://books.google.com/books?id=HpTuAAAAMAAJ&dq=teaching+introductory+physics&hl=&source=gbs_api",
+              "canonicalVolumeLink": "https://books.google.com/books/about/Teaching_Introductory_Physics.html?hl=&id=HpTuAAAAMAAJ"
+            },
+            "saleInfo": {
+              "country": "US",
+              "saleability": "NOT_FOR_SALE",
+              "isEbook": false
+            },
+            "accessInfo": {
+              "country": "US",
+              "viewability": "NO_PAGES",
+              "embeddable": false,
+              "publicDomain": false,
+              "textToSpeechPermission": "ALLOWED",
+              "epub": {
+                "isAvailable": false
+              },
+              "pdf": {
+                "isAvailable": false
+              },
+              "webReaderLink": "http://play.google.com/books/reader?id=HpTuAAAAMAAJ&hl=&printsec=frontcover&source=gbs_api",
+              "accessViewStatus": "NONE",
+              "quoteSharingAllowed": false
+            },
+            "searchInfo": {
+              "textSnippet": "This book is an invaluable resource for physics teachers."
+            }
+          },
+          {
+            "kind": "books#volume",
+            "id": "eXaQDwAAQBAJ",
+            "etag": "Npvqwflx0TM",
+            "selfLink": "https://www.googleapis.com/books/v1/volumes/eXaQDwAAQBAJ",
+            "volumeInfo": {
+              "title": "Riot Baby",
+              "authors": [
+                "Tochi Onyebuchi"
+              ],
+              "publisher": "Tor.com",
+              "publishedDate": "2020-01-21",
+              "description": "\"Riot Baby bursts at the seams of story with so much fire, passion and power that in the end it turns what we call a narrative into something different altogether.\"—Marlon James Ella has a Thing. She sees a classmate grow up to become a caring nurse. A neighbor's son murdered in a drive-by shooting. Things that haven't happened yet. Kev, born while Los Angeles burned around them, wants to protect his sister from a power that could destroy her. But when Kev is incarcerated, Ella must decide what it means to watch her brother suffer while holding the ability to wreck cities in her hands. Rooted in the hope that can live in anger, Riot Baby is as much an intimate family story as a global dystopian narrative. It burns fearlessly toward revolution and has quietly devastating things to say about love, fury, and the black American experience. Ella and Kev are both shockingly human and immeasurably powerful. Their childhoods are defined and destroyed by racism. Their futures might alter the world. “[Tochi] Onyebuchi has woven a story as uplifting as it is heartbreaking, an epic ode to the future and past, tiny acts of resistance, love, and the wild unstoppable sweep of revolution.”—Daniel José Older At the Publisher's request, this title is being sold without Digital Rights Management Software (DRM) applied.",
+              "industryIdentifiers": [
+                {
+                  "type": "ISBN_13",
+                  "identifier": "9781250214768"
+                },
+                {
+                  "type": "ISBN_10",
+                  "identifier": "1250214769"
+                }
+              ],
+              "readingModes": {
+                "text": true,
+                "image": false
+              },
+              "pageCount": 176,
+              "printType": "BOOK",
+              "categories": [
+                "Fiction"
+              ],
+              "averageRating": 4,
+              "ratingsCount": 9,
+              "maturityRating": "NOT_MATURE",
+              "allowAnonLogging": true,
+              "contentVersion": "1.2.2.0.preview.2",
+              "panelizationSummary": {
+                "containsEpubBubbles": false,
+                "containsImageBubbles": false
+              },
+              "imageLinks": {
+                "smallThumbnail": "http://books.google.com/books/content?id=eXaQDwAAQBAJ&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api",
+                "thumbnail": "http://books.google.com/books/content?id=eXaQDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api"
+              },
+              "language": "en",
+              "previewLink": "http://books.google.com/books?id=eXaQDwAAQBAJ&pg=PP1&dq=riot+baby&hl=&cd=1&source=gbs_api",
+              "infoLink": "https://play.google.com/store/books/details?id=eXaQDwAAQBAJ&source=gbs_api",
+              "canonicalVolumeLink": "https://play.google.com/store/books/details?id=eXaQDwAAQBAJ"
+            },
+            "saleInfo": {
+              "country": "US",
+              "saleability": "FOR_SALE",
+              "isEbook": true,
+              "listPrice": {
+                "amount": 10.99,
+                "currencyCode": "USD"
+              },
+              "retailPrice": {
+                "amount": 10.99,
+                "currencyCode": "USD"
+              },
+              "buyLink": "https://play.google.com/store/books/details?id=eXaQDwAAQBAJ&rdid=book-eXaQDwAAQBAJ&rdot=1&source=gbs_api",
+              "offers": [
+                {
+                  "finskyOfferType": 1,
+                  "listPrice": {
+                    "amountInMicros": 10990000,
+                    "currencyCode": "USD"
+                  },
+                  "retailPrice": {
+                    "amountInMicros": 10990000,
+                    "currencyCode": "USD"
+                  },
+                  "giftable": true
+                }
+              ]
+            },
+            "accessInfo": {
+              "country": "US",
+              "viewability": "PARTIAL",
+              "embeddable": true,
+              "publicDomain": false,
+              "textToSpeechPermission": "ALLOWED",
+              "epub": {
+                "isAvailable": true
+              },
+              "pdf": {
+                "isAvailable": false
+              },
+              "webReaderLink": "http://play.google.com/books/reader?id=eXaQDwAAQBAJ&hl=&printsec=frontcover&source=gbs_api",
+              "accessViewStatus": "SAMPLE",
+              "quoteSharingAllowed": false
+            },
+            "searchInfo": {
+              "textSnippet": "Finalist for the NAACP Image Award for Best Outstanding Work of Literary Fiction A Most Anticipated in 2020 Pick for Book Riot | Buzzfeed | Paste | WBUR Named a Best of 2020 Pick for NPR | Wired | Book Riot | Publishers Weekly | NYPL | The ..."
+            }
           }
         ]
     }
