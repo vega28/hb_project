@@ -19,8 +19,19 @@ model.db.create_all()
 fake = Faker()
 
 # create test data:
+books_in_db = []
+movies_in_db = []
+tv_in_db = []
+
+# create types
 for new_type in ['book', 'movie', 'tv']:
     crud.create_media_type(new_type)
+
+# create genres:
+for new_genre in ['Science', 'Fiction', 'Nonfiction', 'Fantasy']:
+    crud.create_genre(new_genre)
+scifi = crud.create_genre(genre_name = 'Science Fiction')
+clifi = crud.create_genre(genre_name = 'Climate Fiction')
 
 ## Open Library API version:
 # with open('data/test_books.json') as f:
@@ -34,7 +45,7 @@ for new_type in ['book', 'movie', 'tv']:
 ## Google Books API version:
 with open('data/books.json') as f:
     book_data = json.loads(f.read())
-books_in_db = []
+
 for book in book_data['items']:
     # genres = book['categories'] # TODO: assign these now!
     new_book = crud.create_book(title=book['volumeInfo']['title'], 
@@ -45,12 +56,18 @@ for book in book_data['items']:
                                 pages=book['volumeInfo'].get('pageCount'),
                                 year=book['volumeInfo'].get('publishedDate')) 
                                 # isbn=book['volumeInfo']['industryIdentifiers']['ISBN_13']) # TODO: figure out how to unpack this.
+
+    if book['volumeInfo'].get('categories'):
+        for genre in book['volumeInfo']['categories']:
+            new_genre = crud.create_genre(genre.title())
+            crud.assign_genre(new_book, new_genre)
+
     books_in_db.append(new_book)
 
 ## IMDB API for movies:
 with open('data/movies.json') as f2:
     movie_data = json.loads(f2.read())
-movies_in_db = []
+
 for movie in movie_data['items']:
     new_movie = crud.create_movie(title=movie['title'], 
                                 type_id=2,
@@ -58,12 +75,18 @@ for movie in movie_data['items']:
                                 description=movie['plot'],
                                 length=movie['runtimeMins'],
                                 year=movie['year'])
+
+    if movie.get('genreList'):
+        for genre in movie['genreList']:
+            new_genre = crud.create_genre(genre['key'].title())
+            crud.assign_genre(new_movie, new_genre)
+
     movies_in_db.append(new_movie)
 
 ## IMDB API for TV:
 with open('data/tv.json') as f3:
     tv_data = json.loads(f3.read())
-tv_in_db = []
+
 for ep in tv_data['items']:
     new_ep = crud.create_tv_ep(title=ep['title'], 
                                 type_id=3,
@@ -97,7 +120,7 @@ sg1_ep1 = crud.create_tv_ep(title='Children of the Gods', type_id=3,
                             ep_length=92, 
                             season=1)
 
-sources = ['owned', 'library', 'amazon','other']
+sources = ['owned', 'library', 'amazon', 'other']
 
 # create test users:
 bob = crud.create_user(fname='bob', lname='bobson', email='bob@bob.com', pwd='bob', profile_pic='https://images.gr-assets.com/authors/1406058780p8/3089156.jpg')
@@ -138,12 +161,7 @@ for user in test_users: # FIXME: currently user can have duplicate media items.
                                         source=choice(sources))
 
 
-# create & assign genres:
-for new_genre in ['Science', 'Fiction', 'Nonfiction', 'Fantasy']:
-    crud.create_genre(new_genre)
-scifi = crud.create_genre(genre_name = 'Science Fiction')
-clifi = crud.create_genre(genre_name = 'Climate Fiction')
-
+# assign genres:
 # crud.assign_genre(cosmos, sci)
 crud.assign_genre(contact, scifi)
 crud.assign_genre(mononoke, clifi)

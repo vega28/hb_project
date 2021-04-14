@@ -223,7 +223,8 @@ def review_new_media_item():
                     'author': author,
                     'cover': request.args.get(list_num+'-cover'),
                     'description': request.args.get(list_num+'-description'),
-                    'pages': request.args.get(list_num+'-pageCount')}
+                    'pages': request.args.get(list_num+'-pageCount'),
+                    'genres': request.args.get(list_num+'-genres')}
 
         item = crud.create_book(title=item_data['title'], 
                                 type_id=1, # FIXME: currently hardcoded 
@@ -234,6 +235,11 @@ def review_new_media_item():
                                 # edition=None, 
                                 pages=item_data.get('pages')) 
                                 # isbn=None)
+
+        if item_data.get('genres'):
+            for genre in item_data['genres']:
+                new_genre = crud.create_genre(genre.title())
+                crud.assign_genre(item, new_genre)
 
         # return render_template('search_results.html', list_num=list_num, item_data=item_data) ### temp debugging route - will go to review page when item is added to db correctly!
 

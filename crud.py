@@ -263,7 +263,7 @@ def create_genre(genre_name):
     if check_genre: # genre already exists!
         return check_genre
     else:
-        new_genre = Genre(genre_name=genre_name)
+        new_genre = Genre(genre_name=genre_name.title())
 
         db.session.add(new_genre)
         db.session.commit()   
@@ -350,10 +350,10 @@ def get_item_by_user_media_id(user_id, user_media_id):
     return UserMedia.query.join(User).filter(User.user_id==user_id).join(Item).filter(UserMedia.user_media_id==user_media_id).first().item
 
 
-def create_collection(user, collection_name):
+def create_collection(user, collection_name, public=True):
     """ Create and return a new collection. """
 
-    collection = Collection(user_id=user.user_id, name=collection_name)
+    collection = Collection(user_id=user.user_id, name=collection_name, public=public)
 
     db.session.add(collection)
     db.session.commit()
@@ -387,6 +387,20 @@ def assign_to_collection(user, media_item, collection):
     db.session.commit()   
 
     return association
+
+
+def toggle_collection_public(collection_id):
+    """ Toggle whether a collection is public or not. """
+
+    collection = get_collection_by_id(collection_id)
+    if collection.public:
+        collection.public = False
+        new_public_status = 'private'
+    else:
+        collection.public = True
+        new_public_status = 'public'
+
+    return f'The collection ${collection.name} is now ${new_public_status}'
 
 
 def create_user_update(user, media_item, date=None, start_bool=False, end_bool=False, update_value=None, num_times_through=None, dnf=None):

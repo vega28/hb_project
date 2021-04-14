@@ -201,6 +201,7 @@ class Collection(db.Model):
                         db.ForeignKey('users.user_id'), 
                         nullable=False) # foreign key linking to users
     name = db.Column(db.String(30), nullable=False)
+    public = db.Column(db.Boolean, nullable=False)
 
     user = db.relationship('User', backref='collections')
     # user_media = a list of UserMedia objects that are in this collection

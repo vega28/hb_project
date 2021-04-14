@@ -7,8 +7,11 @@
   <ul>
     {% for item in all_media %} 
       <li><a href="/media/{{ item.item_id }}">{{ item.title }}</a></li>
+      MY GENRES ARE {% for genre in item.genres %}{{ genre.genre_name }} {% endfor %} <!-- debugging -->
     {% endfor %}
   </ul>
+
   <img src="http://25.media.tumblr.com/368c39479619dc392ce951edfd1e324b/tumblr_mzty556vVY1qekx3go6_250.gif">
+
   <p><a href="/">Return to homepage.</a></p>
 {% endblock %}

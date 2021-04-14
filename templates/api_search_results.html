@@ -33,6 +33,8 @@
         value="{{ volume['volumeInfo'].get('description') }}">
       <input type="hidden" name="{{ loop.index }}-publishedDate" 
         value="{{ volume['volumeInfo'].get('publishedDate') }}">
+      <input type="hidden" name="{{ loop.index }}-genres" 
+        value="{{ volume['volumeInfo'].get('categories') }}">
     </div>
     {% endfor %}
   </form>
