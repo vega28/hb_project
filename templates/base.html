@@ -16,6 +16,14 @@
       <a class="nav-link active" href="/">Home</a>
       <a class="nav-link" href="/media">View all media</a>
       <a class="nav-link" href="/users">View all users</a>
+      {% if session.get('user_id') %} 
+        You are logged in as {{ session['user_name'] }}.
+        <a class="nav-link" href="/log_out">Log Out</a>
+      {% endif %} 
+      {% if session.get('user_id') == None %} 
+        <a class="nav-link" href="/log_in">Log In</a>
+        <a class="nav-link" href="/sign_up">Sign Up</a>
+      {% endif %}
     </nav>  
     {% block body %}{% endblock %}
   </body>

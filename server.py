@@ -72,7 +72,7 @@ def user_details(user_id):
 @app.route('/log_in')
 def show_login_page():
     """ Show the log-in page for an existing user. """
-    if session.get('user_id',None):
+    if session.get('user_id', None):
         flash(f'You are already logged in!')
         return redirect('/')
     else:
@@ -91,6 +91,7 @@ def verify_login():
     if user and user.pwd == pwd:
         flash(f'Welcome back, {user.fname}! You are now logged in.')
         session['user_id'] = user.user_id
+        session['user_name'] = user.fname
     else:
         flash(f'User email and/or password is incorrect. Please try again.')
 

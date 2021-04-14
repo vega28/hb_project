@@ -6,10 +6,6 @@
   <h1>📚 Welcome, {{ user.fname }}! 📚 </h1>
   <img src="{{ user.profile_pic }}">
 
-  <ul>
-    <li><a href="/log_out">Log Out</a></li>
-    <li><a href="/search">Search for new items</a></li>
-  </ul>
 
   <div id="collection-details"></div>
 
@@ -32,10 +28,13 @@
 
   <div>
     <h3>Your media:</h3>
-    {% for user_item in user.media %} 
-      <img src="{{ user_item.item.cover }}" class="user-media-id {{ user_item.user_media_id }}" 
-      id="{{ user_item.user_media_id }}" value="{{ user_item.user_media_id }}">
-    {% endfor %}
+    <div><a href="/search">Search for new items</a></div>
+    <div>
+      {% for user_item in user.media %} 
+        <img src="{{ user_item.item.cover }}" class="user-media-id {{ user_item.user_media_id }}" 
+        id="{{ user_item.user_media_id }}" value="{{ user_item.user_media_id }}">
+      {% endfor %}
+    </div>
   </div>
 
   <script src="/static/js/manage.js"></script>
