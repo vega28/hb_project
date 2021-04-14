@@ -103,6 +103,7 @@ def log_out():
     """ Log user out of session. """
 
     del session['user_id']
+    del session['user_name']
     flash('You have been logged out.')
 
     return redirect('/')
@@ -166,7 +167,7 @@ def process_search():
     session['search_query'] = {'media_type': media_type,
                                 'title': request.args.get('title'),
                                 'year': request.args.get('year'),
-                                'main_genre': request.args.get('genre')}
+                                'genre': request.args.get('genre')}
     if media_type == 'book':
         session['search_query']['author'] = request.args.get('author')
     elif media_type == 'movie':
