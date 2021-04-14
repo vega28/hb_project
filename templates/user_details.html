@@ -16,14 +16,14 @@
   </div>
   
   <div>
-    <h3>{{ user.fname }}'s public collections:</h3><!-- TODO: Make a boolean in collections that says public or not! -->
+    <h3>{{ user.fname }}'s public collections:</h3>
     {% for collection in user.collections %} 
-      <!-- {% if collection.public %}  -->
+      {% if collection.public %} 
         <h5>{{ collection.name }}</h5>
         {% for item in collection.user_media %}
           <img src="{{ item.item.cover }}">
         {% endfor %}
-      <!-- {% endif %}  -->
+      {% endif %} 
     {% endfor %} 
   <div>
 
@@ -34,7 +34,5 @@
       <img src="{{ item.item.cover }}">
     {% endfor %}
   </div>
-
-  <p><a href="/users">Return to list of users.</a></p>
 
 {% endblock %}

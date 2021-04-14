@@ -82,6 +82,9 @@ $('.collection').on('click', (evt) => {
 })
 
 
+// TODO: add button to toggle public status of each collection.
+
+
 // When user clicks on add collection button, ask for a name and then make collection
 $('#create-collection').on('click', () => {
     $('#new-collection').html('<form id="new-collection-form">New collection name: <input type="text" id="new-collection-name"><input type="submit" id="submit-new-collection"></form>');
