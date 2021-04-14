@@ -22,7 +22,7 @@
       <p>Main genre <select id="genre" name="genre">
         <option class="choice" value="">-- none of these --</option>
         {% for genre in genres %} 
-          <option class="choice" value="{{ genre.genre_id }}">
+          <option class="choice" name="genre" value="{{ genre.genre_name }}">
             {{ genre.genre_name }}
           </option>
         {% endfor %} 
@@ -31,13 +31,13 @@
     </section>
 
     <section class="type-of-media choice" id="its-a-book" style="display: none">
-      <p>Author <input type="text" name="author"></p>
+      <p>Author <input class="media-specific choice" type="text" id="author" name="author"></p>
     </section>
     <section class="type-of-media choice" id="its-a-movie" style="display: none">
-      <p>Runtime (minutes) <input type="number" name="length"></p>
+      <p>Runtime (minutes) <input class="media-specific choice" type="number" id="length" name="length"></p>
     </section>
     <section class="type-of-media choice" id="its-a-tv-ep" style="display: none">
-      <p>Season <input type="text" name="season"></p>
+      <p>Season <input class="media-specific choice" type="text" id="season" name="season"></p>
     </section>
     <section class="type-of-media choice" id="its-an-item" style="display: none">
       <!-- <p>Type of media <input type="text" name="media_type"></p> -->

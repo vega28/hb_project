@@ -10,7 +10,7 @@
     Please select an item:  
     {% for volume in data['items'] %} 
     <div>
-      <input type="radio" name="list_num" value="{{ loop.index }}" id="{{ loop.index }}">
+      <input type="radio" name="list_num" value="{{ loop.index }}" id="{{ loop.index }}" required>
       <label for="{{ loop.index }}">
         <a href="{{ volume['volumeInfo'].get('canonicalVolumeLink') }}">
               {{ volume['volumeInfo']['title'] }} 

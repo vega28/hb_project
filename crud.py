@@ -223,7 +223,7 @@ def search_db(query_terms):
     
     new_query = Item.query
     if query_terms.get('title'):
-        new_query = new_query.filter(Item.title == query_terms['title'])
+        new_query = new_query.filter(Item.title.like(f"%{query_terms['title']}%"))
     if query_terms.get('year'):
         new_query = new_query.filter(Item.year == query_terms['year'])
     if query_terms.get('genre'):
@@ -238,7 +238,7 @@ def search_db(query_terms):
     if query_terms.get('media_type') == 'book':
         new_query = new_query.join(Book)
         if query_terms.get('author'):
-            new_query = new_query.filter(Book.author == query_terms['author'])
+            new_query = new_query.filter(Book.author.like(f"%{query_terms['author']}%"))
     elif query_terms.get('media_type') == 'movie':
         new_query = new_query.join(Movie)
         if query_terms.get('length'):
@@ -258,6 +258,8 @@ def create_genre(genre_name):
         <Genre genre_name=Climate Fiction>
     """
 
+    if genre_name == 'Sci-Fi' or genre_name == 'Sci-fi':
+        genre_name = 'Science Fiction'
     check_genre = Genre.query.filter(Genre.genre_name==genre_name).first()
 
     if check_genre: # genre already exists!

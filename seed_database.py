@@ -28,7 +28,7 @@ for new_type in ['book', 'movie', 'tv']:
     crud.create_media_type(new_type)
 
 # create genres:
-for new_genre in ['Science', 'Fiction', 'Nonfiction', 'Fantasy']:
+for new_genre in ['Science', 'Fiction', 'Nonfiction']:
     crud.create_genre(new_genre)
 scifi = crud.create_genre(genre_name = 'Science Fiction')
 clifi = crud.create_genre(genre_name = 'Climate Fiction')

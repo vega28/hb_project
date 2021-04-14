@@ -154,12 +154,13 @@ def search_db_for_media_item():
 @app.route('/process_search')
 def process_search():
     """ Search database for the specified media item.
-        Show ALL results matching any ONE keyword. 
+        Show results matching ALL keywords.
         Let user select the correct item, if it exists.
         If not in the database, redirect to /add_media route. """
 
     if session.get('search_query'):
-        del session['search_query']
+        del session['search_query'] # clear all fields
+
     media_type = request.args.get('media_type')
     session['search_query'] = {'media_type': media_type,
                                 'title': request.args.get('title'),
@@ -191,7 +192,7 @@ def review_media_item():
     """ Ask for user's review and rating of new media item. """
 
     if session.get('item_to_add'):
-        del session['item_to_add']
+        del session['item_to_add'] # clear all fields
     item = crud.get_item_by_id(request.args.get('chosen-item'))
 
     session['item_to_add'] = {'title': item.title, 
