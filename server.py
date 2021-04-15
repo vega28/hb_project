@@ -18,7 +18,7 @@ IMDB_API_KEY = os.environ['IMDB_API_KEY']
 
 
 #----------------------------------------------------------------------#
-# Homepages                                                            #
+# *** Homepages                                                        #
 #----------------------------------------------------------------------#
 
 @app.route('/')
@@ -36,7 +36,7 @@ def show_homepage():
 
 
 #----------------------------------------------------------------------#
-# Routes Visible Without Logging In                                    #
+# *** Routes Visible Without Logging In                                #
 #----------------------------------------------------------------------#
 
 # browse all media route (by genre, media type, etc.) # TODO: filter with JS?
@@ -77,7 +77,7 @@ def user_details(user_id):
 
 
 #----------------------------------------------------------------------#
-# Routes Related to User Login Status                                  #
+# *** Routes Related to User Login Status                              #
 #----------------------------------------------------------------------#
 
 @app.route('/log_in')
@@ -155,7 +155,7 @@ def register_user():
 
 
 #----------------------------------------------------------------------#
-# Routes Related to Media Search                                       #
+# *** Routes Related to Media Search                                   #
 #----------------------------------------------------------------------#
 
 # add media item (check if in db first, then make get request to appropriate API)
@@ -326,7 +326,7 @@ def search_api_for_media_item():
 
 
 #----------------------------------------------------------------------#
-# Routes Related to User's Media Management                            #
+# *** Routes Related to User's Media Management                        #
 #----------------------------------------------------------------------#
 
 @app.route('/view_item', methods=['POST'])
@@ -383,7 +383,7 @@ def add_item_to_collection():
 
 
 #----------------------------------------------------------------------#
-# Routes Related to User's Collection Management                       #
+# *** Routes Related to User's Collection Management                   #
 #----------------------------------------------------------------------#
 
 @app.route('/view_collection', methods=['POST'])

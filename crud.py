@@ -5,7 +5,7 @@ from datetime import datetime
 
 
 #----------------------------------------------------------------------#
-# User Helper Functions                                                #
+# *** User Helper Functions                                            #
 #----------------------------------------------------------------------#
 
 def create_user(fname, lname, email, pwd, profile_pic=None):
@@ -63,7 +63,7 @@ def get_user_by_email(email):
 
 
 #----------------------------------------------------------------------#
-# Media Helper Functions                                               #
+# *** Media Helper Functions                                           #
 #----------------------------------------------------------------------#
 
 def create_media_type(type_name):
@@ -195,7 +195,7 @@ def create_item(title, type_id, cover=None, description=None, year=None):
 
 
 #----------------------------------------------------------------------#
-# Media Search Helper Functions                                        #
+# *** Media Search Helper Functions                                    #
 #----------------------------------------------------------------------#
 
 def get_all_media():
@@ -268,7 +268,7 @@ def search_db(query_terms):
 
 
 #----------------------------------------------------------------------#
-# Genre Helper Functions                                               #
+# *** Genre Helper Functions                                           #
 #----------------------------------------------------------------------#
 
 def create_genre(genre_name):
@@ -322,7 +322,7 @@ def get_by_genre(genre_name, media_type=None):
 
 
 #----------------------------------------------------------------------#
-# User's Library Helper Functions                                      #
+# *** User's Library Helper Functions                                  #
 #----------------------------------------------------------------------#
 
 def store_media_in_user_library(user, media_item, rating, review, source):
@@ -384,7 +384,7 @@ def get_user_media_id(user, media_item):
 
 
 #----------------------------------------------------------------------#
-# Collections Helper Functions                                         #
+# *** Collections Helper Functions                                     #
 #----------------------------------------------------------------------#
 
 def create_collection(user, collection_name, public=True):
@@ -434,7 +434,7 @@ def toggle_collection_public(collection_id):
 
 
 #----------------------------------------------------------------------#
-# User's Updates Helper Functions                                      #
+# *** User's Updates Helper Functions                                  #
 #----------------------------------------------------------------------#
 
 def create_user_update(user, media_item, date=None, start_bool=False, end_bool=False, update_value=None, num_times_through=None, dnf=None):

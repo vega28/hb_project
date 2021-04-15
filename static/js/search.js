@@ -1,10 +1,10 @@
 "use strict";
 
 //--------------------------------------------------------------------//
-// DB Search Functions                                                //
+// *** DB Search Functions                                            //
 //--------------------------------------------------------------------//
 
-// Update DB Search form based on selected media type
+//* Update DB Search form based on selected media type
 
 $('#media_type').on('change', (evt) => {
     evt.preventDefault();
@@ -27,7 +27,7 @@ $('#media_type').on('change', (evt) => {
 })
 
 
-// Success function: show search results from database:
+//* Success function: show search results from database:
 
 function displayResults(results) {
     console.log(results)
@@ -38,7 +38,7 @@ function displayResults(results) {
 }
 
 
-// Display updated DB Search results based on user input (in real time!)
+//* Display updated DB Search results based on user input (in real time!)
 
 $('.choice').on('change', (evt) => {
     evt.preventDefault();

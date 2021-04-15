@@ -1,10 +1,10 @@
 "use strict";
 
 //--------------------------------------------------------------------//
-// Item Management Functions                                          //
+// *** Item Management Functions                                      //
 //--------------------------------------------------------------------//
 
-// When user clicks on a cover, open up the view_item part of the page
+//* When user clicks on a cover, open up the view_item part of the page
 //      allow user to add item to a collection
 // TODO: when item is added to collection, need to add manually to collection div!
 
@@ -45,7 +45,7 @@ $('.user-media-id').on('click', (evt) => {
 
 
 
-// When user clicks delete button, remove association between item and user (UserMedia object)
+//* When user clicks delete button, remove association between item and user (UserMedia object)
 
 $('#delete-from-library').on('click', () => {
     let id_to_del = $('#delete-from-library').val();
@@ -69,7 +69,7 @@ $('#edit-details').on('click', () => {
 })
 
 
-// When user clicks close button, close the expanded details (both collection and item)
+//* When user clicks close button, close the expanded details (both collection and item)
 
 $('.close-details').on('click', () => {
     $('#collection-details').html('');
@@ -78,7 +78,7 @@ $('.close-details').on('click', () => {
 
 
 //--------------------------------------------------------------------//
-// Collection Management Functions                                    //
+// *** Collection Management Functions                                //
 //--------------------------------------------------------------------//
 
 // When user clicks on a collections div, open up the view_collection part of the page
@@ -98,7 +98,7 @@ $('.collection').on('click', (evt) => {
 // TODO: add button to toggle public status of each collection.
 
 
-// When user clicks on add collection button, ask for a name and then make collection
+//* When user clicks on add collection button, ask for a name and then make collection
 
 $('#create-collection').on('click', () => {
     $('#new-collection').html('<form id="new-collection-form">New collection name: <input type="text" id="new-collection-name"><input type="submit" id="submit-new-collection"></form>');
@@ -116,7 +116,7 @@ $('#create-collection').on('click', () => {
 })
 
 
-// When user clicks delete button, delete collection
+//* When user clicks delete button, delete collection
 
 $('#delete-collection').on('click', () => {
     let id_to_del = $('#delete-collection').val();

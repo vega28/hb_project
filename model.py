@@ -6,7 +6,7 @@ db = SQLAlchemy()
 
 
 #----------------------------------------------------------------------#
-# Media-related Models                                                 #
+# *** Media-related Models                                             #
 #----------------------------------------------------------------------#
 
 class Item(db.Model):
@@ -24,12 +24,13 @@ class Item(db.Model):
     year = db.Column(db.Integer) # release year
     created_at = db.Column(db.DateTime, nullable=False) 
 
-    ## updates = a list of UserUpdates about this media item
+    #* updates = a list of UserUpdates about this media item
     media_type = db.relationship('Type', backref='items') # returns media_type object
     genres = db.relationship('Genre', 
                             secondary='media_genres', 
                             backref='items')
-    ## users = db.relationship('User', secondary='user_media', backref='items') # TODO: check these relationships...
+    #* users = db.relationship('User', secondary='user_media', backref='items') 
+    # TODO: check these relationships...
 
     def __repr__(self):
         return f'<Media Item title={self.title}>'
@@ -45,7 +46,7 @@ class Type(db.Model):
     media_type = db.Column(db.String(20), nullable=False)
     # TODO: make name of media_type the primary key, change foreign key in Item class
 
-    ## items = a list of media Item objects of the specified media_type 
+    #* items = a list of media Item objects of the specified media_type 
 
     def __repr__(self):
         return f'<Type media_type={self.media_type} type_id={self.type_id}>'
@@ -60,7 +61,7 @@ class Genre(db.Model):
     genre_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     genre_name = db.Column(db.String(30), unique=True, nullable=False)
 
-    ## items = a list of media items of the specified genre 
+    #* items = a list of media items of the specified genre 
 
     def __repr__(self):
         return f'<Genre genre_name={self.genre_name}>'
@@ -140,35 +141,35 @@ class TVEpisode(Item): # NTH
         return f'<TVEpisode show_title={self.show_title} title={self.title}>'
 
 
-# class Comic(db.Model): # NTH
-#     """ A comic book. """
-#     __tablename__ = 'comics'
-#     # add attributes here
-#     # describe relationships here
-#     def __repr__(self):
-#         return f'<ClassName attribute={self.attribute}>'
+#// class Comic(db.Model): # NTH
+#//     """ A comic book. """
+#//     __tablename__ = 'comics'
+#//     # add attributes here
+#//     # describe relationships here
+#//     def __repr__(self):
+# //        return f'<ClassName attribute={self.attribute}>'
 
 
-# class Podcast(db.Model): # NTH
-#     """ A podcast. """
-#     __tablename__ = 'podcasts'
-#     # add attributes here
-#     # describe relationships here
-#     def __repr__(self):
-#         return f'<ClassName attribute={self.attribute}>'
+#// class Podcast(db.Model): # NTH
+#//     """ A podcast. """
+#//     __tablename__ = 'podcasts'
+#//     # add attributes here
+#//     # describe relationships here
+#//     def __repr__(self):
+#//         return f'<ClassName attribute={self.attribute}>'
 
 
-# class Game(db.Model): # NTH
-#     """ A game. """
-#     __tablename__ = 'games'
-#     # add attributes here
-#     # describe relationships here
-#     def __repr__(self):
-#         return f'<ClassName attribute={self.attribute}>'
+#// class Game(db.Model): # NTH
+#//     """ A game. """
+#//     __tablename__ = 'games'
+#//     # add attributes here
+#//     # describe relationships here
+#//     def __repr__(self):
+#//         return f'<ClassName attribute={self.attribute}>'
 
 
 #----------------------------------------------------------------------#
-# User-related Models                                                  #
+# *** User-related Models                                              #
 #----------------------------------------------------------------------#
 
 class User(db.Model):
@@ -184,9 +185,9 @@ class User(db.Model):
     profile_pic = db.Column(db.Text) # link to image
     created_at = db.Column(db.DateTime, nullable=False) 
 
-    ## collections = a list of Collection objects specific to this user
-    ## media = a list of media Item objects specific to this user's library 
-    ## updates = a list of this user's updates
+    #* collections = a list of Collection objects specific to this user
+    #* media = a list of media Item objects specific to this user's library 
+    #* updates = a list of this user's updates
 
     def __repr__(self):
         return f'<User fname={self.fname} lname={self.lname}>'
@@ -208,7 +209,7 @@ class Collection(db.Model):
     created_at = db.Column(db.DateTime, nullable=False) 
 
     user = db.relationship('User', backref='collections')
-    ## user_media = a list of UserMedia objects that are in this collection
+    #* user_media = a list of UserMedia objects that are in this collection
 
     def __repr__(self):
         return f'<Collection name={self.name} user_id={self.user_id}>'
@@ -234,7 +235,7 @@ class CollectionUserMedia(db.Model):
 
 
 #----------------------------------------------------------------------#
-# Models Bridging Users & Media                                        #
+# *** Models Bridging Users & Media                                    #
 #----------------------------------------------------------------------#
 
 class UserMedia(db.Model):
@@ -292,7 +293,7 @@ class UserUpdate(db.Model):
 
 
 #----------------------------------------------------------------------#
-# Functions                                                            #
+# *** Functions                                                        #
 #----------------------------------------------------------------------#
 
 def connect_to_db(flask_app, db_uri='postgresql:///library', echo=True):
