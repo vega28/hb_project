@@ -4,30 +4,15 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-class User(db.Model):
-    """ A user of the app. """
 
-    __tablename__ = 'users'
-
-    user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    fname = db.Column(db.String(25), nullable=False)
-    lname = db.Column(db.String(25), nullable=False)
-    email = db.Column(db.String(40), nullable=False, unique=True) 
-    pwd = db.Column(db.String(25), nullable=False) # keep it secret, keep it safe!
-    profile_pic = db.Column(db.Text) # link to image
-
-    # collections = a list of Collection objects specific to this user
-    # media = a list of media Item objects specific to this user's library 
-    # updates = a list of this user's updates
-
-    def __repr__(self):
-        return f'<User fname={self.fname} lname={self.lname}>'
-
+#----------------------------------------------------------------------#
+# Media-related Models                                                 #
+#----------------------------------------------------------------------#
 
 class Item(db.Model):
     """ A media item of any type. """
 
-    __tablename__ = 'media'
+    __tablename__ = 'media' # TODO: make this items
 
     item_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
@@ -37,16 +22,18 @@ class Item(db.Model):
     cover = db.Column(db.Text) # link to image
     description = db.Column(db.Text)
     year = db.Column(db.Integer) # release year
+    created_at = db.Column(db.DateTime, nullable=False) 
 
-    # updates = a list of UserUpdates about this media item
+    ## updates = a list of UserUpdates about this media item
     media_type = db.relationship('Type', backref='items') # returns media_type object
     genres = db.relationship('Genre', 
                             secondary='media_genres', 
                             backref='items')
-    # users = db.relationship('User', secondary='user_media', backref='items') # TODO: check these relationships...
+    ## users = db.relationship('User', secondary='user_media', backref='items') # TODO: check these relationships...
 
     def __repr__(self):
         return f'<Media Item title={self.title}>'
+
 
 
 class Type(db.Model):
@@ -58,11 +45,10 @@ class Type(db.Model):
     media_type = db.Column(db.String(20), nullable=False)
     # TODO: make name of media_type the primary key, change foreign key in Item class
 
-    # items = a list of media Item objects of the specified media_type 
+    ## items = a list of media Item objects of the specified media_type 
 
     def __repr__(self):
         return f'<Type media_type={self.media_type} type_id={self.type_id}>'
-
 
 
 class Genre(db.Model):
@@ -70,15 +56,14 @@ class Genre(db.Model):
 
     __tablename__ = 'genres'
 
-    # TODO: make genre_id a string key (SCI, SCIFI, CLIFI, NF etc.)
+    # TODO: make genre_id a string key (SCI, SCIFI, NF etc.)
     genre_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     genre_name = db.Column(db.String(30), unique=True, nullable=False)
 
-    # items = a list of media items of the specified genre 
+    ## items = a list of media items of the specified genre 
 
     def __repr__(self):
         return f'<Genre genre_name={self.genre_name}>'
-
 
 
 class MediaGenre(db.Model):
@@ -100,13 +85,11 @@ class MediaGenre(db.Model):
         return f'<MediaGenre media_genre_id={self.media_genre_id}>'
 
 
-
 class Book(Item): 
     """ A book - subclassed from media Item. """
 
     __tablename__ = 'books'
 
-    # add attributes here
     book_id = db.Column(db.Integer, 
                         db.ForeignKey('media.item_id'), 
                         primary_key=True)
@@ -115,11 +98,11 @@ class Book(Item):
     pages = db.Column(db.Integer) # length in pages
     isbn = db.Column(db.Integer, unique=True) # check if there exists a specific format for ISBN in python?
 
-    # describe relationships here # TODONE: do these inherit from the parent class as well? YES.
+    # describe relationships here 
+    # TODONE: do these inherit from the parent class as well? YES.
 
     def __repr__(self):
         return f'<Book title={self.title} author={self.author}>' 
-
 
 
 class Movie(Item):
@@ -138,8 +121,7 @@ class Movie(Item):
         return f'<Movie title={self.title} year={self.year}>'
 
 
-
-class TVEpisode(Item):
+class TVEpisode(Item): # NTH
     """ An episode of a TV show - subclassed from media Item. """
 
     __tablename__ = 'tv'
@@ -158,7 +140,6 @@ class TVEpisode(Item):
         return f'<TVEpisode show_title={self.show_title} title={self.title}>'
 
 
-
 # class Comic(db.Model): # NTH
 #     """ A comic book. """
 #     __tablename__ = 'comics'
@@ -166,7 +147,6 @@ class TVEpisode(Item):
 #     # describe relationships here
 #     def __repr__(self):
 #         return f'<ClassName attribute={self.attribute}>'
-
 
 
 # class Podcast(db.Model): # NTH
@@ -178,7 +158,6 @@ class TVEpisode(Item):
 #         return f'<ClassName attribute={self.attribute}>'
 
 
-
 # class Game(db.Model): # NTH
 #     """ A game. """
 #     __tablename__ = 'games'
@@ -187,6 +166,30 @@ class TVEpisode(Item):
 #     def __repr__(self):
 #         return f'<ClassName attribute={self.attribute}>'
 
+
+#----------------------------------------------------------------------#
+# User-related Models                                                  #
+#----------------------------------------------------------------------#
+
+class User(db.Model):
+    """ A user of the app. """
+
+    __tablename__ = 'users'
+
+    user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    fname = db.Column(db.String(25), nullable=False)
+    lname = db.Column(db.String(25), nullable=False)
+    email = db.Column(db.String(40), nullable=False, unique=True) 
+    pwd = db.Column(db.String(25), nullable=False) # keep it secret, keep it safe!
+    profile_pic = db.Column(db.Text) # link to image
+    created_at = db.Column(db.DateTime, nullable=False) 
+
+    ## collections = a list of Collection objects specific to this user
+    ## media = a list of media Item objects specific to this user's library 
+    ## updates = a list of this user's updates
+
+    def __repr__(self):
+        return f'<User fname={self.fname} lname={self.lname}>'
 
 
 class Collection(db.Model):
@@ -202,13 +205,13 @@ class Collection(db.Model):
                         nullable=False) # foreign key linking to users
     name = db.Column(db.String(30), nullable=False)
     public = db.Column(db.Boolean, nullable=False)
+    created_at = db.Column(db.DateTime, nullable=False) 
 
     user = db.relationship('User', backref='collections')
-    # user_media = a list of UserMedia objects that are in this collection
+    ## user_media = a list of UserMedia objects that are in this collection
 
     def __repr__(self):
         return f'<Collection name={self.name} user_id={self.user_id}>'
-
 
 
 class CollectionUserMedia(db.Model):
@@ -230,6 +233,9 @@ class CollectionUserMedia(db.Model):
         return f'<CollectionUserMedia collections_user_media_id={self.collections_user_media_id}>'
 
 
+#----------------------------------------------------------------------#
+# Models Bridging Users & Media                                        #
+#----------------------------------------------------------------------#
 
 class UserMedia(db.Model):
     """ Middle table: media items specific to a user. """
@@ -245,7 +251,7 @@ class UserMedia(db.Model):
                         nullable=False) # foreign key linking to media
     rating = db.Column(db.Integer)
     review = db.Column(db.Text)
-    created_at = db.Column(db.DateTime, nullable=False) # check this - how to make it NOW?
+    created_at = db.Column(db.DateTime, nullable=False) 
     source = db.Column(db.String(30))
 
     user = db.relationship('User', backref='media')
@@ -256,7 +262,6 @@ class UserMedia(db.Model):
 
     def __repr__(self):
         return f'<UserMedia user_media_id={self.user_media_id}>'
-
 
 
 class UserUpdate(db.Model):
@@ -286,13 +291,9 @@ class UserUpdate(db.Model):
         return f'<UserUpdate update_id={self.update_id}>'
 
 
-
-
-
-
-
-
-
+#----------------------------------------------------------------------#
+# Functions                                                            #
+#----------------------------------------------------------------------#
 
 def connect_to_db(flask_app, db_uri='postgresql:///library', echo=True):
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
@@ -305,7 +306,8 @@ def connect_to_db(flask_app, db_uri='postgresql:///library', echo=True):
     print('Connected to the db!')
 
 
-#-----------------------------------------------------------------------------#
+#----------------------------------------------------------------------#
+
 if __name__ == '__main__':
     from server import app
 

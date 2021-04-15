@@ -4,6 +4,10 @@ from model import *
 from datetime import datetime
 
 
+#----------------------------------------------------------------------#
+# User Helper Functions                                                #
+#----------------------------------------------------------------------#
+
 def create_user(fname, lname, email, pwd, profile_pic=None):
     """ Create and return a new user. 
     e.g.
@@ -23,6 +27,7 @@ def create_user(fname, lname, email, pwd, profile_pic=None):
                     lname=lname.title(), 
                     email=email.lower(), 
                     pwd=pwd, 
+                    created_at=datetime.now(),
                     profile_pic=profile_pic)
 
         db.session.add(user)
@@ -56,6 +61,10 @@ def get_user_by_email(email):
 
     return db.session.query(User).filter(User.email==email).first()
 
+
+#----------------------------------------------------------------------#
+# Media Helper Functions                                               #
+#----------------------------------------------------------------------#
 
 def create_media_type(type_name):
     """ Create and return a new media type. 
@@ -98,6 +107,7 @@ def create_book(title, type_id, author, cover=None, description=None,
                     author=author, 
                     edition=edition, 
                     pages=pages, 
+                    created_at=datetime.now(),
                     isbn=isbn)
 
     db.session.add(new_item)
@@ -123,6 +133,7 @@ def create_movie(title, type_id, cover=None, description=None, length=None,
                     cover=cover, 
                     description=description, 
                     length=length, 
+                    created_at=datetime.now(),
                     year=year)
 
     db.session.add(new_item)
@@ -152,6 +163,7 @@ def create_tv_ep(title, type_id, show_title, cover=None, description=None,
                         show_title=show_title, 
                         ep_length=ep_length, 
                         ep_of_season=ep_of_season,
+                        created_at=datetime.now(),
                         season=season)
 
     db.session.add(new_item)
@@ -173,6 +185,7 @@ def create_item(title, type_id, cover=None, description=None, year=None):
                     type_id=type_id, 
                     cover=cover, 
                     description=description,
+                    created_at=datetime.now(),
                     year=year)
 
     db.session.add(new_item)
@@ -180,6 +193,10 @@ def create_item(title, type_id, cover=None, description=None, year=None):
 
     return new_item
 
+
+#----------------------------------------------------------------------#
+# Media Search Helper Functions                                        #
+#----------------------------------------------------------------------#
 
 def get_all_media():
     """ Query database and return a list of all media items. """
@@ -232,9 +249,7 @@ def search_db(query_terms):
 
     # for key in query_terms: # build query
     #     new_query = new_query.filter(Item.key == query_terms[key])
-
         # FIXME: how do I use the keys to point at the attributes I care about? apparently putting a variable in there doesn't work.
-        # Also, note this does not add author or anything type-specific! need to join queries in that case.
 
     if query_terms.get('media_type') == 'book':
         new_query = new_query.join(Book)
@@ -251,6 +266,10 @@ def search_db(query_terms):
 
     return new_query.all()
 
+
+#----------------------------------------------------------------------#
+# Genre Helper Functions                                               #
+#----------------------------------------------------------------------#
 
 def create_genre(genre_name):
     """ Create and return a new genre. 
@@ -302,6 +321,10 @@ def get_by_genre(genre_name, media_type=None):
     return Genre.query.filter(Genre.genre_name == genre_name).first().items
 
 
+#----------------------------------------------------------------------#
+# User's Library Helper Functions                                      #
+#----------------------------------------------------------------------#
+
 def store_media_in_user_library(user, media_item, rating, review, source):
     """ Add a media item to a user's personal library.
         Allow user to include a rating, review, etc. 
@@ -313,7 +336,6 @@ def store_media_in_user_library(user, media_item, rating, review, source):
                         review=review, 
                         created_at=datetime.now(), 
                         source=source)
-    # TODO: figure out timestamp for created_at!
 
     db.session.add(user_item)
     db.session.commit()
@@ -353,10 +375,23 @@ def get_item_by_user_media_id(user_id, user_media_id):
     return UserMedia.query.join(User).filter(User.user_id==user_id).join(Item).filter(UserMedia.user_media_id==user_media_id).first().item
 
 
+def get_user_media_id(user, media_item):
+    """ Query database and return the user_media_id association between 
+        a user_id and a media_item. """
+
+    return UserMedia.query.filter(UserMedia.user_id==user.user_id, 
+                    UserMedia.item_id==media_item.item_id).first().user_media_id
+
+
+#----------------------------------------------------------------------#
+# Collections Helper Functions                                         #
+#----------------------------------------------------------------------#
+
 def create_collection(user, collection_name, public=True):
     """ Create and return a new collection. """
 
-    collection = Collection(user_id=user.user_id, name=collection_name, public=public)
+    collection = Collection(user_id=user.user_id, name=collection_name, 
+                            created_at=datetime.now(), public=public)
 
     db.session.add(collection)
     db.session.commit()
@@ -368,14 +403,6 @@ def get_collection_by_id(collection_id):
     """ Given the collection_id, return the collection object. """
 
     return Collection.query.filter(Collection.collection_id==collection_id).first()
-
-
-def get_user_media_id(user, media_item):
-    """ Query database and return the user_media_id association between 
-        a user_id and a media_item. """
-
-    return UserMedia.query.filter(UserMedia.user_id==user.user_id, 
-                    UserMedia.item_id==media_item.item_id).first().user_media_id
 
 
 def assign_to_collection(user, media_item, collection):
@@ -406,6 +433,10 @@ def toggle_collection_public(collection_id):
     return f'The collection ${collection.name} is now ${new_public_status}'
 
 
+#----------------------------------------------------------------------#
+# User's Updates Helper Functions                                      #
+#----------------------------------------------------------------------#
+
 def create_user_update(user, media_item, date=None, start_bool=False, end_bool=False, update_value=None, num_times_through=None, dnf=None):
     """ Allow user to create an update on a specific media item.
         e.g. started / finished / completed 50 pages / etc... 
@@ -427,7 +458,8 @@ def create_user_update(user, media_item, date=None, start_bool=False, end_bool=F
     return user_update
 
 
-#-----------------------------------------------------------------------------#
+#----------------------------------------------------------------------#
+
 if __name__ == '__main__':
     import doctest
     # import unittest

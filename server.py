@@ -17,6 +17,10 @@ GOOGLE_BOOKS_TOKEN = os.environ['GOOGLE_BOOKS_TOKEN']
 IMDB_API_KEY = os.environ['IMDB_API_KEY']
 
 
+#----------------------------------------------------------------------#
+# Homepages                                                            #
+#----------------------------------------------------------------------#
+
 @app.route('/')
 def show_homepage():
     """ Show the homepage. 
@@ -31,8 +35,11 @@ def show_homepage():
         return render_template('homepage.html')
 
 
+#----------------------------------------------------------------------#
+# Routes Visible Without Logging In                                    #
+#----------------------------------------------------------------------#
 
-# browse all media route (by genre, media type, etc.) TODO: filter with JS?
+# browse all media route (by genre, media type, etc.) # TODO: filter with JS?
 @app.route('/media')
 def list_media():
     """ View list of all media. """
@@ -69,9 +76,14 @@ def user_details(user_id):
     return render_template('user_details.html', user=user)
 
 
+#----------------------------------------------------------------------#
+# Routes Related to User Login Status                                  #
+#----------------------------------------------------------------------#
+
 @app.route('/log_in')
 def show_login_page():
     """ Show the log-in page for an existing user. """
+
     if session.get('user_id', None):
         flash(f'You are already logged in!')
         return redirect('/')
@@ -142,12 +154,16 @@ def register_user():
     return redirect('/')
 
 
+#----------------------------------------------------------------------#
+# Routes Related to Media Search                                       #
+#----------------------------------------------------------------------#
+
 # add media item (check if in db first, then make get request to appropriate API)
 @app.route('/search')
 def search_db_for_media_item():
     """ Show search page. """
 
-    # session['media_types'] = crud.get_all_types() # use this if you get the jinja template together for searchpage.html
+    # session['media_types'] = crud.get_all_types() # TODO: use this if you get the jinja template together for searchpage.html
     genres = crud.get_all_genres()
 
     return render_template('searchpage.html', genres=genres)
@@ -309,6 +325,10 @@ def search_api_for_media_item():
         pass # user creates their own new type and item
 
 
+#----------------------------------------------------------------------#
+# Routes Related to User's Media Management                            #
+#----------------------------------------------------------------------#
+
 @app.route('/view_item', methods=['POST'])
 def view_item():
     """ Allow user to view details for a specified item in their library. """
@@ -335,6 +355,36 @@ def delete_item():
 
     return f'{title} has been removed from your library.'
 
+
+@app.route('/choose_collection', methods=['POST'])
+def choose_collection():
+    """ Allow user to choose which collection to add their item to. """
+
+    user = crud.get_user_by_id(session['user_id'])
+
+    return render_template('choose_collection.html', user=user)
+
+
+@app.route('/add_item_to_collection', methods=['POST'])
+def add_item_to_collection():
+    """ Add the specified item to the user's specified collection. """
+
+    collection_id = request.form.get('collection_id') 
+    user_item_id = request.form.get('user_item_id')
+    user = crud.get_user_by_id(session['user_id'])
+    user_item = crud.get_user_item_by_user_media_id(user.user_id, user_item_id)
+    collection = crud.get_collection_by_id(collection_id)
+    crud.assign_to_collection(user, user_item, collection)
+
+    response = {'alert': f'{user_item.item.title} was successfully added to {collection.name}.',
+                'cover': user_item.item.cover}
+
+    return response
+
+
+#----------------------------------------------------------------------#
+# Routes Related to User's Collection Management                       #
+#----------------------------------------------------------------------#
 
 @app.route('/view_collection', methods=['POST'])
 def view_collection():
@@ -384,39 +434,15 @@ def delete_collection():
     return f'{collection_name} has been removed from your library.'
 
 
-@app.route('/add_item_to_collection', methods=['POST'])
-def add_item_to_collection():
-    """ Add the specified item to the user's specified collection. """
-
-    collection_id = request.form.get('collection_id') 
-    user_item_id = request.form.get('user_item_id')
-    user = crud.get_user_by_id(session['user_id'])
-    user_item = crud.get_user_item_by_user_media_id(user.user_id, user_item_id)
-    collection = crud.get_collection_by_id(collection_id)
-    crud.assign_to_collection(user, user_item, collection)
-
-    response = {'alert': f'{user_item.item.title} was successfully added to {collection.name}.',
-                'cover': user_item.item.cover}
-
-    return response
-
-
-@app.route('/choose_collection', methods=['POST'])
-def choose_collection():
-    """ Allow user to choose which collection to add their item to. """
-
-    user = crud.get_user_by_id(session['user_id'])
-
-    return render_template('choose_collection.html', user=user)
-
+#----------------------------------------------------------------------#
 
 # TODO: create media management functions: 
 
 #       rename collection
-#       add item to collection 
 #       remove items from collection
 #       edit rating/review/source
 
+#       DONE: add item to collection 
 #       DONE: delete item from user library 
 #       DONE: create collection 
 #       DONE: delete collection 
@@ -426,10 +452,8 @@ def choose_collection():
 #       NTH: arrange items in collection 
 
 
+#----------------------------------------------------------------------#
 
-
-
-#-----------------------------------------------------------------------------#
 if __name__ == '__main__':
     connect_to_db(app, echo=False)
     app.run(debug=True, host='0.0.0.0')

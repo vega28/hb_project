@@ -1,8 +1,13 @@
 "use strict";
 
+//--------------------------------------------------------------------//
+// Item Management Functions                                          //
+//--------------------------------------------------------------------//
+
 // When user clicks on a cover, open up the view_item part of the page
 //      allow user to add item to a collection
-// TODO: when item is added to collection, it does not rerender template, so need to add manually!
+// TODO: when item is added to collection, need to add manually to collection div!
+
 $('.user-media-id').on('click', (evt) => {
     $('#collection-details').html('');
     $.post('/view_item', {'user_media_id': evt.target.id}, (res) => {
@@ -41,6 +46,7 @@ $('.user-media-id').on('click', (evt) => {
 
 
 // When user clicks delete button, remove association between item and user (UserMedia object)
+
 $('#delete-from-library').on('click', () => {
     let id_to_del = $('#delete-from-library').val();
     console.log(`here's your value: "${id_to_del}"`);
@@ -55,6 +61,7 @@ $('#delete-from-library').on('click', () => {
 
 
 // TODO: When user clicks edit button, open rating/review/source/collections for editing
+
 $('#edit-details').on('click', () => {
     alert(`JUST REBOOT THE UNIVERSE, WHY DON'T YOU. MOFFAT *shakes fist* `);
     // open up form entry for anything with class '.editable-detail' ... $('.editable-detail') ... then use new route called update?
@@ -63,14 +70,20 @@ $('#edit-details').on('click', () => {
 
 
 // When user clicks close button, close the expanded details (both collection and item)
+
 $('.close-details').on('click', () => {
     $('#collection-details').html('');
     $('#item-details').html('');
 })
 
 
+//--------------------------------------------------------------------//
+// Collection Management Functions                                    //
+//--------------------------------------------------------------------//
+
 // When user clicks on a collections div, open up the view_collection part of the page
 // ! working... but weird multiplication of post requests happening! related to number of clicks? 2^num_clicks.
+
 $('.collection').on('click', (evt) => {
     // evt.preventDefault();
     // alert(`WHY HELLO THERE... my id is ${evt.target.id}`);
@@ -86,6 +99,7 @@ $('.collection').on('click', (evt) => {
 
 
 // When user clicks on add collection button, ask for a name and then make collection
+
 $('#create-collection').on('click', () => {
     $('#new-collection').html('<form id="new-collection-form">New collection name: <input type="text" id="new-collection-name"><input type="submit" id="submit-new-collection"></form>');
 
@@ -103,6 +117,7 @@ $('#create-collection').on('click', () => {
 
 
 // When user clicks delete button, delete collection
+
 $('#delete-collection').on('click', () => {
     let id_to_del = $('#delete-collection').val();
     console.log(`here's your value: "${id_to_del}"`);

@@ -1,5 +1,11 @@
 "use strict";
 
+//--------------------------------------------------------------------//
+// DB Search Functions                                                //
+//--------------------------------------------------------------------//
+
+// Update DB Search form based on selected media type
+
 $('#media_type').on('change', (evt) => {
     evt.preventDefault();
     let selectedOption = $(evt.target);
@@ -20,7 +26,8 @@ $('#media_type').on('change', (evt) => {
     }
 })
 
-// Show search results from database:
+
+// Success function: show search results from database:
 
 function displayResults(results) {
     console.log(results)
@@ -29,6 +36,9 @@ function displayResults(results) {
       $('#db-search-results').append(`<div><input type="radio" name="chosen-item" value="${i}" required> ${results[i]['title']} <img src=${results[i]['cover']}></div>`);
     }
 }
+
+
+// Display updated DB Search results based on user input (in real time!)
 
 $('.choice').on('change', (evt) => {
     evt.preventDefault();
