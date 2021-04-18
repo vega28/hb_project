@@ -5,6 +5,14 @@ import os
 from jinja2 import StrictUndefined
 from pprint import pformat
 import requests
+from bokeh.plotting import figure
+from bokeh.embed import components
+from math import pi
+from bokeh.palettes import Category20
+from bokeh.transform import cumsum
+from bokeh.models import ColumnDataSource
+from random import randint
+import json
 
 from model import connect_to_db
 import crud
@@ -256,7 +264,10 @@ def review_new_media_item():
                                 # isbn=None)
 
         if item_data.get('genres'):
-            for genre in item_data['genres']:
+            genres = (item_data['genres']).strip("'][").split(', ')
+            print('***********DEBUG GENRE THING***',genres)
+            for genre in genres:
+                print(f'******GENRE IS****{genre}***IS OF TYPE***',type(genre))
                 new_genre = crud.create_genre(genre.title())
                 crud.assign_genre(item, new_genre)
 
@@ -432,6 +443,45 @@ def delete_collection():
     crud.remove_from_user_library(user, collection=collection)
 
     return f'{collection_name} has been removed from your library.'
+
+
+#----------------------------------------------------------------------#
+# *** Routes Related to User's Visualizations                          #
+#----------------------------------------------------------------------#
+
+@app.route('/pie')
+def show_pie():
+    """ Show a pie chart representing the genres enjoyed by a user. """
+
+    genres = [genre.genre_name for genre in crud.get_all_genres()]
+    genres = genres[:18]
+
+    # get data
+    # TODO: make query of UserMedia and ORDER BY count per genre?!
+    #       select genre_name, count(titles), group by genre, order by count 
+    counts = [randint(0,10) for genre in genres] ### debugging - get actual data!
+    angle = [(n/(sum(counts)) * 2*pi) for n in counts] 
+    # color = list(Category20[len(genres)]) # TODO: fix colors
+    source = ColumnDataSource(data=dict(genres=genres, counts=counts, angle=angle))#, color=color))#color=Colorblind[len(fruits)]))
+
+    # build figure/plot
+    p = figure(title="My Genres - Proof of Concept", toolbar_location=None, tools="hover", # can also specify plot height
+                tooltips=[("genre", "@genres"), ("count", "@counts")], 
+                x_range=(-0.5, 1.0))
+
+    p.wedge(x=0, y=0, radius=0.2,
+            start_angle=cumsum('angle', include_zero=True), end_angle=cumsum('angle'),
+            line_color='white', legend_field='genres', 
+            line_width=2,  source=source) # fill_color='color',
+
+    p.axis.axis_label = None
+    p.axis.visible = False
+    p.grid.grid_line_color = None
+
+    # get displayable plot
+    script, div = components(p)
+
+    return render_template('pie.html', plot_div=div, plot_script=script)
 
 
 #----------------------------------------------------------------------#
