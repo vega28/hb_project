@@ -184,7 +184,7 @@ def process_search():
         Let user select the correct item, if it exists.
         If not in the database, redirect to /add_media route. """
 
-    if session.get('search_query'):
+    if session.get('search_query'): # if previously had other search terms
         del session['search_query'] # clear all fields
 
     media_type = request.args.get('media_type')
@@ -213,6 +213,104 @@ def process_search():
     return db_matches_dict
 
 
+@app.route('/api_search')
+def search_api_for_media_item():
+    """ Make GET request to the appropriate API. 
+        Display the results from the API response to allow user to choose one. """
+
+    if session['search_query']['media_type'] == 'book':
+        # Google Books API
+        uri = 'https://www.googleapis.com/books/v1/volumes'
+        payload = {'access_token': GOOGLE_BOOKS_TOKEN,
+            'maxResults': 20,
+            'q': f"{session['search_query']['title']} {session['search_query']['genre']} {session['search_query']['year']} {session['search_query']['author']}"}
+        res = requests.get(uri, params=payload)
+        data = res.json() # type dict
+
+        return render_template('api_search_results.html', 
+                                pformat=pformat, data=data)
+
+    elif session['search_query']['media_type'] == 'movie':
+        pass # IMDB movie API
+        # TODO: allow user to select an option to add to db - get its tag, do another request to get that volume's info, and add to db
+        uri = 'https://imdb-api.com/en/API/SearchMovie/'
+        payload = {'apiKey': IMDB_API_KEY,
+            'expression': f"{session['search_query']['title']} {session['search_query']['year']}"} # {session['search_query']['length']}  {session['search_query']['genre']}
+        res = requests.get(uri, params=payload)
+        data = res.json()
+
+        return render_template('api_search_results.html', 
+                                pformat=pformat, data=data) # TODO: check this... not same as books!!
+
+    #// elif session['search_query']['media_type'] == 'tv_ep':
+    #//     pass # IMDB TV API
+    
+    #// else:
+    #//     pass # user creates their own new type and item
+
+
+@app.route('/review_new_media')
+def review_new_media_item():
+    """ Parse information about new item.
+        Create and add new item to database. """
+
+    if session.get('item_to_add'): # if previously added a new item
+        del session['item_to_add'] # then clear all fields 
+    
+    # TODO: check if item already in db!
+
+    # create new item with the appropriate media_type. 
+    if session['search_query']['media_type'] == 'book':
+
+        # parse item information from html form:
+        list_num = request.args.get('list_num')
+        author = request.args.get(list_num+'-authors')
+        if author:
+            author = author[0]
+        item_data = {'id': request.args.get(list_num+'-id'),
+                    'title': request.args.get(list_num+'-title'),
+                    'author': author,
+                    'cover': request.args.get(list_num+'-cover'),
+                    'description': request.args.get(list_num+'-description'),
+                    'pages': request.args.get(list_num+'-pageCount'),
+                    'genres': request.args.get(list_num+'-genres')}
+
+        # add new item to db:
+        item = crud.create_book(title=item_data['title'], 
+                                type_id=1, # FIXME: currently hardcoded 
+                                author=item_data.get('author'), 
+                                cover=item_data.get('cover'), 
+                                description=item_data.get('description'), 
+                                # year=item_data.get('publishedDate'), # TODO: fix format 
+                                # edition=None, 
+                                pages=item_data.get('pages')) 
+                                # isbn=None)
+
+        # assign genres:
+        if item_data.get('genres'):
+            genres = (item_data['genres']).strip("'][").split(', ')
+            for genre in genres:
+                new_genre = crud.create_genre(genre.title())
+                crud.assign_genre(item, new_genre)
+
+    # TODO: movie search!
+    # elif session['search_query']['media_type'] == 'movie':
+    #     item = crud.create_movie(title, type_id, cover=None, description=None, length=None, 
+    #             year=None)
+    #// elif session['search_query']['media_type'] == 'tv_ep':
+    #//     item = crud.create_tv_ep(title, type_id, show_title, cover=None, description=None, 
+    #//             year=None, ep_length=None, season=None, ep_of_season=None)# TODO
+    #// else:
+    #//     item = crud.create_item(title, type_id, cover=None, description=None, year=None) # TODO
+
+    # add new item to session then go to review_media page:
+    session['item_to_add'] = {'title': item.title, 
+                            'item_id': item.item_id, 
+                            'cover': item.cover}
+
+    return render_template('review_media.html')
+
+
 @app.route('/review_media')
 def review_media_item():
     """ Ask for user's review and rating of new media item. """
@@ -230,68 +328,6 @@ def review_media_item():
     return render_template('review_media.html')
 
 
-@app.route('/review_new_media')
-def review_new_media_item():
-    """ Ask for user's review and rating of new media item. 
-        Add new item to database. """
-
-    if session.get('item_to_add'): # ? is this redundant?
-        del session['item_to_add']
-    
-    # create new item with the appropriate media_type. add to db.
-    if session['search_query']['media_type'] == 'book':
-
-        list_num = request.args.get('list_num')
-        author = request.args.get(list_num+'-authors')
-        if author:
-            author = author[0]
-        item_data = {'id': request.args.get(list_num+'-id'),
-                    'title': request.args.get(list_num+'-title'),
-                    'author': author,
-                    'cover': request.args.get(list_num+'-cover'),
-                    'description': request.args.get(list_num+'-description'),
-                    'pages': request.args.get(list_num+'-pageCount'),
-                    'genres': request.args.get(list_num+'-genres')}
-
-        item = crud.create_book(title=item_data['title'], 
-                                type_id=1, # FIXME: currently hardcoded 
-                                author=item_data.get('author'), 
-                                cover=item_data.get('cover'), 
-                                description=item_data.get('description'), 
-                                # year=item_data.get('publishedDate'), # TODO: fix format 
-                                # edition=None, 
-                                pages=item_data.get('pages')) 
-                                # isbn=None)
-
-        if item_data.get('genres'):
-            genres = (item_data['genres']).strip("'][").split(', ')
-            print('***********DEBUG GENRE THING***',genres)
-            for genre in genres:
-                print(f'******GENRE IS****{genre}***IS OF TYPE***',type(genre))
-                new_genre = crud.create_genre(genre.title())
-                crud.assign_genre(item, new_genre)
-
-        # return render_template('search_results.html', list_num=list_num, item_data=item_data) ### temp debugging route - will go to review page when item is added to db correctly!
-
-
-    # elif session['search_query']['media_type'] == 'movie':
-    #     item = crud.create_movie(title, type_id, cover=None, description=None, length=None, 
-    #             year=None)# TODO
-    # elif session['search_query']['media_type'] == 'tv_ep':
-    #     item = crud.create_tv_ep(title, type_id, show_title, cover=None, description=None, 
-    #             year=None, ep_length=None, season=None, ep_of_season=None)# TODO
-    # else:
-    #     item = crud.create_item(title, type_id, cover=None, description=None, year=None) # TODO
-
-    # retrieve user's rating, review, and source. route to /add_media
-
-    session['item_to_add'] = {'title': item.title, 
-                            'item_id': item.item_id, 
-                            'cover': item.cover}
-
-    return render_template('review_media.html')
-
-
 @app.route('/add_media')
 def add_media_item():
     """ Add item to user's media. """
@@ -305,35 +341,6 @@ def add_media_item():
     flash(f"{session['item_to_add']['title']} has been added to your library.")
 
     return redirect('/')
-
-
-@app.route('/api_search')
-def search_api_for_media_item():
-    """ Make GET request to the appropriate API. 
-        Add item to the database. """
-
-    if session['search_query']['media_type'] == 'book':
-        # Google Books API
-        uri = 'https://www.googleapis.com/books/v1/volumes'
-        payload = {'access_token': GOOGLE_BOOKS_TOKEN,
-            'maxResults': 20,
-            'q': f"{session['search_query']['title']} {session['search_query']['author']}"}
-        res = requests.get(uri, params=payload)
-        data = res.json() # type dict
-
-        return render_template('api_search_results.html', 
-                                pformat=pformat, data=data)
-
-    elif session['search_query']['media_type'] == 'movie':
-        pass # IMDB movie API
-        # TODO: allow user to select an option to add to db - get its tag, do another request to get that volume's info, and add to db
-
-    elif session['search_query']['media_type'] == 'tv_ep':
-        pass # IMDB TV API
-        # TODO: allow user to select an option to add to db - get its tag, do another request to get that volume's info, and add to db
-
-    else:
-        pass # user creates their own new type and item
 
 
 #----------------------------------------------------------------------#
