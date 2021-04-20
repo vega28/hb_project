@@ -2,6 +2,7 @@
 
 from model import *
 from datetime import datetime
+from sqlalchemy import func
 
 
 #----------------------------------------------------------------------#
@@ -319,6 +320,28 @@ def get_by_genre(genre_name, media_type=None):
 
     # else:
     return Genre.query.filter(Genre.genre_name == genre_name).first().items
+
+
+def get_user_genre_data(user_id):
+    """ Return a dict that lists a user's genres and 
+        the number of media items per genre. 
+        NTH: make this a db query instead of inefficient nested for loops.
+        NTH: also include media_type. """
+
+    user_genre_data = {}
+    user = get_user_by_id(user_id)
+    for item in user.media:
+        for genre in item.item.genres:
+            user_genre_data[genre.genre_name] = user_genre_data.get(genre.genre_name, 0) + 1
+
+    ## query method:
+    # myquery = Genre.query.join(MediaGenre).join(Item).join(UserMedia).join(User)
+    # myquery = myquery.filter(User.user_id == user_id)
+    ## need to group this query by Genre.genre_name and count Item.item_id !
+
+    ## can also use engine.connect().execute('PUT RAW SQL HERE')
+
+    return user_genre_data
 
 
 #----------------------------------------------------------------------#
