@@ -6,7 +6,6 @@
 
 //* When user clicks on a cover, open up the view_item part of the page
 //      allow user to add item to a collection
-// TODO: when item is added to collection, need to add manually to collection div!
 
 $('.user-media-id').on('click', (evt) => {
     $('#collection-details').html('');
@@ -98,7 +97,10 @@ $('.collection').on('click', (evt) => {
 // TODO: add button to toggle public status of each collection.
 
 
-//* When user clicks on add collection button, ask for a name and then make collection
+// TODO: When user clicks "Rename Collection" button, ask for new name and then update that collection's record
+
+
+//* When user clicks on "Add New Collection" button, ask for a name and then make collection
 
 $('#create-collection').on('click', () => {
     $('#new-collection').html('<form id="new-collection-form">New collection name: <input type="text" id="new-collection-name"><input type="submit" id="submit-new-collection"></form>');
@@ -112,6 +114,7 @@ $('#create-collection').on('click', () => {
             alert(res);
         })
         $('#new-collection').html('');
+        // TODO: show the new collection on the page like with new media item
     })
 })
 

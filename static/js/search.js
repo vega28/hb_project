@@ -11,8 +11,6 @@ $('#media_type').on('change', (evt) => {
     let selectedOption = $(evt.target);
     $('.media-specific').val('');
     $('.type-of-media').hide();
-    // TODO: empty the vals for any specific media type
-    // $(`#its-a-${$('#media_type').val()}`).slideDown();
     if ($('#media_type').val() === 'book') {
         $('#its-a-book').slideDown();
     }

@@ -2,11 +2,8 @@
 
 from model import *
 from datetime import datetime
-from sqlalchemy import func, create_engine, MetaData
+from sqlalchemy import func, create_engine
 
-engine = create_engine('postgresql:///library') # ! go thru what this is doing w/ instructor
-metadata = MetaData() #
-metadata.create_all(engine) # start engine
 
 #----------------------------------------------------------------------#
 # *** User Helper Functions                                            #
@@ -333,17 +330,11 @@ def get_user_genre_data(user_id):
 
     user_genre_data = {}
     # user = get_user_by_id(user_id)
-    # for item in user.media:
+    # for item in user.media: # very inefficient old method! but does use ORM relationships!
     #     for genre in item.item.genres:
     #         user_genre_data[genre.genre_name] = user_genre_data.get(genre.genre_name, 0) + 1
 
-    ## query method:
-    # myquery = Genre.query.join(MediaGenre).join(Item).join(UserMedia).join(User)
-    # myquery = myquery.filter(User.user_id == user_id)
-    ## need to group this query by Genre.genre_name and count Item.item_id !
-
-    ## can also use engine.connect().execute('PUT RAW SQL HERE')
-    with engine.connect() as con:
+    with db.engine.connect() as con:
         rs = con.execute(f'SELECT g.genre_name, COUNT(m.item_id) FROM genres AS g JOIN media_genres USING (genre_id) JOIN media AS m USING (item_id) JOIN user_media USING (item_id) JOIN users AS u USING (user_id) WHERE u.user_id = {user_id} GROUP BY g.genre_name ORDER BY count DESC')
 
         for row in rs:
