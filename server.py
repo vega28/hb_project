@@ -11,6 +11,7 @@ from math import pi
 from bokeh.palettes import Category20
 from bokeh.transform import cumsum
 from bokeh.models import ColumnDataSource
+import pandas as pd
 from random import randint
 import json
 
@@ -460,26 +461,22 @@ def delete_collection():
 def show_pie():
     """ Show a pie chart representing the genres enjoyed by a user. """
 
-    genres = [genre.genre_name for genre in crud.get_all_genres()]
-    genres = genres[:18]
-
     # get data
-    # TODO: make query of UserMedia and ORDER BY count per genre?!
-    #       select genre_name, count(titles), group by genre, order by count 
-    counts = [randint(0,10) for genre in genres] ### debugging - get actual data!
-    angle = [(n/(sum(counts)) * 2*pi) for n in counts] 
-    # color = list(Category20[len(genres)]) # TODO: fix colors
-    source = ColumnDataSource(data=dict(genres=genres, counts=counts, angle=angle))#, color=color))#color=Colorblind[len(fruits)]))
+    genre_data = crud.get_user_genre_data(session['user_id'])
+    data = pd.Series(genre_data).reset_index(name='value').rename(columns={'index':'genre'})
+    data['angle'] = data['value']/data['value'].sum() * 2 * pi
+    data['color'] = Category20[len(genre_data)]
+    source = ColumnDataSource(data=data)
 
     # build figure/plot
-    p = figure(title="My Genres - Proof of Concept", toolbar_location=None, tools="hover", # can also specify plot height
-                tooltips=[("genre", "@genres"), ("count", "@counts")], 
+    p = figure(title="My Genre Pie", toolbar_location=None, tools="hover", # can also specify plot height
+                tooltips=[("genre", "@genre"), ("count", "@value")], 
                 x_range=(-0.5, 1.0))
 
-    p.wedge(x=0, y=0, radius=0.2,
+    p.wedge(x=0, y=0, radius=0.4,
             start_angle=cumsum('angle', include_zero=True), end_angle=cumsum('angle'),
-            line_color='white', legend_field='genres', 
-            line_width=2,  source=source) # fill_color='color',
+            line_color='white', legend_field='genre', 
+            line_width=2, fill_color='color', source=source) 
 
     p.axis.axis_label = None
     p.axis.visible = False

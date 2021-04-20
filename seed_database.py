@@ -131,7 +131,10 @@ william = crud.create_user(fname='William', lname='Adama', email='adama@bsg.com'
 daniel = crud.create_user(fname='Daniel', lname='Jackson', email='djackson@sgc.com', pwd="share", profile_pic='https://tse2.mm.bing.net/th?id=OIP.W8baHOdXLIJsdi4V46xR-wHaLD&pid=Api')
 buffy = crud.create_user(fname='Buffy', lname='Summers', email='buffy@summers.com', pwd='mrpointy', profile_pic='https://tse1.mm.bing.net/th?id=OIP.b3ngjS5r4_W4nFmetfqDGQHaFf&pid=Api')
 test_users = [bob, rose, wendy, leslie, william, daniel, buffy]
-for user in test_users: # FIXME: currently user can have duplicate media items.
+
+# assign media
+reviews = ['WOOOO','This was the beeest!','meh...','Super interesting concept.','This totally broke my heart.']
+for user in test_users: 
     user_media = []
     for j in range(5):
         item_choice = choice(books_in_db)
@@ -140,7 +143,7 @@ for user in test_users: # FIXME: currently user can have duplicate media items.
             crud.store_media_in_user_library(user=user, 
                                             media_item=item_choice, 
                                             rating=randint(1,5), 
-                                            review=fake.text(), 
+                                            review=choice(reviews), 
                                             source=choice(sources))
     for n in range(2):
         item_choice = choice(movies_in_db)
@@ -149,7 +152,7 @@ for user in test_users: # FIXME: currently user can have duplicate media items.
             crud.store_media_in_user_library(user=user, 
                                             media_item=item_choice, 
                                             rating=randint(1,5), 
-                                            review=fake.text(), 
+                                            review=choice(reviews), 
                                             source=choice(sources))
     for m in range(1):
         item_choice = choice(tv_in_db)
@@ -157,7 +160,7 @@ for user in test_users: # FIXME: currently user can have duplicate media items.
         crud.store_media_in_user_library(user=user,
                                         media_item=item_choice,
                                         rating=randint(1,5),
-                                        review=fake.text(),
+                                        review=choice(reviews),
                                         source=choice(sources))
 
 
