@@ -34,9 +34,9 @@ $('.user-media-id').on('click', (evt) => {
                 // ? WHY didn't this next line work?!
                 // $('#add-to-collection-form').on('submit', (evt) => { 
                 $('#coll-submit-button').on('click', () => {
-                    let user_media_id = $('#add-to-collection').val();
-                    let collection_id = $('input[type="radio"]:checked').val();
-                    let postData = {'user_item_id': user_media_id, 
+                    const user_media_id = $('#add-to-collection').val();
+                    const collection_id = $('input[type="radio"]:checked').val();
+                    const postData = {'user_item_id': user_media_id, 
                                     'collection_id': collection_id}
                     $.post('/add_item_to_collection', postData, (res2) => {
                         alert(res2['alert']);
@@ -123,12 +123,12 @@ $('#create-collection').on('click', () => {
         </p>
         <p>
           <input type="radio" name="new-collection-public-status" 
-            value="True" id="new-collection-public-true" required> 
+            value="true" id="new-collection-public-true" required> 
           Public
         </p>
         <p>
           <input type="radio" name="new-collection-public-status" 
-            value="False" id="new-collection-public-false" required> 
+            value="" id="new-collection-public-false" required> 
           Private
         </p>
         <input type="submit" id="submit-new-collection">
@@ -138,9 +138,12 @@ $('#create-collection').on('click', () => {
     $('#new-collection-form').on('submit', (evt) => {
         evt.preventDefault();
         const collection_name = $('#new-collection-name').val();
+        const public_bool = $('input[type="radio"]:checked').val();
         console.log(`The collection ${collection_name} is being created...`);
         // TODO: connect private/public radio button here
-        $.post('/create_collection', {'collection_name': collection_name}, (res) => {
+        $.post('/create_collection', 
+               {'collection_name': collection_name, 'public': public_bool}, 
+               (res) => {
           console.log('collection has successfully been added.');
           alert(res);
         })

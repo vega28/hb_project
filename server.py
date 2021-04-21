@@ -433,9 +433,11 @@ def list_collections():
 def create_collection():
     """ Allow user to define a new collection """
 
+    public = True if request.form.get('public') else False # JS was handing 'true' and 'false' strings, so this is my workaround for now!
     user = crud.get_user_by_id(session['user_id'])
     collection = crud.create_collection(user, 
-                                    request.form.get('collection_name'))
+                                        request.form.get('collection_name'), 
+                                        public=public)
 
     return f'{collection.name} has been added to your library.'
 
