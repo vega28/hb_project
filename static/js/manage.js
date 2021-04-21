@@ -5,7 +5,7 @@
 //--------------------------------------------------------------------//
 
 //* When user clicks on a cover, open up the view_item part of the page
-//      allow user to add item to a collection
+//    allow user to add item to a collection
 
 $('.user-media-id').on('click', (evt) => {
     $('#collection-details').html('');
@@ -17,11 +17,19 @@ $('.user-media-id').on('click', (evt) => {
             evt.preventDefault();
             $.get('/list_collections', (userCollections) => {
             
-                $('#which-collection-to-add-to').append('<form id="add-to-collection-form">');
+                $('#which-collection-to-add-to')
+                    .append('<form id="add-to-collection-form">');
                 for (let i in userCollections) {
-                    $('#which-collection-to-add-to').append(`<p><input type="radio" name="which-collection" value="${i}">${userCollections[i]['name']}</p>`);
+                    $('#which-collection-to-add-to')
+                    .append(
+                      `<p>
+                        <input type="radio" name="which-collection" value="${i}">
+                        ${userCollections[i]['name']}
+                      </p>`
+                      );
                 }
-                $('#which-collection-to-add-to').append('<input type="submit" id="coll-submit-button"></form>');
+                $('#which-collection-to-add-to')
+                    .append('<input type="submit" id="coll-submit-button"></form>');
                 
                 // ? WHY didn't this next line work?!
                 // $('#add-to-collection-form').on('submit', (evt) => { 
@@ -32,7 +40,8 @@ $('.user-media-id').on('click', (evt) => {
                                     'collection_id': collection_id}
                     $.post('/add_item_to_collection', postData, (res2) => {
                         alert(res2['alert']);
-                        $(`#collection-display-${collection_id}`).append(`<img src="${res2['cover']}" class="${user_media_id}">`);
+                        $(`#collection-display-${collection_id}`).append(
+                            `<img src="${res2['cover']}" class="${user_media_id}">`);
                     });
                     $('#which-collection-to-add-to').html('');
                 });
@@ -44,7 +53,8 @@ $('.user-media-id').on('click', (evt) => {
 
 
 
-//* When user clicks delete button, remove association between item and user (UserMedia object)
+//* When user clicks delete button, remove association between 
+//    item and user (UserMedia object)
 
 $('#delete-from-library').on('click', () => {
     let id_to_del = $('#delete-from-library').val();
@@ -68,7 +78,8 @@ $('#edit-details').on('click', () => {
 })
 
 
-//* When user clicks close button, close the expanded details (both collection and item)
+//* When user clicks close button, 
+//    close the expanded details (both collection and item)
 
 $('.close-details').on('click', () => {
     $('#collection-details').html('');
@@ -80,7 +91,8 @@ $('.close-details').on('click', () => {
 // *** Collection Management Functions                                //
 //--------------------------------------------------------------------//
 
-// When user clicks on a collections div, open up the view_collection part of the page
+//* When user clicks on a collections div, 
+//    open up the view_collection part of the page
 // ! working... but weird multiplication of post requests happening! related to number of clicks? 2^num_clicks.
 
 $('.collection').on('click', (evt) => {
@@ -100,20 +112,38 @@ $('.collection').on('click', (evt) => {
 // TODO: When user clicks "Rename Collection" button, ask for new name and then update that collection's record
 
 
-//* When user clicks on "Add New Collection" button, ask for a name and then make collection
+//* When user clicks on "Add New Collection" button, 
+//    ask for a name and then make collection
 
 $('#create-collection').on('click', () => {
-    $('#new-collection').html('<form id="new-collection-form"><p>New collection name: <input type="text" id="new-collection-name"></p><p><input type="radio" name="new-collection-public-status" value="True" id="new-collection-public-true" required> Public</p><p><input type="radio" name="new-collection-public-status" value="False" id="new-collection-public-false" required> Private</p><input type="submit" id="submit-new-collection"></form>');
+    $('#new-collection').html(
+      `<form id="new-collection-form">
+        <p>New collection name: 
+          <input type="text" id="new-collection-name">
+        </p>
+        <p>
+          <input type="radio" name="new-collection-public-status" 
+            value="True" id="new-collection-public-true" required> 
+          Public
+        </p>
+        <p>
+          <input type="radio" name="new-collection-public-status" 
+            value="False" id="new-collection-public-false" required> 
+          Private
+        </p>
+        <input type="submit" id="submit-new-collection">
+      </form>`
+      );
 
     $('#new-collection-form').on('submit', (evt) => {
         evt.preventDefault();
-        let collection_name = $('#new-collection-name').val();
+        const collection_name = $('#new-collection-name').val();
         console.log(`The collection ${collection_name} is being created...`);
-        $.post('/create_collection', {'collection_name': collection_name}, (res) => {
-            console.log('collection has successfully been added.');
-            alert(res);
-        })
         // TODO: connect private/public radio button here
+        $.post('/create_collection', {'collection_name': collection_name}, (res) => {
+          console.log('collection has successfully been added.');
+          alert(res);
+        })
         $('#new-collection').html('');
         // TODO: show the new collection on the page like with new media item
     })
@@ -123,7 +153,7 @@ $('#create-collection').on('click', () => {
 //* When user clicks delete button, delete collection
 
 $('#delete-collection').on('click', () => {
-    let id_to_del = $('#delete-collection').val();
+    const id_to_del = $('#delete-collection').val();
     console.log(`here's your value: "${id_to_del}"`);
     // NTH: pop up confirmation before actually deleting
     $.post('/delete_collection', {'collection_id': id_to_del}, (res) => {

@@ -31,7 +31,14 @@ function displayResults(results) {
     console.log(results)
     $('#db-search-results').html('')
     for (let i in results) {
-      $('#db-search-results').append(`<div><input type="radio" name="chosen-item" value="${i}" required> ${results[i]['title']} <img src=${results[i]['cover']}></div>`);
+      $('#db-search-results')
+      .append(
+        `<div>
+          <input type="radio" name="chosen-item" value="${i}" required> 
+          ${results[i]['title']}
+          <img src=${results[i]['cover']}>
+        </div>`
+        );
     }
 }
 
@@ -49,5 +56,4 @@ $('.choice').on('change', (evt) => {
                     'season': $('#season').val(),
                     'genre': $('#genre option:selected').val()};
     $.get('/process_search', formData, displayResults);
-    // alert('WHY HELLO THERE');
 })
