@@ -485,7 +485,42 @@ def show_pie():
     # get displayable plot
     script, div = components(p)
 
-    return render_template('pie.html', plot_div=div, plot_script=script)
+    return render_template('vis_pie.html', plot_div=div, plot_script=script)
+
+
+@app.route('/timeline')
+def show_timeline():
+    """ Show timeline plot illustrating a user's updates. """
+
+    # get data
+    # TODO: make this real data!
+    books = {
+        'The Hobbit': 354,
+        'Seven Brief Lessons': 60,
+        'Priory of the Orange Tree': 900,
+        'Cosmos': 290
+    }
+    startdate = [3, 2, 1, 4]
+    enddate = [6, 3, 10, 7]
+    data = pd.Series(books).reset_index(name='pages').rename(columns={'index':'title'})
+    data['startdate'] = startdate # TODO: make these dates
+    data['enddate'] = enddate
+    # data['color'] = Category20[len(books)] # TODO: make color correspond to genre or rating!
+
+    # build figure/plot
+    p = figure(y_range=(0, 1000), x_range=(0, 11), plot_width=400, plot_height=550, toolbar_location=None,
+            title="reading timeline sorted by page length (proof of concept)")
+    p.hbar(y="pages", left='startdate', right='enddate', height=10, source=data) # NOTE: height is width of the bar! also can include fill_color='color'
+
+    p.ygrid.grid_line_color = None
+    p.xaxis.axis_label = "dates read"
+    p.outline_line_color = None
+
+    # get displayable plot
+    script, div = components(p)
+
+    return render_template('vis_timeline.html', plot_div=div, plot_script=script)
+
 
 
 #----------------------------------------------------------------------#

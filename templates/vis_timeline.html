@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block preamble %}
+{% endblock %}
+
+{% block title %}timeline ⌚{% endblock %}
+
+{% block body %}
+  <h1>your timeline</h1>
+               
+  {{ plot_div|safe }}
+  {{ plot_script|safe }}
+
+{% endblock %}
+
+
