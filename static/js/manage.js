@@ -62,7 +62,7 @@ $('#delete-from-library').on('click', () => {
 // TODO: When user clicks edit button, open rating/review/source/collections for editing
 
 $('#edit-details').on('click', () => {
-    alert(`JUST REBOOT THE UNIVERSE, WHY DON'T YOU. MOFFAT *shakes fist* `);
+    alert(`TODO: EDIT STUFF`);
     // open up form entry for anything with class '.editable-detail' ... $('.editable-detail') ... then use new route called update?
     // OR... redirect to review_item page and AUTOFILL using $('.editable-detail') stuff and add a conditional to the add_item route to update instead
 })
@@ -94,7 +94,7 @@ $('.collection').on('click', (evt) => {
 })
 
 
-// TODO: add button to toggle public status of each collection.
+// TODO: When user clicks "Make Collection Public/Private" button, toggle public status of that collection.
 
 
 // TODO: When user clicks "Rename Collection" button, ask for new name and then update that collection's record
@@ -113,6 +113,7 @@ $('#create-collection').on('click', () => {
             console.log('collection has successfully been added.');
             alert(res);
         })
+        // TODO: connect private/public radio button here
         $('#new-collection').html('');
         // TODO: show the new collection on the page like with new media item
     })
