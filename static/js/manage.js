@@ -103,7 +103,7 @@ $('.collection').on('click', (evt) => {
 //* When user clicks on "Add New Collection" button, ask for a name and then make collection
 
 $('#create-collection').on('click', () => {
-    $('#new-collection').html('<form id="new-collection-form">New collection name: <input type="text" id="new-collection-name"><input type="submit" id="submit-new-collection"></form>');
+    $('#new-collection').html('<form id="new-collection-form"><p>New collection name: <input type="text" id="new-collection-name"></p><p><input type="radio" name="new-collection-public-status" value="True" id="new-collection-public-true" required> Public</p><p><input type="radio" name="new-collection-public-status" value="False" id="new-collection-public-false" required> Private</p><input type="submit" id="submit-new-collection"></form>');
 
     $('#new-collection-form').on('submit', (evt) => {
         evt.preventDefault();
