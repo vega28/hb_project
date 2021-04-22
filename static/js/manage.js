@@ -69,22 +69,21 @@ $('#delete-from-library').on('click', () => {
 })
 
 
-// TODO: When user clicks edit button, open rating/review/source/collections for editing
-//* When user clicks "Edit Details" button, 
-//    open up form entry for anything with class '.editable-detail'
-//    and AUTOFILL using $('.editable-detail') 
+//// When user clicks "Edit Details" button, 
+////    open up form entry for anything with class '.editable-detail'
+////    and AUTOFILL using $('.editable-detail') 
 
-$('#edit-details').on('click', () => {
-    const id_to_edit = $('#edit-details').val();
-    $.get('/edit_item', 
-    {'user_media_id': id_to_edit}, 
-    () => {
-        console.log('success...?'); // redirect?!
-    })
+//// $('#edit-details').on('click', () => {
+////     const id_to_edit = $('#edit-details').val();
+////     $.get('/edit_item', 
+////     {'user_media_id': id_to_edit}, 
+////     () => {
+////         console.log('success...?'); // redirect?!
+////     })
 
-    // open up form entry for anything with class '.editable-detail' ... $('.editable-detail') ... then use new route called update?
-    // OR... redirect to review_item page and AUTOFILL using $('.editable-detail') stuff and add a conditional to the add_item route to update instead
-})
+//     // open up form entry for anything with class '.editable-detail' ... $('.editable-detail') ... then use new route called update?
+//     // OR... redirect to review_item page and AUTOFILL using $('.editable-detail') stuff and add a conditional to the add_item route to update instead
+//// })
 
 
 //* When user clicks close button, 

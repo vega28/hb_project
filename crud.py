@@ -409,11 +409,11 @@ def update_media_in_user_library(user, media_item, rating=None, review=None, sou
     """ Update user_media record in the db with edited details. """
 
     UserMedia.query.filter(UserMedia.user_media_id == media_item.user_media_id).update(
-        {'ratinig': rating,
+        {'rating': rating,
         'review': review,
         'source': source}
     )
-    # db.session.update(media_item)
+    
     db.session.commit()
 
     return media_item

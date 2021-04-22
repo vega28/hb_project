@@ -352,13 +352,21 @@ def add_media_item():
 def view_item():
     """ Allow user to view details for a specified item in their library. """
 
+    if session.get('item_to_edit'):
+        del session['item_to_edit'] # clear all fields
     user_media_id = request.form.get('user_media_id') 
     user = crud.get_user_by_id(session['user_id'])
     user_item = crud.get_user_item_by_user_media_id(user.user_id, user_media_id) 
-    db_item = crud.get_item_by_user_media_id(user.user_id, user_media_id)
+    session['item_to_edit'] = {'title': user_item.item.title, 
+                        'item_id': user_item.item.item_id, 
+                        'user_media_id': user_item.user_media_id,
+                        'cover': user_item.item.cover,
+                        'rating': user_item.rating,
+                        'review': user_item.review,
+                        'source': user_item.source}
 
     return render_template('view_item.html', user=user, 
-                            user_item=user_item, db_item=db_item)
+                            user_item=user_item, db_item=user_item.item)
 
 
 @app.route('/edit_item')
@@ -366,19 +374,11 @@ def edit_item_details():
     """ Show the current details for an item.
         Allow the user to edit the rating, review, and source. """
 
-    if session.get('item_to_edit'):
-        del session['item_to_edit'] # clear all fields
-    item = crud.get_user_item_by_user_media_id(session['user_id'], 
-                        request.args.get('edit-details'))
-    session['item_to_edit'] = {'title': item.item.title, 
-                        'item_id': item.item.item_id, 
-                        'user_media_id': item.user_media_id,
-                        'cover': item.item.cover,
-                        'rating': item.rating,
-                        'review': item.review,
-                        'source': item.source}
-    
-    return render_template('edit_media_review.html')
+    user_item = crud.get_user_item_by_user_media_id(session['user_id'], 
+                        session['item_to_edit']['user_media_id'])
+
+    return render_template('edit_media_review.html', user_item=user_item,
+                            sources=['library', 'owned', 'amazon', 'netflix', 'other'])
 
 
 @app.route('/process_edits')
@@ -388,8 +388,9 @@ def process_item_details_edits():
     # update record in user_media table in db
     user_item = crud.get_user_item_by_user_media_id(session['user_id'], 
                         session['item_to_edit']['user_media_id'])
+    print('**********',user_item)
     crud.update_media_in_user_library(user=crud.get_user_by_id(session['user_id']), 
-        user_media_item=user_item, 
+        media_item=user_item, 
         rating=request.args.get('rating'), 
         review=request.args.get('review'), 
         source=request.args.get('source'))
