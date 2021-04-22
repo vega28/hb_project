@@ -439,7 +439,8 @@ def create_collection():
                                         request.form.get('collection_name'), 
                                         public=public)
 
-    return f'{collection.name} has been added to your library.'
+    return {'alert': f'{collection.name} has been added to your library.',
+            'collection_id' : collection.collection_id}
 
 
 @app.route('/delete_collection', methods=['POST'])

@@ -11,16 +11,24 @@
 
   <div id="collection-details"></div>
 
-  <div>
+  <div id="collections-display">
     <h3>Your collections:</h3>
     {% for collection in user.collections %} 
       <div id="collection-display-{{ collection.collection_id }}">
-        <h5 class="collection" id="{{ collection.collection_id }}" value="{{ collection.collection_id }}">{{ collection.name }}</h5>
+        <h5 class="collection" id="{{ collection.collection_id }}" 
+          value="{{ collection.collection_id }}">
+          {{ collection.name }}
+          {% if not collection.public %} 
+            (private)
+          {% endif %} 
+        </h5>
         {% for user_item in collection.user_media %}
           <img src="{{ user_item.item.cover }}" class="{{ user_item.user_media_id }}">
         {% endfor %}
       </div>
     {% endfor %} 
+  </div>
+  <div>
     <button class="collection-actions" id="create-collection">Add New Collection</button>
     <div id="new-collection"></div>
     <div id="which-collection-to-add-to"></div>

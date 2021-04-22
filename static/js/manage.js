@@ -139,16 +139,25 @@ $('#create-collection').on('click', () => {
         evt.preventDefault();
         const collection_name = $('#new-collection-name').val();
         const public_bool = $('input[type="radio"]:checked').val();
+        // ? had this as Boolean($('input[type="radio"]:checked').val()) 
+        // ?    but was still passing string 'true' and string 'false' to python server...
         console.log(`The collection ${collection_name} is being created...`);
-        // TODO: connect private/public radio button here
         $.post('/create_collection', 
                {'collection_name': collection_name, 'public': public_bool}, 
                (res) => {
+          alert(res['alert']);
+          $(`#collections-display`).append(
+            `<div id="collection-display-${res['collection_id']}">
+              <h5 class="collection" id="${res['collection_id']}" 
+                value="${res['collection_id']}">
+                ${collection_name}`);
+          if (public_bool === '') {
+            $(`#collection-display-${res['collection_id']}`).append('(private)'); // displays on next line and not in header...
+          } 
+          $(`#collection-display-${res['collection_id']}`).append(`</h5></div>`); 
           console.log('collection has successfully been added.');
-          alert(res);
         })
         $('#new-collection').html('');
-        // TODO: show the new collection on the page like with new media item
     })
 })
 
@@ -157,7 +166,7 @@ $('#create-collection').on('click', () => {
 
 $('#delete-collection').on('click', () => {
     const id_to_del = $('#delete-collection').val();
-    console.log(`here's your value: "${id_to_del}"`);
+    console.log(`here's your value: "${id_to_del}"`); // 
     // NTH: pop up confirmation before actually deleting
     $.post('/delete_collection', {'collection_id': id_to_del}, (res) => {
         $('#collection-details').html('');
