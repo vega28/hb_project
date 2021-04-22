@@ -57,7 +57,7 @@ $('.user-media-id').on('click', (evt) => {
 //    item and user (UserMedia object)
 
 $('#delete-from-library').on('click', () => {
-    let id_to_del = $('#delete-from-library').val();
+    const id_to_del = $('#delete-from-library').val();
     console.log(`here's your value: "${id_to_del}"`);
     console.log($(`.${id_to_del}`)[0].id); 
     // NTH: pop up confirmation before actually deleting
@@ -70,9 +70,18 @@ $('#delete-from-library').on('click', () => {
 
 
 // TODO: When user clicks edit button, open rating/review/source/collections for editing
+//* When user clicks "Edit Details" button, 
+//    open up form entry for anything with class '.editable-detail'
+//    and AUTOFILL using $('.editable-detail') 
 
 $('#edit-details').on('click', () => {
-    alert(`TODO: EDIT STUFF`);
+    const id_to_edit = $('#edit-details').val();
+    $.get('/edit_item', 
+    {'user_media_id': id_to_edit}, 
+    () => {
+        console.log('success...?'); // redirect?!
+    })
+
     // open up form entry for anything with class '.editable-detail' ... $('.editable-detail') ... then use new route called update?
     // OR... redirect to review_item page and AUTOFILL using $('.editable-detail') stuff and add a conditional to the add_item route to update instead
 })
@@ -139,8 +148,8 @@ $('#create-collection').on('click', () => {
         evt.preventDefault();
         const collection_name = $('#new-collection-name').val();
         const public_bool = $('input[type="radio"]:checked').val();
-        // ? had this as Boolean($('input[type="radio"]:checked').val()) 
-        // ?    but was still passing string 'true' and string 'false' to python server...
+        // ! WHY. had this as Boolean($('input[type="radio"]:checked').val()) 
+        // !    but was still passing string 'true' and string 'false' to python server...
         console.log(`The collection ${collection_name} is being created...`);
         $.post('/create_collection', 
                {'collection_name': collection_name, 'public': public_bool}, 

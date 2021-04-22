@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Media{% endblock %}
+
+{% block body %}
+  <h1>Review {{ session['item_to_edit']['title'] }}</h1>
+
+  <form action="/add_media" method="GET">
+
+    <div>
+      Rating:
+      <input type="radio" name="rating" value="1" id="rate1">
+      <label for="rate1">1</label>
+
+      <input type="radio" name="rating" value="2" id="rate2">
+      <label for="rate2">2</label>
+
+      <input type="radio" name="rating" value="3" id="rate3">
+      <label for="rate3">3</label>
+
+      <input type="radio" name="rating" value="4" id="rate4">
+      <label for="rate4">4</label>
+
+      <input type="radio" name="rating" value="5" id="rate5">
+      <label for="rate5">5</label>
+    </div>
+
+    <div>
+      Review:
+      <input type="text" name="review" id="review">
+    </div>
+
+    <div>
+      Source: 
+      <select id="source" name="source" required>
+        <option value="">-- please choose a source --</option>
+        <option value="library">library</option>
+        <option value="owned">owned</option>
+        <option value="amazon">Amazon</option>
+        <option value="netflix">Netflix</option>
+        <option value="other">other</option>
+      </select>
+    </div>
+
+    <p><input type="submit"></p>
+
+  </form>
+
+  <p><a href="/search">Return to searchpage.</a></p>
+{% endblock %}

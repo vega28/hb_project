@@ -361,6 +361,44 @@ def view_item():
                             user_item=user_item, db_item=db_item)
 
 
+@app.route('/edit_item')
+def edit_item_details():
+    """ Show the current details for an item.
+        Allow the user to edit the rating, review, and source. """
+
+    if session.get('item_to_edit'):
+        del session['item_to_edit'] # clear all fields
+    item = crud.get_user_item_by_user_media_id(session['user_id'], 
+                        request.args.get('edit-details'))
+    session['item_to_edit'] = {'title': item.item.title, 
+                        'item_id': item.item.item_id, 
+                        'user_media_id': item.user_media_id,
+                        'cover': item.item.cover,
+                        'rating': item.rating,
+                        'review': item.review,
+                        'source': item.source}
+    
+    return render_template('edit_media_review.html')
+
+
+@app.route('/process_edits')
+def process_item_details_edits():
+    """ Process the edits provided by the user. """
+
+    # update record in user_media table in db
+    user_item = crud.get_user_item_by_user_media_id(session['user_id'], 
+                        session['item_to_edit']['user_media_id'])
+    crud.update_media_in_user_library(user=crud.get_user_by_id(session['user_id']), 
+        user_media_item=user_item, 
+        rating=request.args.get('rating'), 
+        review=request.args.get('review'), 
+        source=request.args.get('source'))
+
+    flash(f"Your details for {session['item_to_edit']['title']} have been edited.")
+
+    return redirect('/')
+
+
 @app.route('/delete_item', methods=['POST'])
 def delete_item():
     """ Remove the specified item from the user's library. 
