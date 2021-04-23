@@ -337,7 +337,10 @@ def add_media_item():
             media_item=crud.get_item_by_id(session['item_to_add']['item_id']), 
             rating=request.args.get('rating'), 
             review=request.args.get('review'), 
-            source=request.args.get('source'))
+            source=request.args.get('source'),
+            start_date=request.args.get('start_date'),
+            end_date=request.args.get('end_date'),
+            dnf=request.args.get('dnf'))
 
     flash(f"{session['item_to_add']['title']} has been added to your library.")
 
@@ -363,7 +366,10 @@ def view_item():
                         'cover': user_item.item.cover,
                         'rating': user_item.rating,
                         'review': user_item.review,
-                        'source': user_item.source}
+                        'source': user_item.source,
+                        'start_date': user_item.start_date,
+                        'end_date': user_item.end_date,
+                        'dnf': user_item.dnf}
 
     return render_template('view_item.html', user=user, 
                             user_item=user_item, db_item=user_item.item)
@@ -393,7 +399,10 @@ def process_item_details_edits():
         media_item=user_item, 
         rating=request.args.get('rating'), 
         review=request.args.get('review'), 
-        source=request.args.get('source'))
+        source=request.args.get('source'),
+        start_date=request.args.get('start_date'),
+        end_date=request.args.get('end_date'),
+        dnf=request.args.get('dnf'))
 
     flash(f"Your details for {session['item_to_edit']['title']} have been edited.")
 

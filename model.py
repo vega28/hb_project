@@ -253,7 +253,12 @@ class UserMedia(db.Model):
     rating = db.Column(db.Integer)
     review = db.Column(db.Text)
     created_at = db.Column(db.DateTime, nullable=False) 
+    last_updated_at = db.Column(db.DateTime, nullable=False)
     source = db.Column(db.String(30))
+    start_date = db.Column(db.DateTime) # NOTE: if multiple reads/watches, create new usermedia items
+    end_date = db.Column(db.DateTime) # NOTE: if movie, same as start_date
+    dnf = db.Column(db.Boolean)
+    num_consumptions = db.Column(db.Integer) # have this calculated based on previous records
 
     user = db.relationship('User', backref='media')
     item = db.relationship('Item', backref='user_media')
@@ -267,6 +272,7 @@ class UserMedia(db.Model):
 
 class UserUpdate(db.Model):
     """ Middle table: an update logged by a user. """
+    # ! DEPRECATED
 
     __tablename__ = 'user_updates'
 

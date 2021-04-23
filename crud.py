@@ -313,7 +313,7 @@ def assign_genre(media_item, genre):
 
 
 def get_by_genre(genre_name, media_type=None):
-    """ Query database and return a list of specified media items by genre. """
+    """ Query database; return a list of specified media items by genre. """
 
     # if media_type:
     #     filter by media_type, then filter by genre, then return list.
@@ -347,17 +347,25 @@ def get_user_genre_data(user_id):
 # *** User's Library Helper Functions                                  #
 #----------------------------------------------------------------------#
 
-def store_media_in_user_library(user, media_item, rating, review, source):
+def store_media_in_user_library(user, media_item, rating, review, source, 
+                        start_date=None, end_date=None, dnf=False):
     """ Add a media item to a user's personal library.
-        Allow user to include a rating, review, etc. 
+        Allow user to include a rating, review, startdate, etc. 
         Return UserMedia object. """
 
+    num_consumptions= 1 if end_date else 0     
+    #TODO: update num_consumptions after checking db for previous instances of the same item_id with an end_date
     user_item = UserMedia(user_id=user.user_id, 
                         item_id=media_item.item_id, 
                         rating=rating, 
                         review=review, 
                         created_at=datetime.now(), 
-                        source=source)
+                        source=source,
+                        last_updated_at=datetime.now(),
+                        start_date=start_date,
+                        end_date=end_date,
+                        dnf=dnf,
+                        num_consumptions=num_consumptions) 
 
     db.session.add(user_item)
     db.session.commit()
@@ -380,7 +388,6 @@ def remove_from_user_library(user, user_media_item=None, user_media_id=None, col
 
     db.session.delete(thing) # delete the record
     db.session.commit()
-    # later: verify whether any associated user_updates are removed too!
 
     print(f'{name_of_thing} was successfully removed from your library!')
 
@@ -405,15 +412,21 @@ def get_user_media_id(user, media_item):
                     UserMedia.item_id==media_item.item_id).first().user_media_id
 
 
-def update_media_in_user_library(user, media_item, rating=None, review=None, source=None):
+def update_media_in_user_library(user, media_item, rating=None, review=None, source=None, 
+                        start_date=None, end_date=None, dnf=False):
     """ Update user_media record in the db with edited details. """
 
     UserMedia.query.filter(UserMedia.user_media_id == media_item.user_media_id).update(
         {'rating': rating,
         'review': review,
-        'source': source}
+        'source': source,
+        'start_date': start_date,
+        'end_date': end_date,
+        'dnf': dnf,
+        'last_updated_at': datetime.now(),
+        'num_consumptions': 1 if end_date else 0} # TODO: calculate num_consumptions
     )
-    
+   
     db.session.commit()
 
     return media_item
