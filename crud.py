@@ -348,7 +348,7 @@ def get_user_genre_data(user_id):
 #----------------------------------------------------------------------#
 
 def store_media_in_user_library(user, media_item, rating, review, source, 
-                        start_date=MINYEAR, end_date=MINYEAR, dnf=False):
+                        start_date=None, end_date=None, dnf=False):
     """ Add a media item to a user's personal library.
         Allow user to include a rating, review, startdate, etc. 
         Return UserMedia object. """

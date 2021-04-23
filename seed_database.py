@@ -4,7 +4,8 @@
 import os
 import json
 from faker import Faker
-from random import choice, randint
+from random import choice, randint, random
+from datetime import datetime, date, time
 
 import crud
 import model
@@ -136,24 +137,36 @@ test_users = [bob, rose, wendy, leslie, william, daniel, buffy]
 reviews = ['WOOOO','This was the beeest!','meh...','Super interesting concept.','This totally broke my heart.']
 for user in test_users: 
     user_media = []
+    earliest_date = datetime(2010, 1, 1, 0, 0, 0)
     for j in range(5):
         item_choice = choice(books_in_db)
         if item_choice not in user_media:
             user_media.append(item_choice)
+            start_date = earliest_date + (datetime.now() - earliest_date) * random()
+            start_date = datetime.combine(date(start_date.year, start_date.month, start_date.day), time(0, 0, 0))
+            end_date = start_date + (datetime.now() - start_date) * random()
+            end_date = datetime.combine(date(end_date.year, end_date.month, end_date.day), time(0, 0, 0))            
             crud.store_media_in_user_library(user=user, 
                                             media_item=item_choice, 
                                             rating=randint(1,5), 
                                             review=choice(reviews), 
-                                            source=choice(sources))
+                                            source=choice(sources),
+                                            start_date=start_date,
+                                            end_date=end_date,
+                                            dnf=False)
     for n in range(2):
         item_choice = choice(movies_in_db)
         if item_choice not in user_media:
             user_media.append(item_choice)
+            # TODO: implement dates
+            # start_date = earliest_date + (datetime.now() - earliest_date) * random()
             crud.store_media_in_user_library(user=user, 
                                             media_item=item_choice, 
                                             rating=randint(1,5), 
                                             review=choice(reviews), 
                                             source=choice(sources))
+                                            # start_date=start_date,
+                                            # dnf=False)
     for m in range(1):
         item_choice = choice(tv_in_db)
         user_media.append(item_choice)
