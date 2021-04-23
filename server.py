@@ -403,6 +403,7 @@ def process_item_details_edits():
         start_date=request.args.get('start_date'),
         end_date=request.args.get('end_date'),
         dnf=request.args.get('dnf'))
+    print(f"""**********dnf'{request.args.get("dnf")}'""")
 
     flash(f"Your details for {session['item_to_edit']['title']} have been edited.")
 
@@ -544,7 +545,9 @@ def show_timeline():
     """ Show timeline plot illustrating a user's updates. """
 
     # get data
-    # TODO: make this real data!
+    log_data = crud.get_user_log(session['user_id'])
+    # TODO: connect the real data!
+
     books = {
         'The Hobbit': 354,
         'Seven Brief Lessons': 60,

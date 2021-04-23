@@ -1,7 +1,7 @@
 """CRUD opertions."""
 
 from model import *
-from datetime import datetime
+from datetime import datetime, MINYEAR
 from sqlalchemy import func, create_engine
 
 
@@ -348,11 +348,12 @@ def get_user_genre_data(user_id):
 #----------------------------------------------------------------------#
 
 def store_media_in_user_library(user, media_item, rating, review, source, 
-                        start_date=None, end_date=None, dnf=False):
+                        start_date=MINYEAR, end_date=MINYEAR, dnf=False):
     """ Add a media item to a user's personal library.
         Allow user to include a rating, review, startdate, etc. 
         Return UserMedia object. """
 
+    #TODO: fix timestamp issue (can't be None or empty string!)
     num_consumptions= 1 if end_date else 0     
     #TODO: update num_consumptions after checking db for previous instances of the same item_id with an end_date
     user_item = UserMedia(user_id=user.user_id, 
@@ -413,8 +414,10 @@ def get_user_media_id(user, media_item):
 
 
 def update_media_in_user_library(user, media_item, rating=None, review=None, source=None, 
-                        start_date=None, end_date=None, dnf=False):
+                        start_date=MINYEAR, end_date=MINYEAR, dnf=False):
     """ Update user_media record in the db with edited details. """
+
+    # TODO: get start_date and end_date to work properly! can't have Nonetype!
 
     UserMedia.query.filter(UserMedia.user_media_id == media_item.user_media_id).update(
         {'rating': rating,
@@ -422,7 +425,7 @@ def update_media_in_user_library(user, media_item, rating=None, review=None, sou
         'source': source,
         'start_date': start_date,
         'end_date': end_date,
-        'dnf': dnf,
+        'dnf': True if dnf else False,
         'last_updated_at': datetime.now(),
         'num_consumptions': 1 if end_date else 0} # TODO: calculate num_consumptions
     )
@@ -430,6 +433,27 @@ def update_media_in_user_library(user, media_item, rating=None, review=None, sou
     db.session.commit()
 
     return media_item
+
+
+def get_user_log(user_id):
+    """ Get all information about user's updates and return as dict. """
+
+    user_log_data = {}
+    user = get_user_by_id(user_id)
+    for item in user.media:
+        user_log_data[item.user_media_id] = {
+            'title': item.item.title,
+            'rating': item.rating,
+            'review': item.review,
+            'source': item.source,
+            'created_at': item.created_at,
+            'start_date': item.start_date,
+            'end_date': item.end_date,
+            'dnf': item.dnf,
+            'num_consumptions': item.num_consumptions
+        }
+
+    return user_log_data
 
 
 #----------------------------------------------------------------------#
