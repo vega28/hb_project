@@ -14,6 +14,7 @@ from bokeh.models import ColumnDataSource
 import pandas as pd
 from random import randint
 import json
+from datetime import datetime
 
 from model import connect_to_db
 import crud
@@ -258,7 +259,7 @@ def review_new_media_item():
     if session.get('item_to_add'): # if previously added a new item
         del session['item_to_add'] # then clear all fields 
     
-    # TODO: check if item already in db!
+    # TODO: check if item already in db! ask if user is sure they want a 2nd instance
 
     # create new item with the appropriate media_type. 
     if session['search_query']['media_type'] == 'book':
@@ -546,25 +547,35 @@ def show_timeline():
 
     # get data
     log_data = crud.get_user_log(session['user_id'])
+    # print(log_data)
+    books = {}
+    startdate = []
+    enddate = []
+    for user_media_id in log_data:
+        print(log_data[user_media_id]['title'])
+        if log_data[user_media_id]['start_date']:
+            books[f"{log_data[user_media_id]['title']}"] = log_data[user_media_id]['rating']
+            startdate.append(log_data[user_media_id]['start_date'])
+            enddate.append(log_data[user_media_id]['end_date'])
     # TODO: connect the real data!
 
-    books = {
-        'The Hobbit': 354,
-        'Seven Brief Lessons': 60,
-        'Priory of the Orange Tree': 900,
-        'Cosmos': 290
-    }
-    startdate = [3, 2, 1, 4]
-    enddate = [6, 3, 10, 7]
-    data = pd.Series(books).reset_index(name='pages').rename(columns={'index':'title'})
+    # books = {
+    #     'The Hobbit': 354,
+    #     'Seven Brief Lessons': 60,
+    #     'Priory of the Orange Tree': 900,
+    #     'Cosmos': 290
+    # }
+    # startdate = [3, 2, 1, 4]
+    # enddate = [6, 3, 10, 7]
+    data = pd.Series(books).reset_index(name='rating').rename(columns={'index':'title'})
     data['startdate'] = startdate # TODO: make these dates
     data['enddate'] = enddate
     # data['color'] = Category20[len(books)] # TODO: make color correspond to genre or rating!
 
     # build figure/plot
-    p = figure(y_range=(0, 1000), x_range=(0, 11), plot_width=400, plot_height=550, toolbar_location=None,
-            title="reading timeline sorted by page length (proof of concept)")
-    p.hbar(y="pages", left='startdate', right='enddate', height=10, source=data) # NOTE: height is width of the bar! also can include fill_color='color'
+    p = figure(y_range=(0, 5.5), x_range=(datetime(2010,1,1,0,0,0), datetime.now()), plot_width=400, plot_height=550, toolbar_location=None,
+            title="reading timeline sorted by rating (proof of concept)")
+    p.hbar(y="rating", left='startdate', right='enddate', height=0.1, source=data) # NOTE: height is width of the bar! also can include fill_color='color'
 
     p.ygrid.grid_line_color = None
     p.xaxis.axis_label = "dates read"

@@ -31,8 +31,7 @@ function displayResults(results) {
     console.log(results)
     $('#db-search-results').html('')
     for (let i in results) {
-      $('#db-search-results')
-      .append(
+      $('#db-search-results').append(
         `<div>
           <input type="radio" name="chosen-item" value="${i}" required> 
           ${results[i]['title']}
@@ -54,6 +53,6 @@ $('.choice').on('change', (evt) => {
                     'author': $('#author').val(),
                     'length': $('#length').val(),
                     'season': $('#season').val(),
-                    'genre': $('#genre option:selected').val()};
+                    'genre': $('#genre option:selected').val()}; // ! check this!!!
     $.get('/process_search', formData, displayResults);
 })

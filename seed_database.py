@@ -143,9 +143,10 @@ for user in test_users:
         if item_choice not in user_media:
             user_media.append(item_choice)
             start_date = earliest_date + (datetime.now() - earliest_date) * random()
-            start_date = datetime.combine(date(start_date.year, start_date.month, start_date.day), time(0, 0, 0))
+            start_date = datetime.combine(start_date.date(), time.min)
+            # TODO: weight start/end_dates to usually be within a year of each other
             end_date = start_date + (datetime.now() - start_date) * random()
-            end_date = datetime.combine(date(end_date.year, end_date.month, end_date.day), time(0, 0, 0))            
+            end_date = datetime.combine(end_date.date(), time.min)            
             crud.store_media_in_user_library(user=user, 
                                             media_item=item_choice, 
                                             rating=randint(1,5), 
@@ -159,7 +160,6 @@ for user in test_users:
         if item_choice not in user_media:
             user_media.append(item_choice)
             # TODO: implement dates
-            # start_date = earliest_date + (datetime.now() - earliest_date) * random()
             crud.store_media_in_user_library(user=user, 
                                             media_item=item_choice, 
                                             rating=randint(1,5), 
@@ -170,6 +170,7 @@ for user in test_users:
     for m in range(1):
         item_choice = choice(tv_in_db)
         user_media.append(item_choice)
+        # TODO: implement dates
         crud.store_media_in_user_library(user=user,
                                         media_item=item_choice,
                                         rating=randint(1,5),
@@ -183,7 +184,7 @@ crud.assign_genre(contact, scifi)
 crud.assign_genre(mononoke, clifi)
 crud.assign_genre(sg1_ep1, scifi)
 
-# assign user-specific media:
+# assign user-specific media: # TODO: include dates too!
 # crud.store_media_in_user_library(user=bob, media_item=cosmos, rating=5, 
                         # review='We are all starstuff.', source='owned')
 crud.store_media_in_user_library(user=rose, media_item=contact, rating=5, 
