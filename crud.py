@@ -1,8 +1,8 @@
 """CRUD opertions."""
 
 from model import *
-from datetime import datetime, MINYEAR
-from sqlalchemy import func, create_engine, sql
+from datetime import datetime
+from sqlalchemy import create_engine
 
 
 #----------------------------------------------------------------------#
@@ -144,7 +144,7 @@ def create_tv_ep(title, type_id, show_title, cover=None, description=None,
     return new_item
 
 
-def create_item(title, type_id, cover=None, description=None, year=None):
+def create_item(title, type_id, cover=None, description=None, year=None, note=None):
     """ Create and return a new generic media item. """
 
     new_item = Item(title=title, 
@@ -213,10 +213,6 @@ def search_db(query_terms):
         new_query = new_query.join(MediaGenre).join(Genre)
         new_query = new_query.filter(Genre.genre_name == query_terms.get('genre'))
 
-    # for key in query_terms: # build query
-    #     new_query = new_query.filter(Item.key == query_terms[key])
-        # FIXME: how do I use the keys to point at the attributes I care about? apparently putting a variable in there doesn't work.
-
     if query_terms.get('media_type') == 'book':
         new_query = new_query.join(Book)
         if query_terms.get('author'):
@@ -229,6 +225,9 @@ def search_db(query_terms):
         new_query = new_query.join(TVEpisode)
         if query_terms.get('season'):
             new_query = new_query.filter(TVEpisode.season == query_terms['season'])
+    # TODO: get this working for the case of "other" type of media
+    # elif query_terms.get('media_type') == 'item':
+    #     new_query = new_query.filter(Item.media_type.type_id != 1, Item.media_type.type_id != 2, Item.media_type.type_id != 3)
 
     return new_query.all()
 
@@ -258,7 +257,7 @@ def create_genre(genre_name):
 def get_all_genres():
     """ Query database and return a list of all genres. """
 
-    return Genre.query.all()
+    return Genre.query.order_by('genre_name').all()
 
 
 def assign_genre(media_item, genre):

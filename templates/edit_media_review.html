@@ -26,7 +26,7 @@
       <select id="source" name="source" required>
         <option value="">-- please choose a source --</option>
         {% for source in sources %} 
-          <option value={{ source }} 
+          <option value="{{ source }}" 
             {% if source == user_item.source %}selected{% endif %}>
             {{ source }}
           </option>

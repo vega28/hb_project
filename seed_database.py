@@ -32,7 +32,7 @@ movies_in_db = []
 tv_in_db = []
 
 # create types
-for new_type in ['book', 'movie', 'tv']:
+for new_type in ['book', 'movie', 'tv', 'podcast', 'game', 'comic', 'other']:
     crud.create_media_type(new_type)
 
 # create genres:

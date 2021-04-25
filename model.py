@@ -23,6 +23,7 @@ class Item(db.Model):
     description = db.Column(db.Text)
     year = db.Column(db.Integer) # release year
     created_at = db.Column(db.DateTime, nullable=False) 
+    note = db.Column(db.String(100), default=None)
 
     #* updates = a list of UserUpdates about this media item
     media_type = db.relationship('Type', backref='items') # returns media_type object

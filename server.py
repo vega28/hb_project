@@ -1,6 +1,6 @@
 """ Server for library app. """
 
-from flask import (Flask, render_template, request, flash, session, redirect, jsonify)
+from flask import (Flask, render_template, request, flash, session, redirect)
 import os
 from jinja2 import StrictUndefined
 from pprint import pformat
@@ -349,6 +349,46 @@ def add_media_item():
     flash(f"{session['item_to_add']['title']} has been added to your library.")
 
     return redirect('/')
+
+
+@app.route('/create_new_item')
+def create_new_item():
+    """ Show form to allow user to create a new item that is not in the 
+        db and cannot be found by searching Google Books. """
+
+    genres = crud.get_all_genres()
+
+    return render_template('create_new_item.html', genres=genres,
+                            sources=['library', 'owned', 'amazon', 'netflix', 'other'])
+
+
+@app.route('/save_new_item', methods=['POST'])
+def save_new_item():
+    """ Save the user's new item to the database. 
+        Redirect to the review page. """
+
+    if request.form.get('media_type') == '':
+        type_id = 7
+    else:
+        type_id = int(request.form.get('media_type'))
+
+    item = crud.create_item(title=request.form.get('title'), 
+                            type_id=type_id,
+                            cover=request.form.get('cover'),
+                            description=request.form.get('description'),
+                            year=request.form.get('year') if request.form.get('year') else None,
+                            note=request.form.get('note'))
+    genre = crud.create_genre(request.form.get('genre'))
+    crud.assign_genre(item, genre=genre)
+
+    if session.get('item_to_add'):
+        del session['item_to_add'] # clear all fields
+
+    session['item_to_add'] = {'title': item.title, 
+                            'item_id': item.item_id, 
+                            'cover': item.cover}
+
+    return render_template('review_media.html')
 
 
 #----------------------------------------------------------------------#
