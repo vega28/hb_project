@@ -68,11 +68,7 @@ def get_user_by_email(email):
 #----------------------------------------------------------------------#
 
 def create_media_type(type_name):
-    """ Create and return a new media type. 
-    e.g.
-        >>> create_media_type('book')
-        <Type media_type=book type_id=1>
-    """
+    """ Create and return a new media type. """
 
     check_type = Type.query.filter(Type.media_type==type_name).first()
 
@@ -90,15 +86,7 @@ def create_media_type(type_name):
 
 def create_book(title, type_id, author, cover=None, description=None, 
                 year=None, edition=None, pages=None, isbn=None):
-    """ Create and return a new book. 
-    e.g.
-        >>> create_book(title='Contact', type_id=1,
-        ... cover='https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1567132653l/94786._SY475_.jpg',
-        ... description="In December, 1999, a multinational team journeys out to the stars, to the most awesome encounter in human history. Who -- or what -- is out there? In Cosmos, Carl Sagan explained the universe. In Contact, he predicts its future -- and our own.",
-        ... author='Carl Sagan', 
-        ... pages=434)
-        <Book title=Contact author=Carl Sagan>
-    """
+    """ Create and return a new book. """
 
     new_item = Book(title=title, 
                     type_id=type_id,  # TODO: specify this automatically!
@@ -119,15 +107,7 @@ def create_book(title, type_id, author, cover=None, description=None,
 
 def create_movie(title, type_id, cover=None, description=None, length=None, 
                 year=None):
-    """ Create and return a new movie. 
-    e.g.
-        >>> create_movie(title='Princess Mononoke', type_id=2, 
-        ... cover='https://m.media-amazon.com/images/M/MV5BNGIzY2IzODQtNThmMi00ZDE4LWI5YzAtNzNlZTM1ZjYyYjUyXkEyXkFqcGdeQXVyODEzNjM5OTQ@._V1_UX182_CR0,0,182,268_AL_.jpg', 
-        ... description="On a journey to find the cure for a Tatarigami's curse, Ashitaka finds himself in the middle of a war between the forest gods and Tatara, a mining colony. In this quest he also meets San, the Mononoke Hime.", 
-        ... length=134, 
-        ... year=1997)
-        <Movie title=Princess Mononoke year=1997>
-    """
+    """ Create and return a new movie. """
 
     new_item = Movie(title=title, 
                     type_id=type_id,  # TODO: specify this automatically!
@@ -145,16 +125,7 @@ def create_movie(title, type_id, cover=None, description=None, length=None,
 
 def create_tv_ep(title, type_id, show_title, cover=None, description=None, 
                 year=None, ep_length=None, season=None, ep_of_season=None):
-    """ Create and return a new tv episode. 
-    e.g.
-        >>> create_tv_ep(title='Children of the Gods', type_id=3, 
-        ... cover='https://m.media-amazon.com/images/M/MV5BMTc3MjEwMTc5N15BMl5BanBnXkFtZTcwNzQ2NjQ4NA@@._V1_UX182_CR0,0,182,268_AL_.jpg',
-        ... description="Colonel Jack O'Neill is brought out of retirement to lead a new expedition back to Abydos, only to find an old friend, a new enemy and a far wider use of the Stargate.",
-        ... show_title='Stargate SG-1', 
-        ... ep_length=92, 
-        ... season=1)
-        <TVEpisode show_title=Stargate SG-1 title=Children of the Gods>
-    """
+    """ Create and return a new tv episode. """
 
     new_item = TVEpisode(title=title, 
                         type_id=type_id,  # TODO: specify this automatically!
@@ -174,13 +145,7 @@ def create_tv_ep(title, type_id, show_title, cover=None, description=None,
 
 
 def create_item(title, type_id, cover=None, description=None, year=None):
-    """ Create and return a new generic media item. 
-    e.g.
-        >>> create_item(title='Cosmos', type_id=1,
-        ... cover='http://books.google.com/books/content?id=cDKODQAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api',
-        ... description="Presents an illustrated guide to the universe and to Earth's relationship to it, moving from theories of creation to humankind's discovery of the cosmos, to general relativity, to space missions, and beyond.")
-        <Media Item title=Cosmos>
-    """
+    """ Create and return a new generic media item. """
 
     new_item = Item(title=title, 
                     type_id=type_id, 
@@ -202,7 +167,7 @@ def create_item(title, type_id, cover=None, description=None, year=None):
 def get_all_media():
     """ Query database and return a list of all media items. """
 
-    return Item.query.all() 
+    return Item.query.order_by('title').all() 
 
 
 def get_all_books():
@@ -273,11 +238,7 @@ def search_db(query_terms):
 #----------------------------------------------------------------------#
 
 def create_genre(genre_name):
-    """ Create and return a new genre. 
-    e.g.
-        >>> create_genre('Climate Fiction')
-        <Genre genre_name=Climate Fiction>
-    """
+    """ Create and return a new genre. """
 
     if genre_name == 'Sci-Fi' or genre_name == 'Sci-fi':
         genre_name = 'Science Fiction'
@@ -353,8 +314,7 @@ def store_media_in_user_library(user, media_item, rating, review, source,
         Allow user to include a rating, review, startdate, etc. 
         Return UserMedia object. """
 
-    num_consumptions= 1 if end_date else 0     
-    #TODO: update num_consumptions after checking db for previous instances of the same item_id with an end_date
+    num_consumptions = len(UserMedia.query.filter(UserMedia.item_id == media_item.item_id).all())     
     user_item = UserMedia(user_id=user.user_id, 
                         item_id=media_item.item_id, 
                         rating=rating, 
@@ -416,8 +376,9 @@ def update_media_in_user_library(user, media_item, rating=None, review=None, sou
                         start_date=None, end_date=None, dnf=False):
     """ Update user_media record in the db with edited details. """
 
-    # TODO: get start_date and end_date to work properly! can't have Nonetype!
-
+    num_consumptions = UserMedia.query.filter(UserMedia.item_id == media_item.item_id)
+    num_consumptions = num_consumptions.filter(UserMedia.user_id == user.user_id).all()
+    num_consumptions = len(num_consumptions)     
     UserMedia.query.filter(UserMedia.user_media_id == media_item.user_media_id).update(
         {'rating': rating,
         'review': review,
@@ -426,7 +387,7 @@ def update_media_in_user_library(user, media_item, rating=None, review=None, sou
         'end_date': end_date,
         'dnf': True if dnf else False,
         'last_updated_at': datetime.now(),
-        'num_consumptions': 1 if end_date else 0} # TODO: calculate num_consumptions
+        'num_consumptions': num_consumptions} 
     )
    
     db.session.commit()

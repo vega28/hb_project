@@ -565,7 +565,7 @@ def show_timeline():
             data['media_type'].append(log_data[user_media_id]['media_type'])
     colors = Category20[5] 
     cds_data = ColumnDataSource(data=data)
-    print(cds_data.data)
+
     movie_view = CDSView(source=cds_data,
             filters=[GroupFilter(column_name='media_type', group='movie')])
     book_view = CDSView(source=cds_data,
