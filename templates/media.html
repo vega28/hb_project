@@ -4,13 +4,35 @@
 
 {% block body %}
   <h1>All Media 📚🎬📺 </h1>
-  <ul>
-    {% for item in all_media %} 
-      <li><a href="/media/{{ item.item_id }}">{{ item.title }}</a></li>
-      MY GENRES ARE {% for genre in item.genres %}{{ genre.genre_name }} {% endfor %} <!-- debugging -->
-    {% endfor %}
-  </ul>
-
-  <img src="http://25.media.tumblr.com/368c39479619dc392ce951edfd1e324b/tumblr_mzty556vVY1qekx3go6_250.gif">
+  
+  <!-- from bootstrap sortable table -->
+  <link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
+  
+  <h3>Your Updates</h3>
+  <table
+    data-toggle="table"
+    data-search="true"
+    data-show-columns="true">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Cover</th>
+        <th>Title</th>
+        <th>Genres</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in all_media %} 
+        <tr id="tr-id-{{ item.item_id }}" class="tr-class-{{ item.item_id }}" 
+        data-title="bootstrap table" data-object='{"key": "value"}'>
+          <td>{{ item.media_type.media_type }}</td>
+          <td><img src="{{ item.cover }}"></td>
+          <td><a href="/media/{{ item.item_id }}">{{ item.title }}</a></td>
+          <td>{% for genre in item.genres %}<p>{{ genre.genre_name }}</p>{% endfor %}</td>
+        </tr>
+      {% endfor %} 
+    </tbody>
+  </table>
 
 {% endblock %}

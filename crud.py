@@ -2,7 +2,7 @@
 
 from model import *
 from datetime import datetime, MINYEAR
-from sqlalchemy import func, create_engine
+from sqlalchemy import func, create_engine, sql
 
 
 #----------------------------------------------------------------------#
@@ -353,7 +353,6 @@ def store_media_in_user_library(user, media_item, rating, review, source,
         Allow user to include a rating, review, startdate, etc. 
         Return UserMedia object. """
 
-    #TODO: fix timestamp issue (can't be None or empty string!)
     num_consumptions= 1 if end_date else 0     
     #TODO: update num_consumptions after checking db for previous instances of the same item_id with an end_date
     user_item = UserMedia(user_id=user.user_id, 
@@ -414,7 +413,7 @@ def get_user_media_id(user, media_item):
 
 
 def update_media_in_user_library(user, media_item, rating=None, review=None, source=None, 
-                        start_date=MINYEAR, end_date=MINYEAR, dnf=False):
+                        start_date=None, end_date=None, dnf=False):
     """ Update user_media record in the db with edited details. """
 
     # TODO: get start_date and end_date to work properly! can't have Nonetype!
@@ -443,6 +442,7 @@ def get_user_log(user_id):
     for item in user.media:
         user_log_data[item.user_media_id] = {
             'title': item.item.title,
+            'media_type': item.item.media_type.media_type,
             'rating': item.rating,
             'review': item.review,
             'source': item.source,
@@ -510,7 +510,9 @@ def toggle_collection_public(collection_id):
 # *** User's Updates Helper Functions                                  #
 #----------------------------------------------------------------------#
 
-def create_user_update(user, media_item, date=None, start_bool=False, end_bool=False, update_value=None, num_times_through=None, dnf=None):
+# ! DEPRECATED
+def create_user_update(user, media_item, date=None, start_bool=False, 
+    end_bool=False, update_value=None, num_times_through=None, dnf=None):
     """ Allow user to create an update on a specific media item.
         e.g. started / finished / completed 50 pages / etc... 
         Return UserUpdate object. """

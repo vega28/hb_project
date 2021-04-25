@@ -19,6 +19,13 @@ model.db.create_all()
 
 fake = Faker()
 
+# get random start date
+def random_date(earliest_date):
+    """ Get a random date for seeding purposes. """
+
+    return earliest_date + (date.today() - earliest_date) * random()
+
+
 # create test data:
 books_in_db = []
 movies_in_db = []
@@ -137,16 +144,14 @@ test_users = [bob, rose, wendy, leslie, william, daniel, buffy]
 reviews = ['WOOOO','This was the beeest!','meh...','Super interesting concept.','This totally broke my heart.']
 for user in test_users: 
     user_media = []
-    earliest_date = datetime(2010, 1, 1, 0, 0, 0)
+    earliest_date = date(2010, 1, 1)
     for j in range(5):
         item_choice = choice(books_in_db)
         if item_choice not in user_media:
             user_media.append(item_choice)
-            start_date = earliest_date + (datetime.now() - earliest_date) * random()
-            start_date = datetime.combine(start_date.date(), time.min)
+            start_date = random_date(earliest_date)
             # TODO: weight start/end_dates to usually be within a year of each other
-            end_date = start_date + (datetime.now() - start_date) * random()
-            end_date = datetime.combine(end_date.date(), time.min)            
+            end_date = random_date(start_date)
             crud.store_media_in_user_library(user=user, 
                                             media_item=item_choice, 
                                             rating=randint(1,5), 
@@ -159,23 +164,27 @@ for user in test_users:
         item_choice = choice(movies_in_db)
         if item_choice not in user_media:
             user_media.append(item_choice)
-            # TODO: implement dates
+            start_date = random_date(earliest_date)
             crud.store_media_in_user_library(user=user, 
                                             media_item=item_choice, 
                                             rating=randint(1,5), 
                                             review=choice(reviews), 
-                                            source=choice(sources))
-                                            # start_date=start_date,
-                                            # dnf=False)
+                                            source=choice(sources),
+                                            start_date=start_date,
+                                            end_date=start_date,
+                                            dnf=False)
     for m in range(1):
         item_choice = choice(tv_in_db)
         user_media.append(item_choice)
-        # TODO: implement dates
+        start_date = random_date(earliest_date)
         crud.store_media_in_user_library(user=user,
                                         media_item=item_choice,
                                         rating=randint(1,5),
                                         review=choice(reviews),
-                                        source=choice(sources))
+                                        source=choice(sources),
+                                        start_date=start_date,
+                                        end_date=start_date,
+                                        dnf=False)
 
 
 # assign genres:
@@ -188,11 +197,16 @@ crud.assign_genre(sg1_ep1, scifi)
 # crud.store_media_in_user_library(user=bob, media_item=cosmos, rating=5, 
                         # review='We are all starstuff.', source='owned')
 crud.store_media_in_user_library(user=rose, media_item=contact, rating=5, 
-                        review='woot', source='owned')
+                        review='woot', source='owned', 
+                        start_date=random_date(date(2015,1,1)))
+adate=random_date(date(2015,1,1))
 crud.store_media_in_user_library(user=rose, media_item=mononoke, rating=5, 
-                        review='beautiful soundtrack and movie', source='library')
+                        review='beautiful soundtrack and movie', source='library', 
+                        start_date=adate, end_date=adate)
+adate=random_date(date(2015,1,1))
 crud.store_media_in_user_library(user=rose, media_item=sg1_ep1, rating=4, 
-                        review='That was a long pilot.', source='prime video')
+                        review='That was a long pilot.', source='amazon', 
+                        start_date=adate, end_date=adate)
 
 # organize collections:
 favorites = crud.create_collection(user=rose, collection_name='Favorites')

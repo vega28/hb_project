@@ -7,20 +7,20 @@
 
   <form action="/add_media" method="GET">
 
-    <div>
+    <p>
       Rating:
       {% for i in range(1,6) %}
        <input type="radio" name="rating" value="{{ i }}" id="rate{{ i }}">
        <label for="rate{{ i }}">{{ i }}</label>
       {% endfor %} 
-    </div>
+    </p>
 
-    <div>
+    <p>
       Review:
       <input type="text" name="review" id="review">
-    </div>
+    </p>
 
-    <div>
+    <p>
       Source: 
       <select id="source" name="source" required>
         <option value="">-- please choose a source --</option>
@@ -30,19 +30,19 @@
         <option value="netflix">Netflix</option>
         <option value="other">other</option>
       </select>
-    </div>
+    </p>
 
-    <div>
+    <p>
       <input type="checkbox" name="dnf" id="dnf"> Did not finish! <!--! connect this checkbox !-->
-    </div>
+    </p>
 
-    <div>
-      <input type="datetime" name="start_date" id="start_date"> Start Date <!--! connect this and make date !-->
-    </div>
+    <p>
+      <input type="date" name="start_date" id="start_date"> Start Date
+    </p>
 
-    <div>
-      <input type="datetime" name="end_date" id="end_date"> End Date <!--! connect this and make date !-->
-    </div>
+    <p>
+      <input type="date" name="end_date" id="end_date"> End Date 
+    </p>
 
     <p><input type="submit"></p>
 

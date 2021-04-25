@@ -10,9 +10,16 @@ $('#media_type').on('change', (evt) => {
     evt.preventDefault();
     let selectedOption = $(evt.target);
     $('.media-specific').val('');
+    $('#go-search-api').html('');
     $('.type-of-media').hide();
     if ($('#media_type').val() === 'book') {
         $('#its-a-book').slideDown();
+        $('#go-search-api').html(
+            `<p>
+              Not finding what you're looking for? 
+              <a href="/api_search">Search Google Books instead!</a>
+              <img src="http://25.media.tumblr.com/368c39479619dc392ce951edfd1e324b/tumblr_mzty556vVY1qekx3go6_250.gif">
+            </p>`);
     }
     if ($('#media_type').val() === 'movie') {
         $('#its-a-movie').slideDown();    
@@ -28,8 +35,14 @@ $('#media_type').on('change', (evt) => {
 //* Success function: show search results from database:
 
 function displayResults(results) {
+    console.log('NEW RESULTS')
     console.log(results)
+    console.log(typeof(results))
     $('#db-search-results').html('')
+    // TODO: deal with case of no results in db
+    // if (results === {}) {
+    //     $('#db-search-results').append('Sorry, that search is not turning up any results.');
+    // }
     for (let i in results) {
       $('#db-search-results').append(
         `<div>

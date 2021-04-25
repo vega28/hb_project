@@ -255,8 +255,8 @@ class UserMedia(db.Model):
     created_at = db.Column(db.DateTime, nullable=False) 
     last_updated_at = db.Column(db.DateTime, nullable=False)
     source = db.Column(db.String(30))
-    start_date = db.Column(db.DateTime, nullable=True) # NOTE: if multiple reads/watches, create new usermedia items
-    end_date = db.Column(db.DateTime, nullable=True) # NOTE: if movie, same as start_date
+    start_date = db.Column(db.Date, nullable=True) # NOTE: if multiple reads/watches, create new usermedia items
+    end_date = db.Column(db.Date, nullable=True) # NOTE: if movie, same as start_date
     dnf = db.Column(db.Boolean)
     num_consumptions = db.Column(db.Integer) # have this calculated based on previous records
 

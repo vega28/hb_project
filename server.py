@@ -334,13 +334,15 @@ def review_media_item():
 def add_media_item():
     """ Add item to user's media. """
 
+    start_date = request.args.get('start_date') if request.args.get('start_date') else None
+    end_date = request.args.get('end_date') if request.args.get('end_date') else None
     crud.store_media_in_user_library(user=crud.get_user_by_id(session['user_id']), 
             media_item=crud.get_item_by_id(session['item_to_add']['item_id']), 
             rating=request.args.get('rating'), 
             review=request.args.get('review'), 
             source=request.args.get('source'),
-            start_date=request.args.get('start_date'),
-            end_date=request.args.get('end_date'),
+            start_date=start_date,
+            end_date=end_date,
             dnf=request.args.get('dnf'))
 
     flash(f"{session['item_to_add']['title']} has been added to your library.")
@@ -395,14 +397,15 @@ def process_item_details_edits():
     # update record in user_media table in db
     user_item = crud.get_user_item_by_user_media_id(session['user_id'], 
                         session['item_to_edit']['user_media_id'])
-    print('**********',user_item)
+    start_date = request.args.get('start_date') if request.args.get('start_date') else None
+    end_date = request.args.get('end_date') if request.args.get('end_date') else None
     crud.update_media_in_user_library(user=crud.get_user_by_id(session['user_id']), 
         media_item=user_item, 
         rating=request.args.get('rating'), 
         review=request.args.get('review'), 
         source=request.args.get('source'),
-        start_date=request.args.get('start_date'),
-        end_date=request.args.get('end_date'),
+        start_date=start_date,
+        end_date=end_date,
         dnf=request.args.get('dnf'))
     print(f"""**********dnf'{request.args.get("dnf")}'""")
 
@@ -547,35 +550,31 @@ def show_timeline():
 
     # get data
     log_data = crud.get_user_log(session['user_id'])
-    # print(log_data)
     books = {}
-    startdate = []
-    enddate = []
+    start_date = []
+    end_date = []
+    media_type = []
     for user_media_id in log_data:
-        print(log_data[user_media_id]['title'])
         if log_data[user_media_id]['start_date']:
             books[f"{log_data[user_media_id]['title']}"] = log_data[user_media_id]['rating']
-            startdate.append(log_data[user_media_id]['start_date'])
-            enddate.append(log_data[user_media_id]['end_date'])
-    # TODO: connect the real data!
-
-    # books = {
-    #     'The Hobbit': 354,
-    #     'Seven Brief Lessons': 60,
-    #     'Priory of the Orange Tree': 900,
-    #     'Cosmos': 290
-    # }
-    # startdate = [3, 2, 1, 4]
-    # enddate = [6, 3, 10, 7]
+            start_date.append(log_data[user_media_id]['start_date'])
+            if log_data[user_media_id]['start_date'] and (log_data[user_media_id]['end_date'] == None):
+                end_date.append(datetime.now())
+            else:
+                end_date.append(log_data[user_media_id]['end_date'])
+            media_type.append(log_data[user_media_id]['media_type'])
     data = pd.Series(books).reset_index(name='rating').rename(columns={'index':'title'})
-    data['startdate'] = startdate # TODO: make these dates
-    data['enddate'] = enddate
+    data['start_date'] = start_date 
+    data['end_date'] = end_date
+    data['media_type'] = media_type
     # data['color'] = Category20[len(books)] # TODO: make color correspond to genre or rating!
 
     # build figure/plot
-    p = figure(y_range=(0, 5.5), x_range=(datetime(2010,1,1,0,0,0), datetime.now()), plot_width=400, plot_height=550, toolbar_location=None,
-            title="reading timeline sorted by rating (proof of concept)")
-    p.hbar(y="rating", left='startdate', right='enddate', height=0.1, source=data) # NOTE: height is width of the bar! also can include fill_color='color'
+    p = figure(y_range=(0, 5.5), x_range=(datetime(2010,1,1,0,0,0), datetime.now()), 
+            plot_width=400, plot_height=550, toolbar_location=None, tools="hover",
+            tooltips=[("title", "@title"), ("media_type", "@media_type")],
+            title="reading timeline sorted by rating")
+    p.hbar(y="rating", left='start_date', right='end_date', height=0.1, source=data) # NOTE: height is width of the bar! also can include fill_color='color'
 
     p.ygrid.grid_line_color = None
     p.xaxis.axis_label = "dates read"
@@ -592,15 +591,8 @@ def show_timeline():
 
 # TODO: create media management functions: 
 
-#       rename collection
-#       remove items from collection
-#       edit rating/review/source
-
-#       DONE: add item to collection 
-#       DONE: delete item from user library 
-#       DONE: create collection 
-#       DONE: delete collection 
-
+#       NTH: rename collection
+#       NTH: remove items from collection
 #       NTH: see/edit updates associated with this item.
 #       NTH: bulk add items to collection
 #       NTH: arrange items in collection 
