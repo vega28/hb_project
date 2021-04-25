@@ -1,6 +1,6 @@
 """ Server for library app. """
 
-from flask import (Flask, render_template, request, flash, session, redirect)
+from flask import (Flask, render_template, request, flash, session, redirect, jsonify)
 import os
 from jinja2 import StrictUndefined
 from pprint import pformat
@@ -10,11 +10,11 @@ from bokeh.embed import components
 from math import pi
 from bokeh.palettes import Category20
 from bokeh.transform import cumsum
-from bokeh.models import ColumnDataSource
+from bokeh.models import ColumnDataSource, CDSView, GroupFilter
 import pandas as pd
 from random import randint
 import json
-from datetime import datetime
+from datetime import datetime, date, time
 
 from model import connect_to_db
 import crud
@@ -232,17 +232,17 @@ def search_api_for_media_item():
         return render_template('api_search_results.html', 
                                 pformat=pformat, data=data)
 
-    elif session['search_query']['media_type'] == 'movie':
-        pass # IMDB movie API
-        # TODO: allow user to select an option to add to db - get its tag, do another request to get that volume's info, and add to db
-        uri = 'https://imdb-api.com/en/API/SearchMovie/'
-        payload = {'apiKey': IMDB_API_KEY,
-            'expression': f"{session['search_query']['title']} {session['search_query']['year']}"} # {session['search_query']['length']}  {session['search_query']['genre']}
-        res = requests.get(uri, params=payload)
-        data = res.json()
+    # elif session['search_query']['media_type'] == 'movie':
+    #     pass # IMDB movie API
+    #     # TODO: allow user to select an option to add to db - get its tag, do another request to get that volume's info, and add to db
+    #     uri = 'https://imdb-api.com/en/API/SearchMovie/'
+    #     payload = {'apiKey': IMDB_API_KEY,
+    #         'expression': f"{session['search_query']['title']} {session['search_query']['year']}"} # {session['search_query']['length']}  {session['search_query']['genre']}
+    #     res = requests.get(uri, params=payload)
+    #     data = res.json()
 
-        return render_template('api_search_results.html', 
-                                pformat=pformat, data=data) # TODO: check this... not same as books!!
+    #     return render_template('api_search_results.html', 
+    #                             pformat=pformat, data=data) # TODO: check this... not same as books!!
 
     #// elif session['search_query']['media_type'] == 'tv_ep':
     #//     pass # IMDB TV API
@@ -336,6 +336,7 @@ def add_media_item():
 
     start_date = request.args.get('start_date') if request.args.get('start_date') else None
     end_date = request.args.get('end_date') if request.args.get('end_date') else None
+    dnf = True if request.args.get('dnf') else False
     crud.store_media_in_user_library(user=crud.get_user_by_id(session['user_id']), 
             media_item=crud.get_item_by_id(session['item_to_add']['item_id']), 
             rating=request.args.get('rating'), 
@@ -343,7 +344,7 @@ def add_media_item():
             source=request.args.get('source'),
             start_date=start_date,
             end_date=end_date,
-            dnf=request.args.get('dnf'))
+            dnf=dnf)
 
     flash(f"{session['item_to_add']['title']} has been added to your library.")
 
@@ -550,31 +551,39 @@ def show_timeline():
 
     # get data
     log_data = crud.get_user_log(session['user_id'])
-    books = {}
-    start_date = []
-    end_date = []
-    media_type = []
+    data = {'title': [], 'media_type': [], 'rating': [], 'start_date': [], 'end_date':[]}
     for user_media_id in log_data:
         if log_data[user_media_id]['start_date']:
-            books[f"{log_data[user_media_id]['title']}"] = log_data[user_media_id]['rating']
-            start_date.append(log_data[user_media_id]['start_date'])
+            data['title'].append(log_data[user_media_id]['title'])
+            data['rating'].append(log_data[user_media_id]['rating'])
+            start_date = datetime.combine(log_data[user_media_id]['start_date'],time.min)
+            data['start_date'].append(start_date)
             if log_data[user_media_id]['start_date'] and (log_data[user_media_id]['end_date'] == None):
-                end_date.append(datetime.now())
+                data['end_date'].append(datetime.now())
             else:
-                end_date.append(log_data[user_media_id]['end_date'])
-            media_type.append(log_data[user_media_id]['media_type'])
-    data = pd.Series(books).reset_index(name='rating').rename(columns={'index':'title'})
-    data['start_date'] = start_date 
-    data['end_date'] = end_date
-    data['media_type'] = media_type
-    # data['color'] = Category20[len(books)] # TODO: make color correspond to genre or rating!
+                data['end_date'].append(datetime.combine(log_data[user_media_id]['end_date'],time.min))
+            data['media_type'].append(log_data[user_media_id]['media_type'])
+    colors = Category20[5] 
+    cds_data = ColumnDataSource(data=data)
+    print(cds_data.data)
+    movie_view = CDSView(source=cds_data,
+            filters=[GroupFilter(column_name='media_type', group='movie')])
+    book_view = CDSView(source=cds_data,
+            filters=[GroupFilter(column_name='media_type', group='book')])
+    tv_view = CDSView(source=cds_data,
+            filters=[GroupFilter(column_name='media_type', group='tv')])
 
     # build figure/plot
     p = figure(y_range=(0, 5.5), x_range=(datetime(2010,1,1,0,0,0), datetime.now()), 
-            plot_width=400, plot_height=550, toolbar_location=None, tools="hover",
+            plot_width=500, plot_height=350, tools=["hover","box_zoom","wheel_zoom","pan"],
             tooltips=[("title", "@title"), ("media_type", "@media_type")],
-            title="reading timeline sorted by rating")
-    p.hbar(y="rating", left='start_date', right='end_date', height=0.1, source=data) # NOTE: height is width of the bar! also can include fill_color='color'
+            title="timeline sorted by rating")
+    p.hbar(y="rating", left='start_date', right='end_date', fill_alpha=0.5,
+            height=0.35, view=book_view, fill_color=colors[0], source=cds_data) 
+    p.diamond(y="rating", x='start_date', fill_alpha=0.5, size=20,
+            view=movie_view, fill_color=colors[2], source=cds_data)
+    p.hex(y="rating", x='start_date', fill_alpha=0.5, size=20,
+            view=tv_view, fill_color=colors[4], source=cds_data)
 
     p.ygrid.grid_line_color = None
     p.xaxis.axis_label = "dates read"

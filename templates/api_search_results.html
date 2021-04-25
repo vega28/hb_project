@@ -16,7 +16,9 @@
               {{ volume['volumeInfo']['title'] }} 
               AUTHORED BY: {{ volume['volumeInfo'].get('authors') }}
               MY ID IS: {{ volume['id'] }}
-              <img src="{{ volume['volumeInfo'].get('imageLinks')['smallThumbnail'] }}">
+              {% if volume['volumeInfo'].get('imageLinks') %} 
+                <img src="{{ volume['volumeInfo']['imageLinks'].get('smallThumbnail') }}">
+              {% endif %} 
         </a>
       </label>
       <input type="hidden" name="{{ loop.index }}-title" 
@@ -25,8 +27,10 @@
         value="{{ volume['volumeInfo'].get('authors') }}">
       <input type="hidden" name="{{ loop.index }}-id" 
         value="{{ volume['id'] }}">
-      <input type="hidden" name="{{ loop.index }}-cover" 
-        value="{{ volume['volumeInfo'].get('imageLinks')['smallThumbnail'] }}">
+      {% if volume['volumeInfo'].get('imageLinks') %}
+        <input type="hidden" name="{{ loop.index }}-cover" 
+          value="{{ volume['volumeInfo'].get('imageLinks')['smallThumbnail'] }}">
+      {% endif %} 
       <input type="hidden" name="{{ loop.index }}-pageCount" 
         value="{{ volume['volumeInfo'].get('pageCount') }}">
       <input type="hidden" name="{{ loop.index }}-description" 
