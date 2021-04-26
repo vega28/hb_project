@@ -210,7 +210,7 @@ def search_db(query_terms):
     if query_terms.get('year'):
         new_query = new_query.filter(Item.year == query_terms['year'])
     if query_terms.get('genre'):
-        new_query = new_query.join(MediaGenre).join(Genre)
+        new_query = new_query.join(Genre.items)
         new_query = new_query.filter(Genre.genre_name == query_terms.get('genre'))
 
     if query_terms.get('media_type') == 'book':
