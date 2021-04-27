@@ -148,16 +148,23 @@ $('#create-collection').on('click', () => {
                {'collection_name': collection_name, 'public': public_bool}, 
                (res) => {
           alert(res['alert']);
-          $(`#collections-display`).append(
-            `<div id="collection-display-${res['collection_id']}">
-              <h5 class="collection" id="${res['collection_id']}" 
-                value="${res['collection_id']}">
-                ${collection_name}`);
           if (public_bool === '') {
-            // ! this displays on next line and not in header...
-            $(`#collection-display-${res['collection_id']}`).append('(private)'); 
-          } 
-          $(`#collection-display-${res['collection_id']}`).append(`</h5></div>`); 
+            $(`#collections-display`).append(
+              `<div id="collection-display-${res['collection_id']}">
+                <h5 class="collection" id="${res['collection_id']}" 
+                  value="${res['collection_id']}">
+                  ${collection_name} (private)
+                </h5>
+              </div>`);  
+          } else {
+            $(`#collections-display`).append(
+              `<div id="collection-display-${res['collection_id']}">
+                <h5 class="collection" id="${res['collection_id']}" 
+                  value="${res['collection_id']}">
+                  ${collection_name} 
+                </h5>
+              </div>`);
+          }
           console.log('collection has successfully been added.');
         })
         $('#new-collection').html('');
