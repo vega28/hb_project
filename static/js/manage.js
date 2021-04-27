@@ -8,7 +8,7 @@
 //    allow user to add item to a collection
 
 $('.user-media-id').on('click', (evt) => {
-    $('#collection-details').html('');
+    $('#collection-details').html(''); // reset collection details popout
     $.post('/view_item', {'user_media_id': evt.target.id}, (res) => {
         $('#item-details').html(res);
         console.log('item details have successfully been displayed on this page');
@@ -95,7 +95,7 @@ $('.collection').on('click', (evt) => {
     $('#item-details').html('');
     $.post('/view_collection', {'collection_id': evt.target.id}, (res) => {
         $('#collection-details').html(res);
-    })
+
     console.log('collection details have successfully been displayed on the page');
 
     //* When user clicks delete collection button, delete collection
@@ -109,7 +109,8 @@ $('.collection').on('click', (evt) => {
           $(`#collection-display-${id_to_del}`).remove();
           alert(res);
       }); 
-    })
+    });
+    });
 
     // TODO: When user clicks "Make Collection Public/Private" button, toggle public status of that collection.
     // TODO: When user clicks "Rename Collection" button, ask for new name and then update that collection's record
