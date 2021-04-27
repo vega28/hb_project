@@ -5,7 +5,9 @@
 <div>
   <a href="/edit_item"><button class="item-actions" id="edit-details" value="{{ user_item.user_media_id }}">Edit Details</button></a>
   <button class="item-actions" id="add-to-collection" value="{{ user_item.user_media_id }}">Add to Collection</button>
-  <button class="item-actions" id="delete-from-library" value="{{ user_item.user_media_id }}">Delete From Your Library</button>
+  <button class="item-actions" id="delete-from-library" value="{{ user_item.user_media_id }}">
+    Delete From Your Library
+  </button>
   <button class="close-details" id="close-item-actions" value="{{ user_item.user_media_id }}">Close Details</button>
 </div>
 
@@ -34,6 +36,6 @@
   <p>{{ user_item.item.description }}</p>
 </div>
 
-<script src="/static/js/manage.js"></script>
+<script src="/static/js/manage_popout.js"></script>
 
 <h1>-----------------------------------------------------------</h1>

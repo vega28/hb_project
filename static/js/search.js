@@ -40,6 +40,7 @@ function displayResults(results) {
     console.log(typeof(results))
     $('#db-search-results').html('')
     // TODO: deal with case of no results in db
+    // !     why doesn't the below work?
     // if (results === {}) {
     //     $('#db-search-results').append('Sorry, that search is not turning up any results.');
     // }
@@ -66,6 +67,6 @@ $('.choice').on('change', (evt) => {
                     'author': $('#author').val(),
                     'length': $('#length').val(),
                     'season': $('#season').val(),
-                    'genre': $('#genre option:selected').val()}; // ! check this!!!
+                    'genre': $('#genre option:selected').val()}; 
     $.get('/process_search', formData, displayResults);
 })
