@@ -1,13 +1,6 @@
 "use strict";
 
 //--------------------------------------------------------------------//
-// *** General Management Functions                                   //
-//--------------------------------------------------------------------//
-
-
-
-
-//--------------------------------------------------------------------//
 // *** Item Management Functions                                      //
 //--------------------------------------------------------------------//
 
@@ -66,12 +59,7 @@ $('.user-media-id').on('click', (evt) => {
                     $('#which-collection-to-add-to').html('');
                 });
             });
-            //* When user clicks close button, 
-            //    close the expanded details (both collection and item)
 
-            $('.close-details').on('click', () => {
-              $('#item-details').html('');
-            });
         });
     });
 });
@@ -125,12 +113,6 @@ $('.collection').on('click', (evt) => {
 
     // TODO: When user clicks "Make Collection Public/Private" button, toggle public status of that collection.
     // TODO: When user clicks "Rename Collection" button, ask for new name and then update that collection's record
-    //* When user clicks close button, 
-    //    close the expanded details (both collection and item)
-
-    $('.close-details').on('click', () => {
-      $('#collection-details').html('');
-    })
 })
 
 
