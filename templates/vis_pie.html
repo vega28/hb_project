@@ -6,11 +6,10 @@
 {% block title %}Mybrary | pie time 🥧{% endblock %}
 
 {% block body %}
-  <h1>🥧pie pie pie🥧</h1>
-               
+<div class="container-fluid">
   {{ plot_div|safe }}
-  {{ plot_script|safe }}
-
+</div>
+{{ plot_script|safe }}
 {% endblock %}
 
 

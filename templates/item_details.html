@@ -3,6 +3,7 @@
 {% block title %}Mybrary | {{ item.title }} Details{% endblock %}
 
 {% block body %}
+  <div class="container">
   <h1>{{ item.title }}</h1>
   <p>{{ item.description }}</p>
   <img src="{{ item.cover }}">
@@ -12,4 +13,5 @@
       <button type="submit" name="chosen-item" value="{{ item.item_id }}">Add to my library!</button>
     </form>
   {% endif %}
+  </div>
 {% endblock %}

@@ -4,8 +4,9 @@
 
 {% block body %}
   <div class="container-fluid">
+
     <aside class="navbar align-items-start w-25">
-      <nav class="nav flex-column position-sticky" id="user-info">
+      <nav class="nav flex-column side-nav" id="user-info">
         <img src="{{ user.profile_pic }}">
         <a class="nav-link" href="/pie">Your Genres</a>
         <a class="nav-link" href="/timeline">Your Timeline</a>
@@ -15,10 +16,10 @@
       </nav>
     </aside>
 
-    <div class="container" id="collections-display">
+    <div class="container row" id="collections-display">
       <h3 id="your-collections">Your collections:</h3>
       {% for collection in user.collections %} 
-        <div class="container" id="collection-display-{{ collection.collection_id }}">
+        <div class="container col" id="collection-display-{{ collection.collection_id }}">
           <h5 class="collection" id="{{ collection.collection_id }}" 
             value="{{ collection.collection_id }}">
             {{ collection.name }}
@@ -39,12 +40,16 @@
       <div class="container" id="which-collection-to-add-to"></div>
     </div>
 
+    <div class="empty-space">.</div><!--add whitespace-->
+
     <div class="container" id="collection-details"></div>
 
     <div class="container" id="item-details"></div>
 
-    <div class="container">
-      <h3>Your media:</h3>
+    <div class="empty-space">.</div><!--add whitespace-->
+
+    <div class="container row">
+      <h3>Your Media (display option 1):</h3>
       <div class="container">
         {% for user_item in user.media %} 
           <img src="{{ user_item.item.cover }}" 
@@ -54,13 +59,16 @@
       </div>
     </div>
 
+    <div class="empty-space">.</div><!--add whitespace-->
+
+
 
     <!-- from bootstrap sortable table -->
     <link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
     <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
     
     <div class="container table">
-      <h3 id="your-media">Your Media</h3>
+      <h3 id="your-media">Your Media (display option 2)</h3>
       <table
         data-toggle="table"
         data-search="true"

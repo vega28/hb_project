@@ -7,9 +7,17 @@ body {
 }
 
 .container {
-  /* background-color: whitesmoke; */
+  background-color: whitesmoke;
+  color: #312f30;
+  /* background-color: #312f30;
+  color: whitesmoke; */
+  margin: auto;
+  padding: 1em;
+}
+
+.empty-space {
+  /* background: transparent; */
   background-color: #312f30;
-  color: whitesmoke;
 }
 
 .table {
@@ -25,4 +33,18 @@ a {
 .nav {
   color: #00826D;
   background-color: whitesmoke;
+}
+
+/* .navbar-custom {
+  background-color: whitesmoke; opacity: 0.5;
+  color: #00826D;
+} */
+
+.logo {
+  height: 2em;
+}
+
+.foot {
+  color: #00826D; 
+  background-color: whitesmoke; opacity: 0.5;
 }
