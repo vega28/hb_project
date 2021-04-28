@@ -1,3 +1,28 @@
 img {
     height: 10em;
   }
+
+body {
+  background: url("/static/images/vichy/vichy.png") repeat center center;
+}
+
+.container {
+  /* background-color: whitesmoke; */
+  background-color: #312f30;
+  color: whitesmoke;
+}
+
+.table {
+  color: #312f30;
+  background-color: whitesmoke;
+}
+
+a {
+  color: #00B9A1;
+  text-decoration: underline;
+}
+
+.nav {
+  color: #00826D;
+  background-color: whitesmoke;
+}

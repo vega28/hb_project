@@ -5,6 +5,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdn.bokeh.org/bokeh/release/bokeh-2.3.1.min.js" crossorigin="anonymous"></script>   
     <link rel="stylesheet" href="/static/css/library.css">
+    <link rel="shortcut icon" href="/static/images/favicon.ico">
     <title>{% block title %}{% endblock %}</title>
   </head>
   <body>
@@ -14,16 +15,16 @@
       </p>
     {% endfor %}
     <nav class="nav">
-      <a class="nav-link active" href="/">Home</a>
+      <a class="nav-link active" aria-current="page" href="/">Home</a><!-- how to make aria point at current page? -->
       <a class="nav-link" href="/media">View all media</a>
       <a class="nav-link" href="/users">View all users</a>
       {% if session.get('user_id') %} 
-        You are logged in as {{ session['user_name'] }}.
-        <a class="nav-link" href="/log_out">Log Out</a>
+        <a class="nav-link disabled" >Hi, {{ session['user_name'] }}!</a><!-- left justify and not clickable -->
+        <a class="nav-link" href="/log_out">Log Out</a><!-- left justify -->
       {% endif %} 
       {% if session.get('user_id') == None %} 
-        <a class="nav-link" href="/log_in">Log In</a>
-        <a class="nav-link" href="/sign_up">Sign Up</a>
+        <a class="nav-link" href="/log_in">Log In</a><!-- left justify -->
+        <a class="nav-link" href="/sign_up">Sign Up</a><!-- left justify -->
       {% endif %}
     </nav>  
     {% block body %}{% endblock %}
