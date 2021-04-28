@@ -172,5 +172,3 @@ $('#create-collection').on('click', () => {
     })
 })
 
-
-

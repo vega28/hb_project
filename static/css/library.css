@@ -44,7 +44,15 @@ a {
   height: 2em;
 }
 
-.foot {
-  color: #00826D; 
+.btn-primary {
+  color: whitesmoke;
+  background-color: #00B9A1;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;  /* required because fixed position */
   background-color: whitesmoke; opacity: 0.5;
+  color: #00826D; 
 }
