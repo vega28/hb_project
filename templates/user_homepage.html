@@ -13,6 +13,7 @@
       <a class="nav-link" href="/timeline">Your Timeline</a>
       <a class="nav-link" href="/search">Search for New Items</a>
       <a class="nav-link" href="#your-collections">Collections</a>
+      <a class="nav-link" href="#your-top-media">Your Top Media</a>
       <a class="nav-link" href="#your-media">Your Media</a>
     </nav>
   </aside>  
@@ -21,7 +22,7 @@
 
   <!-- testing modals -->
   <!-- Modal -->
-  <div class="modal" id="collection-popout" tabindex="-1" 
+  <!-- <div class="modal" id="collection-popout" tabindex="-1" 
   aria-labelledby="collection-popout-label" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -45,13 +46,14 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- /testing modals -->
   <main class="main-content w-100">
     <div class="container row" id="collections-display">
       <h3 id="your-collections">Your Collections</h3>
       {% for collection in user.collections %} 
-      <div class="container col" id="collection-display-{{ collection.collection_id }}">
+      <div class="container col">
+      <div class="container" id="collection-display-{{ collection.collection_id }}">
         <h5 class="collection" id="{{ collection.collection_id }}" 
         value="{{ collection.collection_id }}">
           {{ collection.name }}
@@ -62,10 +64,17 @@
         {% for user_item in collection.user_media %}
           <img src="{{ user_item.item.cover }}" class="{{ user_item.user_media_id }}">
         {% endfor %}
-        <p>
+        <!-- <p>
           <button type="button" class="btn btn-primary" data-bs-toggle="modal" 
           data-bs-target="#collection-popout">
             delete collection
+          </button>
+        </p> -->
+        </div>
+        <p>
+          <button type="button" class="btn btn-primary collection" 
+          id="{{ collection.collection_id }}" value="{{ collection.collection_id }}">
+            view details
           </button>
         </p>
       </div>
@@ -75,7 +84,6 @@
         Add New Collection
       </button>
       <div class="container" id="new-collection"></div>
-      <div class="container" id="which-collection-to-add-to"></div>
     </div>
 
     <div class="empty-space">&ThinSpace;</div><!--add whitespace-->
@@ -87,7 +95,7 @@
     <div class="empty-space">&ThinSpace;</div><!--add whitespace-->
 
     <div class="container row">
-      <h3>Your Top Media</h3>
+      <h3 id="your-top-media">Your Top Media</h3>
       <div class="container">
         {% for user_item in user.media %} 
           <img src="{{ user_item.item.cover }}" 

@@ -173,13 +173,13 @@ $('#create-collection').on('click', () => {
 })
 
 
-$('#testing').on('click', () => {
-  const id_to_del = $('#delete-collection').val();
-  console.log(`here's your value: "${id_to_del}"`); // 
+// $('#testing').on('click', () => {
+//   const id_to_del = $('#delete-collection').val();
+//   console.log(`here's your value: "${id_to_del}"`); // 
   // NTH: pop up confirmation before actually deleting
   // $.post('/delete_collection', {'collection_id': id_to_del}, (res) => {
   //     $('#collection-details').html('');
   //     $(`#collection-display-${id_to_del}`).remove();
   //     alert(res);
   // });
-});
+// });

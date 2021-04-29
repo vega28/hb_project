@@ -40,7 +40,7 @@ def show_homepage():
 
     if logged_in:
         user = crud.get_user_by_id(session['user_id'])
-        return render_template('user_homepage.html', user=user)
+        return render_template('user_homepage_v2.html', user=user)
     else:
         return render_template('homepage.html')
 

@@ -3,14 +3,17 @@
 <h1 name="chosen-item" id="db-item-id" value="{{ db_item.item_id }}">Manage Your Item</h1>
 
 <div class="container">
-  <a href="/edit_item"><button class="item-actions btn btn-primary" id="edit-details" value="{{ user_item.user_media_id }}">Edit Details</button></a>
-  <button class="item-actions btn btn-primary" id="add-to-collection" value="{{ user_item.user_media_id }}">Add to Collection</button>
-  <button class="item-actions btn btn-primary" id="delete-from-library" value="{{ user_item.user_media_id }}">
-    Delete From Your Library
+  <a href="/edit_item"><button class="item-actions btn btn-primary" id="edit-details" 
+    value="{{ user_item.user_media_id }}">Edit Details</button></a>
+  <button class="item-actions btn btn-primary" id="add-to-collection" 
+  value="{{ user_item.user_media_id }}">Add to Collection</button>
+  <button class="item-actions btn btn-primary" id="delete-from-library" 
+  value="{{ user_item.user_media_id }}">Delete From Your Library
   </button>
-  <button class="close-details btn btn-primary" id="close-item-actions" value="{{ user_item.user_media_id }}">Close Details</button>
+  <button class="close-details btn btn-primary" id="close-item-actions" 
+  value="{{ user_item.user_media_id }}">Close</button>
 </div>
-
+<div class="container more-detail" id="which-collection-to-add-to"></div>
 <div class="container">
   <h3 id="chosen-user-item" value="{{ user_item.user_media_id }}">{{ user_item.item.title }}</h3>
   <img src="{{ user_item.item.cover }}" id="item-cover">

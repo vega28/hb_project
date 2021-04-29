@@ -5,8 +5,10 @@
 <div class="container">
   <h3>{{ collection.name }}</h3>
   <div>
-    <button class="collection-actions btn btn-primary" id="delete-collection" value="{{ collection.collection_id }}">Delete Collection</button>
-    <button class="close-details btn btn-primary" id="close-collection-actions" value="{{ collection.collection_id }}">Close Details</button>
+    <button class="collection-actions btn btn-primary" id="delete-collection" 
+    value="{{ collection.collection_id }}">Delete Collection</button>
+    <button class="close-details btn btn-primary" id="close-collection-actions" 
+    value="{{ collection.collection_id }}">Close</button>
   </div>
   {% for item in collection.user_media %}
       <img src="{{ item.item.cover }}" class="{{ item.user_media_id }}">

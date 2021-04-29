@@ -3,7 +3,7 @@ img {
   }
 
 .flexible-img {
-  height: auto;
+  width: auto;
 }
 
 body {
@@ -25,7 +25,6 @@ body {
 }
 
 .empty-space {
-  /* background: transparent; */
   background-color: transparent;
 }
 
@@ -43,30 +42,6 @@ a {
   color: #00826D;
   background-color: whitesmoke;
 }
-
-.sidenav {
-  /* position: fixed; */
-  height: 100%;
-  width: 160px;
-  position: sticky;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  padding-top: 20px;
-}
-
-/* .position-sticky {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 20px;
-  left: 0;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  z-index: 1;
-} */
 
 .user-info {
   margin-top: 0;
@@ -99,7 +74,12 @@ a {
 footer {
   position: relative;
   bottom: 0;
-  width: 100%;  /* required because fixed position */
+  width: 100%;  
   background-color: whitesmoke; opacity: 0.5;
   color: #00826D; 
+}
+
+.sidebar-user nav.position-sticky {
+  top: 0;
+  left: 0;
 }
