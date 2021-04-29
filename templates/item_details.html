@@ -10,7 +10,8 @@
 
   {% if session.get('user_id') %} 
     <form action="/review_media">
-      <button type="submit" name="chosen-item" value="{{ item.item_id }}">Add to my library!</button>
+      <button class="btn btn-primary" type="submit" name="chosen-item" 
+      value="{{ item.item_id }}">Add to my library!</button>
     </form>
   {% endif %}
   </div>

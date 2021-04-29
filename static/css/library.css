@@ -2,6 +2,10 @@ img {
     height: 10em;
   }
 
+.flexible-img {
+  height: auto;
+}
+
 body {
   background: url("/static/images/vichy/vichy.png") repeat center center;
 }
@@ -15,9 +19,14 @@ body {
   padding: 1em;
 }
 
+.popout {
+  background-color: #BC4364; 
+  color: whitesmoke;
+}
+
 .empty-space {
   /* background: transparent; */
-  background-color: #312f30;
+  background-color: transparent;
 }
 
 .table {
@@ -31,6 +40,39 @@ a {
 }
 
 .nav {
+  color: #00826D;
+  background-color: whitesmoke;
+}
+
+.sidenav {
+  /* position: fixed; */
+  height: 100%;
+  width: 160px;
+  position: sticky;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+/* .position-sticky {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 20px;
+  left: 0;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+} */
+
+.user-info {
+  margin-top: 0;
+}
+
+.navbar {
   color: #00826D;
   background-color: whitesmoke;
 }
@@ -49,8 +91,13 @@ a {
   background-color: #00B9A1;
 }
 
+.btn-warning {
+  color: whitesmoke;
+  background-color: #BC4364;
+}
+
 footer {
-  position: fixed;
+  position: relative;
   bottom: 0;
   width: 100%;  /* required because fixed position */
   background-color: whitesmoke; opacity: 0.5;

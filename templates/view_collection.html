@@ -1,13 +1,12 @@
-
-<h1>-----------------------------------------------------------</h1>
+<div class="container popout">
 
 <h1>Manage Your Collection</h1>
 
-<div>
+<div class="container">
   <h3>{{ collection.name }}</h3>
   <div>
-    <button class="collection-actions" id="delete-collection" value="{{ collection.collection_id }}">Delete Collection</button>
-    <button class="close-details" id="close-collection-actions" value="{{ collection.collection_id }}">Close Details</button>
+    <button class="collection-actions btn btn-primary" id="delete-collection" value="{{ collection.collection_id }}">Delete Collection</button>
+    <button class="close-details btn btn-primary" id="close-collection-actions" value="{{ collection.collection_id }}">Close Details</button>
   </div>
   {% for item in collection.user_media %}
       <img src="{{ item.item.cover }}" class="{{ item.user_media_id }}">
@@ -16,4 +15,4 @@
 
 <script src="/static/js/manage_popout.js"></script>
 
-<h1>-----------------------------------------------------------</h1>
+</div>
