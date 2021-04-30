@@ -20,11 +20,9 @@ body {
 }
 
 .popout {
-  background-color: #BC4364; 
+  background-color: #c8a16e; 
   color: whitesmoke;
 }
-
-
 
 .table {
   color: #312f30;
@@ -47,13 +45,8 @@ a {
 
 .navbar {
   color: #00826D;
-  background-color: whitesmoke;
+  background-color: rgb(245, 245, 245);
 }
-
-/* .navbar-custom {
-  background-color: whitesmoke; opacity: 0.5;
-  color: #00826D;
-} */
 
 .logo {
   height: 2em;
@@ -84,4 +77,10 @@ footer {
 
 .empty-space {
   background-color: transparent;
+}
+
+.flash-msg {
+  padding: 10px;
+  margin: 0;
+  background-color: #c8a16e;
 }
