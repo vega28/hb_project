@@ -46,9 +46,13 @@ function displayResults(results) {
     for (let i in results) {
       $('#db-search-results').append(
         `<div>
-          <input type="radio" name="chosen-item" value="${i}" required> 
-          ${results[i]['title']}
-          <img src=${results[i]['cover']}>
+          <div class="card" style="width: 8em;">
+            <img src=${results[i]['cover']}> 
+            <div class="card-body">
+              <input type="radio" name="chosen-item" value="${i}" required> 
+              <span class="card-text">${results[i]['title']}</span>
+            </div>
+          </div>
         </div>`
         );
     }
