@@ -16,9 +16,8 @@ $('#media_type').on('change', (evt) => {
         $('#its-a-book').slideDown();
         $('#go-search-api').html(
             `<p>
-              Not finding what you're looking for? 
+              Not finding the book you're looking for? 
               <a href="/api_search">Search Google Books instead!</a>
-              <img src="http://25.media.tumblr.com/368c39479619dc392ce951edfd1e324b/tumblr_mzty556vVY1qekx3go6_250.gif">
             </p>`);
     }
     if ($('#media_type').val() === 'movie') {

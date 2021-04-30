@@ -122,7 +122,7 @@ $('.collection').on('click', (evt) => {
 
 $('#create-collection').on('click', () => {
     $('#new-collection').html(
-      `<form id="new-collection-form">
+      `<div class="container popout col-3"><div class="container"><form id="new-collection-form">
         <p>New collection name: 
           <input type="text" id="new-collection-name">
         </p>
@@ -137,7 +137,7 @@ $('#create-collection').on('click', () => {
           Private
         </p>
         <input type="submit" id="submit-new-collection">
-      </form>`
+      </form></div></div>`
       );
 
     $('#new-collection-form').on('submit', (evt) => {
@@ -151,20 +151,30 @@ $('#create-collection').on('click', () => {
           alert(res['alert']);
           if (public_bool === '') {
             $(`#collections-display`).append(
-              `<div id="collection-display-${res['collection_id']}">
-                <h5 class="collection" id="${res['collection_id']}" 
-                  value="${res['collection_id']}">
-                  ${collection_name} (private)
-                </h5>
-              </div>`);  
+              `<div class="container col" id="collection-display-${res['collection_id']}">
+              <div class="container">
+                <h5>${collection_name} (private)</h5>
+              </div>
+              <p>
+              <button type="button" class="btn btn-primary collection" 
+              id="${res['collection_id']}" value="${res['collection_id']}">
+                view details
+              </button>
+              </p>
+            </div>`);  
           } else {
             $(`#collections-display`).append(
-              `<div id="collection-display-${res['collection_id']}">
-                <h5 class="collection" id="${res['collection_id']}" 
-                  value="${res['collection_id']}">
-                  ${collection_name} 
-                </h5>
-              </div>`);
+              `<div class="container col" id="collection-display-${res['collection_id']}">
+              <div class="container">
+                <h5>${collection_name}</h5>
+              </div>
+              <p>
+              <button type="button" class="btn btn-primary collection" 
+              id="${res['collection_id']}" value="${res['collection_id']}">
+                view details
+              </button>
+              </p>
+            </div>`);
           }
           console.log('collection has successfully been added.');
         })

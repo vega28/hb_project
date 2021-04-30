@@ -10,7 +10,7 @@ body {
   background: url("/static/images/vichy/vichy.png") repeat center center;
 }
 
-.container {
+.blurb {
   background-color: whitesmoke;
   color: #312f30;
   /* background-color: #312f30;
@@ -24,9 +24,7 @@ body {
   color: whitesmoke;
 }
 
-.empty-space {
-  background-color: transparent;
-}
+
 
 .table {
   color: #312f30;
@@ -82,4 +80,8 @@ footer {
 .sidebar-user nav.position-sticky {
   top: 0;
   left: 0;
+}
+
+.empty-space {
+  background-color: transparent;
 }

@@ -23,57 +23,58 @@
           <!----------------------------------------------------------------->
           <!-- *** COLLECTIONS SECTION                                     -->
           <!----------------------------------------------------------------->
-          <div class="col">
-
-            <h3 id="your-collections">Your Collections</h3>
-            {% for collection in user.collections %} 
-            <div class="container col">
-            <div class="container" id="collection-display-{{ collection.collection_id }}">
-              <h5 class="collection" id="{{ collection.collection_id }}" 
-              value="{{ collection.collection_id }}">
-                {{ collection.name }}
-                {% if not collection.public %} 
-                  (private)
-                {% endif %} 
-              </h5>
-              {% for user_item in collection.user_media %}
-                <img src="{{ user_item.item.cover }}" class="{{ user_item.user_media_id }}">
-              {% endfor %}
-              </div>
-              <p>
+          <div class="col blurb">
+            <div class="row" id="collections-display">
+              <h3 id="your-collections">Your Collections</h3>
+              {% for collection in user.collections %} 
+              <div class="container col" id="collection-display-{{ collection.collection_id }}">
+                <div class="container">
+                <h5>
+                  {{ collection.name }}
+                  {% if not collection.public %} 
+                    (private)
+                  {% endif %} 
+                </h5>
+                {% for user_item in collection.user_media %}
+                  <img src="{{ user_item.item.cover }}" class="{{ user_item.user_media_id }}">
+                {% endfor %}
+                </div>
+                <p>
                 <button type="button" class="btn btn-primary collection" 
                 id="{{ collection.collection_id }}" value="{{ collection.collection_id }}">
                   view details
                 </button>
-              </p>
+                </p>
+              </div>
+              {% endfor %} 
             </div>
-            {% endfor %} 
-      
             <button class="collection-actions btn btn-primary" id="create-collection">
               Add New Collection
             </button>
             <div class="container" id="new-collection"></div>
-      
           </div>
         </div>
 
         <div class="row empty-space">&ThinSpace;</div><!--add whitespace-->
 
         <div class="row">
-            <!----------------------------------------------------------------->
-            <!-- *** POPOUT SECTIONS                                         -->
-            <!----------------------------------------------------------------->
+          <!----------------------------------------------------------------->
+          <!-- *** POPOUT SECTIONS                                         -->
+          <!----------------------------------------------------------------->
+          <div class="col">
             <div class="container-fluid" id="collection-details"></div>
-          <div class="container-fluid" id="item-details"></div>
+            <div class="container-fluid" id="item-details"></div>
+          </div>
         </div>
-
-        <div class="row empty-space">&ThinSpace;</div><!--add whitespace-->    
+        
+        <div class="row empty-space">&ThinSpace;</div><!--add whitespace-->
 
         <div class="row">
-            <!----------------------------------------------------------------->
-            <!-- *** TOP MEDIA SECTION                                       -->
-            <!----------------------------------------------------------------->
-            <h3 id="your-top-media">Your Top Media</h3>
+          <!----------------------------------------------------------------->
+          <!-- *** TOP MEDIA SECTION                                       -->
+          <!----------------------------------------------------------------->
+          <div class="col blurb">
+          <h3 id="your-top-media">Your Top Media</h3>
             <div class="container">
               {% for user_item in user.media %} 
                 <img src="{{ user_item.item.cover }}" 
@@ -81,9 +82,11 @@
                 id="{{ user_item.user_media_id }}" value="{{ user_item.user_media_id }}">
               {% endfor %}
             </div>      
+          </div>
         </div>
-
-        <div class="row empty-space">.</div><!--add whitespace-->
+        
+        <div class="row empty-space">&ThinSpace;</div><!--add whitespace-->
+        <div class="row empty-space">&ThinSpace;</div><!--add whitespace-->
 
         <div class="row">
           <!----------------------------------------------------------------->
@@ -92,53 +95,55 @@
           <!-- from bootstrap sortable table -->
           <link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
           <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
-        
-          <div class="container table">
-          <h3 id="your-media">Your Library</h3>
-          <table
-          data-toggle="table"
-          data-search="true"
-          data-show-columns="true">
-          <thead>
-            <tr>
-              <th>UM-ID</th>
-              <th>Type</th>
-              <th>Cover</th>
-              <th>Title</th>
-              <th>Last Updated</th>
-              <th>Rating</th>
-              <th>Review</th>
-              <th>Source</th>
-              <th>Start Date</th>
-              <th>Finish Date</th>
-              <th>DNF</th>
-              <th>Num Times Thru</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for item in user.media %} 
-              <tr id="tr-id-{{ item.user_media_id }}" class="tr-class-{{ item.user_media_id }}" 
-              data-title="bootstrap table" data-object='{"key": "value"}'>
-                <td>{{ item.user_media_id }}</td>
-                <td>{{ item.item.media_type.media_type }}</td>
-                <td><img src="{{ item.item.cover }}"></td>
-                <td>{{ item.item.title }}</td>
-                <td>{{ item.last_updated_at }}</td>
-                <td>{{ item.rating }}</td>
-                <td>{{ item.review }}</td>
-                <td>{{ item.source }}</td>
-                <td>{{ item.start_date }}</td>
-                <td>{{ item.end_date }}</td>
-                <td>{{ item.dnf }}</td>
-                <td>{{ item.num_consumptions }}</td>
-              </tr>
-            {% endfor %} 
-            </tbody>
-          </table>
-        </div>  
+          <div class="col blurb">
+            <div class="container table">
+            <h3 id="your-media">Your Library</h3>
+            <table
+            data-toggle="table"
+            data-search="true"
+            data-show-columns="true">
+            <thead>
+                <tr>
+                <th>UM-ID</th>
+                <th>Type</th>
+                <th>Cover</th>
+                <th>Title</th>
+                <th>Last Updated</th>
+                <th>Rating</th>
+                <th>Review</th>
+                <th>Source</th>
+                <th>Start Date</th>
+                <th>Finish Date</th>
+                <th>DNF</th>
+                <th>Num Times Thru</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in user.media %} 
+                <tr id="tr-id-{{ item.user_media_id }}" class="tr-class-{{ item.user_media_id }}" 
+                data-title="bootstrap table" data-object='{"key": "value"}'>
+                    <td>{{ item.user_media_id }}</td>
+                    <td>{{ item.item.media_type.media_type }}</td>
+                    <td><img src="{{ item.item.cover }}"></td>
+                    <td>{{ item.item.title }}</td>
+                    <td>{{ item.last_updated_at }}</td>
+                    <td>{{ item.rating }}</td>
+                    <td>{{ item.review }}</td>
+                    <td>{{ item.source }}</td>
+                    <td>{{ item.start_date }}</td>
+                    <td>{{ item.end_date }}</td>
+                    <td>{{ item.dnf }}</td>
+                    <td>{{ item.num_consumptions }}</td>
+                </tr>
+                {% endfor %} 
+                </tbody>
+            </table>
+            </div>  
+        </div>
       </div>
     </div>
   </main>
 </div>
 
+<script src="/static/js/manage.js"></script>
 {% endblock %}

@@ -3,6 +3,10 @@
 {% block title %}Mybrary | Search{% endblock %}
 
 {% block body %}
+<div style="display:flex; flex-direction: row;">
+<main class="w-80">
+<div class="row">
+  <div class="col blurb">
   <h1>Let's Check the Database First:</h1>
   <form action="/review_media" method="GET">
     
@@ -53,4 +57,8 @@
   <div>Not in the database? <a href="/create_new_item">Add new item here!</a></div>
 
   <script src="/static/js/search.js"></script>
+</div>
+</div>
+</main>
+</div>
 {% endblock %}

@@ -615,14 +615,14 @@ def show_timeline():
 
     # build figure/plot
     p = figure(y_range=(0, 5.5), x_range=(datetime(2010,1,1,0,0,0), datetime.now()), 
-            plot_width=500, plot_height=350, tools=["hover","box_zoom","wheel_zoom","pan"],
-            tooltips=[("title", "@title"), ("media_type", "@media_type")],
+            plot_width=1000, plot_height=675, tools=["hover","box_zoom","wheel_zoom","pan"],
+            tooltips=[("title", "@title"), ("media_type", "@media_type")], # TODO: add , ("date", x_val)
             title="timeline sorted by rating")
     p.hbar(y="rating", left='start_date', right='end_date', fill_alpha=0.5,
             height=0.35, view=book_view, fill_color=colors[0], source=cds_data) 
-    p.diamond(y="rating", x='start_date', fill_alpha=0.5, size=20,
+    p.diamond(y="rating", x='start_date', fill_alpha=0.5, size=35,
             view=movie_view, fill_color=colors[2], source=cds_data)
-    p.hex(y="rating", x='start_date', fill_alpha=0.5, size=20,
+    p.hex(y="rating", x='start_date', fill_alpha=0.5, size=35,
             view=tv_view, fill_color=colors[4], source=cds_data)
 
     p.ygrid.grid_line_color = None
