@@ -19,6 +19,8 @@
   </div>
   <main class="main-content w-100">
     <div class="container pt-2">
+      
+      <div class="row empty-space">&ThinSpace;</div><!--add whitespace-->
 
       <div class="row">
         <!----------------------------------------------------------------->
@@ -115,7 +117,7 @@
             data-show-columns="true">
             <thead>
                 <tr>
-                <!-- <th>UM-ID</th> -->
+                <th>UM-ID</th>
                 <th>Details</th>
                 <th>Type</th>
                 <th>Cover</th>
@@ -134,9 +136,11 @@
                 {% for item in user.media %} 
                 <tr id="tr-id-{{ item.user_media_id }}" class="tr-class-{{ item.user_media_id }}" 
                 data-title="bootstrap table" data-object='{"key": "value"}'>
-                    <!-- <td>{{ item.user_media_id }}</td> -->
+                    <td>{{ item.user_media_id }}</td>
                     <td>
-                      <button class="{{ item.user_media_id }} btn btn-primary" id="{{ item.user_media_id }}">
+                      <button class="{{ item.user_media_id }} btn btn-primary" 
+                      id="{{ item.user_media_id }}">
+                      <!-- NOTE id is duplicated atm, will only leave one in the end (tested with only one and still doesn't work)-->
                         details
                       </button>
                     </td>
