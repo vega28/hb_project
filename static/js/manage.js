@@ -11,6 +11,7 @@ $('.user-media-id').on('click', (evt) => {
     $('#collection-details').html(''); // reset collection details popout
     $.post('/view_item', {'user_media_id': evt.target.id}, (res) => {
         $('#item-details').html(res);
+        window.scrollTo(0,$('#item-details').offset().top);
         console.log('item details have successfully been displayed on this page');
  
         //* When user clicks delete item button, remove association between 
@@ -95,8 +96,8 @@ $('.collection').on('click', (evt) => {
     $('#item-details').html('');
     $.post('/view_collection', {'collection_id': evt.target.id}, (res) => {
         $('#collection-details').html(res);
-
-    console.log('collection details have successfully been displayed on the page');
+        window.scrollTo(0,$('#collection-details').offset().top);
+        console.log('collection details have successfully been displayed on the page');
 
     //* When user clicks delete collection button, delete collection
 

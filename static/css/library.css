@@ -10,6 +10,10 @@ body {
   background: url("/static/images/vichy/vichy.png") repeat center center;
 }
 
+.container {
+  padding: 1em;
+}
+
 .blurb {
   background-color: whitesmoke;
   color: #312f30;

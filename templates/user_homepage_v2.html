@@ -19,6 +19,17 @@
   </div>
   <main class="main-content w-100">
     <div class="container pt-2">
+
+      <div class="row">
+        <!----------------------------------------------------------------->
+        <!-- *** POPOUT SECTIONS                                         -->
+        <!----------------------------------------------------------------->
+        <div class="col">
+          <div class="container-fluid" id="collection-details"></div>
+          <!-- <div class="container-fluid" id="item-details"></div> -->
+        </div>
+      </div>
+
       <div class="row">
           <!----------------------------------------------------------------->
           <!-- *** COLLECTIONS SECTION                                     -->
@@ -62,7 +73,7 @@
           <!-- *** POPOUT SECTIONS                                         -->
           <!----------------------------------------------------------------->
           <div class="col">
-            <div class="container-fluid" id="collection-details"></div>
+            <!-- <div class="container-fluid" id="collection-details"></div> -->
             <div class="container-fluid" id="item-details"></div>
           </div>
         </div>
@@ -104,36 +115,42 @@
             data-show-columns="true">
             <thead>
                 <tr>
-                <th>UM-ID</th>
+                <!-- <th>UM-ID</th> -->
+                <th>Details</th>
                 <th>Type</th>
                 <th>Cover</th>
                 <th>Title</th>
-                <th>Last Updated</th>
+                <!-- <th>Last Updated</th> -->
                 <th>Rating</th>
                 <th>Review</th>
                 <th>Source</th>
                 <th>Start Date</th>
                 <th>Finish Date</th>
-                <th>DNF</th>
-                <th>Num Times Thru</th>
+                <!-- <th>DNF</th> -->
+                <!-- <th>Num Times Thru</th> -->
                 </tr>
             </thead>
             <tbody>
                 {% for item in user.media %} 
                 <tr id="tr-id-{{ item.user_media_id }}" class="tr-class-{{ item.user_media_id }}" 
                 data-title="bootstrap table" data-object='{"key": "value"}'>
-                    <td>{{ item.user_media_id }}</td>
+                    <!-- <td>{{ item.user_media_id }}</td> -->
+                    <td>
+                      <button class="{{ item.user_media_id }} btn btn-primary" id="{{ item.user_media_id }}">
+                        details
+                      </button>
+                    </td>
                     <td>{{ item.item.media_type.media_type }}</td>
                     <td><img src="{{ item.item.cover }}"></td>
                     <td>{{ item.item.title }}</td>
-                    <td>{{ item.last_updated_at }}</td>
+                    <!-- <td>{{ item.last_updated_at }}</td> -->
                     <td>{{ item.rating }}</td>
                     <td>{{ item.review }}</td>
                     <td>{{ item.source }}</td>
                     <td>{{ item.start_date }}</td>
                     <td>{{ item.end_date }}</td>
-                    <td>{{ item.dnf }}</td>
-                    <td>{{ item.num_consumptions }}</td>
+                    <!-- <td>{{ item.dnf }}</td> -->
+                    <!-- <td>{{ item.num_consumptions }}</td> -->
                 </tr>
                 {% endfor %} 
                 </tbody>

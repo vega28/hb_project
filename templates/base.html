@@ -12,6 +12,11 @@
     <title>{% block title %}{% endblock %}</title>
   </head>
   <body>
+    <script>
+      setTimeout(function () {
+      $('.flash-msg').fadeOut('slow');
+      }, 10000);
+    </script>
     {% for msg in get_flashed_messages() %}
       <p class="flash-msg">
         {{ msg }}
