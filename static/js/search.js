@@ -43,25 +43,47 @@ function displayResults(results) {
     // if (results === {}) {
     //     $('#db-search-results').append('Sorry, that search is not turning up any results.');
     // }
+    let j = 1;
     for (let i in results) {
-      $('#db-search-results').append(
-        `<div>
-          <div class="card" style="width: 8em;">
-            <img class="card-img-top flexible-img" src=${results[i]['cover']}> 
-            <div class="card-body">
-              <input type="radio" name="chosen-item" value="${i}" required> 
-              <span class="card-text">${results[i]['title']}</span>
-            </div>
-          </div>
-        </div>`
-        );
+      console.log(i, j)
+      // let cardHTML = `<div class="card" style="height: 18em; width: 15em;"> 
+      //                   <div class="card-body">
+      //                     <div class="row">
+      //                       <img style="width: auto;" src=${results[i]['cover']}>
+      //                     </div>
+      //                     <input type="radio" name="chosen-item" value="${i}" required> 
+      //                     <span class="card-text">${results[i]['title']}</span>
+      //                     <p><a href="#" class="btn btn-primary">this one!</a></p>
+      //                   </div>
+      //                 </div>`;
+      let cardHTML = `<div class="card" style="height: 18em; width: 15em;"> 
+                        <div class="card-body">
+                          <div class="row">
+                            <img style="width: auto;" src=${results[i]['cover']}>
+                          </div>
+                          <span class="card-text">${results[i]['title']}</span>
+                          <p><button class="btn btn-primary" type="submit" name="chosen-item" value="${i}">this one!</button></p>
+                        </div>
+                      </div>`;
+      if (j % 3 == 1) {
+        console.log(`hello from the ${(j + 2) / 3} row ${typeof((j + 2) / 3)}`)
+        $('#db-search-results').append(`<div class="row row-${(j + 2) / 3}"></div>`);
+        $(`.row-${(j + 2) / 3}`).append(cardHTML);
+      }
+      if (j % 3 == 2) {
+        $(`.row-${(j + 1) / 3}`).append(cardHTML);
+      }
+      if (j % 3 == 0) {
+        $(`.row-${j / 3}`).append(cardHTML);
+      }
+    j += 1;
     }
-}
+  }
 
 
 //* Display updated DB Search results based on user input (in real time!)
 
-$('.choice').on('change', (evt) => {
+$('.choice').on('input', (evt) => {
     evt.preventDefault();
     // get the vals
     let formData = {'media_type': $('#media_type').val(),

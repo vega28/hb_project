@@ -3,11 +3,14 @@
 {% block title %}Mybrary | Search{% endblock %}
 
 {% block body %}
-<div style="display:flex; flex-direction: row;">
-<main class="w-80">
+<main>
 <div class="row">
-  <div class="col blurb">
-  <h1>Let's Check the Database First:</h1>
+  <div class="row empty-space">&ThinSpace;</div><!--add whitespace-->
+</div>
+<div class="row">
+  <div class="col-6 blurb">
+  <h3>Let's Check the Database First:</h3>
+  <div class="row empty-space">&ThinSpace;</div><!--add whitespace-->
   <form action="/review_media" method="GET">
     
     <!-- dropdown menu of types ... NTH other option where user enters info -->
@@ -46,10 +49,12 @@
       <!-- <p>Type of media <input type="text" name="media_type"></p> -->
     </section>
 
-    
-    <div id="db-search-results"></div>
-
-    <p><input type="submit"></p>
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col" id="db-search-results"></div>
+    </div>
+  
+    <!-- <p><input type="submit"></p> -->
 
   </form>
 
@@ -59,6 +64,8 @@
   <script src="/static/js/search.js"></script>
 </div>
 </div>
-</main>
+<div class="row">
+  <div class="row empty-space">&ThinSpace;</div><!--add whitespace-->
 </div>
+</main>
 {% endblock %}

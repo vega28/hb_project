@@ -317,6 +317,8 @@ def review_new_media_item():
 def review_media_item():
     """ Ask for user's review and rating of new media item. """
 
+    print('***********************DEBUG**********',request.args.get('chosen-item'))
+
     if session.get('item_to_add'):
         del session['item_to_add'] # clear all fields
     item = crud.get_item_by_id(request.args.get('chosen-item'))
