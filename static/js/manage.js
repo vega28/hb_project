@@ -7,65 +7,72 @@
 //* When user clicks on a cover, open up the view_item part of the page
 //    allow user to add item to a collection
 
-$('.user-media-id').on('click', (evt) => {
-    $('#collection-details').html(''); // reset collection details popout
-    $.post('/view_item', {'user_media_id': evt.target.id}, (res) => {
-        $('#item-details').html(res);
-        window.scrollTo(0,$('#item-details').offset().top);
-        console.log('item details have successfully been displayed on this page');
- 
-        //* When user clicks delete item button, remove association between 
-        //    item and user (UserMedia object)
+console.log('hello from manage.js');
 
-        $('#delete-from-library').on('click', () => {
-          const id_to_del = $('#delete-from-library').val();
-          console.log(`here's your value: "${id_to_del}"`);
-          console.log($(`.${id_to_del}`)[0].id); 
-          // NTH: pop up confirmation before actually deleting
-          $.post('/delete_item', {'user_media_id': id_to_del}, (res) => {
-              $('#item-details').html('');
-              alert(res);
-              $(`.${id_to_del}`).remove(); 
-          }); 
-        })
+// add event listener to add event listeners to buttons in table after it's rendered!
+$('.nav-link').on('click', ()=> {
+  console.log("ok, now you can click those buttons in the table -__-");
 
-        $('#add-to-collection').on('click', (evt) => {
-            evt.preventDefault();
-            $.get('/list_collections', (userCollections) => {
-            
-                $('#which-collection-to-add-to')
-                    .append('<form id="add-to-collection-form">');
-                for (let i in userCollections) {
-                    $('#which-collection-to-add-to')
-                    .append(
-                      `<p>
-                        <input type="radio" name="which-collection" value="${i}">
-                        ${userCollections[i]['name']}
-                      </p>`
-                      );
-                }
-                $('#which-collection-to-add-to')
-                    .append('<input type="submit" id="coll-submit-button"></form>');
-                
-                $('#coll-submit-button').on('click', () => {
-                    const user_media_id = $('#add-to-collection').val();
-                    const collection_id = $('input[type="radio"]:checked').val();
-                    const postData = {'user_item_id': user_media_id, 
-                                    'collection_id': collection_id}
-                    $.post('/add_item_to_collection', postData, (res2) => {
-                        alert(res2['alert']);
-                        $(`#collection-display-${collection_id}`).append(
-                            `<img src="${res2['cover']}" class="${user_media_id}">`);
-                    });
-                    $('#which-collection-to-add-to').html('');
-                });
-            });
+  $('button.user-media-id').on('click', (evt) => {
+      console.log('helloooooo');
+      $('#collection-details').html(''); // reset collection details popout
+      $.post('/view_item', {'user_media_id': evt.target.id}, (res) => {
+          $('#item-details').html(res);
+          window.scrollTo(0,$('#item-details').offset().top);
+          console.log('item details have successfully been displayed on this page');
+  
+          //* When user clicks delete item button, remove association between 
+          //    item and user (UserMedia object)
 
-        });
-    });
-});
+          $('#delete-from-library').on('click', () => {
+            const id_to_del = $('#delete-from-library').val();
+            console.log(`here's your value: "${id_to_del}"`);
+            console.log($(`.${id_to_del}`)[0].id); 
+            // NTH: pop up confirmation before actually deleting
+            $.post('/delete_item', {'user_media_id': id_to_del}, (res) => {
+                $('#item-details').html('');
+                alert(res);
+                $(`.${id_to_del}`).remove(); 
+            }); 
+          })
 
+          $('#add-to-collection').on('click', (evt) => {
+              evt.preventDefault();
+              $.get('/list_collections', (userCollections) => {
+              
+                  $('#which-collection-to-add-to')
+                      .append('<form id="add-to-collection-form">');
+                  for (let i in userCollections) {
+                      $('#which-collection-to-add-to')
+                      .append(
+                        `<p>
+                          <input type="radio" name="which-collection" value="${i}">
+                          ${userCollections[i]['name']}
+                        </p>`
+                        );
+                  }
+                  $('#which-collection-to-add-to')
+                      .append('<input type="submit" id="coll-submit-button"></form>');
+                  
+                  $('#coll-submit-button').on('click', () => {
+                      const user_media_id = $('#add-to-collection').val();
+                      const collection_id = $('input[type="radio"]:checked').val();
+                      const postData = {'user_item_id': user_media_id, 
+                                      'collection_id': collection_id}
+                      $.post('/add_item_to_collection', postData, (res2) => {
+                          alert(res2['alert']);
+                          $(`#collection-display-${collection_id}`).append(
+                              `<img src="${res2['cover']}" class="${user_media_id}">`);
+                      });
+                      $('#which-collection-to-add-to').html('');
+                  });
+              });
 
+          });
+      });
+  });
+
+}) // closes test event listener
 //// When user clicks "Edit Details" button, 
 ////    open up form entry for anything with class '.editable-detail'
 ////    and AUTOFILL using $('.editable-detail') 

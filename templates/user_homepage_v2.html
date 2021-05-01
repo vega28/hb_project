@@ -90,9 +90,7 @@
           <h3 id="your-top-media">Your Top Media</h3>
             <div class="container">
               {% for user_item in user.media %} 
-                <img src="{{ user_item.item.cover }}" 
-                class="user-media-id {{ user_item.user_media_id }}" 
-                id="{{ user_item.user_media_id }}" value="{{ user_item.user_media_id }}">
+                <img src="{{ user_item.item.cover }}">
               {% endfor %}
             </div>      
           </div>
@@ -105,9 +103,6 @@
           <!----------------------------------------------------------------->
           <!-- *** CATALOG SECTION                                         -->
           <!----------------------------------------------------------------->
-          <!-- from bootstrap sortable table -->
-          <link href="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.css" rel="stylesheet">
-          <script src="https://unpkg.com/bootstrap-table@1.18.3/dist/bootstrap-table.min.js"></script>
           <div class="col blurb">
             <div class="container table">
             <h3 id="your-media">Your Library</h3>
@@ -117,7 +112,7 @@
             data-show-columns="true">
             <thead>
                 <tr>
-                <th>UM-ID</th>
+                <!-- <th>UM-ID</th> -->
                 <th>Details</th>
                 <th>Type</th>
                 <th>Cover</th>
@@ -136,16 +131,15 @@
                 {% for item in user.media %} 
                 <tr id="tr-id-{{ item.user_media_id }}" class="tr-class-{{ item.user_media_id }}" 
                 data-title="bootstrap table" data-object='{"key": "value"}'>
-                    <td>{{ item.user_media_id }}</td>
+                    <!-- <td>{{ item.user_media_id }}</td> -->
                     <td>
-                      <button class="{{ item.user_media_id }} btn btn-primary" 
+                      <button class="user-media-id {{ item.user_media_id }} btn btn-primary" 
                       id="{{ item.user_media_id }}">
-                      <!-- NOTE id is duplicated atm, will only leave one in the end (tested with only one and still doesn't work)-->
                         details
                       </button>
                     </td>
                     <td>{{ item.item.media_type.media_type }}</td>
-                    <td><img src="{{ item.item.cover }}"></td>
+                    <td><img class="cover" src="{{ item.item.cover }}"></td>
                     <td>{{ item.item.title }}</td>
                     <!-- <td>{{ item.last_updated_at }}</td> -->
                     <td>{{ item.rating }}</td>
@@ -166,5 +160,9 @@
   </main>
 </div>
 
+
+{% endblock %}
+
+{% block scripts %} 
 <script src="/static/js/manage.js"></script>
 {% endblock %}

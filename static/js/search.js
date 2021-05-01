@@ -47,7 +47,7 @@ function displayResults(results) {
       $('#db-search-results').append(
         `<div>
           <div class="card" style="width: 8em;">
-            <img src=${results[i]['cover']}> 
+            <img class="card-img-top flexible-img" src=${results[i]['cover']}> 
             <div class="card-body">
               <input type="radio" name="chosen-item" value="${i}" required> 
               <span class="card-text">${results[i]['title']}</span>

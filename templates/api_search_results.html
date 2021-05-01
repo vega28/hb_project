@@ -12,7 +12,7 @@
     <div>
       <div class="card" style="width: 18em;">
         {% if volume['volumeInfo'].get('imageLinks') %} 
-          <img class="card-img-top" src="{{ volume['volumeInfo']['imageLinks'].get('smallThumbnail') }}">
+          <img class="card-img-top flexible-img" src="{{ volume['volumeInfo']['imageLinks'].get('smallThumbnail') }}">
         {% endif %} 
         <div class="card-body">
           <input type="radio" name="list_num" value="{{ loop.index }}" id="{{ loop.index }}" required>
