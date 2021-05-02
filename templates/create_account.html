@@ -3,14 +3,26 @@
 {% block title %}Mybrary | Sign Up!{% endblock %}
 
 {% block body %}
-  <h1>Create an Account</h1>
-  <form action="/new_user" method="POST">
-    <p>First Name <input type="text" name="fname"></p>
-    <p>Last Name <input type="text" name="lname"></p>
-    <p>Email <input type="email" name="email"></p>
-    <p>Password <input type="password" name="pwd"></p>
-    <p>Confirm Password <input type="password" name="pwd_confirm"></p>
-    <p>Profile Picture url <input type="url" name="profile_pic"></p>
-    <p><input type="submit"></p>
-  </form>
+<main>
+  <div class="row">
+    <div class="row empty-space">&ThinSpace;</div><!--add whitespace-->
+  </div>
+  <div class="row">
+    <div class="col-3 blurb">
+      <h3>Create an Account</h3>
+      <form action="/new_user" method="POST">
+        <p>First Name <input type="text" name="fname"></p>
+        <p>Last Name <input type="text" name="lname"></p>
+        <p>Email <input type="email" name="email"></p>
+        <p>Password <input type="password" name="pwd"></p>
+        <p>Confirm Password <input type="password" name="pwd_confirm"></p>
+        <p>Profile Picture url <input type="url" name="profile_pic"></p>
+        <p><input type="submit"></p>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="row empty-space">&ThinSpace;</div><!--add whitespace-->
+  </div>
+</main>
 {% endblock %}

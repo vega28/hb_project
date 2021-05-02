@@ -1,5 +1,7 @@
 img {
     height: 10em;
+    margin-bottom: 10px;
+    margin-right: 10px;
   }
 
 .flexible-img {
@@ -37,13 +39,23 @@ body {
   background-color: whitesmoke;
 }
 
+p {
+  font-size: 1.1em;
+}
+
 a {
   color: #00B9A1;
   text-decoration: underline;
+  font-size: 1.1em;
+}
+
+form { 
+  font-size: 1.1em;
 }
 
 .nav {
   color: #00826D;
+  font-size: 1.1em;
   background-color: whitesmoke;
 }
 
@@ -53,6 +65,7 @@ a {
 
 .navbar {
   color: #00826D;
+  font-size: 1.1em;
   background-color: rgb(245, 245, 245);
 }
 
@@ -62,11 +75,13 @@ a {
 
 .btn-primary {
   color: whitesmoke;
+  font-size: 1.1em;
   background-color: #00B9A1;
 }
 
 .btn-warning {
   color: whitesmoke;
+  font-size: 1.1em;
   background-color: #BC4364;
 }
 
@@ -76,6 +91,7 @@ footer {
   width: 100%;  
   background-color: whitesmoke; opacity: 0.5;
   color: #00826D; 
+  font-size: 1.1em;
 }
 
 .sidebar-user nav.position-sticky {
@@ -90,5 +106,10 @@ footer {
 .flash-msg {
   padding: 10px;
   margin: 0;
+  font-size: 1.1em;
   background-color: #c8a16e;
+}
+
+table {
+  font-size: 1.1em;
 }

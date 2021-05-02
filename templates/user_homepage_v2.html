@@ -7,13 +7,13 @@
   <div class="sidebar-user d-flex w-15">
     <aside class="navbar align-items-start">
       <nav class="nav flex-column position-sticky" id="user-info">
-        <img src="{{ user.profile_pic }}">
-        <a class="nav-link" href="/pie">Your Genres</a>
-        <a class="nav-link" href="/timeline">Your Timeline</a>
-        <a class="nav-link" href="/search">Search for New Items</a>
+        <img src="{{ user.profile_pic }}" style="margin: 0; padding: 0;">
+        <a class="nav-link" href="/pie">Genres</a>
+        <a class="nav-link" href="/timeline">Timeline</a>
+        <a class="nav-link" href="/search">Search</a>
         <a class="nav-link" href="#your-collections">Collections</a>
-        <a class="nav-link" href="#your-top-media">Your Top Media</a>
-        <a class="nav-link" href="#your-media">Your Media</a>
+        <a class="nav-link" href="#your-top-media">Top-Rated Media</a>
+        <a class="nav-link" href="#your-media">Catalog</a>
       </nav>
   </aside>  
   </div>
@@ -24,11 +24,10 @@
 
       <div class="row">
         <!----------------------------------------------------------------->
-        <!-- *** POPOUT SECTIONS                                         -->
+        <!-- *** POPOUT SECTION                                          -->
         <!----------------------------------------------------------------->
         <div class="col">
           <div class="container-fluid" id="collection-details"></div>
-          <!-- <div class="container-fluid" id="item-details"></div> -->
         </div>
       </div>
 
@@ -42,17 +41,17 @@
               {% for collection in user.collections %} 
               <div class="container col" id="collection-display-{{ collection.collection_id }}">
                 <div class="container">
-                <h5>
+                <h4>
                   {{ collection.name }}
                   {% if not collection.public %} 
                     (private)
                   {% endif %} 
-                </h5>
+                </h4>
                 {% for user_item in collection.user_media %}
                   <img src="{{ user_item.item.cover }}" class="{{ user_item.user_media_id }}">
                 {% endfor %}
                 </div>
-                <p>
+                <p style="padding-left: 1em">
                 <button type="button" class="btn btn-primary collection" 
                 id="{{ collection.collection_id }}" value="{{ collection.collection_id }}">
                   view details
@@ -60,11 +59,13 @@
                 </p>
               </div>
               {% endfor %} 
+              <div class="container" id="new-collection"></div>
             </div>
-            <button class="collection-actions btn btn-primary" id="create-collection">
-              Add New Collection
-            </button>
-            <div class="container" id="new-collection"></div>
+            <p style="padding-left: 1.1em">
+              <button class="collection-actions btn btn-primary" id="create-collection">
+                Add New Collection
+              </button>
+            </p>
           </div>
         </div>
 
@@ -72,10 +73,9 @@
 
         <div class="row">
           <!----------------------------------------------------------------->
-          <!-- *** POPOUT SECTIONS                                         -->
+          <!-- *** POPOUT SECTION                                          -->
           <!----------------------------------------------------------------->
           <div class="col">
-            <!-- <div class="container-fluid" id="collection-details"></div> -->
             <div class="container-fluid" id="item-details"></div>
           </div>
         </div>
@@ -90,7 +90,9 @@
           <h3 id="your-top-media">Your Top Media</h3>
             <div class="container">
               {% for user_item in user.media %} 
-                <img src="{{ user_item.item.cover }}">
+                {% if user_item.rating >= 3 %} 
+                  <img src="{{ user_item.item.cover }}">
+                {% endif %} 
               {% endfor %}
             </div>      
           </div>
@@ -105,10 +107,12 @@
           <!----------------------------------------------------------------->
           <div class="col blurb">
             <div class="container table">
-            <h3 id="your-media">Your Library</h3>
+            <h3 id="your-media">Your Catalog</h3>
             <table
             data-toggle="table"
             data-search="true"
+            data-pagination="true"
+            data-page-size="5"
             data-show-columns="true">
             <thead>
                 <tr>
@@ -139,7 +143,7 @@
                       </button>
                     </td>
                     <td>{{ item.item.media_type.media_type }}</td>
-                    <td><img class="cover" src="{{ item.item.cover }}"></td>
+                    <td><img class="cover" src="{{ item.item.cover }}" style="margin: 0;"></td>
                     <td>{{ item.item.title }}</td>
                     <!-- <td>{{ item.last_updated_at }}</td> -->
                     <td>{{ item.rating }}</td>
