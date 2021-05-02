@@ -3,10 +3,16 @@
 {% block title %}Mybrary | Users{% endblock %}
 
 {% block body %}
-  <h1>All Users 😎🤓</h1>
-  <ul>
-      {% for user in all_users %} 
-        <li><a href="/users/{{ user.user_id }}">{{ user.email }}</a></li>
-      {% endfor %}
-  </ul>
+<div class="row empty-space">&ThinSpace;</div><!--add whitespace-->
+<div class="row">
+  <div class="col-3 blurb">
+    <h3>All Users 😎🤓</h3>
+    <ul>
+        {% for user in all_users %} 
+          <li><a href="/users/{{ user.user_id }}">{{ user.email }}</a></li>
+        {% endfor %}
+    </ul>
+  </div>
+</div>
+<div class="row empty-space">&ThinSpace;</div><!--add whitespace-->
 {% endblock %}

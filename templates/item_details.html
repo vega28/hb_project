@@ -3,16 +3,32 @@
 {% block title %}Mybrary | {{ item.title }} Details{% endblock %}
 
 {% block body %}
-  <div class="container">
-  <h1>{{ item.title }}</h1>
-  <p>{{ item.description }}</p>
-  <img src="{{ item.cover }}">
-
-  {% if session.get('user_id') %} 
-    <form action="/review_media">
-      <button class="btn btn-primary" type="submit" name="chosen-item" 
-      value="{{ item.item_id }}">Add to my library!</button>
-    </form>
-  {% endif %}
+<div class="row empty-space">&ThinSpace;</div><!--add whitespace-->
+<div class="row">
+  <div class="col-6 blurb">
+    <h1>{{ item.title }}</h1>
+    <div class="row empty-space">&ThinSpace;</div><!--add whitespace-->
+    <div class="row">
+      <div class="col-3">
+        <div class="row d-flex justify-content-end">
+          <img src="{{ item.cover }}" style="width:auto; height: auto;">
+        </div>
+        <div class="row empty-space">&ThinSpace;</div><!--add whitespace-->
+        <div class="row d-flex justify-content-end"><!-- TODO: justify not working on button! -->
+          {% if session.get('user_id') %} 
+            <form action="/review_media">
+              <button class="btn btn-primary" type="submit" name="chosen-item" 
+              value="{{ item.item_id }}">Add to my library!</button>
+            </form>
+          {% endif %}  
+        </div>
+      </div>
+      <div class="col-7 d-flex justify-content-start">
+        <p>{{ item.description }}</p>
+      </div>
+      <div class="col-1"></div>
+    </div>
   </div>
+</div>
+<div class="row empty-space">&ThinSpace;</div><!--add whitespace-->
 {% endblock %}

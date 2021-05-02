@@ -3,50 +3,72 @@
 {% block title %}Mybrary | Search Results 🔍{% endblock %}
 
 {% block body %}
-  <h1>Searching Google Books...</h1>
+<main>
+  <div class="row">
+    <div class="col empty-space">&ThinSpace;</div><!--add whitespace-->
+  </div>
+  <div class="row">
+    <div class="col-10 blurb">
+      <h3>Google Books Search Results</h3>
+      <div class="row empty-space">&ThinSpace;</div><!--add whitespace-->
 
-  <form action="/review_new_media">
-    <p><input type="submit"></p>
-    Please select an item:  
-    {% for volume in data['items'] %} 
-    <div>
-      <div class="card" style="width: 18em;">
-        {% if volume['volumeInfo'].get('imageLinks') %} 
-          <img class="card-img-top flexible-img" src="{{ volume['volumeInfo']['imageLinks'].get('smallThumbnail') }}">
-        {% endif %} 
-        <div class="card-body">
-          <input type="radio" name="list_num" value="{{ loop.index }}" id="{{ loop.index }}" required>
-          <h5 class="card-title">{{ volume['volumeInfo']['title'] }}</h5> 
-          <p class="card-text">Author: {{ volume['volumeInfo'].get('authors')[0] }}</p>
-          <label for="{{ loop.index }}">
-            <a class="btn btn-primary" href="{{ volume['volumeInfo'].get('canonicalVolumeLink') }}">
-              view details
-            </a>
-          </label>
-          <input type="hidden" name="{{ loop.index }}-title" 
-            value="{{ volume['volumeInfo']['title'] }}">
-          <input type="hidden" name="{{ loop.index }}-authors" 
-            value="{{ volume['volumeInfo'].get('authors') }}">
-          <input type="hidden" name="{{ loop.index }}-id" 
-            value="{{ volume['id'] }}">
-          {% if volume['volumeInfo'].get('imageLinks') %}
-            <input type="hidden" name="{{ loop.index }}-cover" 
-              value="{{ volume['volumeInfo'].get('imageLinks')['smallThumbnail'] }}">
-          {% endif %} 
-          <input type="hidden" name="{{ loop.index }}-pageCount" 
-            value="{{ volume['volumeInfo'].get('pageCount') }}">
-          <input type="hidden" name="{{ loop.index }}-description" 
-            value="{{ volume['volumeInfo'].get('description') }}">
-          <input type="hidden" name="{{ loop.index }}-publishedDate" 
-            value="{{ volume['volumeInfo'].get('publishedDate') }}">
-          <input type="hidden" name="{{ loop.index }}-genres" 
-            value="{{ volume['volumeInfo'].get('categories') }}">
+      <form action="/review_new_media">
+        <h5>Please select an item:</h5>  
+        <div class="row">
+        {% for volume in data['items'] %} 
+        <div class="col">
+          <div class="card" style="height: 25em; width: 18em;">
+            <div class="card-body">
+              <div class="row">
+                {% if volume['volumeInfo'].get('imageLinks') %} 
+                  <img style="width: auto;" class="card-img-top flexible-img" src="{{ volume['volumeInfo']['imageLinks'].get('smallThumbnail') }}">
+                {% endif %} 
+              </div>
+              <div class="row">
+                <p><h5 class="card-title">{{ volume['volumeInfo']['title'] }}</h5></p> 
+                <p class="card-text">Author: {{ volume['volumeInfo'].get('authors')[0] }}</p>
+
+                <div class="col">
+                  <a class="btn btn-primary" href="{{ volume['volumeInfo'].get('canonicalVolumeLink') }}">
+                    view details
+                  </a>
+                </div>
+
+                <div class="col">
+                  <button class="btn btn-primary" type="submit" name="list_num" value="{{ loop.index }}">
+                    select
+                  </button>
+                </div>
+              </div>
+              <input type="hidden" name="{{ loop.index }}-title" 
+                value="{{ volume['volumeInfo']['title'] }}">
+              <input type="hidden" name="{{ loop.index }}-authors" 
+                value="{{ volume['volumeInfo'].get('authors') }}">
+              <input type="hidden" name="{{ loop.index }}-id" 
+                value="{{ volume['id'] }}">
+              {% if volume['volumeInfo'].get('imageLinks') %}
+                <input type="hidden" name="{{ loop.index }}-cover" 
+                  value="{{ volume['volumeInfo'].get('imageLinks')['smallThumbnail'] }}">
+              {% endif %} 
+              <input type="hidden" name="{{ loop.index }}-pageCount" 
+                value="{{ volume['volumeInfo'].get('pageCount') }}">
+              <input type="hidden" name="{{ loop.index }}-description" 
+                value="{{ volume['volumeInfo'].get('description') }}">
+              <input type="hidden" name="{{ loop.index }}-publishedDate" 
+                value="{{ volume['volumeInfo'].get('publishedDate') }}">
+              <input type="hidden" name="{{ loop.index }}-genres" 
+                value="{{ volume['volumeInfo'].get('categories') }}">
+            </div>
+          </div>
         </div>
+        {% endfor %}
       </div>
-    </div>
-    {% endfor %}
-  </form>
+      </form>
 
-  {# <p><pre>{{ pformat(data) }}</pre></p> #}
-  <p><a href="/search">Return to searchpage.</a></p>
+      {# <p><pre>{{ pformat(data) }}</pre></p> #}
+      <p><a href="/search">Return to searchpage.</a></p>
+
+    </div>
+  </div>
+</main>
 {% endblock %}

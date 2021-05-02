@@ -56,13 +56,16 @@ function displayResults(results) {
       //                     <p><a href="#" class="btn btn-primary">this one!</a></p>
       //                   </div>
       //                 </div>`;
-      let cardHTML = `<div class="card" style="height: 18em; width: 15em;"> 
+      let cardHTML = `<div class="card" style="height: 24em; width: 15em;"> 
+                        <div class="card-header">${results[i]['media_type']}</div>
                         <div class="card-body">
                           <div class="row">
-                            <img style="width: auto;" src=${results[i]['cover']}>
+                            <img style="width: auto;" src="${results[i]['cover']}">
                           </div>
-                          <span class="card-text">${results[i]['title']}</span>
-                          <p><button class="btn btn-primary" type="submit" name="chosen-item" value="${i}">this one!</button></p>
+                          <div class="row">
+                            <p class="card-text"><h5>${results[i]['title']}</h5></p>
+                            <p><button class="btn btn-primary" type="submit" name="chosen-item" value="${i}">this one!</button></p>
+                          </div>
                         </div>
                       </div>`;
       if (j % 3 == 1) {

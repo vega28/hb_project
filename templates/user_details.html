@@ -3,36 +3,33 @@
 {% block title %}Mybrary | User Details{% endblock %}
 
 {% block body %}
-  <h1>{{ user.fname }} {{ user.lname }}</h1>
+<div class="row empty-space">&ThinSpace;</div><!--add whitespace-->
+<div class="row">
+  <div class="col-10 blurb">
+    <h3>{{ user.fname }} {{ user.lname }}</h3>
 
-  <p>{{ user.email }}</p>
-  
-  {% if session.get('user_id') == user.user_id %}
-    <h4>(this is you!)</h4> 
-  {% endif %}
+    <p>{{ user.email }}</p>
+    
+    {% if session.get('user_id') == user.user_id %}
+      <h5>(this is you!)</h5> 
+    {% endif %}
 
-  <div>
-    <img src="{{ user.profile_pic }}">
+    <div>
+      <img src="{{ user.profile_pic }}">
+    </div>
+    
+    <div>
+      <h3>{{ user.fname }}'s public collections:</h3>
+      {% for collection in user.collections %} 
+        {% if collection.public %} 
+          <h5>{{ collection.name }}</h5>
+          {% for item in collection.user_media %}
+            <img src="{{ item.item.cover }}">
+          {% endfor %}
+        {% endif %} 
+      {% endfor %} 
+    </div>
   </div>
-  
-  <div>
-    <h3>{{ user.fname }}'s public collections:</h3>
-    {% for collection in user.collections %} 
-      {% if collection.public %} 
-        <h5>{{ collection.name }}</h5>
-        {% for item in collection.user_media %}
-          <img src="{{ item.item.cover }}">
-        {% endfor %}
-      {% endif %} 
-    {% endfor %} 
-  <div>
-
-  </div>
-    <h3>{{ user.fname }}'s media:</h3><!-- TODO: don't show this to other users after initial dev phase. -->
-
-    {% for item in user.media %} 
-      <img src="{{ item.item.cover }}">
-    {% endfor %}
-  </div>
-
+</div>
+<div class="row empty-space">&ThinSpace;</div><!--add whitespace-->
 {% endblock %}

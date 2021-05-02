@@ -210,7 +210,8 @@ def process_search():
     db_matches_dict = {}
     for item in db_matches:
         db_matches_dict[item.item_id] = {'title': item.title, 
-                                        'cover': item.cover}
+                                        'cover': item.cover,
+                                        'media_type': item.media_type.media_type}
 
     return db_matches_dict
 
@@ -316,8 +317,6 @@ def review_new_media_item():
 @app.route('/review_media')
 def review_media_item():
     """ Ask for user's review and rating of new media item. """
-
-    print('***********************DEBUG**********',request.args.get('chosen-item'))
 
     if session.get('item_to_add'):
         del session['item_to_add'] # clear all fields
