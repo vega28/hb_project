@@ -3,13 +3,26 @@
 {% block preamble %}
 {% endblock %}
 
-{% block title %}Mybrary | pie time 🥧{% endblock %}
+{% block title %}Mybrary | Genres 🥧{% endblock %}
 
 {% block body %}
-<div class="container-fluid">
-  {{ plot_div|safe }}
-</div>
-{{ plot_script|safe }}
+<main>
+  <div class="row">
+    <div class="row empty-space">&ThinSpace;</div><!--add whitespace-->
+  </div>
+  <div class="row">
+    <div class="col-5 blurb">
+      
+        {{ plot_div|safe }}
+      
+    </div>
+  </div>
+  <div class="row">
+    <div class="row empty-space">&ThinSpace;</div><!--add whitespace-->
+  </div>
+  </main>
+
 {% endblock %}
 
+{% block scripts %}{{ plot_script|safe }}{% endblock%} 
 

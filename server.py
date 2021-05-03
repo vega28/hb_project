@@ -567,7 +567,7 @@ def show_pie():
     source = ColumnDataSource(data=data)
 
     # build figure/plot
-    p = figure(title="My Genre Pie", toolbar_location=None, tools="hover", # can also specify plot height
+    p = figure(title="Your Genres", toolbar_location=None, tools="hover", plot_height=570,
                 tooltips=[("genre", "@genre"), ("count", "@value")], 
                 x_range=(-0.5, 1.0))
 
@@ -579,6 +579,9 @@ def show_pie():
     p.axis.axis_label = None
     p.axis.visible = False
     p.grid.grid_line_color = None
+    p.title.text_font_size = '2em'
+    p.legend.title_text_font_size = '1.5em'
+    p.legend.label_text_font_size = '1.5em'
 
     # get displayable plot
     script, div = components(p)
@@ -616,7 +619,7 @@ def show_timeline():
 
     # build figure/plot
     p = figure(y_range=(0, 5.5), x_range=(datetime(2010,1,1,0,0,0), datetime.now()), 
-            plot_width=1000, plot_height=675, tools=["hover","box_zoom","wheel_zoom","pan"],
+            plot_width=970, plot_height=580, tools=["hover","box_zoom","wheel_zoom","pan"],
             tooltips=[("title", "@title"), ("media_type", "@media_type")], # TODO: add , ("date", x_val)
             title="timeline sorted by rating")
     p.hbar(y="rating", left='start_date', right='end_date', fill_alpha=0.5,
@@ -627,8 +630,12 @@ def show_timeline():
             view=tv_view, fill_color=colors[4], source=cds_data)
 
     p.ygrid.grid_line_color = None
-    p.xaxis.axis_label = "dates read"
+    p.xaxis.axis_label = "date"
+    p.yaxis.axis_label = "rating"
     p.outline_line_color = None
+    p.title.text_font_size = '2em'
+    p.xaxis.axis_label_text_font_size = "1.5em"
+    p.yaxis.axis_label_text_font_size = "1.5em"
 
     # get displayable plot
     script, div = components(p)

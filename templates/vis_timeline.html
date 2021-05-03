@@ -6,10 +6,21 @@
 {% block title %}Mybrary | Timeline{% endblock %}
 
 {% block body %}
-<div class="container-fluid">
+<main>
+  <div class="row">
+    <div class="row empty-space">&ThinSpace;</div><!--add whitespace-->
+  </div>
+  <div class="row">
+    <div class="col-7 blurb">
+      
   {{ plot_div|safe }}
 </div>
-{{ plot_script|safe }}
+</div>
+<div class="row">
+  <div class="row empty-space">&ThinSpace;</div><!--add whitespace-->
+</div>
+</main>
+
 {% endblock %}
 
-
+{% block scripts %}{{ plot_script|safe }}{% endblock%} 
