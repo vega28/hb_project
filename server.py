@@ -567,9 +567,20 @@ def show_pie():
     source = ColumnDataSource(data=data)
 
     # build figure/plot
+    tooltips = """
+        <div>
+            <div>
+                <span style="font-size: 1.5em; color: #00826D;">genre: </span>
+                <span style="font-size: 1.5em;">@genre</span>
+            </div>
+            <div>
+                <span style="font-size: 1.5em; color: #00826D;">count: </span>
+                <span style="font-size: 1.5em;">@value</span>
+            </div>
+        </div>
+    """
     p = figure(title="Your Genres", toolbar_location=None, tools="hover", plot_height=570,
-                tooltips=[("genre", "@genre"), ("count", "@value")], 
-                x_range=(-0.5, 1.0))
+                tooltips=tooltips, x_range=(-0.5, 1.0))
 
     p.wedge(x=0, y=0, radius=0.4,
             start_angle=cumsum('angle', include_zero=True), end_angle=cumsum('angle'),
@@ -607,7 +618,7 @@ def show_timeline():
             else:
                 data['end_date'].append(datetime.combine(log_data[user_media_id]['end_date'],time.min))
             data['media_type'].append(log_data[user_media_id]['media_type'])
-    colors = Category20[5] 
+    colors = Category20[7] 
     cds_data = ColumnDataSource(data=data)
 
     movie_view = CDSView(source=cds_data,
@@ -616,26 +627,51 @@ def show_timeline():
             filters=[GroupFilter(column_name='media_type', group='book')])
     tv_view = CDSView(source=cds_data,
             filters=[GroupFilter(column_name='media_type', group='tv')])
+    game_view = CDSView(source=cds_data,
+            filters=[GroupFilter(column_name='media_type', group='game')])
 
     # build figure/plot
+    tooltips = """
+        <div>
+            <div>
+                <span style="font-size: 1.5em; color: #00826D;">title: </span>
+                <span style="font-size: 1.5em;">@title</span>
+            </div>
+            <div>
+                <span style="font-size: 1.5em; color: #00826D;">media type: </span>
+                <span style="font-size: 1.5em;">@media_type</span>
+            </div>
+        </div>
+    """
     p = figure(y_range=(0, 5.5), x_range=(datetime(2010,1,1,0,0,0), datetime.now()), 
             plot_width=970, plot_height=580, tools=["hover","box_zoom","wheel_zoom","pan"],
-            tooltips=[("title", "@title"), ("media_type", "@media_type")], # TODO: add , ("date", x_val)
-            title="timeline sorted by rating")
-    p.hbar(y="rating", left='start_date', right='end_date', fill_alpha=0.5,
+            tooltips=tooltips, title="Timeline Sorted by Rating")
+    p.hbar(y="rating", left='start_date', right='end_date', fill_alpha=0.5, legend_label='book',
             height=0.35, view=book_view, fill_color=colors[0], source=cds_data) 
-    p.diamond(y="rating", x='start_date', fill_alpha=0.5, size=35,
+    p.diamond(y="rating", x='start_date', fill_alpha=0.5, size=35, legend_label='movie',
             view=movie_view, fill_color=colors[2], source=cds_data)
-    p.hex(y="rating", x='start_date', fill_alpha=0.5, size=35,
+    p.hex(y="rating", x='start_date', fill_alpha=0.5, size=35, legend_label='tv',
             view=tv_view, fill_color=colors[4], source=cds_data)
+    p.hbar(y="rating", left='start_date', right='end_date', fill_alpha=0.5, legend_label='game',
+            height=0.35, view=game_view, fill_color=colors[6], source=cds_data) 
 
+    p.legend.click_policy = "hide"
+    p.legend.border_line_color = "black"
+    p.legend.background_fill_color = "#f5f5f5"
+    p.legend.label_text_font_size = "1.5em"
+    p.legend.location = "bottom_left"
     p.ygrid.grid_line_color = None
     p.xaxis.axis_label = "date"
     p.yaxis.axis_label = "rating"
     p.outline_line_color = None
     p.title.text_font_size = '2em'
-    p.xaxis.axis_label_text_font_size = "1.5em"
-    p.yaxis.axis_label_text_font_size = "1.5em"
+    p.xaxis.axis_label_text_font_style = "bold"
+    p.xaxis.axis_label_text_font_size = "2em"
+    p.xaxis.major_label_text_font_size = "1.5em"
+    p.yaxis.axis_label_text_font_style = "bold"
+    p.yaxis.axis_label_text_font_size = "2em"
+    p.yaxis.major_label_text_font_size = "1.5em"
+    p.yaxis.major_label_text_baseline = "bottom"
 
     # get displayable plot
     script, div = components(p)

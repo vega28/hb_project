@@ -7,21 +7,10 @@
 
 {% block body %}
 <main>
-  <div class="row">
-    <div class="row empty-space">&ThinSpace;</div><!--add whitespace-->
+  <div class="container d-flex justify-content-center">
+    {{ plot_div|safe }}
   </div>
-  <div class="row">
-    <div class="col-5 blurb">
-      
-        {{ plot_div|safe }}
-      
-    </div>
-  </div>
-  <div class="row">
-    <div class="row empty-space">&ThinSpace;</div><!--add whitespace-->
-  </div>
-  </main>
-
+</main>
 {% endblock %}
 
 {% block scripts %}{{ plot_script|safe }}{% endblock%} 

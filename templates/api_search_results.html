@@ -26,7 +26,9 @@
               </div>
               <div class="row">
                 <p><h5 class="card-title">{{ volume['volumeInfo']['title'] }}</h5></p> 
-                <p class="card-text">Author: {{ volume['volumeInfo'].get('authors')[0] }}</p>
+                {% if volume['volumeInfo'].get('authors') %} 
+                  <p class="card-text">Author: {{ volume['volumeInfo'].get('authors')[0] }}</p>
+                {% endif %}
 
                 <div class="col">
                   <a class="btn btn-primary" href="{{ volume['volumeInfo'].get('canonicalVolumeLink') }}">
@@ -42,22 +44,32 @@
               </div>
               <input type="hidden" name="{{ loop.index }}-title" 
                 value="{{ volume['volumeInfo']['title'] }}">
+              {% if volume['volumeInfo'].get('authors') %}
               <input type="hidden" name="{{ loop.index }}-authors" 
                 value="{{ volume['volumeInfo'].get('authors') }}">
+                {% endif %} 
               <input type="hidden" name="{{ loop.index }}-id" 
                 value="{{ volume['id'] }}">
               {% if volume['volumeInfo'].get('imageLinks') %}
                 <input type="hidden" name="{{ loop.index }}-cover" 
                   value="{{ volume['volumeInfo'].get('imageLinks')['smallThumbnail'] }}">
               {% endif %} 
+              {% if volume['volumeInfo'].get('pageCount') %}
               <input type="hidden" name="{{ loop.index }}-pageCount" 
                 value="{{ volume['volumeInfo'].get('pageCount') }}">
+              {% endif %} 
+              {% if volume['volumeInfo'].get('description') %}
               <input type="hidden" name="{{ loop.index }}-description" 
                 value="{{ volume['volumeInfo'].get('description') }}">
+              {% endif %} 
+              {% if volume['volumeInfo'].get('publishedDate') %}
               <input type="hidden" name="{{ loop.index }}-publishedDate" 
                 value="{{ volume['volumeInfo'].get('publishedDate') }}">
+              {% endif %} 
+              {% if volume['volumeInfo'].get('categories') %}
               <input type="hidden" name="{{ loop.index }}-genres" 
                 value="{{ volume['volumeInfo'].get('categories') }}">
+              {% endif %} 
             </div>
           </div>
         </div>
