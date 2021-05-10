@@ -20,7 +20,7 @@ Mybrary is a personal library app that allows users to log, review, and organize
 - Clone this repository to your machine
 - Set up a virtual environment and install all dependencies listed in requirements.txt
 - Get IMDB and Google Books API keys and save into secrets.sh
-- Run seed.py to create and seed the PostgreSQL database
+- Run seed_database.py to create and seed the PostgreSQL database
 - Run server.py to launch the app!
 
 ## Development Roadmap
