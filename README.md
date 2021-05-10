@@ -4,22 +4,15 @@ Mybrary is a personal library app that allows users to log, review, and organize
 
 ### Tech Stack
 
-- PostgreSQL
-- SQLAlchemy
-- Python
-- Bokeh
-- Flask
-- Jinja
-- JavaScript
-- jQuery
-- Bootstrap
+- backend: PostgreSQL, SQLAlchemy, Python, Bokeh, Flask, Jinja
+- frontend: JavaScript, jQuery, Bootstrap
 
 ### APIs Used
 
 - Google Books
 - IMDB
 
-### Data
+### Links
 
 - Check out the [Mybrary demo video]!
 - See [full data model here]
@@ -42,11 +35,18 @@ Mybrary is a personal library app that allows users to log, review, and organize
 
 #### Future Growth
 
-- ARIA accessibility tools on front end
+- ARIA accessibility tools for frontend
 - Integrate more APIs for the user
+- Secure user data
 - New media recommendations by genre
 - More data visualization 
 - Set goals and track progress
+
+### Installation Instructions
+
+- Clone this repository to your machine
+- Set up a virtual environment and install all items in requirements.txt
+- Get IMDB and Google Books API keys and save into secrets.sh
 
 ## About the Developer
 
