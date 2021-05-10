@@ -2,51 +2,50 @@
 
 Mybrary is a personal library app that allows users to log, review, and organize their books, movies, and other media. 
 
-### Tech Stack
 
-- backend: PostgreSQL, SQLAlchemy, Python, Bokeh, Flask, Jinja
+### Technologies Used
+
+- backend: PostgreSQL, SQLAlchemy, Python, Flask, Jinja
 - frontend: JavaScript, jQuery, Bootstrap
-
-### APIs Used
-
-- Google Books
-- IMDB
+- Python libraries: Bokeh
+- APIs: Google Books, IMDB
 
 ### Links
 
 - Check out the [Mybrary demo video]!
 - See [full data model here]
 
-### Roadmap
+### Installation Instructions
 
-#### MVP
+- Clone this repository to your machine
+- Set up a virtual environment and install all dependencies listed in requirements.txt
+- Get IMDB and Google Books API keys and save into secrets.sh
+- Run seed.py to create and seed the PostgreSQL database
+- Run server.py to launch the app!
+
+## Development Roadmap
+
+### MVP
 
 - User signup / login / logout
-- Add media item
+- Add media item to database / personal library
 - Search database for media
 - Organize media into personal collections
 - Browse users and media
 
-#### 2.0
+### 2.0
 
 - User updates
 - Genres
-- Visualize data 
+- Visualize data using Bokeh
 
-#### Future Growth
+### Future Growth
 
 - ARIA accessibility tools for frontend
 - Integrate more APIs for the user
 - Secure user data
 - New media recommendations by genre
 - More data visualization 
-- Set goals and track progress
-
-### Installation Instructions
-
-- Clone this repository to your machine
-- Set up a virtual environment and install all items in requirements.txt
-- Get IMDB and Google Books API keys and save into secrets.sh
 
 ## About the Developer
 
