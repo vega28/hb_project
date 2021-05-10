@@ -1,22 +1,34 @@
-## Project Proposal
+## Mybrary 
 
-### Overview
+Mybrary is a personal library app that allows users to log, review, and organize their books, movies, and other media. 
 
-This personal library app allows users to log, review, and organize their media into collections. NTH features: users can share their media, visualize their media consumption in various ways, and set and track progress to goals.
+### Tech Stack
 
-### Technologies required (besides typical Hackbright tech stack)
+- PostgreSQL
+- SQLAlchemy
+- Python
+- Bokeh
+- Flask
+- Jinja
+- JavaScript
+- jQuery
+- Bootstrap
 
-- Google Books API
-- IMDB API
+### APIs Used
+
+- Google Books
+- IMDB
 
 ### Data
 
-- There will be data for user profiles as well as general media data. Each media item will have various properties depending on the type of media. All media will be categorized by genre. See full data model here: https://dbdiagram.io/d/605cf99cecb54e10c33d4cbe
+- Check out the [Mybrary demo video]!
+- See [full data model here]
 
 ### Roadmap
 
 #### MVP
 
+- User signup / login / logout
 - Add media item
 - Search database for media
 - Organize media into personal collections
@@ -26,15 +38,22 @@ This personal library app allows users to log, review, and organize their media 
 
 - User updates
 - Genres
-- Visualize data
+- Visualize data 
 
-#### 3.0
+#### Future Growth
 
+- ARIA accessibility tools on front end
+- Integrate more APIs for the user
 - New media recommendations by genre
-- More visualization of data
+- More data visualization 
 - Set goals and track progress
-- Share progress/goals/recommendations with friends
 
-### Notes
+## About the Developer
 
-TBD
+Kelsi is an enthusiastic nerd and educator who loves puzzles and collaborative problem-solving. She has a physics BS and astronomy MS and has spent the last few years teaching high school physics. Though she loved teaching, Kelsi is ready to engage in a more technical role that allows her to do more widespread good for our planet.
+
+Kelsi's career goals include supporting the advancement of science; promoting diversity, inclusion, and accessibility through outreach and mentorship; and continuous learning. A career in software engineering is an opportunity to fulfill all these goals! She is excited to bring her empathy, versatility, and scientific experience to a technical role with a socially-conscious company.
+
+
+[Mybrary demo video]: <https://youtu.be/OtL71MUcEog>
+[full data model here]: <https://dbdiagram.io/d/608e0585b29a09603d12fbff>
