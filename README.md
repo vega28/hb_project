@@ -18,7 +18,7 @@ Mybrary is a personal library app that allows users to log, review, and organize
 ### Installation Instructions
 
 - Clone this repository to your machine
-- Set up a virtual environment and install all dependencies listed in requirements.txt
+- Set up a python virtual environment and install all dependencies listed in requirements.txt
 - Get IMDB and Google Books API keys and save into secrets.sh
 - Run seed_database.py to create and seed the PostgreSQL database
 - Run server.py to launch the app!
@@ -41,6 +41,7 @@ Mybrary is a personal library app that allows users to log, review, and organize
 
 ### Future Growth
 
+- Improve testing and evaluate test coverage
 - ARIA accessibility tools for frontend
 - Integrate more APIs for the user
 - Secure user data
